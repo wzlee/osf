@@ -9,4 +9,21 @@
          <context:component-scan
             base-package="org.springframework.samples.service"/>  -->
 
+	<context:component-scan base-package="com.lvwang.osf.model" />
+	<context:component-scan base-package="com.lvwang.osf.dao.impl" />
+	<context:component-scan base-package="com.lvwang.osf.service" />
+	
+	
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" >
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/osf" />
+		<property name="username" value="root" />
+		<property name="password" value="123" />
+		<property name="initialSize" value="10" />
+		<property name="maxActive" value="50" />
+	
+	</bean>
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<constructor-arg ref="dataSource" />
+	</bean>	
 </beans>
