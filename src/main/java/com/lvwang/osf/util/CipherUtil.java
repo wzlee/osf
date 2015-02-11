@@ -5,6 +5,9 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.regex.Pattern;
 
+import org.apache.commons.codec.binary.Base64;
+
+
 public class CipherUtil {
 	
 	private final static String[] hexDigits = {
@@ -56,7 +59,20 @@ public class CipherUtil {
         return Property.SUCCESS_PWD_FORMAT;
 	}
 	
-	
+	public static String generateActivationUrl(String email, String password) {
+		MessageDigest md;
+		try {
+			md = MessageDigest.getInstance("MD5");
+			byte[] results = md.digest(new String(email+password).getBytes("utf-8"));
+			
+			return Base64.encodeBase64String(results).replace('+', '-').replace('/', '_').substring(0, 24);
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 	private static String encodeByMD5(String originString) {
 		if(originString != null && originString.length() != 0) {
@@ -65,8 +81,7 @@ public class CipherUtil {
 				md = MessageDigest.getInstance("MD5");
 				byte[] results = md.digest(originString.getBytes("utf-8"));
 				String resultString = byteArrayToHexString(results);
-				return resultString.toUpperCase();
-				
+				return resultString.toUpperCase();		
 			} catch (NoSuchAlgorithmException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

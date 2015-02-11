@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -25,56 +26,10 @@ public class UserDAOImpl implements UserDAO{
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
-	
-	
-	private User getUser(String sql, Object condition ) {
-		User user = jdbcTemplate.queryForObject(sql, new Object[]{condition}, new RowMapper<User>(){
-			@Override
-			public User mapRow(ResultSet rs, int rowNum)
-					throws SQLException {
-				User user = new User();
-				user.setUser_name(rs.getString("user_name"));
-				user.setUser_email(rs.getString("user_email"));
-				user.setUser_registered_date(rs.getDate("user_registered_date"));
-				user.setUser_status(rs.getInt("user_status"));
-				return user;
-				
-			}
-	
-		});
+		
+	private User queryUser(String sql, Object[] args) {
+		User user = jdbcTemplate.query(sql, args, new ResultSetExtractor<User>(){
 
-		return user;
-	}
-	
-	@Override
-	public User getUserByID(int id) {
-		String sql = "select * from "+TABLE + " where id=?";
-		User user = jdbcTemplate.queryForObject(sql, new Object[]{id}, User.class);
-		/*
-		User user = jdbcTemplate.queryForObject(sql, new Object[]{id}, new RowMapper<User>(){
-					@Override
-					public User mapRow(ResultSet rs, int rowNum)
-							throws SQLException {
-						User user = new User();
-						user.setUser_name(rs.getString("user_name"));
-						user.setUser_email(rs.getString("user_email"));
-						user.setUser_registered_date(rs.getDate("user_registered_date"));
-						user.setUser_status(rs.getInt("user_status"));
-						return user;
-						
-					}
-			
-		});
-		*/
-		return user;
-	}
-
-	@Override
-	public User getUserByEmail(String email) {
-		String sql = "select * from " + TABLE + " where user_email=?";
-
-		User user = jdbcTemplate.query(sql, new Object[]{email}, new ResultSetExtractor<User>(){
-			@Override
 			public User extractData(ResultSet rs) throws SQLException,
 					DataAccessException {
 				User user = null;
@@ -86,55 +41,84 @@ public class UserDAOImpl implements UserDAO{
 					user.setUser_pwd(rs.getString("user_pwd"));
 					user.setUser_registered_date(rs.getDate("user_registered_date"));
 					user.setUser_status(rs.getInt("user_status"));	
+					user.setUser_activationKey(rs.getString("user_activationKey"));
 				}
 				return user;
 			}
+
 		});
+
 		return user;
 	}
+	
+	public User getUserByID(int id) {
+		String sql = "select * from "+TABLE + " where id=?";
+		return queryUser(sql, new Object[]{id});
+	}
 
-	@Override
+	public User getUserByEmail(String email) {
+		String sql = "select * from " + TABLE + " where user_email=?";
+		return queryUser(sql, new Object[]{email});
+	}
+
 	public User getUserByUsername(String username) {
 		String sql = "select * from " + TABLE + " where user_name=?";
-		User user = jdbcTemplate.queryForObject(sql, new Object[]{username}, new RowMapper<User>(){
-
-			@Override
-			public User mapRow(ResultSet rs, int arg1) throws SQLException {
-				User user = new User();
-				
-				user.setUser_name(rs.getString("user_name"));
-				user.setUser_email(rs.getString("user_email"));
-				user.setUser_registered_date(rs.getDate("user_registered_date"));
-				user.setUser_status(rs.getInt("user_status"));
-				return user;
-			}
-		});
-		
-		return user;
+		return queryUser(sql, new Object[]{username});
 	}
 
-	@Override
 	public String getPwdByUsername(String username) {
-		
 		return null;
 	}
 
+	public User getUser(String condition, Object[] args){
+		String sql = "select * from " + TABLE + " where "+condition+"=?";
+		return queryUser(sql, args);
+	}
+	
+	
+	public List<User> getUsersByIDs(int[] ids) {
+		StringBuffer sb = new StringBuffer();
+		sb.append("select * from "+ TABLE+" where id in (");
+		for(int i=0; i<ids.length; i++){
+			if(i != 0)
+				sb.append(",");
+			sb.append(ids[i]);
+		}
+		sb.append(")");
+		System.out.println(sb.toString());
+		List<User> users = jdbcTemplate.query(sb.toString(), new RowMapper<User>(){
+
+			public User mapRow(ResultSet rs, int rowNum) throws SQLException {
+				User user = new User();
+				user.setId(rs.getInt("id"));
+				user.setUser_name(rs.getString("user_name"));
+				user.setUser_email(rs.getString("user_email"));
+				user.setUser_pwd(rs.getString("user_pwd"));
+				user.setUser_registered_date(rs.getDate("user_registered_date"));
+				user.setUser_status(rs.getInt("user_status"));	
+				return user;
+			}
+		});
+		return users;
+		
+	}
+	
 	//返回生成主键 user id
-	@Override
 	public int save(final User user) {
 		final String sql = "insert into " + TABLE + 
-					 "(user_email, user_pwd) values(?,?)";
+					 "(user_email, user_pwd, user_activationKey, user_status) values(?,?,?,?)";
 		//jdbcTemplate.update(sql);
 		
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		jdbcTemplate.update(new PreparedStatementCreator() {
 			
-			@Override
 			public PreparedStatement createPreparedStatement(Connection con)
 					throws SQLException {
-				PreparedStatement ps = con.prepareStatement(sql);
+				PreparedStatement ps = con.prepareStatement(sql, new String[]{"id"});
 				ps.setString(1, user.getUser_email());
 				ps.setString(2, user.getUser_pwd());
+				ps.setString(3, user.getUser_activationKey());
+				ps.setInt(4, user.getUser_status());
 				return ps;
 			}
 		}, keyHolder );
@@ -142,13 +126,32 @@ public class UserDAOImpl implements UserDAO{
 		
 	}
 
+	public int activateUser(final User user) {
+		final String sql = "update " + TABLE + " set user_status=?, user_activationKey=?"+
+					 " where id=?";
+		return jdbcTemplate.update(new PreparedStatementCreator() {
+			
+			public PreparedStatement createPreparedStatement(Connection con)
+					throws SQLException {
+				PreparedStatement ps = con.prepareStatement(sql);
+				ps.setInt(1, user.getUser_status());
+				ps.setString(2, user.getUser_activationKey());
+				ps.setInt(3, user.getId());
+				return ps;
+			}
+		});
+		
+	}
+	
+
+	
+	
 	//delete user by user id
-	@Override
-	public void delete(int id) {
+	public boolean delete(int id) {
 		// TODO Auto-generated method stub
 		String sql = "delete from " + TABLE + " where id=";
-		jdbcTemplate.update(sql, id);
-		
+		int effrows = jdbcTemplate.update(sql, id);
+		return effrows==1?true:false;
 		
 	}
 	

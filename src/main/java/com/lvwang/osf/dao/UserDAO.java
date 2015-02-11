@@ -1,5 +1,7 @@
 package com.lvwang.osf.dao;
 
+import java.util.List;
+
 import com.lvwang.osf.model.User;
 
 public interface UserDAO {
@@ -7,8 +9,11 @@ public interface UserDAO {
 	User getUserByEmail(String email);
 	User getUserByUsername(String username);
 	String getPwdByUsername(String username);
+	List<User> getUsersByIDs(int[] ids);
+	User getUser(String condition, Object[] args);
 	
 	int save(User user);
-	void delete(int id);
+	int activateUser(User user);
+	boolean delete(int id);
 	
 }
