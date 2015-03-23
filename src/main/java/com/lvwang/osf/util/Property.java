@@ -58,9 +58,12 @@ public class Property {
 	
 	public static final String ERROR_ALBUM_CREATE = "006000";				//
 	public static final String ERROR_ALBUM_PERMISSIONDENIED = "006001";				//相册并不属于上传用户
+	public static final String ERROR_ALBUM_UPDDESC = "006002"; 			//更新相册描述错误
+	public static final String ERROR_ALBUM_UPDCOVER = "006003"; 			//更新相册封面错误
 	
 	public static final String ERROR_PHOTO_CREATE = "007000";
 	public static final String ERROR_PHOTO_EMPTY = "007001";				//上传图片为空
+	public static final String ERROR_PHOTO_UPDDESC = "007002";				//上传图片为空
 	
 	public static final String ERROR_COMMENT_EMPTY = "008000";				//comment empty
 	public static final String ERROR_COMMENT_STATUS = "008001";				//comment状态异常	
@@ -89,8 +92,10 @@ public class Property {
 	
 	public static final String SUCCESS_ALBUM_CREATE = "106000";
 	public static final String SUCCESS_ALBUM_ALLOWED = "106001";
+	public static final String SUCCESS_ALBUM_UPDATE = "106002";
 	
 	public static final String SUCCESS_PHOTO_CREATE = "107000";
+	public static final String SUCCESS_PHOTO_UPDATE = "107001";
 	
 	public static final String SUCCESS_COMMENT_CREATE = "108000";
 	

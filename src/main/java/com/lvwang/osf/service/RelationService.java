@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.lvwang.osf.dao.RelationDAO;
 import com.lvwang.osf.model.Relation;
@@ -22,6 +23,7 @@ public class RelationService {
 	@Qualifier("relationDao")
 	private RelationDAO relationDao;
 	
+	@Transactional
 	public Map<String, Object> newRelation(int object_type, int object_id, int tag_id) {
 		Map<String, Object> ret = new HashMap<String, Object>();
 		int id = relationDao.save(object_type, object_id, tag_id);

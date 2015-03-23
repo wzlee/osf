@@ -104,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `osf`.`osf_followers` (
 ENGINE = InnoDB;
 
 
-
+drop table osf_albums;
 CREATE TABLE IF NOT EXISTS `osf`.`osf_albums` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `user_id` INT NOT NULL,
@@ -113,6 +113,8 @@ CREATE TABLE IF NOT EXISTS `osf`.`osf_albums` (
   `album_desc` TEXT NULL COMMENT '描述',
   `last_add_ts` DATETIME NOT NULL DEFAULT current_timestamp,
   `photos_count` INT NOT NULL DEFAULT 0,
+  `status` INT NOT NULL DEFAULT 0,
+  `cover` VARCHAR(45) NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_osf_albums_album_author_idx` (`user_id` ASC),
   CONSTRAINT `fk_osf_albums_album_author`
@@ -131,4 +133,8 @@ CREATE TABLE IF NOT EXISTS `osf`.`osf_photos` (
   `ts` TIMESTAMP NULL DEFAULT current_timestamp,
   `desc` VARCHAR(50) NULL,
   PRIMARY KEY (`id`))
-ENGINE = InnoDB
+ENGINE = InnoDB;
+
+
+
+

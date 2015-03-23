@@ -47,11 +47,11 @@ public class AuthMgt implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		// place your code here
-		System.out.println("filtering..............");
+		//System.out.println("filtering..............");
 		HttpServletRequest req = (HttpServletRequest)request;
 		HttpServletResponse rpo = (HttpServletResponse)response;
 		String servletPath = req.getServletPath();
-		System.out.println(servletPath);
+		//System.out.println(servletPath);
 		if(servletPath != null && servletPath.length() != 0) {
 			if(servletPath.startsWith(URL_COMMENT) || servletPath.startsWith(URL_POST)) {
 				HttpSession session = req.getSession();
@@ -65,13 +65,13 @@ public class AuthMgt implements Filter {
 				    String json = "{\"status\":\""+Property.ERROR_ACCOUNT_NOTLOGIN+"\"}";
 				    writer.write(json);
 				    writer.close();
-				    System.out.println("user not login");
+				    //System.out.println("user not login");
 				} else {
-					System.out.println("go ahead");
+					//System.out.println("go ahead");
 					chain.doFilter(request, response);
 				}
 			} else {
-				System.out.println("go ahead");
+				//System.out.println("go ahead");
 				chain.doFilter(request, response);
 			}
 		}

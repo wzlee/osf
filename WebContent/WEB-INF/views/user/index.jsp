@@ -22,6 +22,9 @@
   	<script type="text/javascript" src="<%=request.getContextPath() %>/js/post.js"></script>
   	<script type="text/javascript" src="<%=request.getContextPath() %>/js/follow.js"></script>  
   	<style>
+  	  body{
+  	  	font-family:"Microsoft YaHei", "微软雅黑","Times New Roman"
+  	  }
 	  .postheader{
 	      font-weight: bold;
 	      margin-bottom: 10px;
@@ -50,6 +53,19 @@
 	  .ui.images img {
 	  	width:23.5%;
 	  }
+	  .albumheader {
+	  	margin-top:50px;
+	  }
+	  #rightside {
+		padding-left:45px;
+   	  }
+   	  .ui.feed > .event {
+   	  	margin-top: 30px;
+   	  	margin-bottom: 30px;
+   	  }
+   	  .ui.feed > .event > .content {
+   	  	line-height: 20px;
+   	  }
   	</style>  	
 </head>
 <body>
@@ -57,8 +73,50 @@
 	<!--  <%@ include file="../topbar.jsp" %>-->
     <div class="row">  
           <div class="span8">     
-          	<div class="ui feed">
+          		<div class="ui feed">
           			<h4 class="ui header">我的日志 (<a href="#"> 全部 </a>)</h4>
+          			<c:forEach items="${posts }" var="post">     			
+	          			<div class="ui divider"></div>
+	                    <div class="event">                    
+	                      <div class="content">
+	                        <div class="text">
+	                        	<div class="row">
+	                        		<div class="span6">
+	                        			<h3 class="ui header">${post.post_title }</h3>
+	                        			<div>
+	                        				${post.post_excerpt }
+	                        			</div>
+	                        			<div class="postmeta">
+	
+	                        			</div>
+	                        		</div>
+	                        		<div class="span2">
+	                        			<img class="ui small image" src="<c:url value="/img/avatar.jpg"/>" alt=""  />
+	                        		</div>
+	                        	</div>
+	                        </div>
+	                        <div class="meta">
+	                          <a class="like">
+	                            <i class="like icon"></i> ${post.like_count } Likes
+	                          </a>
+	                          <a class="share">
+	                            <i class="share alternate icon"></i> ${post.share_count } shares
+	                          </a>   
+	                          <a class="comment">
+	                            <i class="comment outline icon"></i> ${post.comment_count } comments
+	                          </a>                                                 
+	                        </div>
+	                        <div class="meta" id="tags">
+	                        	<i class="tag icon"></i>
+								<a href="#">#tag1
+								</a>   
+								<a href="#">#tag1
+								</a>							                     	
+	                        </div>
+	                      </div>
+	                    </div>     <!-- end event -->  
+                    </c:forEach>
+                              			
           			<div class="ui divider"></div>
                     <div class="event">                    
                       <div class="content">
@@ -98,7 +156,7 @@
                         </div>
                       </div>
                     </div>     <!-- end event -->       	
-
+			
           			<div class="ui divider"></div>
                     <div class="event">                    
                       <div class="content">
@@ -138,56 +196,29 @@
                         </div>
                       </div>
                     </div>   <!-- end event -->
-          			
-          			
-          			<h4 class="ui header">我的相册 (<a href="#"> 全部 </a>)</h4>
+          		
+          			<h4 class="ui header albumheader">我的相册 (<a href="#"> 全部 </a>)</h4>
           			<div class="ui divider"></div>
                     <div class="event">                    
                       <div class="content">
-<div class="ui four cards">
-  <div class="card">
-    <a class="image">
-      <img src="<c:url value="/img/avatar.jpg"/>">
-    </a>
-    <div class="extra">
-      Rating:
-      <div class="ui star rating" data-rating="4"></div>
-    </div>
-  </div>
-  <div class="card">
-    <a class="image">
-      <img src="<c:url value="/img/avatar.jpg"/>">
-    </a>
-    <div class="extra">
-      Rating:
-      <div class="ui star rating" data-rating="2"></div>
-    </div>
-  </div>
-  <div class="card">
-    <a class="image">
-      <img src="<c:url value="/img/avatar.jpg"/>">
-    </a>
-    <div class="extra">
-      Rating:
-      <div class="ui star rating" data-rating="3"></div>
-    </div>
-  </div>
-  <div class="card">
-    <a class="image">
-      <img src="<c:url value="/img/avatar.jpg"/>">
-    </a>
-    <div class="extra">
-      Rating:
-      <div class="ui star rating" data-rating="4"></div>
-    </div>
-  </div>
-</div>
+						<div class="ui four cards">
+						  <c:forEach items="${albums }" var="album">
+							  <div class="card">
+							    <a class="image" href="<c:url value="/album/${album.id}/photos"/>">
+							      <img src="<c:url value="${imgBaseUrl}${album.cover }"/>">
+							    </a>
+							    <div class="extra">
+							      ${album.album_desc }
+							    </div>
+							  </div>						  						  
+						  </c:forEach>
+						</div>
                       </div>
-                    </div>             			
+                    </div>
           			
-          			
-          	</div>      
-          </div>
+          	</div>     <!-- end feed --> 
+          </div> <!-- end span8 -->
+          
           <div class="span4">
           	<div id="rightside">
 	            <div class="ui card">

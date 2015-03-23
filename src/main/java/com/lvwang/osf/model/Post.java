@@ -1,6 +1,7 @@
 package com.lvwang.osf.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Post {
 	
@@ -18,6 +19,7 @@ public class Post {
 	private int share_count;
 	private int comment_count;
 	private String post_url;
+	private List<String> post_tags;
 	public int getId() {
 		return id;
 	}
@@ -102,4 +104,11 @@ public class Post {
 	public void setShare_count(int share_count) {
 		this.share_count = share_count;
 	}
+	public List<String> getPost_tags() {
+		return post_tags;
+	}
+	public void setPost_tags(List<String> post_tags) {
+		this.post_tags = post_tags;
+	}
+
 }

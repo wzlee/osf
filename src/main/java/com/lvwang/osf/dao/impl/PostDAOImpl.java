@@ -15,9 +15,11 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.lvwang.osf.dao.PostDAO;
 import com.lvwang.osf.model.Post;
+import com.lvwang.osf.service.TagService;
 
 @Repository("postDao")
 public class PostDAOImpl implements PostDAO{
@@ -80,12 +82,13 @@ public class PostDAOImpl implements PostDAO{
 		return posts;
 	}
 	
+
 	public int save(final Post post) {
 		final String sql = "insert into " + TABLE + 
 					 "(post_author, post_title, post_content,"
 					 + "post_excerpt, post_status,"
-					 + "post_pwd, comment_status)"
-					 + " values(?,?,?,?,?,?,?)";
+					 + "post_pwd, comment_status, post_tags)"
+					 + " values(?,?,?,?,?,?,?,?)";
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		jdbcTemplate.update(new PreparedStatementCreator() {
 			
@@ -99,7 +102,7 @@ public class PostDAOImpl implements PostDAO{
 				ps.setInt(5, post.getPost_status());
 				ps.setString(6, post.getPost_pwd());
 				ps.setInt(7, post.getComment_status());
-				
+				ps.setString(8, TagService.toString(post.getPost_tags()));
 				return ps;
 			}
 		}, keyHolder);

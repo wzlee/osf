@@ -1,6 +1,7 @@
 package com.lvwang.osf.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Album {
 	
@@ -11,6 +12,12 @@ public class Album {
 	private String album_desc;
 	private Date last_add_ts;
 	private int photos_count;
+	private int status;
+	private String cover;
+	private int like_count;
+	private int share_count;
+	private int comment_count;
+	private List<Photo> photos;
 	public int getId() {
 		return id;
 	}
@@ -52,5 +59,41 @@ public class Album {
 	}
 	public void setPhotos_count(int photos_count) {
 		this.photos_count = photos_count;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	public String getCover() {
+		return cover;
+	}
+	public void setCover(String cover) {
+		this.cover = cover;
+	}
+	public List<Photo> getPhotos() {
+		return photos;
+	}
+	public void setPhotos(List<Photo> photos) {
+		this.photos = photos;
+	}
+	public int getLike_count() {
+		return like_count;
+	}
+	public void setLike_count(int like_count) {
+		this.like_count = like_count;
+	}
+	public int getShare_count() {
+		return share_count;
+	}
+	public void setShare_count(int share_count) {
+		this.share_count = share_count;
+	}
+	public int getComment_count() {
+		return comment_count;
+	}
+	public void setComment_count(int comment_count) {
+		this.comment_count = comment_count;
 	}
 }

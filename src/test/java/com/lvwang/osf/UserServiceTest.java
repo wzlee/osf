@@ -9,7 +9,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.lvwang.osf.dao.UserDAO;
+import com.lvwang.osf.model.Event;
 import com.lvwang.osf.model.User;
+import com.lvwang.osf.service.FeedService;
 import com.lvwang.osf.service.MailService;
 import com.lvwang.osf.service.UserService;
 import com.lvwang.osf.util.CipherUtil;
@@ -19,16 +21,29 @@ public class UserServiceTest {
 	private static UserService userService;
 	private static UserDAO userDao;
 	private static MailService mailService;
+	private static FeedService feedService;
 	
 	@BeforeClass
 	public static void init() {
 		ApplicationContext context = new ClassPathXmlApplicationContext("/spring/application-config.xml");
 		//userDao = (UserDAO) context.getBean("userDao");
-		userService = (UserService) context.getBean("userService");
-		mailService = (MailService) context.getBean("mailService");
+		//userService = (UserService) context.getBean("userService");
+		//mailService = (MailService) context.getBean("mailService");
+		feedService = (FeedService) context.getBean("feedService");
 	}
 	
+	
 	@Test
+	public void test() {
+		//feedService.push(9, 1);
+		List<Event> events = feedService.getFeeds(1);
+		for(Event event : events) {
+			System.out.println(event.getTitle());
+		}
+	}
+	
+	
+	//@Test
 	public void testfindByEmail() {
 		//User user = userService.findByEmail("aif@gmail.com");
 		//sSystem.out.println(user.getUser_pwd());
