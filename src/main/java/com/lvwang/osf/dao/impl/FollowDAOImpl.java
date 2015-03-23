@@ -2,12 +2,14 @@ package com.lvwang.osf.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
@@ -68,13 +70,35 @@ public class FollowDAOImpl implements FollowDAO{
 	}
 
 	public List<Following> getFollowings(int user_id) {
-		// TODO Auto-generated method stub
-		return null;
+		final String sql = "select * from " + TABLE_FOLLOWING + " where user_id=?";
+		List<Following> followings =  jdbcTemplate.query(sql, new Object[]{user_id}, new RowMapper<Following>() {
+			public Following mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Following following = new Following();
+				following.setId(rs.getInt("id"));
+				following.setUser_id(rs.getInt("user_id"));
+				following.setFollowing_user_id(rs.getInt("following_user_id"));
+				following.setFollowing_user_name(rs.getString("following_user_name"));
+				following.setTs(rs.getTimestamp("ts"));
+				return following;
+			}			
+		});
+		return followings;
 	}
 
-	public List<Follower> getFollowers(int user_id) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Follower> getFollowers(final int user_id) {
+		final String sql = "select * from " + TABLE_FOLLOWER + " where user_id=?";
+		List<Follower> followers =  jdbcTemplate.query(sql, new Object[]{user_id}, new RowMapper<Follower>() {
+			public Follower mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Follower follower = new Follower();
+				follower.setId(rs.getInt("id"));
+				follower.setUser_id(rs.getInt("user_id"));
+				follower.setFollower_user_id(rs.getInt("follower_user_id"));
+				follower.setFollower_user_name(rs.getString("follower_user_name"));
+				follower.setTs(rs.getTimestamp("ts"));
+				return follower;
+			}			
+		});
+		return followers;
 	}
 
 	public boolean delFollowing(final Following following) {

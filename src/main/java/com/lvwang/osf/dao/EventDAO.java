@@ -1,11 +1,11 @@
 package com.lvwang.osf.dao;
 
-import com.lvwang.osf.model.Post;
+import java.util.List;
+
+import com.lvwang.osf.model.Event;
+
 
 public interface EventDAO {
-	int savePostEvent(Post post, String tags);
-	int saveAlbumEvent();
-	int savePhotoEvent();
-	int saveFollowingEvent();
-	int saveFollowedEvent();
+	int save(Event event);
+	List<Event> getEvents(List<Integer> event_ids);
 }

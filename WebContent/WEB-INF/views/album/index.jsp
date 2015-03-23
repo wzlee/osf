@@ -140,10 +140,9 @@
 		              </div>		              
 		            </div> 		<!-- end card -->					
 					<div class="ui tiny images" id="imgbox">
-						<a href="#"><img src="<c:url value="/img/1.jpg"/>" alt=""></a>
-						<a href="#"><img src="<c:url value="/img/1.jpg"/>" alt=""></a>
-						<a href="#"><img src="<c:url value="/img/1.jpg"/>" alt=""></a>
-						<a href="#"><img src="<c:url value="/img/1.jpg"/>" alt=""></a>
+						<c:forEach items="${photos}" var="photo">
+							<a href="#"><img src="<c:url value="${imgBaseUrl}${photo.key }" />" alt=""></a>
+						</c:forEach>
 					</div>
 				</div>
 			</div>

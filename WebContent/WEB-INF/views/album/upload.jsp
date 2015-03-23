@@ -53,7 +53,20 @@
 				</div> <!-- end uploadarea -->
 
 				<div class="ui three cards" id="uploadedphotos">
-				  <div class="card">
+				  <c:forEach items="${photos }" var="photo">
+					  <div class="card" id="card${photo.id }">
+					    <a class="image" href="#">
+					      <img src="<c:url value="http://osfimgs.oss-cn-hangzhou.aliyuncs.com/${photo.key }" />">
+					    </a>
+					    <div class="content">
+					    	<textarea rows="" cols="" placeholder="添加描述..."></textarea>
+					    </div>
+					    <div class="extra meta">
+							<a href=""><i class="delete icon"></i>删除</a>
+					    </div>
+					  </div>
+				  </c:forEach>
+<!-- 				  <div class="card">
 				    <a class="image">
 				      <img src="<c:url value="/img/avatar.jpg"/>">
 				    </a>
@@ -75,15 +88,18 @@
 				    <div class="extra meta">
 						<a href=""><i class="delete icon"></i>删除</a>
 				    </div>
-				  </div>
+				  </div> -->
 				
 				</div>	<!-- end cards -->		<!-- end uploadedphotos -->		
 
 				<div class="ui form">
 					<div class="field">
-						<textarea rows="" cols=""></textarea>
+						<textarea rows="" cols="" id="album_desc"></textarea>
 					</div>
 					
+				</div>
+				<div class="ui button" id="saveAlbumBtn">
+					保存
 				</div>
 				
 			</div>	<!-- end span8 -->

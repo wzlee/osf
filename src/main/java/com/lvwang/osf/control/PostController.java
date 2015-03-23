@@ -1,8 +1,5 @@
 package com.lvwang.osf.control;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +19,7 @@ import com.lvwang.osf.model.Post;
 import com.lvwang.osf.model.Tag;
 import com.lvwang.osf.model.User;
 import com.lvwang.osf.service.EventService;
+import com.lvwang.osf.service.FeedService;
 import com.lvwang.osf.service.PostService;
 import com.lvwang.osf.service.RelationService;
 import com.lvwang.osf.service.TagService;
@@ -48,6 +46,10 @@ public class PostController {
 	@Qualifier("eventService")
 	private EventService eventService;
 	
+	@Autowired
+	@Qualifier("feedService")
+	private FeedService feedService;
+	
 	@RequestMapping("/{id}")
 	public ModelAndView post(@PathVariable("id") int id) {
 		ModelAndView mav = new ModelAndView();
@@ -72,40 +74,27 @@ public class PostController {
 						HttpSession session) {
 				
 		User user = (User)session.getAttribute("user");
-		
+		//1 save post
 		Map<String, Object> map = postService.newPost(user.getId(), 
-											title, 
-											content, 
-											post_status, 
-											comment_status);
-		 
+													  title, 
+													  content, 
+													  post_status, 
+													  comment_status,
+													  param_tags);
 		String status = (String)map.get("status");
-		if(Property.SUCCESS_POST_CREATE.equals(status)) {	
-			if(param_tags != null && param_tags.length() != 0) {				
-				Post post = (Post)map.get("post");
-				Map<String, Object> tagsmap = tagService.newTags(tagService.toList(param_tags));
-				status = (String)tagsmap.get("status");
-				map.put("status", status);	//update status
-				if(Property.SUCCESS_TAG_CREATE.equals(status)) {
-					map.put("tags", tagsmap.get("tags"));	//add tags to ret
-					
-					for(Tag tag: (List<Tag>)tagsmap.get("tags")) {
-						Map<String, Object> relmap = relationService.newRelation(
-													 RelationService.RELATION_TYPE_POST, 
-													 post.getId(), 
-													 tag.getId()
-													 );
-						status = (String)relmap.get("status");
-						map.put("status", status);	//update status
-					}
-					if(Property.SUCCESS_RELATION_CREATE.equals(status)) {
-						//final success, add to event flow
- 						eventService.newEvent(Dic.OBJECT_TYPE_POST, post, param_tags);
-					}
-				}	
-			}
+		Post post = (Post)map.get("post");
+		
+		//2 add event 
+		if(Property.SUCCESS_POST_CREATE.equals(status)) {
+			int event_id = eventService.newEvent(Dic.OBJECT_TYPE_POST, post);
+			
+			//3 push to followers
+			if(event_id !=0 ) {
+				feedService.push(user.getId(), event_id);
+			}			
 		}
 		return map;
+		
 	}
 	
 	

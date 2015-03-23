@@ -2,6 +2,7 @@ package com.lvwang.osf.service;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -17,6 +18,9 @@ import com.lvwang.osf.util.Property;
 
 @Service("albumService")
 public class AlbumService {
+	
+	public static final int ALBUM_STAUS_NORMAL = 0;
+	public static final int ALBUM_STAUS_TOBERELEASED = 1; //待发布
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -35,13 +39,14 @@ public class AlbumService {
 		return contentType.substring(contentType.indexOf('/')+1);
 	}
 	
-	public Map<String, Object> newAlbum(int user_id, String title, String desc) {
+	public Map<String, Object> newAlbum(int user_id, String title, String desc, int status, String cover) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		Album album = new Album();
 		album.setUser_id(user_id);
 		album.setAlbum_title(title);
 		album.setAlbum_desc(desc);
-		
+		album.setStatus(status);
+		album.setCover(cover);
 		int id = albumDao.saveAlbum(album);
 		if(id != 0){
 			album.setId(id);
@@ -84,5 +89,61 @@ public class AlbumService {
 		} else {
 			return Property.SUCCESS_ALBUM_ALLOWED;
 		}
+	}
+	
+	//获取用户的待发布相册
+	public int getToBeReleasedAlbum(int user_id) {
+		return albumDao.getAlbum(user_id, ALBUM_STAUS_TOBERELEASED);
+	}
+	
+	
+	public List<Photo> getPhotosOfAlbum(int album_id) {
+		return albumDao.getPhotos(album_id);
+	}
+	
+	public String updateAlbumDesc(int album_id, String album_desc) {
+		int effRows = albumDao.updateAlbumDesc(album_id, album_desc, ALBUM_STAUS_NORMAL);
+		if(effRows==1) {
+			return Property.SUCCESS_ALBUM_UPDATE;
+		} else {
+			return Property.ERROR_ALBUM_UPDDESC;
+		}
+	}
+	
+	public String updatePhotoDesc(List<Photo> photos) {
+		for(Photo photo: photos) {
+			albumDao.updatePhotoDesc(photo.getId(), photo.getDesc());
+		}
+		return Property.SUCCESS_ALBUM_UPDATE;
+	}
+	
+	public String updateAlbumCover(int album_id, String cover) {
+		int effRows = albumDao.updateAlbumCover(album_id, cover);
+		if(effRows==1) {
+			return Property.SUCCESS_ALBUM_UPDATE;
+		} else {
+			return Property.ERROR_ALBUM_UPDCOVER;
+		}
+	}
+	
+	public String updatePhotosCount(int album_id, int count) {
+		int effRows = albumDao.updatePhotosCount(album_id, count);
+		if(effRows==1) {
+			return Property.SUCCESS_ALBUM_UPDATE;
+		} else {
+			return Property.ERROR_ALBUM_UPDCOVER;
+		}
+	}
+	
+	public List<Album> getAlbumsOfUser(int id) {
+		return albumDao.getAlbumsOfUser(id);
+	}
+	
+	public Album getAlbum(int id) {
+		return albumDao.getAlbum(id);
+	}
+	
+	public String getKeyofPhoto(int id) {
+		return albumDao.getKey(id);
 	}
 }

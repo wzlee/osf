@@ -12,6 +12,7 @@
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/image.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/divider.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/list.css">
+  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/icon.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/page.css">
   <script src=""></script>
   <style>
@@ -37,11 +38,11 @@
   	padding-top:7px;
   	margin-left:7px;
   }
-  .postmeta .tags {
+  .tags {
   	float: right;
   }
   #rightside {
-		padding-left:20px;
+		padding-left:45px;
    }
   </style>
 </head>
@@ -66,8 +67,11 @@
                         </div>
                         <div class="meta">
                           <a class="like">
-                            <i class="like icon"></i> 4 Likes
-                          </a>
+                            <i class="like icon"></i> 4 
+                          </a>  
+                          <a class="comment">
+                            <i class="comment outline icon"></i> 9
+                          </a>                           
                         </div>
                         <div class="ui divider"></div>
                       </div>
@@ -84,7 +88,7 @@
                             3 days ago
                           </div>
                         </div>
-                        <div class="extra text">
+                        <div class="extra">
                           <div class="postheader">
                             <a href="#">你好广州</a>
                           </div>
@@ -92,9 +96,16 @@
                         </div>
                         <div class="meta">
                           <a class="like">
-                            <i class="like icon"></i> 5 Likes
+                            <i class="like icon"></i> 5 
                           </a>
                         </div>
+                        <div class="meta tags">
+                        	<i class="tag icon"></i>
+							<a href="#">#tag1
+							</a>   
+							<a href="#">#tag1
+							</a>							                     	
+                        </div>                        
                         <div class="ui divider"></div>
                       </div>
                     </div>
@@ -105,19 +116,16 @@
                         <img src="img/avatar.png">
                       </div>
                       <div class="content">
-                        <div class="date">
-                          4 days ago
-                        </div>
                         <div class="summary">
                           <a>Helen Troy</a> added <a>2 new illustrations</a>
+	                      <div class="date">
+	                        4 days ago
+	                      </div>                          
                         </div>
                         <div class="extra images">
                           <a><img src="img/avatar.jpg"></a>
                           <a><img src="img/avatar.jpg"></a>
                           <a><img src="img/avatar.jpg"></a>
-                          <a><img src="img/avatar.png"></a>
-                          <a><img src="img/avatar.png"></a>
-                          <a><img src="img/avatar.png"></a>
                         </div>
                         <div class="meta">
                           <a class="like">

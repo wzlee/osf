@@ -14,8 +14,14 @@ import org.springframework.stereotype.Service;
 
 
 
+
+
+
+import org.springframework.transaction.annotation.Transactional;
+
 import com.lvwang.osf.dao.PostDAO;
 import com.lvwang.osf.model.Post;
+import com.lvwang.osf.model.Tag;
 import com.lvwang.osf.util.Property;
 
 @Service("postService")
@@ -29,14 +35,27 @@ public class PostService {
 	public static final int COMMENT_STATUS_ALLOWED = 0;		//允许评论
 	public static final int COMMENT_STATUS_NOTALLOWED = 1;	//不允许评论
 	
+	public static final int POST_SUMMARY_LENGTH = 200;
+	
+	@Autowired
+	@Qualifier("relationService")
+	private RelationService relationService;
+	
+	@Autowired
+	@Qualifier("tagService")
+	private TagService tagService;
+	
 	@Autowired
 	@Qualifier("postDao")
 	private PostDAO postDao;
 	
+	@Transactional
 	public Map<String, Object> newPost(Integer author, String title, String content, 
-						Integer post_status, Integer comment_status) {
+						Integer post_status, Integer comment_status, String param_tags) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
+		
+		//1 field check
 		if(author == null || 
 		   title == null || title.length() == 0 ||
 		   content == null || content.length() == 0) {
@@ -58,17 +77,34 @@ public class PostService {
 			map.put("status", Property.ERROR_COMMENT_STATUS);
 		}
 		
+		//2 save post
 		Post post = new Post();
 		post.setPost_author(author);
 		post.setPost_title(title);
+		post.setPost_excerpt(getSummary(content));
 		post.setPost_content(content);
 		post.setPost_status(post_status);
 		post.setComment_status(comment_status);
 		post.setLike_count(0);
 		post.setShare_count(0);
 		post.setComment_count(0);
+		post.setPost_tags(TagService.toList(param_tags));
 		int id = postDao.save(post);
 		post.setId(id);
+		
+		//3 save tags
+		if(param_tags != null && param_tags.length() != 0) {				
+			Map<String, Object> tagsmap = tagService.newTags(tagService.toList(param_tags));
+			//4 save post tag relation
+			for(Tag tag: (List<Tag>)tagsmap.get("tags")) {
+				Map<String, Object> relmap = relationService.newRelation(
+											 RelationService.RELATION_TYPE_POST, 
+											 post.getId(), 
+											 tag.getId()
+											 );
+			}
+		}
+				
 		map.put("post", post);
 		map.put("status", Property.SUCCESS_POST_CREATE);
 		return map;
@@ -94,6 +130,13 @@ public class PostService {
 		return null;
 	}
 	
-	
+	public static String getSummary(String post_content) {
+		if(post_content == null || post_content.length() == 0)
+			return null;
+		return post_content.substring(0, 
+									  post_content.length() > POST_SUMMARY_LENGTH?
+									  POST_SUMMARY_LENGTH:
+									  post_content.length());
+	}
 	
 }

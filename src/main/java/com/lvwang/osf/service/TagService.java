@@ -9,6 +9,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.lvwang.osf.dao.TagDAO;
 import com.lvwang.osf.model.Tag;
@@ -28,9 +29,19 @@ public class TagService {
 		return Property.SUCCESS_TAG_FORMAT;
 	}
 	
-	public List<String> toList(String tags) {
+	public static List<String> toList(String tags) {
 		String[] tmp = tags.split(" ");
 		return new ArrayList<String>(Arrays.asList(tmp));
+	}
+	
+	public static String toString(List<String> tags) {
+		if(tags == null || tags.size() == 0)
+			return null;
+		StringBuffer buffer = new StringBuffer();
+		for(String tag: tags) {
+			buffer.append(tag+" ");
+		}
+		return buffer.toString();
 	}
 	
 	public Map<String, Object> newTag(String tag){
@@ -60,8 +71,15 @@ public class TagService {
 		return ret;
 	}
 	
+	@Transactional
 	public Map<String, Object> newTags(List<String> tags) {
+				
 		Map<String, Object> ret = new HashMap<String, Object>();
+		if(tags == null || tags.size() == 0) {
+			ret.put("status", Property.SUCCESS_TAG_CREATE);
+			return ret;
+		}
+		
 		List<Tag> taglist = new ArrayList<Tag>();
 		ret.put("tags", taglist);
 		
@@ -91,4 +109,5 @@ public class TagService {
 		ret.put("status", Property.SUCCESS_TAG_CREATE);
 		return ret;
 	}
+	
 }
