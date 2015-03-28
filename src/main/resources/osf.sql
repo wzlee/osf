@@ -12,7 +12,6 @@ CREATE TABLE IF NOT EXISTS `osf`.`osf_users` (
 ENGINE = InnoDB;
 
 
-drop table if exists osf.osf_posts;
 CREATE TABLE IF NOT EXISTS `osf`.`osf_posts` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `post_author` INT NOT NULL COMMENT '作者ID',
@@ -37,7 +36,6 @@ ENGINE = InnoDB;
 alter table osf_posts add column `like_count` INT NOT NULL DEFAULT 0;
 alter table osf_posts add column `share_count` INT NOT NULL DEFAULT 0;
 
-drop table osf_comments;
 CREATE TABLE IF NOT EXISTS `osf`.`osf_comments` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `comment_object_type` INT NOT NULL COMMENT 'post, album,...',
@@ -58,8 +56,6 @@ CREATE TABLE IF NOT EXISTS `osf`.`osf_comments` (
 ENGINE = InnoDB;
 
 
-
-drop table osf_events;
 CREATE TABLE IF NOT EXISTS `osf`.`osf_events` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `object_type` INT NOT NULL,
@@ -104,7 +100,6 @@ CREATE TABLE IF NOT EXISTS `osf`.`osf_followers` (
 ENGINE = InnoDB;
 
 
-drop table osf_albums;
 CREATE TABLE IF NOT EXISTS `osf`.`osf_albums` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `user_id` INT NOT NULL,
@@ -125,7 +120,6 @@ CREATE TABLE IF NOT EXISTS `osf`.`osf_albums` (
 ENGINE = InnoDB;
 
 
-drop table osf_photos;
 CREATE TABLE IF NOT EXISTS `osf`.`osf_photos` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `key` VARCHAR(45) NOT NULL,
