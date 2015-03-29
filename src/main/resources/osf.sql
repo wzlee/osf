@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS `osf`.`osf_posts` (
   `post_lastts` TIMESTAMP NOT NULL DEFAULT current_timestamp on update CURRENT_TIMESTAMP,
   `comment_count` INT NOT NULL DEFAULT 0,
   `post_url` VARCHAR(45) NULL,
+  `post_tags` TEXT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_osf_users_post_author_idx` (`post_author` ASC),
   CONSTRAINT `fk_osf_users_post_author`
@@ -35,6 +36,8 @@ CREATE TABLE IF NOT EXISTS `osf`.`osf_posts` (
 ENGINE = InnoDB;
 alter table osf_posts add column `like_count` INT NOT NULL DEFAULT 0;
 alter table osf_posts add column `share_count` INT NOT NULL DEFAULT 0;
+alter table osf_posts add column `post_album` INT NOT NULL DEFAULT 0;
+alter table osf_posts add column `post_cover` VARCHAR(100) NULL;
 
 CREATE TABLE IF NOT EXISTS `osf`.`osf_comments` (
   `id` INT NOT NULL AUTO_INCREMENT,

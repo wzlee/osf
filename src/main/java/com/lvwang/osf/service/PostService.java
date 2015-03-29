@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -51,7 +53,7 @@ public class PostService {
 	
 	@Transactional
 	public Map<String, Object> newPost(Integer author, String title, String content, 
-						Integer post_status, Integer comment_status, String param_tags) {
+						Integer post_status, Integer comment_status, String param_tags, String post_cover) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
@@ -89,6 +91,7 @@ public class PostService {
 		post.setShare_count(0);
 		post.setComment_count(0);
 		post.setPost_tags(TagService.toList(param_tags));
+		post.setPost_cover(post_cover);
 		int id = postDao.save(post);
 		post.setId(id);
 		
@@ -133,10 +136,12 @@ public class PostService {
 	public static String getSummary(String post_content) {
 		if(post_content == null || post_content.length() == 0)
 			return null;
-		return post_content.substring(0, 
-									  post_content.length() > POST_SUMMARY_LENGTH?
+		Document doc = Jsoup.parse(post_content);
+		String text = doc.text();
+		return text.substring(0, 
+									  text.length() > POST_SUMMARY_LENGTH?
 									  POST_SUMMARY_LENGTH:
-									  post_content.length());
+									  text.length());
 	}
 	
 }

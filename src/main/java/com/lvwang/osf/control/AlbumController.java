@@ -38,6 +38,7 @@ import com.lvwang.osf.util.Property;
 @RequestMapping("/album")
 public class AlbumController {
 
+	
 	@Autowired
 	@Qualifier("albumService") 
 	private AlbumService albumService;
@@ -219,10 +220,32 @@ public class AlbumController {
 		//上传图片
 		Map<String, Object> photoMap = albumService.newPhoto(album_id, img, null);
 		map.put("status", photoMap.get("status"));	
-		map.put("photo", photoMap.get("photo"));
+		Photo photo = (Photo)photoMap.get("photo");		
+		map.put("id", photo.getId());
+		map.put("key", photo.getKey());
 		return map;
 	}
 	
-
+	/*
+	 * post 中图片上传
+	 * 
+	 */
+	@ResponseBody
+	@RequestMapping(value="/upload/postphoto", method=RequestMethod.POST)
+	public Map<String, Object> postPhotoUpload(@RequestParam("uploader_input") MultipartFile img,
+										    HttpSession session) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if(img.isEmpty()) {
+			map.put("status", Property.ERROR_PHOTO_EMPTY);
+			return map;
+		}
+		
+		//upload photo
+		map = albumService.uploadPhoto(img);
+		//set post cover
+		session.setAttribute("post_cover", map.get("link"));
+		return map;
+	}
 	
 }

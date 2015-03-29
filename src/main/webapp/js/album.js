@@ -15,9 +15,9 @@ $(document).ready(function(){
 	                				var imgUrl = 'http://osfimgs.oss-cn-hangzhou.aliyuncs.com/';
 	                				data = jQuery(data).find('pre:first').text();
 	                				data = jQuery.parseJSON(data);
-	                				var $imgCard = $('<div class="card" id="card'+data.photo.id+'">'+
+	                				var $imgCard = $('<div class="card" id="card'+data.id+'">'+
 				    									'<a class="image" href="#">'+
-				      										'<img src="'+imgUrl+data.photo.key+'">'+
+				      										'<img src="'+imgUrl+data.key+'">'+
 				    									'</a>'+
 				    									'<div class="content">'+
 				    										'<textarea rows="" cols="" placeholder="添加描述..."></textarea>'+

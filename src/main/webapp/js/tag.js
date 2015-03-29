@@ -1,7 +1,7 @@
 var tags = new Array();
 $(document).ready(function(){
-
-	$('.delete.icon').live('click', function(event) {
+	
+	$('.delete.icon').on('click', function(event) {
 		var rmtag = $(this).parent('.ui.label').text();
 		for(var i=0; i<tags.length; i++) {
 			if(tags[i] == rmtag) {

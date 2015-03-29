@@ -20,6 +20,8 @@ public class Post {
 	private int comment_count;
 	private String post_url;
 	private List<String> post_tags;
+	private int post_album;
+	private String post_cover;
 	public int getId() {
 		return id;
 	}
@@ -109,6 +111,18 @@ public class Post {
 	}
 	public void setPost_tags(List<String> post_tags) {
 		this.post_tags = post_tags;
+	}
+	public int getPost_album() {
+		return post_album;
+	}
+	public void setPost_album(int post_album) {
+		this.post_album = post_album;
+	}
+	public String getPost_cover() {
+		return post_cover;
+	}
+	public void setPost_cover(String post_cover) {
+		this.post_cover = post_cover;
 	}
 
 }

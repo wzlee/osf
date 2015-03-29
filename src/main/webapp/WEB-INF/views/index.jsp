@@ -7,12 +7,14 @@
   <meta charset="UTF-8">
   <title>首页</title>
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/bootstrap2.css">
+  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/button.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/feed.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/card.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/image.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/divider.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/list.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/icon.css">
+  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/navbar.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/page.css">
   <script src=""></script>
   <style>
@@ -42,13 +44,20 @@
   	float: right;
   }
   #rightside {
-		padding-left:45px;
+	padding-left:45px;
+   }
+   .container {
+   	margin-top: 70px;
+   }
+   .nav-container {
+   	width: 960px;
+   	margin: 0 auto;
    }
   </style>
 </head>
 <body>
+  <%@ include file="topbar.jsp" %>
   <div class="container">
-	<%@ include file="topbar.jsp" %>
     <div class="row">  
           <div class="span8">           
                   <div class="ui feed">

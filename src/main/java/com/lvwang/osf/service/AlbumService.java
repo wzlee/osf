@@ -21,6 +21,7 @@ public class AlbumService {
 	
 	public static final int ALBUM_STAUS_NORMAL = 0;
 	public static final int ALBUM_STAUS_TOBERELEASED = 1; //待发布
+	public static final String BASE_URL = "http://osfimgs.oss-cn-hangzhou.aliyuncs.com/";
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -54,6 +55,22 @@ public class AlbumService {
 			map.put("status", Property.SUCCESS_ALBUM_CREATE);
 		} else {
 			map.put("status", Property.ERROR_ALBUM_CREATE);
+		}
+		return map;
+	}
+	
+	public Map<String, Object> uploadPhoto(MultipartFile img) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		Photo details = new Photo();
+		String key = UUID.randomUUID().toString()+"."+getImgType(img);
+		details.setKey(key);
+		String etag = albumDao.uploadPhoto(img, details);
+		if(etag == null || etag.length() ==0) {
+			map.put("status", Property.ERROR_PHOTO_CREATE);
+			return map;
+		} else {	
+			map.put("link", BASE_URL+key);
+			map.put("status", Property.SUCCESS_PHOTO_CREATE);			
 		}
 		return map;
 	}

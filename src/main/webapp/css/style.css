@@ -1,0 +1,138 @@
+ body{
+	font-family:"Microsoft YaHei", "微软雅黑","Times New Roman"
+ }
+   .container {
+   	margin-top: 70px;
+   }
+   .nav-container {
+   	width: 960px;
+   	margin: 0 auto;
+   } 
+ .postheader{
+    font-weight: bold;
+    margin-bottom: 10px;
+ }
+ .header{
+ 	padding-top: 0;
+ 	margin-top: 0;
+ }
+ .postmeta{
+ 	margin: 15px 0 0;
+ }
+ .postmeta  .avatar {
+ 	float:left;
+ }
+ .postmeta .author {
+ 	float:left;
+ 	padding-top:7px;
+ 	margin-left:7px;
+ }
+ .postmeta .tags {
+ 	float: right;
+ } 	
+ #tags {
+ 	padding-left: 20px;
+ }
+ .ui.images img {
+ 	width:23.5%;
+ }
+ .albumheader {
+ 	margin-top:50px;
+ }
+ #rightside {
+	padding-left:45px;
+ }
+ .ui.feed > .event {
+  	margin-top: 30px;
+  	margin-bottom: 30px;
+  }
+  .ui.feed > .event > .content {
+  	line-height: 20px;
+  }
+  
+ 	.post{
+	line-height: 24px;
+}
+.tags{
+        font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+        margin: 0;
+        outline: 0;
+        -webkit-appearance: none;
+        -webkit-tap-highlight-color: rgba(255,255,255,0);
+        line-height: 1.2142em;
+        padding: 0;
+        font-size: 1em;
+        background: #fff;
+        height: 37px;
+        border: 1px solid rgba(39,41,43,.15);
+        color: rgba(0,0,0,.8);
+        border-radius: .2857rem;
+        box-shadow: 0 0 0 0 transparent inset;
+        -webkit-transition: background-color .2s ease,color .2s ease,box-shadow .2s ease,border-color .2s ease;
+        transition: background-color .2s ease,color .2s ease,box-shadow .2s ease,border-color .2s ease;
+
+  }
+  .ui.form input[type="text"].tag-input{
+        border: 0;
+        padding: 0;
+        margin: 0;
+        outline: 0;
+        position: relative;
+        height: 30px;
+        padding-top: 3px;
+        width: auto;
+		vertical-align: baseline;
+  }
+  .tagfield {
+    display: inline-block;
+    padding-left:4px;
+  }	
+  .froala-editor, .froala-wrapper.f-basic {
+	  border: 1px solid rgba(39, 41, 43, 0.15);
+  	  color: rgba(0, 0, 0, 0.8);	      
+      box-shadow: 0em 0em 0em 0em transparent inset;
+  }
+  .froala-editor {
+  	border-radius: 0.2857rem 0.2857rem 0 0;
+  }
+  .froala-wrapper.f-basic {
+  	border-radius: 0 0 0.2857rem 0.2857rem;
+  }
+  .froala-element {
+  	min-height: 330px;
+  }
+  
+  	.loginarea{
+		/*position: relative;*/
+		padding-top: 30%;		
+	}
+	.forgetpwd{
+		float: right;
+		padding-top: 5px;
+	}
+	.social{
+
+	}
+	.social .button{
+	
+		margin-bottom: 10px;
+	}
+
+	.segment {
+	  position: relative;
+	  box-shadow: 0 0 0 1px rgba(39,41,43,.15),0 1px 2px 0 rgba(0,0,0,.05);
+	  border-radius: .2857rem;
+	  border: none;
+	}	
+
+	.ui.divider {
+		width: 108.5%;
+	}
+	.registerArea{
+		/*position: relative;*/
+		padding-top: 30%;		
+	}
+	.forgetpwd{
+		float: right;
+		padding-top: 5px;
+	}	

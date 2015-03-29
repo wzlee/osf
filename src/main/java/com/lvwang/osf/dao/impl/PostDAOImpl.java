@@ -75,6 +75,7 @@ public class PostDAOImpl implements PostDAO{
 				post.setPost_title(rs.getString("post_title"));
 				post.setPost_ts(rs.getTimestamp("post_ts"));
 				post.setShare_count(rs.getInt("share_count"));
+				post.setPost_cover(rs.getString("post_cover"));
 				return post;
 			}
 			
@@ -87,8 +88,8 @@ public class PostDAOImpl implements PostDAO{
 		final String sql = "insert into " + TABLE + 
 					 "(post_author, post_title, post_content,"
 					 + "post_excerpt, post_status,"
-					 + "post_pwd, comment_status, post_tags)"
-					 + " values(?,?,?,?,?,?,?,?)";
+					 + "post_pwd, comment_status, post_tags, post_cover)"
+					 + " values(?,?,?,?,?,?,?,?,?)";
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		jdbcTemplate.update(new PreparedStatementCreator() {
 			
@@ -103,6 +104,7 @@ public class PostDAOImpl implements PostDAO{
 				ps.setString(6, post.getPost_pwd());
 				ps.setInt(7, post.getComment_status());
 				ps.setString(8, TagService.toString(post.getPost_tags()));
+				ps.setString(9, post.getPost_cover());
 				return ps;
 			}
 		}, keyHolder);

@@ -7,6 +7,7 @@
 	<meta charset="UTF-8" />
 	<title>Document</title>
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/bootstrap2.css">
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/navbar.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/feed.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/button.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/card.css">
@@ -16,61 +17,17 @@
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/label.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/icon.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/page.css">
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">
+    
   	<script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.js"></script>
   	<script type="text/javascript" src="<%=request.getContextPath() %>/js/basic.js"></script>
   	<script type="text/javascript" src="<%=request.getContextPath() %>/js/comment.js"></script>
   	<script type="text/javascript" src="<%=request.getContextPath() %>/js/post.js"></script>
-  	<script type="text/javascript" src="<%=request.getContextPath() %>/js/follow.js"></script>  
-  	<style>
-  	  body{
-  	  	font-family:"Microsoft YaHei", "微软雅黑","Times New Roman"
-  	  }
-	  .postheader{
-	      font-weight: bold;
-	      margin-bottom: 10px;
-	  }
-	  .header{
-	  	padding-top: 0;
-	  	margin-top: 0;
-	  }
-	  .postmeta{
-	  	margin: 15px 0 0;
-	  }
-	  .postmeta  .avatar {
-	  	float:left;
-	  }
-	  .postmeta .author {
-	  	float:left;
-	  	padding-top:7px;
-	  	margin-left:7px;
-	  }
-	  .postmeta .tags {
-	  	float: right;
-	  } 	
-	  #tags {
-	  	padding-left: 20px;
-	  }
-	  .ui.images img {
-	  	width:23.5%;
-	  }
-	  .albumheader {
-	  	margin-top:50px;
-	  }
-	  #rightside {
-		padding-left:45px;
-   	  }
-   	  .ui.feed > .event {
-   	  	margin-top: 30px;
-   	  	margin-bottom: 30px;
-   	  }
-   	  .ui.feed > .event > .content {
-   	  	line-height: 20px;
-   	  }
-  	</style>  	
+  	<script type="text/javascript" src="<%=request.getContextPath() %>/js/follow.js"></script>   	
 </head>
 <body>
+  <%@ include file="../topbar.jsp" %>
   <div class="container">
-	<!--  <%@ include file="../topbar.jsp" %>-->
     <div class="row">  
           <div class="span8">     
           		<div class="ui feed">
@@ -81,8 +38,16 @@
 	                      <div class="content">
 	                        <div class="text">
 	                        	<div class="row">
+	                        	<c:if test="${not empty post.post_cover}">
 	                        		<div class="span6">
-	                        			<h3 class="ui header">${post.post_title }</h3>
+	                        	</c:if>
+	                        	<c:if test="${empty post.post_cover}">
+	                        		<div class="span8">
+	                        	</c:if>
+	                        		
+	                        			<h3 class="ui header">
+	                        				<a href="<%=request.getContextPath() %>/post/${post.id}">${post.post_title }</a>
+	                        			</h3>
 	                        			<div>
 	                        				${post.post_excerpt }
 	                        			</div>
@@ -90,9 +55,12 @@
 	
 	                        			</div>
 	                        		</div>
-	                        		<div class="span2">
-	                        			<img class="ui small image" src="<c:url value="/img/avatar.jpg"/>" alt=""  />
-	                        		</div>
+	                        		<c:if test="${not empty post.post_cover}">
+		                        		<div class="span2">
+		                        			<img class="ui small image" src="${post.post_cover }" alt=""  />
+		                        		</div>
+	                        		</c:if>
+	                        		
 	                        	</div>
 	                        </div>
 	                        <div class="meta">

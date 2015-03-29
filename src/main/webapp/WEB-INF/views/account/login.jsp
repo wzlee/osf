@@ -10,42 +10,11 @@
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/button.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/form.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/page.css">
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">
+	
 	<script src="<%=request.getContextPath() %>/js/jquery.js"></script>
 	<script src="<%=request.getContextPath() %>/js/basic.js"></script>
 	<script src="<%=request.getContextPath() %>/js/login.js"></script>
-	<style>
-	body {
-	    font-family: "Microsoft YaHei","微软雅黑",tahoma,arial,"宋体";
-	}	
-	.loginarea{
-		/*position: relative;*/
-		padding-top: 30%;		
-	}
-	.forgetpwd{
-		float: right;
-		padding-top: 5px;
-	}
-	.social{
-
-	}
-	.social .button{
-	
-		margin-bottom: 10px;
-	}
-
-	.segment {
-	  position: relative;
-	  box-shadow: 0 0 0 1px rgba(39,41,43,.15),0 1px 2px 0 rgba(0,0,0,.05);
-	  border-radius: .2857rem;
-	  border: none;
-	}	
-	.ui.form input[type]{
-		width: 98%;
-	}	
-	.ui.divider {
-		width: 108.5%;
-	}
-	</style>
 </head>
 <body>
 	<div class="container">

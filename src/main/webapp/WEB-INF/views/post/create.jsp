@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,55 +15,17 @@
   	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/image.css">
   	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/label.css">
   	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/icon.css">
+  	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/navbar.css">
+  	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/font-awesome.min.css">
+  	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/froala_editor.min.css">
+  	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/froala_style.min.css">
   	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/page.css">
-  	<style>
-  	body {
-    	font-family: "Microsoft YaHei","微软雅黑",tahoma,arial,"宋体";
-  	}
-	.post{
-		line-height: 24px;
-	}
-	.tags{
-	        font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
-	        margin: 0;
-	        outline: 0;
-	        -webkit-appearance: none;
-	        -webkit-tap-highlight-color: rgba(255,255,255,0);
-	        line-height: 1.2142em;
-	        padding: 0;
-	        font-size: 1em;
-	        background: #fff;
-	        height: 37px;
-	        border: 1px solid rgba(39,41,43,.15);
-	        color: rgba(0,0,0,.8);
-	        border-radius: .2857rem;
-	        box-shadow: 0 0 0 0 transparent inset;
-	        -webkit-transition: background-color .2s ease,color .2s ease,box-shadow .2s ease,border-color .2s ease;
-	        transition: background-color .2s ease,color .2s ease,box-shadow .2s ease,border-color .2s ease;
-	
-	  }
-	  .ui.form input[type="text"].tag-input{
-	        border: 0;
-	        padding: 0;
-	        margin: 0;
-	        outline: 0;
-	        position: relative;
-	        height: 30px;
-	        padding-top: 3px;
-	        width: auto;
-			vertical-align: baseline;
-	  }
-	  .tagfield {
-	    display: inline-block;
-	    padding-left:4px;
-	  }	
-  	</style>
-  	<script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.js"></script>
-  	<script type="text/javascript" src="<%=request.getContextPath() %>/js/basic.js"></script>
-  	<script type="text/javascript" src="<%=request.getContextPath() %>/js/post.js"></script>
-  	<script type="text/javascript" src="<%=request.getContextPath() %>/js/tag.js"></script>
+  	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">
+
+
 </head>
 <body>
+	<%@ include file="../topbar.jsp" %>
 	<div class="container">
 		<div class="row">
 			<div class="span8">
@@ -73,7 +36,9 @@
 				  </div>
 				  <div class="field">
 				    <label>正文</label>
-				    <textarea id="content" class="post"></textarea>
+				    <textarea id="content"></textarea>
+				    
+				    <!--   <textarea id="content" class="post"></textarea> -->
 				  </div>	
 
 					<div class="field">
@@ -103,5 +68,19 @@
 			</div>
 		</div>
 	</div>
+  	<script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery-1.11.1.min.js"></script> 
+  	<script type="text/javascript" src="<%=request.getContextPath() %>/js/froala_editor.min.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath() %>/js/basic.js"></script>
+  	<script type="text/javascript" src="<%=request.getContextPath() %>/js/post.js"></script>
+  	<script type="text/javascript" src="<%=request.getContextPath() %>/js/tag.js"></script>
+  	<script>
+      $(function() {
+          $('#content').editable({
+        	  inlineMode: false,
+        	  imageUploadURL: '<%=request.getContextPath() %>/album/upload/postphoto',
+        	  imageUploadParam: "uploader_input"
+          })
+      });
+    </script>	  	
 </body>
 </html>
