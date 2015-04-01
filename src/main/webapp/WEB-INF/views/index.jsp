@@ -41,6 +41,9 @@
   	margin-left:7px;
   }
   .tags {
+  	float: left;
+  }
+  .actions {
   	float: right;
   }
   #rightside {
@@ -104,17 +107,23 @@
                           新华社北京12月30日电 中共中央总书记、国家主席、中央军委主席、中央全面深化改革领导小组组长习近平12月30日上午主持召开中央全面深化改革领导小组第八次会议并发表重要讲话。他强调，今年是全面深化改革的开局之年，改革形成了上下联动、主动作为、蹄疾步稳、狠抓落实的好局面，呈现出全面播种、次第开花的生动景象
                         </div>
                         <div class="meta">
-                          <a class="like">
-                            <i class="like icon"></i> 5 
-                          </a>
-                        </div>
-                        <div class="meta tags">
+                          <div class="tags">
                         	<i class="tag icon"></i>
-							<a href="#">#tag1
+							<a href="#">摄影
 							</a>   
-							<a href="#">#tag1
-							</a>							                     	
-                        </div>                        
+							<a href="#">旅行
+							</a>
+						  </div>							                     	
+                          <div class="actions">
+							  <a class="comment">
+	                            <i class="comment outline icon"></i> 9
+	                          </a>                           
+	                          <a class="like">
+	                            <i class="like icon"></i> 5 
+	                          </a>                          
+                          </div>
+
+                        </div>                                               
                         <div class="ui divider"></div>
                       </div>
                     </div>
