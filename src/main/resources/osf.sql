@@ -1,3 +1,5 @@
+
+create database osf;
 use osf;
 
 CREATE TABLE IF NOT EXISTS `osf`.`osf_users` (
@@ -134,5 +136,26 @@ CREATE TABLE IF NOT EXISTS `osf`.`osf_photos` (
 ENGINE = InnoDB;
 
 
+CREATE TABLE IF NOT EXISTS `osf`.`osf_tags` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `tag` VARCHAR(30) NOT NULL,
+  `add_ts` TIMESTAMP NOT NULL DEFAULT current_timestamp,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+CREATE TABLE IF NOT EXISTS `osf`.`osf_relations` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `object_type` INT NOT NULL,
+  `object_id` INT NOT NULL,
+  `tag_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_tag_id_idx` (`tag_id` ASC),
+  CONSTRAINT `fk_tag_id`
+    FOREIGN KEY (`tag_id`)
+    REFERENCES `osf`.`osf_tags` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
 
