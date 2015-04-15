@@ -1,7 +1,7 @@
  body{
-	font-family:"Microsoft YaHei", "微软雅黑","Times New Roman"
+	font-family: "Helvetica" ,"Arial","Times New Roman";
  }
-   .container {
+ .container {
    	margin-top: 70px;
    }
    .nav-container {
