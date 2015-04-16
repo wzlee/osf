@@ -31,6 +31,7 @@ import com.lvwang.osf.model.Photo;
 import com.lvwang.osf.model.User;
 import com.lvwang.osf.service.AlbumService;
 import com.lvwang.osf.service.EventService;
+import com.lvwang.osf.service.FeedService;
 import com.lvwang.osf.util.Dic;
 import com.lvwang.osf.util.Property;
 
@@ -46,6 +47,10 @@ public class AlbumController {
 	@Autowired
 	@Qualifier("eventService")
 	private EventService eventService;
+	
+	@Autowired
+	@Qualifier("feedService")
+	private FeedService feedService;
 	
 	@RequestMapping("/{id}/photos")
 	public ModelAndView album(@PathVariable("id") int id) {
@@ -175,7 +180,10 @@ public class AlbumController {
 			album.setAlbum_desc(album_desc);
 			album.setPhotos_count(photos2upd.size());
 			album.setPhotos(photos2upd);
-			eventService.newEvent(Dic.OBJECT_TYPE_ALBUM, album);
+			int event_id = eventService.newEvent(Dic.OBJECT_TYPE_ALBUM, album);
+			if(event_id !=0 ) {
+				feedService.push(user.getId(), event_id);
+			}
 			
 		} catch (JsonProcessingException e) {
 			map.put("status", Property.ERROR_ALBUM_CREATE);

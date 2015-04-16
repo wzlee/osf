@@ -5,4 +5,6 @@ public class Dic {
 	public static final int OBJECT_TYPE_PHOTO = 1;
 	public static final int OBJECT_TYPE_ALBUM = 2;
 	
+	public static final int OBJECT_TYPE_FOLLOWING = 3;
+
 }

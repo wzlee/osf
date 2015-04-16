@@ -42,7 +42,7 @@ public class FeedService {
 	
 	public List<Event> getFeeds(int user_id) {
 		List<Integer> feeds = getEventIDs(user_id);
-		if(feeds != null ) {
+		if(feeds != null && feeds.size()!=0 ) {
 			List<Event> events = eventDao.getEvents(feeds);
 			if(events == null)
 				events = new ArrayList<Event>();

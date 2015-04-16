@@ -42,7 +42,7 @@ public class PostDAOImpl implements PostDAO{
 					post.setPost_author(rs.getInt("post_author"));
 					post.setPost_ts(rs.getTimestamp("post_ts"));
 					post.setPost_title(rs.getString("post_title"));
-					//post.setPost_content(rs.getString("post_content"));
+					post.setPost_content(rs.getString("post_content"));
 					post.setPost_excerpt(rs.getString("post_excerpt"));
 					post.setPost_lastts(rs.getTimestamp("post_lastts"));
 					post.setComment_count(rs.getInt("comment_count"));

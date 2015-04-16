@@ -1,14 +1,18 @@
- body{
+body{
 	font-family: "Helvetica" ,"Arial","Times New Roman";
- }
- .container {
-   	margin-top: 70px;
-   }
-   .nav-container {
+}
+.nav-container {
    	width: 960px;
    	margin: 0 auto;
-   } 
- .postheader{
+} 
+
+.container {
+   	margin-top: 90px;
+}
+.ui.feed {
+	margin-right: 40px;
+}
+.postheader{
     font-weight: bold;
     margin-bottom: 10px;
  }
@@ -29,7 +33,8 @@
  }
  .postmeta .tags {
  	float: right;
- } 	
+ } 
+ 	
  #tags {
  	padding-left: 20px;
  }
@@ -42,18 +47,23 @@
  #rightside {
 	padding-left:45px;
  }
- .ui.feed > .event {
-  	margin-top: 30px;
-  	margin-bottom: 30px;
-  }
+
   .ui.feed > .event > .content {
   	line-height: 20px;
   }
   
- 	.post{
-	line-height: 24px;
-}
-.tags{
+  .post{
+  	margin-top:30px;
+  }
+  .post p {
+  	line-height: 24px;
+  }
+  .post.like{
+		float: right;
+  
+  }  
+  
+/*   .tags{
         font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
         margin: 0;
         outline: 0;
@@ -71,6 +81,10 @@
         -webkit-transition: background-color .2s ease,color .2s ease,box-shadow .2s ease,border-color .2s ease;
         transition: background-color .2s ease,color .2s ease,box-shadow .2s ease,border-color .2s ease;
 
+  } */
+  .event .tags {
+  	float: left;
+  
   }
   .ui.form input[type="text"].tag-input{
         border: 0;
@@ -125,9 +139,6 @@
 	  border: none;
 	}	
 
-	.ui.divider {
-		width: 108.5%;
-	}
 	.registerArea{
 		/*position: relative;*/
 		padding-top: 30%;		
@@ -136,3 +147,7 @@
 		float: right;
 		padding-top: 5px;
 	}	
+	
+.event .actions {
+	float: right;
+}

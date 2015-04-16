@@ -30,6 +30,8 @@ public class TagService {
 	}
 	
 	public static List<String> toList(String tags) {
+		if(tags == null || tags.length() == 0)
+			return new ArrayList<String>();
 		String[] tmp = tags.split(" ");
 		return new ArrayList<String>(Arrays.asList(tmp));
 	}
