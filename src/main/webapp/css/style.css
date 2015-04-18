@@ -157,4 +157,18 @@ body{
 .tip{
 	float: right;
 }
+.ui.menu {
+	background: none;
+	
+}
+.ui.labeled.icon.menu {
+	margin-left: 10px;
+	margin-bottom: 30px;
+	
+}
+.ui.labeled.icon.menu > .item {
+	min-width: 132px;
+}
+
+
 

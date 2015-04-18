@@ -20,7 +20,7 @@ $(document).ready(function(){
 		})
 		.success(function(data) {
 			if(data.status == '104000') {
-				self.location = basePath + '/account/activation/mail/send?username='+username;
+				self.location = basePath + '/account/activation/mail/send?email='+email;
 			} else { //error
 				var status = data.status;
 				switch(status.charAt(2)) {
@@ -64,7 +64,7 @@ $(document).ready(function(){
 						break;
 					case '4':
 						if(status == '004003') {
-							var activationUrl = basePath + '/account/activation/mail/send?username='+username;
+							var activationUrl = basePath + '/account/activation/mail/send?email='+email;
 							$('#emailTip').html('<a href="'+activationUrl+'">已注册,请激活</a>');
 						}
 						$('#email').parent('div.field:first').addClass('error');

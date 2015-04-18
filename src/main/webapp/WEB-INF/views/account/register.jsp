@@ -12,6 +12,7 @@
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/button.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/form.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/page.css">
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/step.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">
 	
 	<script src="<%=request.getContextPath() %>/js/jquery.js"></script>
@@ -22,7 +23,7 @@
     <%@ include file="../topbar.jsp" %>
 	<div class="container">
 		<div class="row">
-			<div class="span8 offset2">				
+			<div class="span9 offset2">				
 					<div class="row">
 						<div class="span4 offset2">
 							<div class="registerArea">

@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.ant.FindLeaksTask;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.lvwang.osf.model.User;
 import com.lvwang.osf.service.UserService;
@@ -68,12 +70,26 @@ public class AccountController {
 	}
 	
 	@RequestMapping("/activation/mail/send")
-	public String actication(@RequestParam("username") String username) {
-		return "account/activation";
+	public ModelAndView actication(@RequestParam("email") String email) {
+		ModelAndView mav = new ModelAndView();	
+		mav.setViewName("account/activation");
+		User user = userService.findByEmail(email);
+		if(user != null) {
+			if(user.getUser_status() == UserService.STATUS_USER_NORMAL) {
+				mav.setViewName("/account/login");
+			} else if(user.getUser_status() == UserService.STATUS_USER_INACTIVE) {
+				
+			}
+			
+			//TO-DO
+			//send email
+			mav.addObject("email", email);
+		}
+		return mav;
 	}
 	
 	@RequestMapping("/activation/mail/resend")
-	public String acticationMailResend(@RequestParam("username") String username) {
+	public String acticationMailResend(@RequestParam("email") String email) {
 		return "account/activation";
 	}	
 	

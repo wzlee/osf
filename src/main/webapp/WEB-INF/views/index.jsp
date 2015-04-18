@@ -16,6 +16,7 @@
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/list.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/icon.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/navbar.css">
+  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/menu.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/page.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">
 </head>
@@ -23,7 +24,29 @@
   <%@ include file="topbar.jsp" %>
   <div class="container">
     <div class="row">  
-          <div class="span8">           
+          <div class="span8">  
+          		<div class="ui avatar image">
+                	<img src="img/avatar.png">
+                </div>
+				<div class="ui labeled icon menu newpost_buttons">
+				  <a class="item" href="<c:url value="/post/create"/>">
+				    <i class="blue big font icon"></i>
+				    发状态
+				  </a>
+				  <a class="item" href="<c:url value="/album/upload"/>">
+				    <i class="pink big photo icon"></i>
+				    传图片
+				  </a>
+				  <a class="item" href="<c:url value="/post/create"/>">
+				    <i class="big write icon"></i>
+				    写日志
+				  </a>
+				  <a class="item">
+				    <i class="green big linkify icon"></i>
+				    链接
+				  </a>				  
+				</div>
+                        
                   <div class="ui feed">
                    <c:forEach items="${feeds }" var="feed"> 
                    <!-- new post -->

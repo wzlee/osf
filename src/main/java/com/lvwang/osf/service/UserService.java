@@ -180,4 +180,8 @@ public class UserService {
 		return userDao.getUser("user_activationKey", new Object[]{key});
 	}
 	
+	public int getStatus(String email) {
+		User user = userDao.getUserByEmail(email);
+		return user.getUser_status();
+	}
 }
