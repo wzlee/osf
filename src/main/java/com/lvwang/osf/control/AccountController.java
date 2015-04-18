@@ -52,12 +52,13 @@ public class AccountController {
 	
 	@ResponseBody
 	@RequestMapping(value="/register", method=RequestMethod.POST)
-	public Map<String, String> register(@RequestParam("email") String email,
-						 @RequestParam("password") String password,
-						 @RequestParam("cfmPwd") String cfmPwd) {
+	public Map<String, String> register(@RequestParam("username") String username,
+										@RequestParam("email") String email,
+						 				@RequestParam("password") String password,
+						 				@RequestParam("cfmPwd") String cfmPwd) {
 		System.out.println("resister....");
 		Map<String, String> map = new HashMap<String, String>();
-		String status = userService.register(email, password, cfmPwd, map);
+		String status = userService.register(username, email, password, cfmPwd, map);
 		if(Property.SUCCESS_ACCOUNT_REG.equals(status)){
 			
 		} else if(Property.ERROR_ACCOUNT_INACTIVE.equals(status)) {
@@ -65,6 +66,16 @@ public class AccountController {
 		map.put("status", status);
 		return map;
 	}
+	
+	@RequestMapping("/activation/mail/send")
+	public String actication(@RequestParam("username") String username) {
+		return "account/activation";
+	}
+	
+	@RequestMapping("/activation/mail/resend")
+	public String acticationMailResend(@RequestParam("username") String username) {
+		return "account/activation";
+	}	
 	
 	@ResponseBody
 	@RequestMapping("/activation/{key}")

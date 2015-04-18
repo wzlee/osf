@@ -94,8 +94,10 @@ public class UserService {
 	
 	
 	@SuppressWarnings("deprecation")
-	public String register(String email, String password, String conformPwd, Map<String, String> map) {
+	public String register(String username, String email, String password, String conformPwd, Map<String, String> map) {
 		//1 empty check
+		if(username == null || username.length() == 0) 
+			return Property.ERROR_USERNAME_EMPTY;
 		if(email == null || email.length() <= 0)
 			return Property.ERROR_EMAIL_EMPTY;
 		if(password == null || password.length() <= 0)
@@ -103,19 +105,10 @@ public class UserService {
 		if(conformPwd == null || conformPwd.length() <= 0)
 			return Property.ERROR_CFMPWD_EMPTY;
 		
-		//2 pwd == conformPwd ?
-		if(!password.equals(conformPwd))
-			return Property.ERROR_CFMPWD_NOTAGREE;
-		
-		//3 password format validate
-		String vpf_rs = CipherUtil.validatePasswordFormat(password);
-		if(vpf_rs != Property.SUCCESS_PWD_FORMAT)
-			return vpf_rs;
-			
-		//4 ValidateEmail
-		if(!ValidateEmail(email))
-			return Property.ERROR_EMAIL_FORMAT;
-		
+		//username exist check
+		if(findByUsername(username) != null) {
+			return Property.ERROR_USERNAME_EXIST;
+		}
 		//5 email exist?
 		User user = findByEmail(email);
 		if(user != null) {
@@ -131,11 +124,26 @@ public class UserService {
 				return Property.ERROR_ACCOUNT_LOCK;
 			else if(STATUS_USER_CANCELLED == user.getUser_status()) 
 				return Property.ERROR_ACCOUNT_CANCELLED;
-
-				
 		}
 		
+		
+		//2 pwd == conformPwd ?
+		if(!password.equals(conformPwd))
+			return Property.ERROR_CFMPWD_NOTAGREE;
+		
+		//3 password format validate
+		String vpf_rs = CipherUtil.validatePasswordFormat(password);
+		if(vpf_rs != Property.SUCCESS_PWD_FORMAT)
+			return vpf_rs;
+			
+		//4 ValidateEmail
+		if(!ValidateEmail(email))
+			return Property.ERROR_EMAIL_FORMAT;
+		
+
+		
 		user = new User();
+		user.setUser_name(username);
 		user.setUser_pwd(CipherUtil.generatePassword(password));
 		user.setUser_email(email);
 		user.setUser_status(STATUS_USER_INACTIVE);

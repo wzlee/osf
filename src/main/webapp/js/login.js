@@ -11,8 +11,11 @@ $(document).ready(function(){
 				   password: password},
 		})
 		.success(function(data) {
-			console.log("success");
-			alert(data);
+			if(JSON.stringify(data).indexOf('1') == 0){
+				self.location = basePath + '/';
+				console.log("login success");
+			}
+			
 		})
 		.fail(function() {
 			console.log("error");

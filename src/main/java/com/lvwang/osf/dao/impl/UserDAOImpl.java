@@ -106,7 +106,7 @@ public class UserDAOImpl implements UserDAO{
 	//返回生成主键 user id
 	public int save(final User user) {
 		final String sql = "insert into " + TABLE + 
-					 "(user_email, user_pwd, user_activationKey, user_status) values(?,?,?,?)";
+					 "(user_name, user_email, user_pwd, user_activationKey, user_status) values(?,?,?,?,?)";
 		//jdbcTemplate.update(sql);
 		
 		KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -115,10 +115,11 @@ public class UserDAOImpl implements UserDAO{
 			public PreparedStatement createPreparedStatement(Connection con)
 					throws SQLException {
 				PreparedStatement ps = con.prepareStatement(sql, new String[]{"id"});
-				ps.setString(1, user.getUser_email());
-				ps.setString(2, user.getUser_pwd());
-				ps.setString(3, user.getUser_activationKey());
-				ps.setInt(4, user.getUser_status());
+				ps.setString(1, user.getUser_name());
+				ps.setString(2, user.getUser_email());
+				ps.setString(3, user.getUser_pwd());
+				ps.setString(4, user.getUser_activationKey());
+				ps.setInt(5, user.getUser_status());
 				return ps;
 			}
 		}, keyHolder );

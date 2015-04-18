@@ -139,10 +139,6 @@ body{
 	  border: none;
 	}	
 
-	.registerArea{
-		/*position: relative;*/
-		padding-top: 30%;		
-	}
 	.forgetpwd{
 		float: right;
 		padding-top: 5px;
@@ -151,3 +147,14 @@ body{
 .event .actions {
 	float: right;
 }
+
+.social-login {
+	padding-top: 94px;
+}
+.social-login .button {
+	padding-bottom: 30px;
+}
+.tip{
+	float: right;
+}
+
