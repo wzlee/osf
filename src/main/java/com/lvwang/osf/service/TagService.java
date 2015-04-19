@@ -12,11 +12,20 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.lvwang.osf.dao.TagDAO;
+import com.lvwang.osf.model.Event;
 import com.lvwang.osf.model.Tag;
 import com.lvwang.osf.util.Property;
 
 @Service("tagService")
 public class TagService {
+	
+	@Autowired
+	@Qualifier("eventService")
+	private EventService eventService;
+	
+	@Autowired
+	@Qualifier("relationService")
+	private RelationService relationService;
 	
 	@Autowired
 	@Qualifier("tagDao")
@@ -110,6 +119,14 @@ public class TagService {
 		}
 		ret.put("status", Property.SUCCESS_TAG_CREATE);
 		return ret;
+	}
+	
+	public int getID(String tag){
+		return tagDao.getTagID(tag);
+	}
+	
+	public List<Event> getWithTag(String tag) {
+		return eventService.getEventsWithRelations(relationService.getRelationsWithTag(tag));
 	}
 	
 }

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Repository;
 import com.lvwang.osf.dao.EventDAO;
 import com.lvwang.osf.model.Event;
 import com.lvwang.osf.model.Post;
+import com.lvwang.osf.model.Relation;
 import com.lvwang.osf.service.TagService;
 import com.lvwang.osf.util.Dic;
 
@@ -93,11 +95,53 @@ public class EventDAOImpl implements EventDAO{
 		return keyHolder.getKey().intValue();
 	}
 
-	public List<Event> getEvents(List<Integer> event_ids) {
+	public List<Event> getEventsWithIDs(List<Integer> event_ids) {
 		String sql = "select * from " + TABLE + " where id in (:ids)";
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("ids", event_ids);
 		return namedParaJdbcTemplate.query(sql, paramMap, new RowMapper<Event>() {
+
+			public Event mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Event event = new Event();
+				event.setComment_count(rs.getInt("comment_count"));
+				event.setContent(rs.getString("content"));
+				event.setFollower_user_id(rs.getInt("follower_user_id"));
+				event.setFollower_user_name(rs.getString("follower_user_name"));
+				event.setFollowing_user_id(rs.getInt("following_user_id"));
+				event.setFollowing_user_name(rs.getString("following_user_name"));
+				event.setId(rs.getInt("id"));
+				event.setLike_count(rs.getInt("like_count"));
+				event.setObject_id(rs.getInt("object_id"));
+				event.setObject_type(rs.getInt("object_type"));
+				event.setShare_count(rs.getInt("share_count"));
+				event.setSummary(rs.getString("summary"));
+				event.setTags(TagService.toList(rs.getString("tags")));
+				event.setTitle(rs.getString("title"));
+				event.setTs(rs.getTimestamp("ts"));
+				event.setUser_avatar(rs.getString("user_avatar"));
+				event.setUser_id(rs.getInt("user_id"));
+				event.setUser_name(rs.getString("user_name"));
+				return event;
+			}
+		});
+		
+	}
+	
+	public List<Event> getEventsWithRelations(Map<Integer, List<Integer>> relationsCategory) {
+		StringBuffer sql = new StringBuffer("select * from " + TABLE + " where ");
+		
+		int i = 0;
+		HashMap<String, Object> paramMap = new HashMap<String, Object>();
+		for(Integer type: relationsCategory.keySet()) {		
+			if(i != 0) {
+				sql.append(" or ");
+			}
+			sql.append("(object_type="+type + " and object_id in (:" + String.valueOf(type)+i +"))");
+			paramMap.put(String.valueOf(type)+i, relationsCategory.get(type));
+			i++;
+		}
+
+		return namedParaJdbcTemplate.query(sql.toString(), paramMap, new RowMapper<Event>() {
 
 			public Event mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Event event = new Event();

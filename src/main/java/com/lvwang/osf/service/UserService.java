@@ -184,4 +184,5 @@ public class UserService {
 		User user = userDao.getUserByEmail(email);
 		return user.getUser_status();
 	}
+	
 }

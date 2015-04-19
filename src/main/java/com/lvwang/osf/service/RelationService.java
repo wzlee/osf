@@ -1,6 +1,8 @@
 package com.lvwang.osf.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,10 @@ public class RelationService {
 	public static final int RELATION_TYPE_POST = 0;
 	public static final int RELATION_TYPE_PHOTO = 1;
 	public static final int RELATION_TYPE_ALBUM = 2;
+	
+	@Autowired
+	@Qualifier("tagService")
+	private TagService tagService;
 	
 	@Autowired
 	@Qualifier("relationDao")
@@ -43,5 +49,20 @@ public class RelationService {
 	
 	public void newRelation(int object_type, int object_id, int[] tags_id) {
 		
+	}
+	
+	
+	/*
+	 * return osf_object type and id with tag
+	 */
+	public List<Relation> getRelationsWithTag(String tag){
+		List<Relation> relations = new ArrayList<Relation>();
+		int tag_id = tagService.getID(tag);
+		if(tag_id != 0) {
+			List<Relation> rels = relationDao.get(tag_id);
+			if(rels != null)
+				relations = rels;
+		}
+		return relations;
 	}
 }

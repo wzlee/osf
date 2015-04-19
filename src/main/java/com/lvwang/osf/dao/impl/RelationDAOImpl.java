@@ -2,17 +2,21 @@ package com.lvwang.osf.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.lvwang.osf.dao.RelationDAO;
+import com.lvwang.osf.model.Relation;
 
 @Repository("relationDao")
 public class RelationDAOImpl implements RelationDAO{
@@ -64,4 +68,26 @@ public class RelationDAOImpl implements RelationDAO{
 		return false;
 	}
 
+	public List<Relation> get(final int tag_id) {
+		final String sql = "select * from " + TABLE + " where tag_id = ?";
+		return jdbcTemplate.query(new PreparedStatementCreator() {
+			
+			public PreparedStatement createPreparedStatement(Connection con)
+					throws SQLException {
+				PreparedStatement ps = con.prepareStatement(sql);
+				ps.setInt(1, tag_id);
+				return ps;
+			}
+		}, new RowMapper<Relation>() {
+
+			public Relation mapRow(ResultSet rs, int arg1)
+					throws SQLException {
+				Relation relation  = new Relation();
+				relation.setObject_type(rs.getInt("object_type"));
+				relation.setObject_id(rs.getInt("object_id"));
+				return relation;
+			}
+		});
+	}
+	
 }

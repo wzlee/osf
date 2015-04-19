@@ -24,8 +24,8 @@ public class FeedService {
 	private FeedDAO feedDao;
 	
 	@Autowired
-	@Qualifier("eventDao")
-	private EventDAO eventDao;
+	@Qualifier("eventService")
+	private EventService eventService;
 	
 	public void push(int user_id, int event_id) {
 		List<Follower> followers = followService.getFollowers(user_id);
@@ -41,9 +41,9 @@ public class FeedService {
 	}
 	
 	public List<Event> getFeeds(int user_id) {
-		List<Integer> feeds = getEventIDs(user_id);
-		if(feeds != null && feeds.size()!=0 ) {
-			List<Event> events = eventDao.getEvents(feeds);
+		List<Integer> event_ids = getEventIDs(user_id);
+		if(event_ids != null && event_ids.size()!=0 ) {
+			List<Event> events = eventService.getEventsWithIDs(event_ids);
 			if(events == null)
 				events = new ArrayList<Event>();
 			return events;

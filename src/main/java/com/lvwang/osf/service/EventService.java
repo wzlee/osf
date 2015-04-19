@@ -1,8 +1,9 @@
 package com.lvwang.osf.service;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,6 +15,7 @@ import com.lvwang.osf.model.Album;
 import com.lvwang.osf.model.Event;
 import com.lvwang.osf.model.Photo;
 import com.lvwang.osf.model.Post;
+import com.lvwang.osf.model.Relation;
 import com.lvwang.osf.util.Dic;
 
 @Service("eventService")
@@ -74,5 +76,31 @@ public class EventService {
 	public int newEvent(int object_type, Object obj) {
 		int event_id = eventDao.save(toEvent(object_type, obj));
 		return event_id;
+	}
+	
+	
+	/*
+	 * 根据relation关系(object_type, object_id)查询event
+	 */
+	public List<Event> getEventsWithRelations(List<Relation> relations) {
+		List<Event> events = new ArrayList<Event>();
+		if(relations != null && relations.size() != 0) {
+			Map<Integer, List<Integer>> category = new HashMap<Integer, List<Integer>>();
+			for(Relation relation : relations) {
+				if(!category.containsKey(relation.getObject_type())) {
+					category.put(relation.getObject_type(), new ArrayList<Integer>());
+				}
+				category.get(relation.getObject_type()).add(relation.getObject_id());
+			}
+			events = eventDao.getEventsWithRelations(category);
+		}
+		return events;
+	}
+	
+	/*
+	 * 根据event id查询event
+	 */
+	public List<Event> getEventsWithIDs(List<Integer> event_ids) {
+		return eventDao.getEventsWithIDs(event_ids);
 	}
 }
