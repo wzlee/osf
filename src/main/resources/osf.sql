@@ -149,6 +149,7 @@ CREATE TABLE IF NOT EXISTS `osf`.`osf_relations` (
   `object_type` INT NOT NULL,
   `object_id` INT NOT NULL,
   `tag_id` INT NOT NULL,
+  `add_ts` TIMESTAMP NOT NULL DEFAULT current_timestamp,
   PRIMARY KEY (`id`),
   INDEX `fk_tag_id_idx` (`tag_id` ASC),
   CONSTRAINT `fk_tag_id`
