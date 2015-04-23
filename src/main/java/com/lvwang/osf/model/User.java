@@ -10,6 +10,7 @@ public class User {
 	private String user_nicename;
 	private Date user_registered_date;
 	private int user_status;
+	private String user_avatar;
 	private String user_activationKey;
 	
 	public String getUser_name() {
@@ -59,5 +60,11 @@ public class User {
 	}
 	public void setUser_activationKey(String user_activationKey) {
 		this.user_activationKey = user_activationKey;
+	}
+	public String getUser_avatar() {
+		return user_avatar;
+	}
+	public void setUser_avatar(String user_avatar) {
+		this.user_avatar = user_avatar;
 	}
 }

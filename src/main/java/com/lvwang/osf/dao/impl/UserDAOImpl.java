@@ -42,6 +42,7 @@ public class UserDAOImpl implements UserDAO{
 					user.setUser_registered_date(rs.getDate("user_registered_date"));
 					user.setUser_status(rs.getInt("user_status"));	
 					user.setUser_activationKey(rs.getString("user_activationKey"));
+					user.setUser_avatar(rs.getString("user_avatar"));
 				}
 				return user;
 			}
@@ -106,7 +107,8 @@ public class UserDAOImpl implements UserDAO{
 	//返回生成主键 user id
 	public int save(final User user) {
 		final String sql = "insert into " + TABLE + 
-					 "(user_name, user_email, user_pwd, user_activationKey, user_status) values(?,?,?,?,?)";
+					 "(user_name, user_email, user_pwd, user_activationKey, user_status, user_avatar) "
+					 + "values(?,?,?,?,?,?)";
 		//jdbcTemplate.update(sql);
 		
 		KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -120,6 +122,7 @@ public class UserDAOImpl implements UserDAO{
 				ps.setString(3, user.getUser_pwd());
 				ps.setString(4, user.getUser_activationKey());
 				ps.setInt(5, user.getUser_status());
+				ps.setString(6, user.getUser_avatar());
 				return ps;
 			}
 		}, keyHolder );

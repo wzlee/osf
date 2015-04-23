@@ -1,6 +1,7 @@
 package com.lvwang.osf.service;
 
 import java.net.URLEncoder;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.mail.internet.AddressException;
@@ -25,6 +26,7 @@ public class UserService {
 	public static final int STATUS_USER_LOCK = 2;				//锁定
 	public static final int STATUS_USER_CANCELLED = 3;			//注销
 	
+	public static final String DEFAULT_USER_AVATAR = "default-avatar.jpg";
 	
 	@Autowired
 	@Qualifier("userDao")
@@ -64,6 +66,7 @@ public class UserService {
 		return userDao.getUserByID(id);
 	}
 	
+	/*
 	public String login(String email, String password) {
 		//1 empty check
 		if(email == null || email.length() <= 0)
@@ -90,6 +93,51 @@ public class UserService {
 			return Property.ERROR_PWD_DIFF;
 		
 		return Property.SUCCESS_ACCOUNT_LOGIN; 
+	}
+	*/
+	
+	public Map<String, Object> login(String email, String password) {
+		Map<String, Object> ret = new HashMap<String, Object>();
+		//1 empty check
+		if(email == null || email.length() <= 0) {
+			ret.put("status", Property.ERROR_EMAIL_EMPTY);
+			return ret;
+		}
+			
+		if(password == null || password.length() <= 0){
+			ret.put("status", Property.ERROR_PWD_EMPTY);
+			return ret;
+		}
+			
+		
+		//2 ValidateEmail 
+		if(!ValidateEmail(email)) {
+			ret.put("status", Property.ERROR_EMAIL_FORMAT);
+			return ret;
+		}
+
+		//3 email exist?
+		User user = findByEmail(email);
+		if(user == null) {
+			ret.put("status", Property.ERROR_USERNAME_NOTEXIST);
+			return ret;
+		}
+		else {
+			//4 check user status
+			if(STATUS_USER_NORMAL != user.getUser_status()) {
+				ret.put("status", user.getUser_status());
+				return ret;
+			}
+		}
+		
+		//5 password validate
+		if(!CipherUtil.validatePassword(user.getUser_pwd(), password)) {
+			ret.put("status", Property.ERROR_PWD_DIFF);
+			return ret;
+		}
+		ret.put("status", Property.SUCCESS_ACCOUNT_LOGIN);
+		ret.put("user", user);
+		return ret;
 	}
 	
 	
@@ -147,6 +195,7 @@ public class UserService {
 		user.setUser_pwd(CipherUtil.generatePassword(password));
 		user.setUser_email(email);
 		user.setUser_status(STATUS_USER_INACTIVE);
+		user.setUser_avatar(DEFAULT_USER_AVATAR);
 		String activationKey = CipherUtil.generateActivationUrl(email, password);
 		user.setUser_activationKey(activationKey);
 		int id =userDao.save(user);

@@ -169,6 +169,22 @@ body{
 .ui.labeled.icon.menu > .item {
 	min-width: 132px;
 }
+.ui.small.centered.circular.image {
+	width: 120px;
+}
+.ui.card > .ui.centered.circular.image {
+	padding-top: 30px;
+}
 
+.ui.statistics > .statistic {
+	margin: 0;
+	min-width: 33%;
+}
 
+.mini.ui.yellow.button.follow {
+	display: block;
+}
 
+.ui.card .centered {
+	text-align: center;
+}

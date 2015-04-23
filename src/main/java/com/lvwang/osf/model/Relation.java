@@ -1,10 +1,13 @@
 package com.lvwang.osf.model;
 
+import java.util.Date;
+
 public class Relation {
 	private int id;
 	private int object_type;
 	private int object_id;
 	private int tag_id;
+	private Date add_ts;
 	public int getId() {
 		return id;
 	}
@@ -28,5 +31,11 @@ public class Relation {
 	}
 	public void setTag_id(int tag_id) {
 		this.tag_id = tag_id;
+	}
+	public Date getAdd_ts() {
+		return add_ts;
+	}
+	public void setAdd_ts(Date add_ts) {
+		this.add_ts = add_ts;
 	}
 }

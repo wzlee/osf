@@ -17,6 +17,7 @@
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/icon.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/navbar.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/menu.css">
+  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/statistic.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/page.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">
 </head>
@@ -269,27 +270,49 @@
             </div>
           <div class="span4">
           	<div id="rightside">
+          		<c:if test="${not empty sessionScope.user}">
 	            <div class="ui card">
-	              <div class="image">
-	                <img src="img/avatar.jpg">
+	              <div class="ui small centered circular  image">
+	                <img src="<c:url value="${imgBaseUrl }/${sessionScope.user.user_avatar }"/> ">
 	              </div>
 	              <div class="content">
-	                <a class="header">Stevie Feliciano</a>
-	                <div class="meta">
-	                  <span class="date">Joined in 2014</span>
-	                </div>
-	                <div class="description">
-	                  Stevie Feliciano is a library scientist living in New York City. She likes to spend her time reading, running, and writing.
-	                </div>
+	                <a class="header centered" href="<c:url value="/user/${sessionScope.user.id}" />">
+	                	${sessionScope.user.user_name }
+	                </a>
+	                <div class="meta centered">
+	                  <span class="date">不想成为画家的黑客不是好摄影师</span>
+	                </div>	                
+					<div class="ui mini statistics">
+					  <div class="statistic">
+					    <div class="value">
+					      22
+					    </div>
+					    <div class="label">粉丝
+					    </div>
+					  </div>
+					  <div class="statistic">
+					    <div class="value">
+					      31
+					    </div>
+					    <div class="label">关注
+					    </div>
+					  </div>
+					  <div class="statistic">
+					    <div class="value">
+					      22
+					    </div>
+					    <div class="label">状态
+					    </div>
+					  </div>
+					</div>	<!-- end statistics --> 
+					
+					               
 	              </div>
 	              <div class="extra content">
-	                <a>
-	                  <i class="user icon"></i>
-	                  22 Friends
-	                </a>
+					<div class="mini ui yellow button follow">+关注</div>	              
 	              </div>
 	            </div> 
-	            
+	            </c:if>
 	            <div class="ui card">
 	            	<div class="content">
 	            		<h4 class="ui header">Header</h4>

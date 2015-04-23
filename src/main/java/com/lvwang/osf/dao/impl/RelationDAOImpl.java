@@ -69,7 +69,7 @@ public class RelationDAOImpl implements RelationDAO{
 	}
 
 	public List<Relation> get(final int tag_id) {
-		final String sql = "select * from " + TABLE + " where tag_id = ?";
+		final String sql = "select * from " + TABLE + " where tag_id = ? order by add_ts";
 		return jdbcTemplate.query(new PreparedStatementCreator() {
 			
 			public PreparedStatement createPreparedStatement(Connection con)

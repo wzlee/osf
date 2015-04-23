@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS `osf`.`osf_users` (
   `user_registered_date` TIMESTAMP NOT NULL DEFAULT current_timestamp,
   `user_status` INT NULL,
   `user_activationKey` VARCHAR(24) NULL,
+  `user_avatar` VARCHAR(100) null,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
