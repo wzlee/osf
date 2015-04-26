@@ -54,11 +54,11 @@
                     <c:if test="${feed.object_type == 0 }">
                     <div class="event">
                       <div class="label">
-                        <img src="img/avatar.png">
+                        <img src="${imgBaseUrl }/${feed.user_avatar }">
                       </div>
                       <div class="content">
                         <div class="summary">
-                          <a>${feed.user_id }</a> 发表了日志
+                          <a href="<c:url value="/user/${feed.user_id }" />">${feed.user_name }</a> 发表了日志
                           <div class="date">
                             ${feed.ts }
                           </div>

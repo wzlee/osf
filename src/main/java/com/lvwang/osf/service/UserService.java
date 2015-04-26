@@ -4,11 +4,16 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.redis.core.HashOperations;
+import org.springframework.data.redis.core.ListOperations;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.hash.HashMapper;
 import org.springframework.stereotype.Service;
 
 import com.lvwang.osf.dao.UserDAO;
@@ -31,6 +36,14 @@ public class UserService {
 	@Autowired
 	@Qualifier("userDao")
 	private UserDAO userDao;
+	
+	@Autowired
+	@Qualifier("redisTemplate")
+	private RedisTemplate<String, String> redisTemplate; 
+	
+	
+	@Resource(name="redisTemplate")
+	private HashOperations<String, String, Object> mapOps;
 		
 	private boolean ValidateEmail(String email) {
 		boolean result = true;
@@ -63,7 +76,13 @@ public class UserService {
 	}
 	
 	public User findById(int id) {
-		return userDao.getUserByID(id);
+		String key = "user:"+id;
+		User user = (User) mapOps.get("user", key);
+		if(user == null) {
+			user = userDao.getUserByID(id);
+			mapOps.put("user", key, user);
+		}	
+		return user;
 	}
 	
 	/*

@@ -11,6 +11,7 @@ import com.lvwang.osf.dao.EventDAO;
 import com.lvwang.osf.dao.FeedDAO;
 import com.lvwang.osf.model.Event;
 import com.lvwang.osf.model.Follower;
+import com.lvwang.osf.model.User;
 
 @Service("feedService")
 public class FeedService {
@@ -26,6 +27,10 @@ public class FeedService {
 	@Autowired
 	@Qualifier("eventService")
 	private EventService eventService;
+	
+	@Autowired
+	@Qualifier("userService")
+	private UserService userService;
 	
 	public void push(int user_id, int event_id) {
 		List<Follower> followers = followService.getFollowers(user_id);
@@ -46,12 +51,23 @@ public class FeedService {
 			List<Event> events = eventService.getEventsWithIDs(event_ids);
 			if(events == null)
 				events = new ArrayList<Event>();
+			addUserInfo(events);
 			return events;
 		}
 		else 
 			return new ArrayList<Event>();
 	}
-		
+	
+	private void addUserInfo(List<Event> events) {
+		if(events == null || events.size() == 0)
+			return;
+		for(Event event : events) {
+			User user = userService.findById(event.getUser_id());
+			event.setUser_name(user.getUser_name());
+			event.setUser_avatar(user.getUser_avatar());
+		}
+	}
+	
 	public void pull() {
 		
 	}
