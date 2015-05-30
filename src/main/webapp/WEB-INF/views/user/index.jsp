@@ -22,6 +22,7 @@
     
   	<script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.js"></script>
   	<script type="text/javascript" src="<%=request.getContextPath() %>/js/basic.js"></script>
+  	<script type="text/javascript" src="<%=request.getContextPath() %>/js/code.js"></script>
   	<script type="text/javascript" src="<%=request.getContextPath() %>/js/comment.js"></script>
   	<script type="text/javascript" src="<%=request.getContextPath() %>/js/post.js"></script>
   	<script type="text/javascript" src="<%=request.getContextPath() %>/js/follow.js"></script>   	

@@ -96,6 +96,8 @@ CREATE TABLE IF NOT EXISTS `osf`.`osf_followings` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
+alter table `osf`.`osf_followings` add unique(user_id, following_user_id);
+
 CREATE TABLE IF NOT EXISTS `osf`.`osf_followers` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `user_id` INT NOT NULL,
@@ -106,6 +108,7 @@ CREATE TABLE IF NOT EXISTS `osf`.`osf_followers` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
+alter table `osf`.`osf_followers` add unique(user_id, follower_user_id);
 
 CREATE TABLE IF NOT EXISTS `osf`.`osf_albums` (
   `id` INT NOT NULL AUTO_INCREMENT,

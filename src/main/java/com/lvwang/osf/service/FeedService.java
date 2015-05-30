@@ -33,10 +33,10 @@ public class FeedService {
 	private UserService userService;
 	
 	public void push(int user_id, int event_id) {
-		List<Follower> followers = followService.getFollowers(user_id);
-		if(followers != null) {
-			for(Follower follower: followers) {
-				feedDao.save("feed:user:"+follower.getFollower_user_id(), event_id);
+		List<Integer> followers = followService.getFollowerIDs(user_id);
+		if(followers != null && followers.size()!=0) {
+			for(Integer follower: followers) {
+				feedDao.save("feed:user:"+follower, event_id);
 			}
 		}
 	}

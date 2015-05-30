@@ -15,9 +15,14 @@
 	        <li><a href="#">Link</a></li>
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
-	        <li><a href='<c:url value="/account/register"></c:url>'>注册</a></li>
-	        <li></li>
-	        <li><a href='<c:url value="/account/login"></c:url>'>登录</a></li>
+	      	<c:if test="${not empty sessionScope.user}">
+	      		<li><a href='<c:url value="/user/${sessionScope.user.id }"></c:url>'>${sessionScope.user.user_name }</a></li>
+	      	</c:if>
+	      	<c:if test="${empty sessionScope.user}">
+		        <li><a href='<c:url value="/account/register"></c:url>'>注册</a></li>
+		        <li></li>
+		        <li><a href='<c:url value="/account/login"></c:url>'>登录</a></li>
+	        </c:if>
 	      </ul>
 	    </div><!-- /.navbar-collapse -->
 	  </div><!-- /.container-fluid -->

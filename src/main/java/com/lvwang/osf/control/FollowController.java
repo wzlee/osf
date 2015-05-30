@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.lvwang.osf.model.User;
 import com.lvwang.osf.service.FollowService;
 import com.lvwang.osf.service.UserService;
+import com.lvwang.osf.util.Property;
 
 @Controller
 @RequestMapping("/follow")

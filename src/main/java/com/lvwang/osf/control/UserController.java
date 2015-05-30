@@ -16,12 +16,18 @@ import com.lvwang.osf.model.Album;
 import com.lvwang.osf.model.Post;
 import com.lvwang.osf.model.User;
 import com.lvwang.osf.service.AlbumService;
+import com.lvwang.osf.service.FollowService;
 import com.lvwang.osf.service.PostService;
+import com.lvwang.osf.service.UserService;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
 
+	@Autowired
+	@Qualifier("userService")
+	private UserService userService;
+	
 	@Autowired
 	@Qualifier("postService")
 	private PostService postService;
@@ -30,9 +36,19 @@ public class UserController {
 	@Qualifier("albumService")
 	private AlbumService albumService;
 	
+	@Autowired
+	@Qualifier("followService")
+	private FollowService followService;
+	
 	@RequestMapping("/{id}")
-	public ModelAndView collection(@PathVariable("id") int id) {	
+	public ModelAndView collection(@PathVariable("id") int id, HttpSession session) {	
+		User me = (User) session.getAttribute("user");
+		
 		ModelAndView mav = new ModelAndView();
+		User user = userService.findById(id);
+		mav.addObject("u", user);
+		mav.addObject("follow", followService.isFollowing(me==null?0:me.getId(), id));
+		
 		List<Post> posts = postService.findPostsOfUser(id);
 		mav.addObject("posts", posts);
 		List<Album> albums = albumService.getAlbumsOfUser(id);

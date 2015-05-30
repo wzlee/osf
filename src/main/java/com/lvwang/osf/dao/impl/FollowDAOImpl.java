@@ -4,9 +4,18 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.redis.core.Cursor;
+import org.springframework.data.redis.core.ListOperations;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ScanOptions;
+import org.springframework.data.redis.core.SetOperations;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
@@ -24,8 +33,24 @@ public class FollowDAOImpl implements FollowDAO{
 	private static final String TABLE_FOLLOWING = "osf_followings";
 	private static final String TABLE_FOLLOWER = "osf_followers";
 	
+	private static final String FOLLOWING_KEY = "following:user:";
+	private static final String FOLLOWER_KEY = "follower:user:";
+	
+	private static final int FOLLOW_SCAN_COUNT = 10;
+	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
+	@Autowired
+	@Qualifier("redisTemplate")
+	private RedisTemplate<String, String> redisTemplate; 
+	
+	
+	@Resource(name="redisTemplate")
+	private ListOperations<String, Integer> listOps;
+	
+	@Resource(name="redisTemplate")
+	private SetOperations<String, Integer> setOps;
 	
 	public int saveFollowing(final Following following) {
 		final String sql = "insert into " + TABLE_FOLLOWING + "(user_id, user_name, "
@@ -45,9 +70,13 @@ public class FollowDAOImpl implements FollowDAO{
 				return ps;
 			}
 		}, keyHolder);
+		
+		setOps.add(FOLLOWING_KEY+following.getUser_id(), following.getFollowing_user_id());
+		
 		return keyHolder.getKey().intValue();
 	}
-
+	
+	
 	public int saveFollower(final Follower follower) {
 		final String sql = "insert into " + TABLE_FOLLOWER + "(user_id, user_name, "
 															+ "follower_user_id, "
@@ -66,10 +95,30 @@ public class FollowDAOImpl implements FollowDAO{
 				return ps;
 			}
 		}, keyHolder);
+		
+		setOps.add(FOLLOWER_KEY+follower.getUser_id() ,follower.getFollower_user_id());
+		
 		return keyHolder.getKey().intValue();
 	}
 
+	public List<Integer> getFollowingIDs(int user_id) {
+		Cursor<Integer> cursor = setOps.scan(FOLLOWING_KEY+user_id, ScanOptions.scanOptions().count(FOLLOW_SCAN_COUNT).build());
+		//List<Integer> following_ids = listOps.range(FOLLOWING_KEY+user_id, 0, listOps.size(FOLLOWING_KEY+user_id)-1);
+		
+		List<Integer> following_ids = new ArrayList<Integer>();
+		while(cursor.hasNext()) {
+			following_ids.add(cursor.next());
+		}
+		return following_ids;
+	}
+	
+	public List<Integer> getFollowerIDs(int user_id) {
+		List<Integer> follower_ids = listOps.range(FOLLOWER_KEY+user_id, 0, listOps.size(FOLLOWER_KEY+user_id)-1);
+		return follower_ids;
+	}
+	
 	public List<Following> getFollowings(int user_id) {
+		
 		final String sql = "select * from " + TABLE_FOLLOWING + " where user_id=?";
 		List<Following> followings =  jdbcTemplate.query(sql, new Object[]{user_id}, new RowMapper<Following>() {
 			public Following mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -113,6 +162,7 @@ public class FollowDAOImpl implements FollowDAO{
 				return ps;
 			}
 		});
+		setOps.remove(FOLLOWING_KEY+following.getUser_id(), following.getFollowing_user_id());
 		return effrows==1?true:false;
 	}
 
@@ -128,9 +178,16 @@ public class FollowDAOImpl implements FollowDAO{
 				return ps;
 			}
 		});
-		return effrows==1?true:false;
 		
-		
+		setOps.remove(FOLLOWER_KEY+follower.getUser_id(), follower.getFollower_user_id());
+		return effrows==1?true:false;	
 	}
 
+	public boolean hasFollowing(int user_a, int user_b) {
+		return setOps.isMember(FOLLOWING_KEY+user_a, user_b);
+	}
+	
+	public boolean hasFollower(int user_a, int user_b) {
+		return setOps.isMember(FOLLOWER_KEY+user_a, user_b);
+	}
 }

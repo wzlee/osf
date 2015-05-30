@@ -4,7 +4,7 @@ $(document).ready(function(){
 		var url = '';
 		var that = $(this);
 
-		if(!$(this).hasClass('active')) {
+		if(!$(this).hasClass('basic')) {
 			url = basePath + '/follow/'+following_user_id;
 		} else {
 			url = basePath + '/follow/undo/'+following_user_id;
@@ -17,12 +17,14 @@ $(document).ready(function(){
 		})
 		.done(function(data) {
 			console.log("success");
-			if('111000' == data.status) {
+			if(SUCCESS_FOLLOW == data.status) {
 				$(that).text('已关注');
-				$(that).addClass('active');
-			} else if('111001' == data.status) {
+				$(that).removeClass('yellow');
+				$(that).addClass('basic');
+			} else if(SUCCESS_FOLLOW_UNDO == data.status) {
 				$(that).text('+关注');
-				$(that).removeClass('active');
+				$(that).removeClass('basic');
+				$(that).addClass('yellow');
 			}
 		})
 		.fail(function() {

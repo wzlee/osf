@@ -74,6 +74,14 @@ public class FollowService {
 		return map;
 	}
 	
+	public List<Integer> getFollowerIDs(int user_id) {
+		return followDao.getFollowerIDs(user_id);
+	}
+	
+	public List<Integer> getFollowingIDs(int user_id) {
+		return followDao.getFollowingIDs(user_id);
+	}
+	
 	public List<Follower> getFollowers(int user_id) {
 		return followDao.getFollowers(user_id);
 	}
@@ -82,4 +90,7 @@ public class FollowService {
 		return followDao.getFollowings(user_id);
 	}
 	
+	public boolean isFollowing(int user_a, int user_b){
+		return followDao.hasFollowing(user_a, user_b);
+	}
 }
