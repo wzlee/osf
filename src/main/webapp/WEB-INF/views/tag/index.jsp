@@ -9,6 +9,7 @@
   <title>Insert title here</title>
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/bootstrap2.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/button.css">
+  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/header.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/feed.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/card.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/image.css">
@@ -17,6 +18,7 @@
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/icon.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/navbar.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/menu.css">
+  
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/page.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">
 </head>
@@ -24,14 +26,22 @@
 	<%@ include file="../topbar.jsp" %>
 	<div class="container">
     <div class="row">  
-          <div class="span8">                      
+          <div class="span8">    
+				  <div class="tagheader">
+				  	<div class="content">
+				  		 标签
+				  	</div>
+				  	<div class="ui mini basic button">
+				  		 已关注
+				  	</div>
+				  </div>              
                   <div class="ui feed">
                    <c:forEach items="${feeds }" var="feed"> 
                    <!-- new post -->
                     <c:if test="${feed.object_type == 0 }">
                     <div class="event">
                       <div class="label">
-                        <img src="img/avatar.png">
+                        <img src="${imgBaseUrl }/${feed.user_avatar }">
                       </div>
                       <div class="content">
                         <div class="summary">
@@ -117,47 +127,49 @@
             </div> <!-- end span8  -->
           <div class="span4">
           	<div id="rightside">
-	            <div class="ui card">
-	              <div class="image">
-	                <img src="img/avatar.jpg">
-	              </div>
-	              <div class="content">
-	                <a class="header">Stevie Feliciano</a>
-	                <div class="meta">
-	                  <span class="date">Joined in 2014</span>
-	                </div>
-	                <div class="description">
-	                  Stevie Feliciano is a library scientist living in New York City. She likes to spend her time reading, running, and writing.
-	                </div>
-	              </div>
-	              <div class="extra content">
-	                <a>
-	                  <i class="user icon"></i>
-	                  22 Friends
-	                </a>
-	              </div>
-	            </div> 
+				<div class="ui header">热门用户</div>
+				<div class="ui divider"></div>
+				<div class="ui divided list">
+				     <div class="item">
+				     <div class="right floated compact ui button">Add</div>
+				      <img class="ui avatar image" src="../img/avatar.jpg">
+				      <div class="content">
+				      <a class="header">Daniel Louise</a>
+				      <div class="description"><a>Arrested </a></div>
+					    </div>
+					  </div>
+					  <div class="item">
+					    <div class="right floated compact ui button">Add</div>
+					    <img class="ui avatar image" src="/images/avatar/small/joe.jpg">
+					    <div class="content">
+					      <div class="header">Joe Henderson</div>
+					    </div>
+					  </div>
+					</div>				
+					
+					<div class="ui header">热门标签</div>
+					<div class="ui divider"></div>
+					<div class="ui divided list">
+					  <div class="item">
+					    <div class="right floated compact ui button">Add</div>
+					    <i class="tag icon"></i>
+					    <div class="content">
+					      <a class="header">Daniel Louise</a>
+					      <div class="description"><a>Arrested </a></div>
+						    </div>
+						  </div>
+						  <div class="item">
+						    <div class="right floated compact ui  yellow button">Add</div>
+						    <i class="tag icon"></i>
+						    <div class="content">
+						      <div>Joe Henderson</div>
+						    </div>
+						  </div>
+						</div>		
+				
+				
 	            
-	            <div class="ui card">
-	            	<div class="content">
-	            		<h4 class="ui header">Header</h4>
-						<div class="ui list">
-						  <div class="item">
-							<a href="">Also quite a lovely city</a>
-						  </div>
-						  <div class="item">
-							<a href="">Sometimes can be a lovely city</a>
-						  </div>
-						  <div class="item">
-							<a href="">What a lovely city</a>
-						  </div>
-						  <div class="item">
-							<a href="">Also quite a lovely city</a>
-						  </div>						  						  						  
 
-						</div>	            		
-	            	</div>
-	            </div>
             </div>           
           </div>
         </div>

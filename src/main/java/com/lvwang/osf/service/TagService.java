@@ -128,5 +128,5 @@ public class TagService {
 	public List<Event> getWithTag(String tag) {
 		return eventService.getEventsWithRelations(relationService.getRelationsWithTag(tag));
 	}
-	
+		
 }

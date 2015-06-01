@@ -164,3 +164,10 @@ CREATE TABLE IF NOT EXISTS `osf`.`osf_relations` (
 ENGINE = InnoDB;
 
 
+CREATE TABLE IF NOT EXISTS `osf`.`osf_interests` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `user_id` INT NOT NULL,
+  `tag_id` INT NOT NULL,
+  `ts` TIMESTAMP NOT NULL DEFAULT current_timestamp,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;

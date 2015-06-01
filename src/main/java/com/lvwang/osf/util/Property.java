@@ -17,7 +17,8 @@ public class Property {
 	 * 			   08:comment
 	 * 			   09:tag
 	 * 			   10:relation
-	 * 			   11:follow	
+	 * 			   11:follow
+	 * 			   12:interest	
 	 * 			   ...)
 	 * 第4-6位标示对象的具体错误/成功类型
 	 * 
@@ -75,7 +76,10 @@ public class Property {
 	public static final String ERROR_RELATION_CREATE = "010000";				//
 	
 	public static final String ERROR_FOLLOW = "011000";				//follow failed
-	public static final String ERROR_FOLLOW_UNDO = "011001";				//undo failed
+	public static final String ERROR_FOLLOW_UNDO = "011001";				//undo failed\
+	
+	public static final String ERROR_INTEREST = "012000";
+	public static final String ERROR_INTEREST_UNDO = "012001";
 	
 	/***********************************************************************
 	 * SUCCESS
@@ -107,4 +111,7 @@ public class Property {
 	
 	public static final String SUCCESS_FOLLOW = "111000";
 	public static final String SUCCESS_FOLLOW_UNDO = "111001";
+	
+	public static final String SUCCESS_INTEREST = "112000";
+	public static final String SUCCESS_INTEREST_UNDO = "112001";
 }

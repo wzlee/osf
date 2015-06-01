@@ -188,3 +188,10 @@ body{
 .ui.card .centered {
 	text-align: center;
 }
+
+.tagheader > div{
+	display: inline-block;
+}
+.tagheader > .content {
+	font-size: 1em;
+}
