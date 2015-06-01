@@ -57,7 +57,7 @@ public class TagController {
 		
 		User user = (User) session.getAttribute("user");
 		interestService.interestInTag(user.getId(), tag_id);
-		
+				
 		ret.put("satus", Property.SUCCESS_INTEREST);
 		return ret;
 	}

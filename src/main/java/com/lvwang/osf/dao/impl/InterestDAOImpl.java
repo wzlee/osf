@@ -2,11 +2,16 @@ package com.lvwang.osf.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+
+import javax.swing.tree.TreePath;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.lvwang.osf.dao.InterestDAO;
@@ -50,4 +55,14 @@ public class InterestDAOImpl implements InterestDAO{
 		
 	}
 
+	public List<Integer> getUsersInterestInTag(int tag_id) {
+		String sql = "select * from " + TABLE_INTEREST + " where tag_id=?";
+		List<Integer> users = jdbcTemplate.query(sql, new Object[]{tag_id}, new RowMapper<Integer>(){
+			public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
+				return rs.getInt("user_id");
+			}		
+		});
+		return users;
+	}
+	
 }

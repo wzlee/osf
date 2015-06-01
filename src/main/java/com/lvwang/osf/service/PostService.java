@@ -106,6 +106,8 @@ public class PostService {
 											 tag.getId()
 											 );
 			}
+			
+			map.put("tags", tagsmap.get("tags"));
 		}
 				
 		map.put("post", post);

@@ -1,5 +1,6 @@
 package com.lvwang.osf.control;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +21,7 @@ import com.lvwang.osf.model.Tag;
 import com.lvwang.osf.model.User;
 import com.lvwang.osf.service.EventService;
 import com.lvwang.osf.service.FeedService;
+import com.lvwang.osf.service.InterestService;
 import com.lvwang.osf.service.PostService;
 import com.lvwang.osf.service.RelationService;
 import com.lvwang.osf.service.TagService;
@@ -49,6 +51,10 @@ public class PostController {
 	@Autowired
 	@Qualifier("feedService")
 	private FeedService feedService;
+	
+	@Autowired
+	@Qualifier("interestService")
+	private InterestService interestService;
 	
 	@RequestMapping("/{id}")
 	public ModelAndView post(@PathVariable("id") int id) {
@@ -96,7 +102,16 @@ public class PostController {
 			//3 push to followers
 			if(event_id !=0 ) {
 				feedService.push(user.getId(), event_id);
-			}			
+			}
+			
+			//4 push to users who follow the tags in the post
+			List<Tag> tags = (ArrayList<Tag>)map.get("tags");
+			for(Tag tag : tags) {
+				List<Integer> i_users = interestService.getUsersInterestedInTag(tag.getId());
+				for(int u : i_users) {
+					feedService.push(u, event_id);
+				}
+			}
 		}
 		return map;
 		

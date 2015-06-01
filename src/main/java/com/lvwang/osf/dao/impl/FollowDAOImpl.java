@@ -113,7 +113,11 @@ public class FollowDAOImpl implements FollowDAO{
 	}
 	
 	public List<Integer> getFollowerIDs(int user_id) {
-		List<Integer> follower_ids = listOps.range(FOLLOWER_KEY+user_id, 0, listOps.size(FOLLOWER_KEY+user_id)-1);
+		Cursor<Integer> cursor = setOps.scan(FOLLOWING_KEY+user_id, ScanOptions.scanOptions().count(FOLLOW_SCAN_COUNT).build());
+		List<Integer> follower_ids = new ArrayList<Integer>();
+		while(cursor.hasNext()) {
+			follower_ids.add(cursor.next());
+		}
 		return follower_ids;
 	}
 	
