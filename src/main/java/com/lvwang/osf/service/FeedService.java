@@ -58,7 +58,7 @@ public class FeedService {
 			return new ArrayList<Event>();
 	}
 	
-	private void addUserInfo(List<Event> events) {
+	public void addUserInfo(List<Event> events) {
 		if(events == null || events.size() == 0)
 			return;
 		for(Event event : events) {

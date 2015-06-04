@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.lvwang.osf.model.Event;
 import com.lvwang.osf.model.User;
+import com.lvwang.osf.service.FeedService;
 import com.lvwang.osf.service.InterestService;
 import com.lvwang.osf.service.TagService;
 import com.lvwang.osf.util.Property;
@@ -34,6 +35,7 @@ public class TagController {
 	@Qualifier("interestService")
 	private InterestService interestService;
 	
+	
 	@RequestMapping("/{tag}")
 	public ModelAndView getFeedsWithTag(@PathVariable("tag") String tag) {
 		try {
@@ -45,6 +47,7 @@ public class TagController {
 		mav.setViewName("tag/index");
 		List<Event> feeds = tagService.getWithTag(tag);
 		mav.addObject("feeds", feeds);
+		mav.addObject("imgBaseUrl", "http://osfimgs.oss-cn-hangzhou.aliyuncs.com/");
 		return mav;
 	}
 	/**

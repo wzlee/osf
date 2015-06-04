@@ -31,7 +31,7 @@ public class UserService {
 	public static final int STATUS_USER_LOCK = 2;				//锁定
 	public static final int STATUS_USER_CANCELLED = 3;			//注销
 	
-	public static final String DEFAULT_USER_AVATAR = "default-avatar.jpg";
+	public static final String DEFAULT_USER_AVATAR = "default-avatar";
 	
 	@Autowired
 	@Qualifier("userDao")

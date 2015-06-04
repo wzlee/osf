@@ -26,6 +26,10 @@ public class TagService {
 	@Autowired
 	@Qualifier("relationService")
 	private RelationService relationService;
+
+	@Autowired
+	@Qualifier("feedService")
+	private FeedService feedService;
 	
 	@Autowired
 	@Qualifier("tagDao")
@@ -126,7 +130,9 @@ public class TagService {
 	}
 	
 	public List<Event> getWithTag(String tag) {
-		return eventService.getEventsWithRelations(relationService.getRelationsWithTag(tag));
+		List<Event> events = eventService.getEventsWithRelations(relationService.getRelationsWithTag(tag));
+		feedService.addUserInfo(events);
+		return events;
 	}
 		
 }
