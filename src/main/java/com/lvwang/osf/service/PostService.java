@@ -24,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.lvwang.osf.dao.PostDAO;
 import com.lvwang.osf.model.Post;
 import com.lvwang.osf.model.Tag;
+import com.lvwang.osf.model.User;
 import com.lvwang.osf.util.Property;
 
 @Service("postService")
@@ -46,6 +47,10 @@ public class PostService {
 	@Autowired
 	@Qualifier("tagService")
 	private TagService tagService;
+	
+	@Autowired
+	@Qualifier("userService")
+	private UserService userService;
 	
 	@Autowired
 	@Qualifier("postDao")
@@ -146,4 +151,8 @@ public class PostService {
 									  text.length());
 	}
 	
+	public User getAuthorOfPost(int id) {
+		int user_id = postDao.getAuthorOfPost(id);
+		return userService.findById(user_id);
+	}
 }

@@ -29,6 +29,7 @@ import com.aliyun.oss.model.PutObjectResult;
 import com.lvwang.osf.dao.AlbumDAO;
 import com.lvwang.osf.model.Album;
 import com.lvwang.osf.model.Photo;
+import com.lvwang.osf.model.User;
 
 @Repository("albumDao")
 public class AlbumDAOImpl implements AlbumDAO{
@@ -224,5 +225,21 @@ public class AlbumDAOImpl implements AlbumDAO{
 				return album;
 			}});
 		return albums;
+	}
+
+	public int getAuthorOfAlbum(int id) {
+		final String sql = "select * from " + TABLE_ALBUM + " where id=?";
+		return jdbcTemplate.query(sql, new Object[]{id}, new ResultSetExtractor<Integer>(){
+
+			public Integer extractData(ResultSet rs) throws SQLException,
+					DataAccessException {
+				int user_id = 0;
+				if(rs.next()) {
+					user_id = rs.getInt("user_id");
+				}
+				return user_id;
+			}
+			
+		});
 	}
 }

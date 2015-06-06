@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Insert title here</title>
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/bootstrap2.css">
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/navbar.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/image.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/header.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/divider.css">
@@ -18,9 +19,11 @@
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/icon.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/card.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/page.css">
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">
 	<script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath() %>/js/ajaxfileupload.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath() %>/js/basic.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath() %>/js/code.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath() %>/js/album.js"></script>	
 	
 	<style>
@@ -31,7 +34,7 @@
 		
 	}
 	.uploader-button.ui.button{
-		background: url("<c:url value="/img/uploader_button.jpg"/>");
+		background: url("<c:url value="/img/uploader_button.png"/>") no-repeat;
 	}
 	#uploadedphotos textarea {
 		border: 0;
@@ -40,6 +43,7 @@
 	</style>
 </head>
 <body>
+	<%@ include file="../topbar.jsp" %>
 	<div class="container">
 		<div class="row">
 			<div class="span8">
@@ -66,29 +70,6 @@
 					    </div>
 					  </div>
 				  </c:forEach>
-<!-- 				  <div class="card">
-				    <a class="image">
-				      <img src="<c:url value="/img/avatar.jpg"/>">
-				    </a>
-				    <div class="content">
-				    	<textarea rows="" cols="" placeholder="添加描述..."></textarea>
-				    </div>
-				    <div class="extra meta">
-						<a href=""><i class="delete icon"></i>删除</a>
-				    </div>
-				  </div>
-
-				  <div class="card">
-				    <a class="image">
-				      <img src="<c:url value="/img/avatar.jpg"/>">
-				    </a>
-				    <div class="content">
-				    	<textarea rows="" cols="" placeholder="添加描述..."></textarea>
-				    </div>
-				    <div class="extra meta">
-						<a href=""><i class="delete icon"></i>删除</a>
-				    </div>
-				  </div> -->
 				
 				</div>	<!-- end cards -->		<!-- end uploadedphotos -->		
 
@@ -98,7 +79,7 @@
 					</div>
 					
 				</div>
-				<div class="ui button" id="saveAlbumBtn">
+				<div class="ui blue button" id="saveAlbumBtn">
 					保存
 				</div>
 				

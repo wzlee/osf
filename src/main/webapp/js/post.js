@@ -17,7 +17,11 @@ $(document).ready(function(){
 			       comment_status: comment_status}
 		})
 		.success(function(data) {
-			console.log("success");
+			var status = data.status;
+			var author = data.post.post_author;
+			if(SUCCESS_POST_CREATE == status) {
+				self.location = basePath + "/user/"+author;
+			}
 		})
 		.fail(function() {
 			console.log("error");

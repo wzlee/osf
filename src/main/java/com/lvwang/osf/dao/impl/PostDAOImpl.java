@@ -76,6 +76,7 @@ public class PostDAOImpl implements PostDAO{
 				post.setPost_ts(rs.getTimestamp("post_ts"));
 				post.setShare_count(rs.getInt("share_count"));
 				post.setPost_cover(rs.getString("post_cover"));
+				post.setPost_tags(TagService.toList(rs.getString("post_tags")));
 				return post;
 			}
 			
@@ -114,6 +115,23 @@ public class PostDAOImpl implements PostDAO{
 	public boolean delete(int id) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	public int getAuthorOfPost(int id) {
+		final String sql = "select * from " + TABLE + " where id=?";
+		return jdbcTemplate.query(sql, new Object[]{id}, new ResultSetExtractor<Integer>(){
+
+			public Integer extractData(ResultSet rs) throws SQLException,
+					DataAccessException {
+				int user_id = 0;
+				if(rs.next()) {
+					user_id = rs.getInt("post_author");
+				}
+				return user_id;
+			}
+			
+		});
+
 	}
 	
 }

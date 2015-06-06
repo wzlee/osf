@@ -59,7 +59,11 @@ public class PostController {
 	@RequestMapping("/{id}")
 	public ModelAndView post(@PathVariable("id") int id) {
 		ModelAndView mav = new ModelAndView();
+		User user = postService.getAuthorOfPost(id);
+		mav.addObject("u", user);
+		
 		mav.addObject("post", postService.findPostByID(id));
+		mav.addObject("imgBaseUrl", "http://osfimgs.oss-cn-hangzhou.aliyuncs.com/");
 		mav.setViewName("post/index");
 		return mav;
 	}
@@ -81,7 +85,7 @@ public class PostController {
 				
 		User user = (User)session.getAttribute("user");
 		String post_cover = (String) session.getAttribute("post_cover");
-		
+		session.removeAttribute("post_cover");
 		//1 save post
 		Map<String, Object> map = postService.newPost(user.getId(), 
 													  title, 

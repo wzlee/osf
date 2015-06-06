@@ -19,6 +19,7 @@
   	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/message.css">
   	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/image.css">
   	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/icon.css">
+  	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/statistic.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/page.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">
 
@@ -107,29 +108,7 @@
 					</div>
 					<div class="span4">
 					  <div id="rightside">
-			            <div class="ui card">
-			              <div class="image">
-			                <img src="<%=request.getContextPath() %>/img/avatar.png">
-			              </div>
-			              <div class="content">
-			                <a class="header">Stevie Feliciano</a>
-			                <div class="meta">
-			                  <span class="date">Joined in 2014</span>
-			                </div>
-			                <div class="description">
-			                  Stevie Feliciano is a library scientist living in New York City. She likes to spend her time reading, running, and writing.
-			                </div>
-			              </div>
-			              <div class="extra content">
-			                <a>
-			                  <i class="user icon"></i>
-			                  22 Friends
-			                </a>
-			                <div class="small ui inverted yellow button follow" following="10">
-			                	Yellow
-			                </div>
-			              </div>		              
-			            </div> 		<!-- end card -->	
+			            <%@ include file="../usercard.jsp" %>  
 			          </div>			
 					</div>
 		</div>

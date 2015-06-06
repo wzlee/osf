@@ -16,8 +16,10 @@
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/list.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/icon.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/navbar.css">
-  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/menu.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/statistic.css">
+  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/menu.css">
+  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/dropdown.css">
+  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/label.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/page.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">
 </head>

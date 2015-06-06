@@ -79,9 +79,9 @@
 	                        </div>
 	                        <div class="meta" id="tags">
 	                        	<i class="tag icon"></i>
-								<a href="#">#tag1
-								</a>   
-								<a href="#">#tag1
+	                        	<c:forEach items="${post.post_tags }" var="tag">
+	                        		<a href="#">${tag }</a>
+	                        	</c:forEach>
 								</a>							                     	
 	                        </div>
 	                      </div>

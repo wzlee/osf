@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.lvwang.osf.dao.AlbumDAO;
 import com.lvwang.osf.model.Album;
 import com.lvwang.osf.model.Photo;
+import com.lvwang.osf.model.User;
 import com.lvwang.osf.util.Property;
 
 @Service("albumService")
@@ -23,11 +25,13 @@ public class AlbumService {
 	public static final int ALBUM_STAUS_TOBERELEASED = 1; //待发布
 	public static final String BASE_URL = "http://osfimgs.oss-cn-hangzhou.aliyuncs.com/";
 	
-	@Autowired
-	private JdbcTemplate jdbcTemplate;
 	
 	@Autowired
 	private AlbumDAO albumDao;
+	
+	@Autowired
+	@Qualifier("userService")
+	private UserService userService;
 	
 	//图片格式校验
 	public String validataImg(MultipartFile img) {
@@ -162,5 +166,10 @@ public class AlbumService {
 	
 	public String getKeyofPhoto(int id) {
 		return albumDao.getKey(id);
+	}
+	
+	public User getAuthorOfALbum(int id) {
+		int user_id = albumDao.getAuthorOfAlbum(id);
+		return userService.findById(user_id);
 	}
 }

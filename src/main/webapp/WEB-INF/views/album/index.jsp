@@ -8,6 +8,8 @@
 	<meta name="type" content="post">
 	<title>album index</title>
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/bootstrap2.css">
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/navbar.css">
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/card.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/image.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/header.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/divider.css">
@@ -17,9 +19,9 @@
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/button.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/message.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/icon.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/card.css">
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/statistic.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/page.css">
-
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">
 	<style>
   	body {
     	font-family: "Microsoft YaHei","微软雅黑",tahoma,arial,"宋体";
@@ -61,6 +63,7 @@
 
 </head>
 <body>
+	<%@ include file="../topbar.jsp" %>
 	<div class="container">
 		<div class="row">
 			<div class="span8">
@@ -121,27 +124,10 @@
 			</div>
 			<div class="span4">
 				<div id="rightside">
-					<div class="ui card">
-		              <div >
-		                <img class="ui small centered circular image" src="<c:url value="/img/avatar.jpg"/>">
-		              </div>
-		              <div class="content">
-		                <a class="header">Stevie Feliciano</a>
-		                <div class="meta">
-		                  <span class="date">Joined in 2014</span>
-		                </div>
-		              </div>
-		              <div class="extra content">
-		                <a>
-		                  <i class="user icon"></i>
-		                  22 Friends
-		                </a>
-						<a class="ui inverted tiny orange  button">+关注</a>	                
-		              </div>		              
-		            </div> 		<!-- end card -->					
+					<%@ include file="../usercard.jsp" %>  					
 					<div class="ui tiny images" id="imgbox">
 						<c:forEach items="${photos}" var="photo">
-							<a href="#"><img src="<c:url value="${imgBaseUrl}${photo.key }" />" alt=""></a>
+							<a href="#"><img src="<c:url value="${imgBaseUrl}${photo.key }" />" alt="" id="preview_photo_${photo.id }"></a>
 						</c:forEach>
 					</div>
 				</div>

@@ -52,12 +52,17 @@ public class AlbumController {
 	@Qualifier("feedService")
 	private FeedService feedService;
 	
+	
 	@RequestMapping("/{id}/photos")
 	public ModelAndView album(@PathVariable("id") int id) {
 		ModelAndView mav = new ModelAndView();
 		List<Photo> photos = albumService.getPhotosOfAlbum(id);
 		mav.addObject("album_id", id);
 		mav.addObject("photos", photos);
+		
+		User user = albumService.getAuthorOfALbum(id); 
+		mav.addObject("u", user);
+		
 		mav.setViewName("album/index");
 		mav.addObject("imgBaseUrl", "http://osfimgs.oss-cn-hangzhou.aliyuncs.com/");
 		return mav;
@@ -184,7 +189,7 @@ public class AlbumController {
 			if(event_id !=0 ) {
 				feedService.push(user.getId(), event_id);
 			}
-			
+			map.put("album", album);
 		} catch (JsonProcessingException e) {
 			map.put("status", Property.ERROR_ALBUM_CREATE);
 		} catch (IOException e) {

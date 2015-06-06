@@ -6,6 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.lvwang.osf.model.Album;
 import com.lvwang.osf.model.Photo;
+import com.lvwang.osf.model.User;
 
 public interface AlbumDAO {
 	
@@ -31,4 +32,6 @@ public interface AlbumDAO {
 	
 	List<Album> getAlbumsOfUser(int id);
 	List<Photo> getPhotos(int album_id);
+	
+	int getAuthorOfAlbum(int id);
 }

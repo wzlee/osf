@@ -1,6 +1,8 @@
 $(document).ready(function(){
 	var photos = [];
 
+	$('#mainimg').attr('src', $('#imgbox img:first').attr('src'));
+	
 	$('#imgbox img').click(function() {
 		var src = $(this).attr('src');
 		$('#mainimg').attr('src', src);
@@ -61,8 +63,12 @@ $(document).ready(function(){
 			contentType:'application/json;charset=UTF-8',
 			data: JSON.stringify({album_desc: album_desc, photos: photos})
 		})
-		.done(function() {
-			console.log("success");
+		.done(function(data) {
+			var status = data.status;
+			var author = data.album.user_id;
+			if(SUCCESS_ALBUM_CREATE == status || SUCCESS_ALBUM_UPDATE == status) {
+				self.location = basePath + "/user/" + author;
+			}
 		})
 		.fail(function() {
 			console.log("error");

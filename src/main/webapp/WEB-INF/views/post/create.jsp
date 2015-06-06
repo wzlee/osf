@@ -71,6 +71,7 @@
   	<script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery-1.11.1.min.js"></script> 
   	<script type="text/javascript" src="<%=request.getContextPath() %>/js/froala_editor.min.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath() %>/js/basic.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath() %>/js/code.js"></script>
   	<script type="text/javascript" src="<%=request.getContextPath() %>/js/post.js"></script>
   	<script type="text/javascript" src="<%=request.getContextPath() %>/js/tag.js"></script>
   	<script>
