@@ -191,7 +191,17 @@ body{
 
 .tagheader > div{
 	display: inline-block;
+	vertical-align: middle;
 }
 .tagheader > .content {
-	font-size: 1em;
+	font-size: 1.5em;
 }
+
+#hottags .item {
+	padding: 10px 0;
+	
+}
+.ui.divided.list > .item  {
+	border-top: 1px solid  rgba(0, 0, 0, 0.05);
+}
+

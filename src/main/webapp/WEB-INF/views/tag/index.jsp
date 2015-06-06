@@ -26,15 +26,7 @@
 	<%@ include file="../topbar.jsp" %>
 	<div class="container">
     <div class="row">  
-          <div class="span8">    
-				  <div class="tagheader">
-				  	<div class="content">
-				  		 标签
-				  	</div>
-				  	<div class="ui mini basic button">
-				  		 已关注
-				  	</div>
-				  </div>              
+          <div class="span8">             
                   <div class="ui feed">
                    <c:forEach items="${feeds }" var="feed"> 
                    <!-- new post -->
@@ -132,45 +124,81 @@
             </div> <!-- end span8  -->
           <div class="span4">
           	<div id="rightside">
+				<div class="tagheader">
+				  	<div class="content">
+				  		${tag }
+				  	</div>
+				  	<c:if test="${isInterest }">
+				  		<div class="ui mini basic button">
+				  			 已关注
+				  		</div>
+				  	</c:if>
+				  	<c:if test="${!isInterest }">
+				  		<div class="ui mini yellow button">
+				  			加关注
+				  		</div>
+				  	</c:if>
+				</div>          		
 				<div class="ui header">热门用户</div>
 				<div class="ui divider"></div>
-				<div class="ui divided list">
+					<div class="ui divided list" id="hotusers">
 				     <div class="item">
-				     <div class="right floated compact ui button">Add</div>
-				      <img class="ui avatar image" src="../img/avatar.jpg">
-				      <div class="content">
-				      <a class="header">Daniel Louise</a>
-				      <div class="description"><a>Arrested </a></div>
-					    </div>
+				     	  <a class="right floated compact">+关注</a>
+				      	  <img class="ui avatar image" src="../img/avatar.jpg">
+					      <div class="content">
+					      	<a class="header">两排杨树</a>
+					      	<div class="description"><a>码农</a></div>
+						  </div>
 					  </div>
 					  <div class="item">
-					    <div class="right floated compact ui button">Add</div>
-					    <img class="ui avatar image" src="/images/avatar/small/joe.jpg">
+					  	<a class="right floated compact">+关注</a>
+					    <img class="ui avatar image" src="../img/avatar.png">
 					    <div class="content">
-					      <div class="header">Joe Henderson</div>
+					      <div class="header">段鸿</div>
 					    </div>
 					  </div>
 					</div>				
 					
 					<div class="ui header">热门标签</div>
 					<div class="ui divider"></div>
-					<div class="ui divided list">
+					<div class="ui divided list" id="hottags">
 					  <div class="item">
-					    <div class="right floated compact ui button">Add</div>
 					    <i class="tag icon"></i>
 					    <div class="content">
-					      <a class="header">Daniel Louise</a>
-					      <div class="description"><a>Arrested </a></div>
-						    </div>
-						  </div>
-						  <div class="item">
-						    <div class="right floated compact ui  yellow button">Add</div>
-						    <i class="tag icon"></i>
-						    <div class="content">
-						      <div>Joe Henderson</div>
-						    </div>
-						  </div>
-						</div>		
+					      <a class="header">美食</a>
+						</div>
+					  </div>
+					  <div class="item">
+					    <i class="tag icon"></i>
+					    <div class="content">
+					      <a class="header">豆瓣</a>
+					    </div>
+					  </div>
+					  <div class="item">
+					    <i class="tag icon"></i>
+					    <div class="content">
+					      <a class="header">摄影</a>
+					    </div>
+					  </div>
+					  <div class="item">
+					    <i class="tag icon"></i>
+					    <div class="content">
+					      <a class="header">设计</a>
+					    </div>
+					  </div>
+					  <div class="item">
+					    <i class="tag icon"></i>
+					    <div class="content">
+					      <a class="header">理财</a>
+					    </div>
+					  </div>
+					  <div class="item">
+					    <i class="tag icon"></i>
+					    <div class="content">
+					      <a class="header">旅行</a>
+					    </div>
+					  </div>
+					</div>		
 				
 				
 	            

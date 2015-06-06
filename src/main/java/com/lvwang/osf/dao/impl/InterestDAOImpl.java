@@ -9,8 +9,10 @@ import java.util.List;
 import javax.swing.tree.TreePath;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
@@ -63,6 +65,22 @@ public class InterestDAOImpl implements InterestDAO{
 			}		
 		});
 		return users;
+	}
+
+	public boolean hasInterestInTag(int user_id, int tag_id) {
+		String sql = "select count(*) count from " +TABLE_INTEREST + " where user_id=? and tag_id=?";
+		int count = jdbcTemplate.query(sql, new ResultSetExtractor<Integer>(){
+
+			public Integer extractData(ResultSet rs) throws SQLException,
+					DataAccessException {
+				if(rs.next()) {
+					return rs.getInt("count");
+				}
+				return 0;
+			}
+			
+		}, new Object[]{user_id, tag_id});
+		return count==0?false:true;
 	}
 	
 }

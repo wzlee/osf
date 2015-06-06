@@ -37,7 +37,7 @@ public class TagController {
 	
 	
 	@RequestMapping("/{tag}")
-	public ModelAndView getFeedsWithTag(@PathVariable("tag") String tag) {
+	public ModelAndView getFeedsWithTag(@PathVariable("tag") String tag, HttpSession session) {
 		try {
 			tag = new String(tag.getBytes("ISO-8859-1"), "UTF-8");
 		} catch (UnsupportedEncodingException e) {
@@ -45,6 +45,18 @@ public class TagController {
 		}
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("tag/index");
+		
+		mav.addObject("tag", tag);
+		
+		User user = (User)session.getAttribute("user");
+		if(user != null) {
+			mav.addObject("isInterest", 
+						  interestService.hasInterestInTag(user.getId(), tagService.getID(tag)));
+			
+		} else {
+			mav.addObject("isInterest", false);
+		}
+		
 		List<Event> feeds = tagService.getWithTag(tag);
 		mav.addObject("feeds", feeds);
 		mav.addObject("imgBaseUrl", "http://osfimgs.oss-cn-hangzhou.aliyuncs.com/");

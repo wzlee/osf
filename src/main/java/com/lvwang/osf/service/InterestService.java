@@ -28,4 +28,8 @@ public class InterestService {
 	public List<Integer> getUsersInterestedInTag(int tag_id) {
 		return interestDao.getUsersInterestInTag(tag_id);
 	}
+	
+	public boolean hasInterestInTag(int user_id, int tag_id) {
+		return interestDao.hasInterestInTag(user_id, tag_id);
+	}
 }
