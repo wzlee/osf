@@ -308,31 +308,68 @@
 					
 					               
 	              </div>
-	              <div class="extra content">
-					<div class="mini ui yellow button follow">+关注</div>	              
-	              </div>
 	            </div> 
 	            </c:if>
-	            <div class="ui card">
-	            	<div class="content">
-	            		<h4 class="ui header">Header</h4>
-						<div class="ui list">
-						  <div class="item">
-							<a href="">Also quite a lovely city</a>
+	            <div class="ui header">热门用户</div>
+				<div class="ui divider"></div>
+				<div class="ui divided list" id="hotusers">
+				     <div class="item">
+				     	  <a class="right floated compact">+关注</a>
+				      	  <img class="ui avatar image" src="img/avatar.jpg">
+					      <div class="content">
+					      	<a class="header">两排杨树</a>
+					      	<div class="description"><a>码农</a></div>
 						  </div>
-						  <div class="item">
-							<a href="">Sometimes can be a lovely city</a>
-						  </div>
-						  <div class="item">
-							<a href="">What a lovely city</a>
-						  </div>
-						  <div class="item">
-							<a href="">Also quite a lovely city</a>
-						  </div>						  						  						  
-
-						</div>	            		
-	            	</div>
-	            </div>
+					  </div>
+					  <div class="item">
+					  	<a class="right floated compact">+关注</a>
+					    <img class="ui avatar image" src="img/avatar.png">
+					    <div class="content">
+					      <div class="header">段鸿</div>
+					    </div>
+					  </div>
+				</div>				
+					
+				<div class="ui header">热门标签</div>
+				<div class="ui divider"></div>
+				<div class="ui divided list" id="hottags">
+				  <div class="item">
+				    <i class="tag icon"></i>
+				    <div class="content">
+				      <a class="header">美食</a>
+					</div>
+				  </div>
+				  <div class="item">
+				    <i class="tag icon"></i>
+				    <div class="content">
+				      <a class="header">豆瓣</a>
+				    </div>
+				  </div>
+				  <div class="item">
+				    <i class="tag icon"></i>
+				    <div class="content">
+				      <a class="header">摄影</a>
+				    </div>
+				  </div>
+				  <div class="item">
+				    <i class="tag icon"></i>
+				    <div class="content">
+				      <a class="header">设计</a>
+				    </div>
+				  </div>
+				  <div class="item">
+				    <i class="tag icon"></i>
+				    <div class="content">
+				      <a class="header">理财</a>
+				    </div>
+				  </div>
+				  <div class="item">
+				    <i class="tag icon"></i>
+				    <div class="content">
+				      <a class="header">旅行</a>
+				    </div>
+				  </div>
+				</div>	
             </div>           
           </div>
         </div>

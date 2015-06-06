@@ -9,9 +9,7 @@ body{
 .container {
    	margin-top: 90px;
 }
-.ui.feed {
-	margin-right: 40px;
-}
+
 .postheader{
     font-weight: bold;
     margin-bottom: 10px;

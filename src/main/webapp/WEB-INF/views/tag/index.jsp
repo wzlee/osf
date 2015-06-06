@@ -141,7 +141,7 @@
 				</div>          		
 				<div class="ui header">热门用户</div>
 				<div class="ui divider"></div>
-					<div class="ui divided list" id="hotusers">
+				<div class="ui divided list" id="hotusers">
 				     <div class="item">
 				     	  <a class="right floated compact">+关注</a>
 				      	  <img class="ui avatar image" src="../img/avatar.jpg">
@@ -157,48 +157,48 @@
 					      <div class="header">段鸿</div>
 					    </div>
 					  </div>
-					</div>				
+				</div>				
 					
-					<div class="ui header">热门标签</div>
-					<div class="ui divider"></div>
-					<div class="ui divided list" id="hottags">
-					  <div class="item">
-					    <i class="tag icon"></i>
-					    <div class="content">
-					      <a class="header">美食</a>
-						</div>
-					  </div>
-					  <div class="item">
-					    <i class="tag icon"></i>
-					    <div class="content">
-					      <a class="header">豆瓣</a>
-					    </div>
-					  </div>
-					  <div class="item">
-					    <i class="tag icon"></i>
-					    <div class="content">
-					      <a class="header">摄影</a>
-					    </div>
-					  </div>
-					  <div class="item">
-					    <i class="tag icon"></i>
-					    <div class="content">
-					      <a class="header">设计</a>
-					    </div>
-					  </div>
-					  <div class="item">
-					    <i class="tag icon"></i>
-					    <div class="content">
-					      <a class="header">理财</a>
-					    </div>
-					  </div>
-					  <div class="item">
-					    <i class="tag icon"></i>
-					    <div class="content">
-					      <a class="header">旅行</a>
-					    </div>
-					  </div>
-					</div>		
+				<div class="ui header">热门标签</div>
+				<div class="ui divider"></div>
+				<div class="ui divided list" id="hottags">
+				  <div class="item">
+				    <i class="tag icon"></i>
+				    <div class="content">
+				      <a class="header">美食</a>
+					</div>
+				  </div>
+				  <div class="item">
+				    <i class="tag icon"></i>
+				    <div class="content">
+				      <a class="header">豆瓣</a>
+				    </div>
+				  </div>
+				  <div class="item">
+				    <i class="tag icon"></i>
+				    <div class="content">
+				      <a class="header">摄影</a>
+				    </div>
+				  </div>
+				  <div class="item">
+				    <i class="tag icon"></i>
+				    <div class="content">
+				      <a class="header">设计</a>
+				    </div>
+				  </div>
+				  <div class="item">
+				    <i class="tag icon"></i>
+				    <div class="content">
+				      <a class="header">理财</a>
+				    </div>
+				  </div>
+				  <div class="item">
+				    <i class="tag icon"></i>
+				    <div class="content">
+				      <a class="header">旅行</a>
+				    </div>
+				  </div>
+				</div>		
 				
 				
 	            

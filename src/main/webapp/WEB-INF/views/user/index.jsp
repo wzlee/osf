@@ -16,6 +16,7 @@
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/list.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/label.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/icon.css">
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/menu.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/statistic.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/page.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">
@@ -191,31 +192,13 @@
           
           <div class="span4">
           	<div id="rightside">
-				<%@ include file="../usercard.jsp" %>
-	            
-	            <div class="ui card">
-	            	<div class="content">
-	            		<h4 class="ui header">Header</h4>
-						<div class="ui list">
-						  <div class="item">
-							<a href="">Also quite a lovely city</a>
-						  </div>
-						  <div class="item">
-							<a href="">Sometimes can be a lovely city</a>
-						  </div>
-						  <div class="item">
-							<a href="">What a lovely city</a>
-						  </div>
-						  <div class="item">
-							<a href="">Also quite a lovely city</a>
-						  </div>						  						  						  
-
-						</div>	            		
-	            	</div>
-	            </div>
+				<%@ include file="../usercard.jsp" %>  
             </div>           
           </div>
-        </div>
-      </div>
+          <!-- end span4 -->
+     </div>
+     <!-- end row -->
+   </div>
+   <!-- end container -->
 </body>
 </html>
