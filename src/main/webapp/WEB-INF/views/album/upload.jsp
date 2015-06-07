@@ -25,6 +25,7 @@
 	<script type="text/javascript" src="<%=request.getContextPath() %>/js/basic.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath() %>/js/code.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath() %>/js/album.js"></script>	
+	<script type="text/javascript" src="<%=request.getContextPath() %>/js/tag.js"></script>
 	
 	<style>
 	.uploader-button input {
@@ -74,6 +75,15 @@
 				</div>	<!-- end cards -->		<!-- end uploadedphotos -->		
 
 				<div class="ui form">
+					<div class="field">
+					  	<label>标签:</label>
+					  	<div class="tags">
+						    <div class="tagfield">   
+						    </div>
+					  		<input type="text" class="tag-input" id="tag-input">
+					  	</div>
+					</div>
+				
 					<div class="field">
 						<textarea rows="" cols="" id="album_desc"></textarea>
 					</div>

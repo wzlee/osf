@@ -1,12 +1,12 @@
 var tags = new Array();
 $(document).ready(function(){
-	
-	$('.delete.icon').on('click', function(event) {
+	$(document).on('click', '.delete.icon', function(event) {
 		var rmtag = $(this).parent('.ui.label').text();
 		for(var i=0; i<tags.length; i++) {
 			if(tags[i] == rmtag) {
 				tags.splice(i, 1);
 				$(this).parent('.ui.label').remove();
+				$('#tag-input').css('width', '100%');
 			}
 		}
 	});
