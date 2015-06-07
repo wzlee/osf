@@ -1,6 +1,5 @@
 package com.lvwang.osf.service;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,13 +7,13 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.lvwang.osf.dao.AlbumDAO;
 import com.lvwang.osf.model.Album;
 import com.lvwang.osf.model.Photo;
+import com.lvwang.osf.model.Tag;
 import com.lvwang.osf.model.User;
 import com.lvwang.osf.util.Property;
 
@@ -32,6 +31,14 @@ public class AlbumService {
 	@Autowired
 	@Qualifier("userService")
 	private UserService userService;
+	
+	@Autowired
+	@Qualifier("tagService")
+	private TagService tagService;
+	
+	@Autowired
+	@Qualifier("relationService")
+	private RelationService relationService;
 	
 	//图片格式校验
 	public String validataImg(MultipartFile img) {
@@ -154,6 +161,30 @@ public class AlbumService {
 		} else {
 			return Property.ERROR_ALBUM_UPDCOVER;
 		}
+	}
+	
+	public String updateAlbumInfo(Album album) {
+		albumDao.updateAlbumInfo(album);
+		return Property.SUCCESS_ALBUM_UPDATE; 
+	}
+	
+	public String updateAlbum(Album album) {
+		updateAlbumInfo(album);
+		updatePhotoDesc(album.getPhotos());
+		
+		//save tag
+		Map<String, Object> tagsmap = tagService.newTags(album.getAlbum_tags());
+		
+		//save relation 
+		for(Tag tag: (List<Tag>)tagsmap.get("tags")) {
+			relationService.newRelation(
+					 		RelationService.RELATION_TYPE_ALBUM, 
+					 		album.getId(), 
+					 		tag.getId()
+					 		);
+		}
+		
+		return Property.SUCCESS_ALBUM_UPDATE;
 	}
 	
 	public List<Album> getAlbumsOfUser(int id) {

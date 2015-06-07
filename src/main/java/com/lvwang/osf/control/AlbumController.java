@@ -10,9 +10,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.JsonProcessingException;
-import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -28,10 +26,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.lvwang.osf.model.Album;
 import com.lvwang.osf.model.Photo;
+import com.lvwang.osf.model.Tag;
 import com.lvwang.osf.model.User;
 import com.lvwang.osf.service.AlbumService;
 import com.lvwang.osf.service.EventService;
 import com.lvwang.osf.service.FeedService;
+import com.lvwang.osf.service.RelationService;
+import com.lvwang.osf.service.TagService;
 import com.lvwang.osf.util.Dic;
 import com.lvwang.osf.util.Property;
 
@@ -129,6 +130,53 @@ public class AlbumController {
 		return map;
 	}
 	
+	private Album toAlbum(String params) {
+		Album album = new Album();
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			JsonNode root = mapper.readTree(params);
+			
+			album.setAlbum_desc(root.path("album_desc").getTextValue());
+			
+			JsonNode photos = root.path("photos");
+			if(photos.size() > 0) {
+				album.setCover(albumService.getKeyofPhoto(
+					 	  	   Integer.parseInt(photos.get(0).path("id").getTextValue())
+				));
+				
+				List<Photo> photos2upd = new ArrayList<Photo>();
+				album.setPhotos(photos2upd);
+				for(int i=0; i<photos.size(); i++) {
+					int photo_id = Integer.parseInt(photos.get(i).path("id").getTextValue());
+					String photo_desc = photos.get(i).path("desc").getTextValue();
+					Photo photo = new Photo();
+					photo.setId(photo_id);
+					photo.setDesc(photo_desc);
+					photos2upd.add(photo);
+					
+					System.out.println("photo_id:"+photo_id+" desc:"+photo_desc);
+				}
+				album.setPhotos_count(photos2upd.size());
+			}
+			
+			JsonNode tags = root.path("tags");
+			if(tags.size() > 0) {
+				List<String> tag_list = new ArrayList<String>();
+				album.setAlbum_tags(tag_list);
+				for(int i=0; i<tags.size(); i++) {
+					tag_list.add(tags.get(i).getTextValue());
+				}
+			}
+			
+			
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return album;
+	}
+	
 	/*
 	 * 创建相册
 	 * 
@@ -137,8 +185,19 @@ public class AlbumController {
 	@RequestMapping(value="/create", method=RequestMethod.POST) 
 	public Map<String, Object> createAlbum(@RequestBody String params, HttpSession session) {
 		Map<String, Object> map = new HashMap<String, Object>();
+		
 		System.out.println(params);
-		ObjectMapper mapper = new ObjectMapper();
+		
+		Album album = toAlbum(params);
+		album.setId((Integer)session.getAttribute("album_id"));
+		User user = (User)session.getAttribute("user");
+		album.setUser_id(user.getId());
+		
+		String status = albumService.updateAlbum(album);
+		map.put("status", status);
+		
+		/*
+		ObjectMapper mapper = new ObjectMapper();		
 		try {
 			JsonNode root = mapper.readTree(params);
 			//update album desc
@@ -162,6 +221,27 @@ public class AlbumController {
 			if(!Property.SUCCESS_ALBUM_UPDATE.equals(status)) 
 				return map;
 			
+			//add tags for album
+			JsonNode tags = root.path("tags");
+			if(tags.size() > 0) {
+				StringBuffer buffer = new StringBuffer();
+				for(int i=0; i<tags.size(); i++) {
+					buffer.append(tags.get(i).getTextValue() + " ");
+				}
+				//save tag
+				Map<String, Object> tagsmap = tagService.newTags(TagService.toList(buffer.toString()));
+				
+				//save relation 
+				for(Tag tag: (List<Tag>)tagsmap.get("tags")) {
+					relationService.newRelation(
+							 		RelationService.RELATION_TYPE_ALBUM, 
+							 		(Integer)session.getAttribute("album_id"), 
+							 		tag.getId()
+							 		);
+				}
+			}
+			
+			
 			//update photos , set desc
 			List<Photo> photos2upd = new ArrayList<Photo>();
 			for(int i=0; i<photos.size(); i++) {
@@ -176,25 +256,28 @@ public class AlbumController {
 			}
 			status = albumService.updatePhotoDesc(photos2upd);
 			map.put("status", status);
+			*/
 			
 			//add event
-			User user = (User)session.getAttribute("user");
-			Album album = new Album();
+			//User user = (User)session.getAttribute("user");
+			//Album album = new Album();
 			album.setId((Integer)session.getAttribute("album_id"));
 			album.setUser_id(user.getId());
-			album.setAlbum_desc(album_desc);
-			album.setPhotos_count(photos2upd.size());
-			album.setPhotos(photos2upd);
+			//album.setAlbum_desc(album_desc);
+			//album.setPhotos_count(photos2upd.size());
+			//album.setPhotos(photos2upd);
 			int event_id = eventService.newEvent(Dic.OBJECT_TYPE_ALBUM, album);
 			if(event_id !=0 ) {
 				feedService.push(user.getId(), event_id);
 			}
 			map.put("album", album);
+			/*
 		} catch (JsonProcessingException e) {
 			map.put("status", Property.ERROR_ALBUM_CREATE);
 		} catch (IOException e) {
 			map.put("status", Property.ERROR_ALBUM_CREATE);
 		}
+		*/
 		return map;
 	}
 	

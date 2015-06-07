@@ -22,7 +22,7 @@ public interface AlbumDAO {
 	int getAlbumUser(int id);
 	int getAlbum(int user_id, int status);
 	
-	
+	int updateAlbumInfo(Album album);
 	int updateAlbumDesc(int album_id, String album_desc, int album_status);
 	int updateAlbumCover(int album_id, String cover);
 	int updatePhotosCount(int album_id, int count);

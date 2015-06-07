@@ -6,7 +6,6 @@ $(document).ready(function(){
 			if(tags[i] == rmtag) {
 				tags.splice(i, 1);
 				$(this).parent('.ui.label').remove();
-				$('#tag-input').css('width', '100%');
 			}
 		}
 	});
@@ -21,7 +20,7 @@ $(document).ready(function(){
 				var newtag = $('<div class="ui label">'+tag+'<i class="delete icon"></i></div>');
 				$('.tagfield').append(newtag);
 				$('#tag-input').val('');
-				$('#tag-input').width($('.tags:first()').width()-$('.tagfield:first()').width()-10);
+				//$('#tag-input').width($('.tags:first()').width()-$('.tagfield:first()').width()-10);
 			}
 
 		}

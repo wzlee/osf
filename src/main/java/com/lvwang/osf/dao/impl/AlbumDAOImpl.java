@@ -30,6 +30,7 @@ import com.lvwang.osf.dao.AlbumDAO;
 import com.lvwang.osf.model.Album;
 import com.lvwang.osf.model.Photo;
 import com.lvwang.osf.model.User;
+import com.lvwang.osf.service.TagService;
 
 @Repository("albumDao")
 public class AlbumDAOImpl implements AlbumDAO{
@@ -205,8 +206,8 @@ public class AlbumDAOImpl implements AlbumDAO{
 	
 	
 	public int updatePhotosCount(int album_id, int count) {
-		String sql = "update " + TABLE_ALBUM + " set photos_count=?";
-		return jdbcTemplate.update(sql, new Object[]{count});
+		String sql = "update " + TABLE_ALBUM + " set photos_count=? where id=?";
+		return jdbcTemplate.update(sql, new Object[]{count, album_id});
 	}
 
 	public List<Album> getAlbumsOfUser(final int id) {
@@ -241,5 +242,16 @@ public class AlbumDAOImpl implements AlbumDAO{
 			}
 			
 		});
+	}
+
+	public int updateAlbumInfo(Album album) {
+		String sql = "update " + TABLE_ALBUM + 
+					 " set album_desc=?, photos_count=?, status=?,cover=?,album_tags=? where id=?";
+		return jdbcTemplate.update(sql, new Object[]{album.getAlbum_desc(),
+													 album.getPhotos_count(),
+													 album.getStatus(),
+													 album.getCover(),
+													 TagService.toString(album.getAlbum_tags()),
+													 album.getId()});
 	}
 }

@@ -61,7 +61,7 @@ $(document).ready(function(){
 			type: 'POST',
 			dataType: 'json',
 			contentType:'application/json;charset=UTF-8',
-			data: JSON.stringify({album_desc: album_desc, photos: photos})
+			data: JSON.stringify({album_desc: album_desc, photos: photos, tags: tags})
 		})
 		.done(function(data) {
 			var status = data.status;

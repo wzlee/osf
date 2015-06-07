@@ -85,19 +85,20 @@ body{
   
   }
   .ui.form input[type="text"].tag-input{
-        border: 0;
+/*         border: 0;
         padding: 0;
         margin: 0;
         outline: 0;
         position: relative;
         height: 30px;
         padding-top: 3px;
-        width: 100%;
-		vertical-align: baseline;
+       width: 100%; 
+		vertical-align: baseline; */
   }
   .tagfield {
-    display: inline-block;
-    padding-left:4px;
+    /* display: inline-block; */
+    padding-left:0;
+    margin-top: 5px;
   }	
   .froala-editor, .froala-wrapper.f-basic {
 	  border: 1px solid rgba(39, 41, 43, 0.15);
@@ -165,7 +166,7 @@ body{
 	
 }
 .ui.labeled.icon.menu > .item {
-	min-width: 132px;
+	width: 141px;
 }
 .ui.small.centered.circular.image {
 	width: 120px;
@@ -217,8 +218,13 @@ body{
 	padding: 10px 4px 12px 0;
 }
 
+.tagfield .ui.label {
+	margin: 3px 3px 3px 0;
+}
 
-
+#album_desc{
+	height: 8em;
+}
 
 
 

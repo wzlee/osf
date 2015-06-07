@@ -120,6 +120,7 @@ CREATE TABLE IF NOT EXISTS `osf`.`osf_albums` (
   `photos_count` INT NOT NULL DEFAULT 0,
   `status` INT NOT NULL DEFAULT 0,
   `cover` VARCHAR(45) NULL,
+  `album_tags` TEXT null,
   PRIMARY KEY (`id`),
   INDEX `fk_osf_albums_album_author_idx` (`user_id` ASC),
   CONSTRAINT `fk_osf_albums_album_author`

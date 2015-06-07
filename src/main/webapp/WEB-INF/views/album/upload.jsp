@@ -24,8 +24,8 @@
 	<script type="text/javascript" src="<%=request.getContextPath() %>/js/ajaxfileupload.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath() %>/js/basic.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath() %>/js/code.js"></script>
-	<script type="text/javascript" src="<%=request.getContextPath() %>/js/album.js"></script>	
 	<script type="text/javascript" src="<%=request.getContextPath() %>/js/tag.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath() %>/js/album.js"></script>	
 	
 	<style>
 	.uploader-button input {
@@ -48,15 +48,6 @@
 	<div class="container">
 		<div class="row">
 			<div class="span8">
-				<div id="uploadarea">
-					<span class="uploader-button ui button">
-						<input type="file" id="uploader_input" name="uploader_input"/>
-					</span>
-					<span>
-						选择照片上传,支持jpeg,png,5M
-					</span>										
-				</div> <!-- end uploadarea -->
-
 				<div class="ui three cards" id="uploadedphotos">
 				  <c:forEach items="${photos }" var="photo">
 					  <div class="card" id="card${photo.id }">
@@ -73,29 +64,40 @@
 				  </c:forEach>
 				
 				</div>	<!-- end cards -->		<!-- end uploadedphotos -->		
-
-				<div class="ui form">
-					<div class="field">
-					  	<label>标签:</label>
-					  	<div class="tags">
-						    <div class="tagfield">   
-						    </div>
-					  		<input type="text" class="tag-input" id="tag-input">
-					  	</div>
-					</div>
+				<div id="uploadarea">
+					<span class="uploader-button ui button">
+						<input type="file" id="uploader_input" name="uploader_input"/>
+					</span>
+					<span>
+						选择照片上传,支持jpeg,png,5M
+					</span>										
+				</div> <!-- end uploadarea -->
 				
-					<div class="field">
-						<textarea rows="" cols="" id="album_desc"></textarea>
-					</div>
-					
-				</div>
-				<div class="ui blue button" id="saveAlbumBtn">
-					保存
-				</div>
 				
 			</div>	<!-- end span8 -->
 			
 			<div class="span4">
+					<div class="ui form">
+						<div class="field">
+						  	<label>标签:</label>
+						  	<div class="tags">
+						  		<input type="text" class="tag-input" id="tag-input">
+						  		<div class="tagfield">   
+							    </div>
+						  	</div>
+						</div>
+					
+						<div class="field">
+							<label>描述:</label>
+							<textarea rows="" cols="" id="album_desc"></textarea>
+						</div>
+						
+					</div>
+					<div class="ui blue button" id="saveAlbumBtn">
+						保存
+					</div>
+					
+
 			</div> <!-- end span4 -->
 		</div>
 	</div>

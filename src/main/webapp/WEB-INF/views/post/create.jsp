@@ -44,9 +44,10 @@
 					<div class="field">
 					  	<label>标签:</label>
 					  	<div class="tags">
+					  		<input type="text" class="tag-input" id="tag-input">
 						    <div class="tagfield">   
 						    </div>
-					  		<input type="text" class="tag-input" id="tag-input">
+					  		
 					  	</div>
 					</div>
 				  			  
