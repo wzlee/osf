@@ -96,7 +96,7 @@ public class EventDAOImpl implements EventDAO{
 	}
 
 	public List<Event> getEventsWithIDs(List<Integer> event_ids) {
-		String sql = "select * from " + TABLE + " where id in (:ids)";
+		String sql = "select * from " + TABLE + " where id in (:ids) order by ts desc";
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("ids", event_ids);
 		return namedParaJdbcTemplate.query(sql, paramMap, new RowMapper<Event>() {
