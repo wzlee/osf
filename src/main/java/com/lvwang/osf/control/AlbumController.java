@@ -31,8 +31,7 @@ import com.lvwang.osf.model.User;
 import com.lvwang.osf.service.AlbumService;
 import com.lvwang.osf.service.EventService;
 import com.lvwang.osf.service.FeedService;
-import com.lvwang.osf.service.RelationService;
-import com.lvwang.osf.service.TagService;
+import com.lvwang.osf.service.InterestService;
 import com.lvwang.osf.util.Dic;
 import com.lvwang.osf.util.Property;
 
@@ -53,6 +52,9 @@ public class AlbumController {
 	@Qualifier("feedService")
 	private FeedService feedService;
 	
+	@Autowired
+	@Qualifier("interestService")
+	private InterestService interestService;
 	
 	@RequestMapping("/{id}/photos")
 	public ModelAndView album(@PathVariable("id") int id) {
@@ -193,91 +195,24 @@ public class AlbumController {
 		User user = (User)session.getAttribute("user");
 		album.setUser_id(user.getId());
 		
-		String status = albumService.updateAlbum(album);
-		map.put("status", status);
+		List<Tag> tags = albumService.updateAlbum(album);
 		
-		/*
-		ObjectMapper mapper = new ObjectMapper();		
-		try {
-			JsonNode root = mapper.readTree(params);
-			//update album desc
-			String album_desc = root.path("album_desc").getTextValue();
-			String status = albumService.updateAlbumDesc((Integer)session.getAttribute("album_id"), album_desc);
-			map.put("status", status);
-			if(!Property.SUCCESS_ALBUM_UPDATE.equals(status)) 
-				return map;
-			
-			JsonNode photos = root.path("photos");
-			//update album cover
-			if(photos.size() > 0) {
-				status = albumService.updateAlbumCover(
-						 (Integer)session.getAttribute("album_id"),
-						 albumService.getKeyofPhoto(
-								 	  Integer.parseInt(
-								 	  photos.get(0).path("id").getTextValue())
-								 	  )
-				);
-			}
-			if(!Property.SUCCESS_ALBUM_UPDATE.equals(status)) 
-				return map;
-			
-			//add tags for album
-			JsonNode tags = root.path("tags");
-			if(tags.size() > 0) {
-				StringBuffer buffer = new StringBuffer();
-				for(int i=0; i<tags.size(); i++) {
-					buffer.append(tags.get(i).getTextValue() + " ");
-				}
-				//save tag
-				Map<String, Object> tagsmap = tagService.newTags(TagService.toList(buffer.toString()));
-				
-				//save relation 
-				for(Tag tag: (List<Tag>)tagsmap.get("tags")) {
-					relationService.newRelation(
-							 		RelationService.RELATION_TYPE_ALBUM, 
-							 		(Integer)session.getAttribute("album_id"), 
-							 		tag.getId()
-							 		);
-				}
-			}
-			
-			
-			//update photos , set desc
-			List<Photo> photos2upd = new ArrayList<Photo>();
-			for(int i=0; i<photos.size(); i++) {
-				int photo_id = Integer.parseInt(photos.get(i).path("id").getTextValue());
-				String photo_desc = photos.get(i).path("desc").getTextValue();
-				Photo photo = new Photo();
-				photo.setId(photo_id);
-				photo.setDesc(photo_desc);
-				photos2upd.add(photo);
-				
-				System.out.println("photo_id:"+photo_id+" desc:"+photo_desc);
-			}
-			status = albumService.updatePhotoDesc(photos2upd);
-			map.put("status", status);
-			*/
-			
-			//add event
-			//User user = (User)session.getAttribute("user");
-			//Album album = new Album();
-			album.setId((Integer)session.getAttribute("album_id"));
-			album.setUser_id(user.getId());
-			//album.setAlbum_desc(album_desc);
-			//album.setPhotos_count(photos2upd.size());
-			//album.setPhotos(photos2upd);
-			int event_id = eventService.newEvent(Dic.OBJECT_TYPE_ALBUM, album);
-			if(event_id !=0 ) {
-				feedService.push(user.getId(), event_id);
-			}
-			map.put("album", album);
-			/*
-		} catch (JsonProcessingException e) {
-			map.put("status", Property.ERROR_ALBUM_CREATE);
-		} catch (IOException e) {
-			map.put("status", Property.ERROR_ALBUM_CREATE);
+		int event_id = eventService.newEvent(Dic.OBJECT_TYPE_ALBUM, album);
+		//push to users who follow u
+		if(event_id !=0 ) {
+			feedService.push(user.getId(), event_id);
 		}
-		*/
+		
+		//push to users who follow the tags in the album
+		for(Tag tag : tags) {
+			List<Integer> i_users = interestService.getUsersInterestedInTag(tag.getId());
+			for(int u : i_users) {
+				feedService.push(u, event_id);
+			}
+		}
+		
+		map.put("album", album);
+		map.put("status", Property.SUCCESS_ALBUM_UPDATE);
 		return map;
 	}
 	

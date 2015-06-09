@@ -34,6 +34,7 @@ public class FeedService {
 	
 	public void push(int user_id, int event_id) {
 		List<Integer> followers = followService.getFollowerIDs(user_id);
+		followers.add(user_id);	//add self
 		if(followers != null && followers.size()!=0) {
 			for(Integer follower: followers) {
 				feedDao.save("feed:user:"+follower, event_id);

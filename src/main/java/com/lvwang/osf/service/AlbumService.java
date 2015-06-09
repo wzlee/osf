@@ -168,7 +168,7 @@ public class AlbumService {
 		return Property.SUCCESS_ALBUM_UPDATE; 
 	}
 	
-	public String updateAlbum(Album album) {
+	public List<Tag> updateAlbum(Album album) {
 		updateAlbumInfo(album);
 		updatePhotoDesc(album.getPhotos());
 		
@@ -183,8 +183,7 @@ public class AlbumService {
 					 		tag.getId()
 					 		);
 		}
-		
-		return Property.SUCCESS_ALBUM_UPDATE;
+		return (List<Tag>)tagsmap.get("tags");
 	}
 	
 	public List<Album> getAlbumsOfUser(int id) {
