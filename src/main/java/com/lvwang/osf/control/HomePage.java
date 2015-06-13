@@ -45,4 +45,15 @@ public class HomePage {
 		return mav;
 		
 	}
+	
+	@RequestMapping("/welcome")
+	public String welcome() {
+		return "welcome";
+	}
+	
+	
+	
+	
+	
+	
 }

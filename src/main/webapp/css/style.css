@@ -1,6 +1,11 @@
 body{
 	font-family: "Helvetica" ,"Arial","Times New Roman";
 }
+
+a {
+	text-decoration: none;
+}
+
 .nav-container {
    	width: 960px;
    	margin: 0 auto;
@@ -45,7 +50,9 @@ body{
  #rightside {
 	padding-left:45px;
  }
-
+.ui.feed > .event > .content .extra.images img{
+	width: 32%;
+}
   .ui.feed > .event > .content {
   	line-height: 20px;
   }
@@ -171,8 +178,19 @@ body{
 .ui.small.centered.circular.image {
 	width: 120px;
 }
+.ui.cards > .card, .ui.card {
+	box-shadow: none;
+}
+
 .ui.card > .ui.centered.circular.image {
 	padding-top: 30px;
+}
+
+.ui.cards > .card > .image > img, .ui.card > .image > img{
+	  border-radius: 500rem;
+}
+.ui.cards > .card > .image, .ui.card > .image {
+	background: none;
 }
 
 .ui.statistics > .statistic {
@@ -225,6 +243,25 @@ body{
 #album_desc{
 	height: 8em;
 }
+
+.ui.feed > .event > .label + .content {
+	margin-top: 0px;
+	padding-top: 0px;
+}
+
+.ui.feed .content .extra img {
+	max-width: 100%;
+}
+
+#action_bar .item {
+	height: 100px;
+	padding: 28px;
+}
+
+
+
+
+
 
 
 

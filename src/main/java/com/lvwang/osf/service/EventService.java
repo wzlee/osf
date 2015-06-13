@@ -38,7 +38,7 @@ public class EventService {
 			event.setUser_id(post.getPost_author());
 			event.setTitle(post.getPost_title());
 			event.setSummary(post.getPost_excerpt());
-			event.setContent(post.getPost_content());
+			event.setContent(post.getPost_cover());
 			event.setLike_count(post.getLike_count());
 			event.setShare_count(post.getShare_count());
 			event.setComment_count(post.getComment_count());

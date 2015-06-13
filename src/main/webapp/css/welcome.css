@@ -1,0 +1,15 @@
+@CHARSET "UTF-8";
+
+
+
+.welcome .span4 {
+	text-align: center;
+}
+
+.welcome .span4  > .ui.circular.segment {
+	width: 200px;
+	height: 200px;
+	display: inline-block;
+	margin: 0 auto;
+	padding-top: 75px;
+}

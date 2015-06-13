@@ -8,7 +8,9 @@
   <meta charset="UTF-8">
   <title>OSF</title>
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/bootstrap2.css">
-  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/button.css">
+  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/navbar.css">
+  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/semantic.css">
+<%--   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/button.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/feed.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/card.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/image.css">
@@ -17,10 +19,12 @@
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/icon.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/navbar.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/statistic.css">
+  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/form.css">
+  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/header.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/menu.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/dropdown.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/label.css">
-  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/page.css">
+  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/page.css"> --%>
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">
 </head>
 <body>
@@ -30,8 +34,8 @@
           <div class="span8">  
           		<div class="ui avatar image">
                 	<img src="img/avatar.png">
-                </div>
-				<div class="ui labeled icon menu newpost_buttons">
+                </div>                
+				<div class="ui labeled icon menu newpost_buttons" id="action_bar">
 				  <a class="item" href="<c:url value="/post/create"/>">
 				    <i class="blue big font icon"></i>
 				    发状态
@@ -66,9 +70,13 @@
                           </div>
                         </div>
                         <div class="extra">
-                          <div class="postheader">
-                            <a href="<c:url value="/post/${feed.object_id }" />">${feed.title }</a>
-                          </div>
+                        	<div class="postheader">
+                           		<a href="<c:url value="/post/${feed.object_id }" />">${feed.title }</a>
+                            </div>
+                      		<img src="<c:url value="${feed.content }"/>" alt="" />
+                      	</div>
+                        <div class="extra">
+                          
                           ${feed.summary }
                         </div>
                         <div class="meta">
@@ -101,7 +109,7 @@
                       </div>
                       <div class="content">
                         <div class="summary">
-                          <a>${feed.user_id }</a> added <a href="<c:url value="/album/${feed.object_id }" /> ">2 new illustrations</a>
+                          <a>${feed.user_name }</a> 上传了相册 <a href="<c:url value="/album/${feed.object_id }" /> "></a>
 	                      <div class="date">
 	                        ${feed.ts }
 	                      </div>                          
@@ -126,7 +134,7 @@
 	                            <i class="comment outline icon"></i> ${feed.comment_count }
 	                          </a>                           
 	                          <a class="like">
-	                            <i class="like icon"></i> ${feed.like_count } 
+	                            <i class="heart icon"></i> ${feed.like_count } 
 	                          </a>                          
                           </div>
                         </div>
@@ -338,37 +346,37 @@
 				  <div class="item">
 				    <i class="tag icon"></i>
 				    <div class="content">
-				      <a class="header">美食</a>
+				      <a class="">美食</a>
 					</div>
 				  </div>
 				  <div class="item">
 				    <i class="tag icon"></i>
 				    <div class="content">
-				      <a class="header">豆瓣</a>
+				      <a class="">豆瓣</a>
 				    </div>
 				  </div>
 				  <div class="item">
 				    <i class="tag icon"></i>
 				    <div class="content">
-				      <a class="header">摄影</a>
+				      <a class="">摄影</a>
 				    </div>
 				  </div>
 				  <div class="item">
 				    <i class="tag icon"></i>
 				    <div class="content">
-				      <a class="header">设计</a>
+				      <a class="">设计</a>
 				    </div>
 				  </div>
 				  <div class="item">
 				    <i class="tag icon"></i>
 				    <div class="content">
-				      <a class="header">理财</a>
+				      <a class="">理财</a>
 				    </div>
 				  </div>
 				  <div class="item">
 				    <i class="tag icon"></i>
 				    <div class="content">
-				      <a class="header">旅行</a>
+				      <a class="">旅行</a>
 				    </div>
 				  </div>
 				</div>	
