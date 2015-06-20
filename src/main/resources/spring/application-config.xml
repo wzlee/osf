@@ -60,14 +60,15 @@
 		<property name="host" value="smtp.gmail.com" />
 		<property name="port" value="587" />
 		<property name="username" value="gavindlutsw@gmail.com" />
-		<property name="password" value="91922625gmail#_" />
+		<property name="password" value="********" />
 		<property name="javaMailProperties">
 	        <!-- additional properties specific to JavaMail -->
-	        <props>
-	            <prop key="mail.smtp.auth">true</prop>
-	            <prop key="mail.smtp.starttls.enable">true</prop>
-	            <prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>	            
-	        </props>
+			<props>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
+            </props>
+
 	    </property>
 	</bean>
 	

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.catalina.ant.FindLeaksTask;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.lvwang.osf.model.User;
+import com.lvwang.osf.service.MailService;
 import com.lvwang.osf.service.UserService;
 import com.lvwang.osf.util.Property;
 
@@ -27,6 +29,10 @@ public class AccountController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	@Qualifier("mailService")
+	private MailService mailService;
 	
 	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public String login() {
@@ -69,9 +75,8 @@ public class AccountController {
 		Map<String, String> map = new HashMap<String, String>();
 		String status = userService.register(username, email, password, cfmPwd, map);
 		if(Property.SUCCESS_ACCOUNT_REG.equals(status)){
-			
-		} else if(Property.ERROR_ACCOUNT_INACTIVE.equals(status)) {
-		}
+			mailService.sendMail(email, "OSF 激活", "hello");
+		} 
 		map.put("status", status);
 		return map;
 	}

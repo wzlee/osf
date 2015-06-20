@@ -28,12 +28,12 @@ public class UserServiceTest {
 		ApplicationContext context = new ClassPathXmlApplicationContext("/spring/application-config.xml");
 		//userDao = (UserDAO) context.getBean("userDao");
 		//userService = (UserService) context.getBean("userService");
-		//mailService = (MailService) context.getBean("mailService");
-		feedService = (FeedService) context.getBean("feedService");
+		mailService = (MailService) context.getBean("mailService");
+		//feedService = (FeedService) context.getBean("feedService");
 	}
 	
 	
-	@Test
+	//@Test
 	public void test() {
 		//feedService.push(9, 1);
 		List<Event> events = feedService.getFeeds(1);
@@ -43,7 +43,7 @@ public class UserServiceTest {
 	}
 	
 	
-	//@Test
+	@Test
 	public void testfindByEmail() {
 		//User user = userService.findByEmail("aif@gmail.com");
 		//sSystem.out.println(user.getUser_pwd());
@@ -60,7 +60,7 @@ public class UserServiceTest {
 		}
 		*/
 		//System.out.println("|"+CipherUtil.generateActivationUrl("kevinsdfefwe@gmail", "12332423")+"|");
-		mailService.sendMail("lvwangbeta@gmail.com", "hehe", "hehe");
+		mailService.sendMail("lvwangbeta@163.com", "hehe", "hehe");
 		
 	}
 	
