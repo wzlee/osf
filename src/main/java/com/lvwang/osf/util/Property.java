@@ -2,6 +2,8 @@ package com.lvwang.osf.util;
 
 public class Property {
 	
+	public static String IMG_BASE_URL = "http://osfimgs.oss-cn-hangzhou.aliyuncs.com/";
+	
 	/*
 	 * 数据字典(6位)
 	 * rules:

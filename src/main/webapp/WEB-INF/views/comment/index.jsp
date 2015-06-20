@@ -5,7 +5,7 @@
 <c:forEach items="${comments }" var="comment">
 	<div class="comment" id="comment${comment.id }" author="${comment.comment_author }">
 	  <a class="avatar">
-	  	<img src="<c:url value="/img/avatar.png"/>" alt="" />
+	  	<img src="<c:url value="${comment.comment_author_avatar }"/>" alt="" />
 	  </a>
 	  <div class="content">
 	  	<c:if test="${comment.comment_parent == 0 }">

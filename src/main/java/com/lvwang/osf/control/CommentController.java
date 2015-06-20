@@ -62,6 +62,7 @@ public class CommentController {
 															comment_content, 
 															comment_parent,
 															comment_parent!=0?userService.findById(comment_parent).getUser_email():null);
+		ret.put("avatar", userService.findById(user.getId()).getUser_avatar());
 		return ret;
 	}
 	

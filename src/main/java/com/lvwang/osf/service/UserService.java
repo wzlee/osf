@@ -82,6 +82,7 @@ public class UserService {
 			user = userDao.getUserByID(id);
 			mapOps.put("user", key, user);
 		}	
+		user.setUser_avatar(Property.IMG_BASE_URL+user.getUser_avatar());
 		return user;
 	}
 	

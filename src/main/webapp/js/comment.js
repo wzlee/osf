@@ -71,7 +71,6 @@ $(document).ready(function(){
 
 		$.ajax({
 			url: basePath + '/comment/create',
-			contentType: "application/json; charset=utf-8",
 			type: 'POST',
 			dataType: 'json',
 			data: {comment_object_type: commentObjectType,
@@ -81,19 +80,9 @@ $(document).ready(function(){
 		})
 		.success(function(data) {
 			var status = data.status;
-			alert(data.status);
-		})
-		.fail(function() {
-			console.log("error");
-		})
-		.always(function() {
-			console.log("complete");
-		});
-		
-		
-		var $comment = $('<div class="comment" id="4">'+
+			var $comment = $('<div class="comment" id="4">'+
 							    '<a class="avatar">'+
-//							      '<img src="img/avatar.png">'+
+							      '<img src="'+data.avatar+'">'+
 							    '</a>'+
 							    '<div class="content">'+
 							      header+
@@ -103,15 +92,12 @@ $(document).ready(function(){
 							      '<div class="text commentContent">'+
 							        '<p>'+commentContent+'</p>'+
 							      '</div>'+
-							      '<div class="actions">'+
-							        '<a class="reply" ref="4">Reply</a>'+
-							      '</div>'+
 							    '</div>'+
 							  '</div>');
-		$('#commentList').prepend($comment);
-		$('#replyarea').remove();
-
-		var $replyarea = $('<div id="replyarea">'+
+			$('#commentList').prepend($comment);
+			$('#replyarea').remove();
+			
+			var $replyarea = $('<div id="replyarea">'+
 								'<div>'+
 								  '<form class="ui reply form" id="replyform">'+
 								    '<div class="field">'+
@@ -123,10 +109,20 @@ $(document).ready(function(){
 								  '</form>'+								
 								'</div>'+
 							  '</div>');
-		$('#comments').prepend($replyarea);
-		$('#replycontent').focus();
-		commentType = 0;
-		commentParent =0;
+			$('#comments').prepend($replyarea);
+			$('#replycontent').focus();
+			commentType = 0;
+			commentParent =0;
+		})
+		.fail(function() {
+			console.log("error");
+		})
+		.always(function() {
+			console.log("complete");
+		});
+		
+		
+
 	});
 
 

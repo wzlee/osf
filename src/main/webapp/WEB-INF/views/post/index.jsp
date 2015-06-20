@@ -79,27 +79,7 @@
 								  </form>								
 						  </div>
 						  
-						  <div id="commentList">
-							
-							  <!--  
-						  	  <div class="comment" id="1" author="">
-							    <a class="avatar">
-							      <img src="<c:url value="/img/avatar.png"/>" alt="" />
-							    </a>
-							    <div class="content">
-							      <a class="author">Matt</a>
-							      <div class="metadata">
-							        <span class="date">Today at 5:42PM</span>
-							      </div>
-							      <div class="text commentContent">
-							        <p>How artistic!</p>
-							      </div>
-							      <div class="actions" >
-							        <a class="reply" ref="1">Reply</a>
-							      </div>
-							    </div>
-							  </div>	
-							  -->
+						  <div id="commentList">							
 							  <jsp:include page="/comment/post/${post.id }"></jsp:include>				  	
 						  </div>
 						  <!-- comment list -->

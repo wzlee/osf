@@ -27,6 +27,10 @@ public class CommentService {
 	@Qualifier("commentDao")
 	private CommentDAO commentDao;
 	
+	@Autowired
+	@Qualifier("userService")
+	private UserService userService;
+	
 	public Map<String, String> newComment(Integer comment_object_type, Integer comment_object_id,
 							 Integer comment_author, String comment_author_email, 
 							 String comment_content, Integer comment_parent, String comment_parent_email){
@@ -64,13 +68,21 @@ public class CommentService {
 	public List<Comment> getComments(String type, int id) {
 		if(type == null || type.length() == 0)
 			return null;
+		List<Comment> comments = null;
 		if(type.equals(TYPE_POST)) {
-			return commentDao.getCommentsOfPost(id);
+			comments = commentDao.getCommentsOfPost(id);
 		} else if(type.equals(TYPE_PHOTO)) {
-			return commentDao.getCommentsOfPhoto(id);
+			comments = commentDao.getCommentsOfPhoto(id);
 		} else if(type.equals(TYPE_ALBUM)){
-			return commentDao.getCommentsOfAlbum(id);
+			comments = commentDao.getCommentsOfAlbum(id);
 		} 
-		return null;
+		
+		//add avatars;
+		if(comments != null && comments.size() !=0) {
+			for(Comment comment: comments) {
+				comment.setComment_author_avatar(userService.findById(comment.getComment_author()).getUser_avatar());
+			}
+		}
+		return comments;
 	}
 }

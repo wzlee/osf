@@ -9,6 +9,7 @@ public class Comment {
 	private int comment_author;
 	private String comment_author_name;
 	private String comment_author_email;
+	private String comment_author_avatar;
 	private Date comment_ts;
 	private String comment_content;
 	private int comment_parent;
@@ -72,5 +73,11 @@ public class Comment {
 	}
 	public void setComment_parent_email(String comment_parent_email) {
 		this.comment_parent_email = comment_parent_email;
+	}
+	public String getComment_author_avatar() {
+		return comment_author_avatar;
+	}
+	public void setComment_author_avatar(String comment_author_avatar) {
+		this.comment_author_avatar = comment_author_avatar;
 	}
 }
