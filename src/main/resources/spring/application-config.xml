@@ -60,7 +60,7 @@
 		<property name="host" value="smtp.gmail.com" />
 		<property name="port" value="587" />
 		<property name="username" value="gavindlutsw@gmail.com" />
-		<property name="password" value="********" />
+		<property name="password" value="*********" />
 		<property name="javaMailProperties">
 	        <!-- additional properties specific to JavaMail -->
 			<props>
