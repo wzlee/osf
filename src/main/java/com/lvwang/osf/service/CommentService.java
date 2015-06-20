@@ -21,7 +21,7 @@ public class CommentService {
 	
 	public static final String TYPE_POST = "post";
 	public static final String TYPE_PHOTO = "photo";
-	public static final String TYPE_ALBUM = "post";
+	public static final String TYPE_ALBUM = "album";
 	
 	@Autowired
 	@Qualifier("commentDao")

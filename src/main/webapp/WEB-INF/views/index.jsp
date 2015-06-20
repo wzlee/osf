@@ -60,7 +60,7 @@
                     <c:if test="${feed.object_type == 0 }">
                     <div class="event">
                       <div class="label">
-                        <img src="${imgBaseUrl }/${feed.user_avatar }">
+                        <img src="${feed.user_avatar }">
                       </div>
                       <div class="content">
                         <div class="summary">

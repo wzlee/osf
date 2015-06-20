@@ -21,6 +21,7 @@ import com.lvwang.osf.model.Tag;
 import com.lvwang.osf.model.User;
 import com.lvwang.osf.service.EventService;
 import com.lvwang.osf.service.FeedService;
+import com.lvwang.osf.service.FollowService;
 import com.lvwang.osf.service.InterestService;
 import com.lvwang.osf.service.PostService;
 import com.lvwang.osf.service.RelationService;
@@ -56,14 +57,21 @@ public class PostController {
 	@Qualifier("interestService")
 	private InterestService interestService;
 	
+	@Autowired
+	@Qualifier("followService")
+	private FollowService followService;
+	
 	@RequestMapping("/{id}")
-	public ModelAndView post(@PathVariable("id") int id) {
+	public ModelAndView post(@PathVariable("id") int id, HttpSession session) {
+		User me = (User) session.getAttribute("user");
+		
 		ModelAndView mav = new ModelAndView();
-		User user = postService.getAuthorOfPost(id);
-		mav.addObject("u", user);
+		User author = postService.getAuthorOfPost(id);
+		mav.addObject("u", author);
+		mav.addObject("follow", followService.isFollowing(me==null?0:me.getId(), author.getId()));
 		
 		mav.addObject("post", postService.findPostByID(id));
-		mav.addObject("imgBaseUrl", "http://osfimgs.oss-cn-hangzhou.aliyuncs.com/");
+		mav.addObject("imgBaseUrl", Property.IMG_BASE_URL);
 		mav.setViewName("post/index");
 		return mav;
 	}

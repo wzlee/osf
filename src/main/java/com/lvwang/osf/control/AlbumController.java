@@ -31,6 +31,7 @@ import com.lvwang.osf.model.User;
 import com.lvwang.osf.service.AlbumService;
 import com.lvwang.osf.service.EventService;
 import com.lvwang.osf.service.FeedService;
+import com.lvwang.osf.service.FollowService;
 import com.lvwang.osf.service.InterestService;
 import com.lvwang.osf.util.Dic;
 import com.lvwang.osf.util.Property;
@@ -56,18 +57,26 @@ public class AlbumController {
 	@Qualifier("interestService")
 	private InterestService interestService;
 	
+	@Autowired
+	@Qualifier("followService")
+	private FollowService followService;
+	
 	@RequestMapping("/{id}/photos")
-	public ModelAndView album(@PathVariable("id") int id) {
+	public ModelAndView album(@PathVariable("id") int id, HttpSession session) {
+		User me = (User) session.getAttribute("user");
+		
 		ModelAndView mav = new ModelAndView();
 		List<Photo> photos = albumService.getPhotosOfAlbum(id);
 		mav.addObject("album_id", id);
 		mav.addObject("photos", photos);
 		
-		User user = albumService.getAuthorOfALbum(id); 
-		mav.addObject("u", user);
+		User author = albumService.getAuthorOfALbum(id); 
+		mav.addObject("u", author);
+		
+		mav.addObject("follow", followService.isFollowing(me==null?0:me.getId(), author.getId()));
 		
 		mav.setViewName("album/index");
-		mav.addObject("imgBaseUrl", "http://osfimgs.oss-cn-hangzhou.aliyuncs.com/");
+		mav.addObject("imgBaseUrl", Property.IMG_BASE_URL);
 		return mav;
 	}
 	

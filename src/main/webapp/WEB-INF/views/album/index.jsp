@@ -5,7 +5,8 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<meta name="type" content="post">
+	<meta name="type" content="album">
+	<meta name="id" content="${album_id }">
 	<title>album index</title>
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/bootstrap2.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/navbar.css">
@@ -72,6 +73,7 @@
 				</div>
 			
 				<div class="ui comments" id="comments">
+
 				  <div id="replyarea">
 						  <form class="ui reply form" id="replyform">
 						    <div class="field">
@@ -81,42 +83,10 @@
 							  评论
 							</div>							    
 						  </form>								
-				  </div>						  
+				  </div>
+				  
 				  <div id="commentList">							
-				  	  <div class="comment" id="1">
-					    <a class="avatar">
-					      <img src="img/avatar.png">
-					    </a>
-					    <div class="content">
-					      <a class="author">Matt</a>
-					      <div class="metadata">
-					        <span class="date">Today at 5:42PM</span>
-					      </div>
-					      <div class="text commentContent">
-					        <p>How artistic!</p>
-					      </div>
-					      <div class="actions" >
-					        <a class="reply" ref="1">Reply</a>
-					      </div>
-					    </div>
-					  </div>
-					  <div class="comment" id="2">
-					    <a class="avatar">
-					      <img src="<c:url value="/img/1.jpg"/>">
-					    </a>
-					    <div class="content">
-					      <a class="author">Elliot Fu</a>
-					      <div class="metadata">
-					        <span class="date">Yesterday at 12:30AM</span>
-					      </div>
-					      <div class="text commentContent">
-					        <p>This has been very useful for my research. Thanks as well!</p>
-					      </div>
-					      <div class="actions">
-					        <a class="reply" ref="2">Reply</a>
-					      </div>
-					    </div>
-					  </div>					  	
+					  <jsp:include page="/comment/album/${album_id }"></jsp:include>				  	
 				  </div>
 				  <!-- comment list -->
 				</div>

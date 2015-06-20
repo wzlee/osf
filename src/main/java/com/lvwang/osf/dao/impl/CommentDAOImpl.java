@@ -50,7 +50,6 @@ public class CommentDAOImpl implements CommentDAO{
 	
 	public List<Comment> getCommentsOfPost(int id) {
 		String sql = "select * from " + TABLE + " where comment_object_type=? and comment_object_id=?";
-		//List<Comment> comments = jdbcTemplate.queryForList(sql, new Object[]{CommentService.COMMENT_TYPE_POST, id}, Comment.class);
 		List<Comment> comments = jdbcTemplate.query(sql, new Object[]{CommentService.COMMENT_TYPE_POST, id}, 
 				new RowMapper<Comment>() {
 
@@ -71,7 +70,15 @@ public class CommentDAOImpl implements CommentDAO{
 
 	public List<Comment> getCommentsOfAlbum(int id) {
 		String sql = "select * from " + TABLE + " where comment_object_type=? and comment_object_id=?";
-		List<Comment> comments = jdbcTemplate.queryForList(sql, new Object[]{CommentService.COMMENT_TYPE_ALBUM, id}, Comment.class);
+		List<Comment> comments = jdbcTemplate.query(sql, new Object[]{CommentService.COMMENT_TYPE_ALBUM, id}, 
+				new RowMapper<Comment>() {
+
+					public Comment mapRow(ResultSet rs, int rowNum)
+							throws SQLException {
+						return generateComment(rs);
+					}
+			
+		});
 		return comments;
 	}
 

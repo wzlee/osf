@@ -250,7 +250,7 @@ a {
 }
 
 .ui.feed .content .extra img {
-	max-width: 100%;
+	width: 100%;
 }
 
 #action_bar .item {
