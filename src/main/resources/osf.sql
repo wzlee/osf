@@ -172,3 +172,12 @@ CREATE TABLE IF NOT EXISTS `osf`.`osf_interests` (
   `ts` TIMESTAMP NOT NULL DEFAULT current_timestamp,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `osf`.`osf_likes` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `user_id` INT NOT NULL,
+  `object_type` INT NOT NULL,
+  `object_id` INT NOT NULL,
+  `ts` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;

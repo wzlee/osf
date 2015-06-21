@@ -26,6 +26,10 @@
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/label.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/page.css"> --%>
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">
+  
+  <script src="<%=request.getContextPath() %>/js/jquery.js"></script>
+  <script src="<%=request.getContextPath() %>/js/basic.js"></script>
+  <script src="<%=request.getContextPath() %>/js/like.js"></script>
 </head>
 <body>
   <%@ include file="topbar.jsp" %>
@@ -91,7 +95,8 @@
 	                            <i class="comment outline icon"></i> ${feed.comment_count }
 	                          </a>                           
 	                          <a class="like">
-	                            <i class="like icon"></i> ${feed.like_count } 
+	                            <i class="heart icon" object_type=${feed.object_type } object_id=${feed.object_id }>
+	                            </i> ${feed.like_count } 
 	                          </a>                          
                           </div>
 
@@ -134,7 +139,12 @@
 	                            <i class="comment outline icon"></i> ${feed.comment_count }
 	                          </a>                           
 	                          <a class="like">
-	                            <i class="heart icon"></i> ${feed.like_count } 
+	                          	<c:if test="${feed.is_like }">
+	                          		<i class="red heart icon" object_type=${feed.object_type } object_id=${feed.object_id }></i> ${feed.like_count }
+	                          	</c:if>
+	                          	<c:if test="${!feed.is_like }">
+	                          		<i class="heart icon" object_type=${feed.object_type } object_id=${feed.object_id }></i> ${feed.like_count }
+	                          	</c:if>	                          	
 	                          </a>                          
                           </div>
                         </div>

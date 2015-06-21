@@ -32,6 +32,10 @@ public class FeedService {
 	@Qualifier("userService")
 	private UserService userService;
 	
+	@Autowired
+	@Qualifier("likeService")
+	private LikeService likeService;
+	
 	public void push(int user_id, int event_id) {
 		List<Integer> followers = followService.getFollowerIDs(user_id);
 		followers.add(user_id);	//add self
@@ -52,7 +56,7 @@ public class FeedService {
 		if(event_ids != null && event_ids.size()!=0 ) {
 			events = eventService.getEventsWithIDs(event_ids);
 			addUserInfo(events);
-			updLikeCount(events);
+			updLikeCount(user_id, events);
 		}
 		return events;
 	}
@@ -67,11 +71,15 @@ public class FeedService {
 		}
 	}
 	
-	public void updLikeCount(List<Event> events){
+	public void updLikeCount(int user_id, List<Event> events){
 		if(events == null || events.size() == 0)
 			return;
 		for(Event event : events) {
-			
+			event.setLike_count((int)likeService.likersCount(event.getObject_type(), 
+															 event.getObject_id()));
+			event.setIs_like(likeService.isLike(user_id, 
+												event.getObject_type(), 
+												event.getObject_id()));
 		}
 	}
 	
