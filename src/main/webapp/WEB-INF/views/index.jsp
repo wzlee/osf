@@ -61,7 +61,7 @@
                   <div class="ui feed">
                    <c:forEach items="${feeds }" var="feed"> 
                    <!-- new post -->
-                    <c:if test="${feed.object_type == 0 }">
+                    <c:if test="${feed.object_type == dic.object_type_post }">
                     <div class="event">
                       <div class="label">
                         <img src="${feed.user_avatar }">
@@ -107,7 +107,7 @@
                     </c:if>
                     
                     <!-- new album -->
-                    <c:if test="${feed.object_type == 2 }">
+                    <c:if test="${feed.object_type == dic.object_type_album }">
                     <div class="event">
                       <div class="label">
                         <img src="img/avatar.png">
@@ -153,10 +153,13 @@
                         <div class="ui divider"></div>
                       </div>
                     </div>                    
-                    
-                    
                     </c:if>
-                                    
+                    <!-- end album  -->    
+                    
+                    <c:if test="">
+                    	
+                    </c:if>
+                                
                   </c:forEach>
                     <div class="event">
                       <div class="label">

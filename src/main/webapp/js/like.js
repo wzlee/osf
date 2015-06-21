@@ -23,7 +23,6 @@ $(document).ready(function(){
 			type: 'POST',
 			dataType: 'json',
 			data:{
-				user_id: user_id,
 				object_type: object_type,
 				object_id: object_id
 			}

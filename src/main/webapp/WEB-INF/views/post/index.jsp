@@ -62,7 +62,12 @@
 								  <i class="wechat icon" id="wechatshare"></i>
 								</div>	
 								<div class="ui circular icon basic button post like">
-								  <i class="empty red heart icon" id="like"></i>
+								  <c:if test="${!is_like }">
+								  	<i class="empty red heart icon" id="like"></i>
+								  </c:if>
+								  <c:if test="${is_like }">
+								  	<i class="red heart icon" id="like"></i>
+								  </c:if>
 								</div>																
 							</div>
 						</div>
