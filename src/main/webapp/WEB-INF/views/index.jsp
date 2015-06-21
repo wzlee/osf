@@ -40,7 +40,7 @@
                 	<img src="img/avatar.png">
                 </div>                
 				<div class="ui labeled icon menu newpost_buttons" id="action_bar">
-				  <a class="item" href="<c:url value="/post/create"/>">
+				  <%-- <a class="item" href="<c:url value="/post/create"/>">
 				    <i class="blue big font icon"></i>
 				    发状态
 				  </a>
@@ -55,7 +55,17 @@
 				  <a class="item">
 				    <i class="green big linkify icon"></i>
 				    链接
-				  </a>				  
+				  </a> --%>	
+				  <div class="short_post">
+				  	<textarea rows="" cols="">
+				  	
+				  	</textarea>
+				  	<div class="bar">
+				  		<div class="ui basic button">
+				  			发表
+				  		</div>
+				  	</div>
+				  </div>			  
 				</div>
                         
                   <div class="ui feed">

@@ -13,6 +13,8 @@
   	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/welcome.css">
 	<style>
 	.section1 { background: url("<%=request.getContextPath() %>/img/background.png");}
+	.section4 { background: url("<%=request.getContextPath() %>/img/gallery/8.jpg") no-repeat;
+				background-size: cover;}
 	</style>
   	<script src="<%=request.getContextPath() %>/js/jquery.js"></script>
   	<script src="<%=request.getContextPath() %>/js/jquery.fullPage.js"></script>
@@ -33,6 +35,9 @@
 					}, 1000, 'easeOutExpo');
 				
 				}
+				if(index == 4){
+					
+				}
 
 			}
 		});
@@ -46,7 +51,9 @@
 <body>
 	<div class="nav">
 		<div class="navbar">
-			<div class="logo"></div>
+			<div class="logo">
+				<img src="<%=request.getContextPath() %>/img/logo.png" alt="" />
+			</div>
 			<button class="register">注册</button>
 		</div>
 	</div>
@@ -135,30 +142,60 @@
 			<div class="features row1">
 				<div class="feature">
 					<div class="circle"></div>
+					<div class="header">说说</div>
+					<div class="desc">发送简短的消息<br/>分享你此时的状态</div>
 				</div>
 				<div class="feature">
 					<div class="circle"></div>
+					<div class="header">相册</div>
+					<div class="desc">上传图片<br/>记录美好时刻</div>
 				</div>
 				<div class="feature">
 					<div class="circle"></div>
+					<div class="header">日志</div>
+					<div class="desc">记录生活点滴</div>
 				</div>
 			</div>	
-			<div class="features row2">
+			<div class="features row1">
 				<div class="feature">
 					<div class="circle"></div>
+					<div class="header">标签</div>
+					<div class="desc">兴趣<br/>从标签出发</div>
 				</div>
 				<div class="feature">
 					<div class="circle"></div>
+					<div class="header">朋友</div>
+					<div class="desc">关注喜欢的朋友<br/>不错过他的动态</div>
+				</div>
+				<div class="feature">
+					<div class="circle"></div>
+					<div class="header">喜欢</div>
+					<div class="desc">相册、日志<br/>喜欢就收藏起来吧</div>
 				</div>
 			</div>
-			
-			<div class="footbar">
-				<div>
-					hello
-				</div>
-			</div>				
+						
 		</div>
-		
+		<!-- end section3 -->
+		<div class="section section4">
+			<div class="container">
+				<div class="row">
+					<div class="span12 center">
+						<div class="header">
+							探索, OSF
+						</div>					
+					</div>
+				</div>			
+				<div class="row">
+					<div class="span6 offset3">
+						<div class="row">
+							<div class="login_btn span3">登录</div>
+							<div class="register_btn span3">注册</div>						
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 
 

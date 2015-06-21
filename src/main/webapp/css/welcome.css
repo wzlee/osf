@@ -131,7 +131,15 @@
  		color: white;
 }
 
-
+.navbar .logo{
+	position: absolute;
+	top: 10px;
+	left:50px;
+}
+.navbar .logo > img{
+	width: 35px;
+	height: 45px;
+}
 
 .section .center{
 	text-align: center;
@@ -225,11 +233,31 @@
 .features .circle{
 	margin: 0 auto;
 	background-color: white;
-	height: 180px;
-	width:180px;
-	border-radius: 200px;
+	height: 150px;
+	width:150px;
+	border-radius: 150px;
 }
 
+.features .header{
+	margin-top:10px;
+	margin-bottom: 10px;
+	text-align: center;
+	font-family: STHeitiSC-Medium;
+	font-size: 24px;
+	color: #555555;
+	line-height: 25px;
+}
+
+.features .desc{
+	margin-top:10px;
+	margin-bottom: 10px;
+	text-align: center;
+	font-family: STHeitiSC-Light;
+	font-size: 16px;
+	color: #555555;
+	line-height: 25px;
+
+}
 
 .footbar{
 	position: absolute;
@@ -239,4 +267,30 @@
 	background-color: white;
 }
 
+.section4 .header{
+	color:white;
+}
+
+.section4 .login_btn{
+	  height: 50px;
+	  text-align: center;
+	  padding: 12px;
+	  font-size: 20px;
+	  color: white;
+	  background-color: #3CBC4F;
+	  border-radius: 3px;	
+}
+
+.section4 .register_btn{
+	  height: 50px;
+	  text-align: center;
+	  padding: 12px;
+	  font-size: 20px;
+	  color: black;
+	  background-color: white;
+	  border-radius: 3px;	
+}
+.section4 .row:FIRST-CHILD {
+	margin-bottom: 50px;
+}
 
