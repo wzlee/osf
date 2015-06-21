@@ -33,11 +33,8 @@
                     <c:if test="${feed.object_type == 0 }">
                     <div class="event">
                       <div class="label">
-                      	<c:if test="${feed.user_avatar == 'default-avatar' }">
-                        	<img src="${imgBaseUrl }/default-avatar.jpg">
-                        </c:if>
                         <c:if test="${feed.user_avatar != 'default-avatar' }">
-                        	<img src="${imgBaseUrl }/${feed.user_avatar }">
+                        	<img src="${feed.user_avatar }">
                         </c:if>
                       </div>
                       <div class="content">

@@ -48,15 +48,13 @@ public class FeedService {
 	
 	public List<Event> getFeeds(int user_id) {
 		List<Integer> event_ids = getEventIDs(user_id);
+		List<Event> events = new ArrayList<Event>();
 		if(event_ids != null && event_ids.size()!=0 ) {
-			List<Event> events = eventService.getEventsWithIDs(event_ids);
-			if(events == null)
-				events = new ArrayList<Event>();
+			events = eventService.getEventsWithIDs(event_ids);
 			addUserInfo(events);
-			return events;
+			updLikeCount(events);
 		}
-		else 
-			return new ArrayList<Event>();
+		return events;
 	}
 	
 	public void addUserInfo(List<Event> events) {
@@ -66,6 +64,14 @@ public class FeedService {
 			User user = userService.findById(event.getUser_id());
 			event.setUser_name(user.getUser_name());
 			event.setUser_avatar(user.getUser_avatar());
+		}
+	}
+	
+	public void updLikeCount(List<Event> events){
+		if(events == null || events.size() == 0)
+			return;
+		for(Event event : events) {
+			
 		}
 	}
 	

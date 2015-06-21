@@ -15,6 +15,7 @@ import com.lvwang.osf.model.Event;
 import com.lvwang.osf.model.User;
 import com.lvwang.osf.service.EventService;
 import com.lvwang.osf.service.FeedService;
+import com.lvwang.osf.util.Property;
 
 
 @Controller
@@ -41,7 +42,7 @@ public class HomePage {
 		List<Event> feeds = new ArrayList<Event>();  
 		feeds = feedService.getFeeds(user.getId());
 		mav.addObject("feeds", feeds);
-		mav.addObject("imgBaseUrl", "http://osfimgs.oss-cn-hangzhou.aliyuncs.com/");
+		mav.addObject("imgBaseUrl", Property.IMG_BASE_URL);
 		return mav;
 		
 	}
