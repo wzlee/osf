@@ -140,10 +140,12 @@
 	                          </a>                           
 	                          <a class="like">
 	                          	<c:if test="${feed.is_like }">
-	                          		<i class="red heart icon" object_type=${feed.object_type } object_id=${feed.object_id }></i> ${feed.like_count }
+	                          		<i class="red heart icon" object_type=${feed.object_type } object_id=${feed.object_id }></i> 
+	                          		<span>${feed.like_count }</span> 
 	                          	</c:if>
 	                          	<c:if test="${!feed.is_like }">
-	                          		<i class="heart icon" object_type=${feed.object_type } object_id=${feed.object_id }></i> ${feed.like_count }
+	                          		<i class="heart icon" object_type=${feed.object_type } object_id=${feed.object_id }></i> 
+	                          		<span>${feed.like_count }</span> 
 	                          	</c:if>	                          	
 	                          </a>                          
                           </div>

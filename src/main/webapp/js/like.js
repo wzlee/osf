@@ -4,16 +4,19 @@ $(document).ready(function(){
 		var object_type = $(this).attr('object_type');
 		var object_id = $(this).attr('object_id');
 		var url = basePath;
+		var like_count =parseInt($(this).next().text());
 
 		//已经喜欢 点击取消喜欢
 		if($(this).hasClass('red')){
 			url += '/undo'
 			$(this).removeClass('red');
+			$(this).next().text(like_count-1);
 		} 
 		//还未喜欢 点击喜欢
 		else{
 			url += '/do'
 			$(this).addClass('red');
+			$(this).next().text(like_count+1);
 		}
 		$.ajax({
 			url: url,
@@ -26,7 +29,7 @@ $(document).ready(function(){
 			}
 		})
 		.success(function(data){
-			alert(data.status);
+			
 		})	
 			
 	});
