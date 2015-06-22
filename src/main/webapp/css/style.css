@@ -254,15 +254,51 @@ a {
 	width: 100%;
 }
 
+.header_box{
+	display: table;
+	margin-bottom: 40px;
+}
+.header_box .ui.avatar.image, #action_bar {
+	display: table-cell;
+	vertical-align: middle;
+}
+#action_bar{
+	padding-left: 10px;
+}
 #action_bar .item {
 	height: 100px;
 	padding: 28px;
 }
 
+.short_post{
+	width: 566px;
+	height: 140px;
+	border-radius: 3px;
+	background: #FFFFFF;
+	border: 1px solid #DEDEDE;	
+}
 
-
-
-
+#action_bar textarea {
+	width: 100%;
+	height: 90px;
+	border:none;
+	resize: none;
+	padding: 10px;
+}
+#action_bar textarea:FOCUS{
+	outline: none;
+	border:none;
+}
+#action_bar .bar{
+	padding: 5px;
+	border-top: 1px solid #DEDEDE;
+}
+#action_bar .bar .button{
+	float: right;
+}
+#action_bar .bar .button:FIRST-CHILD {
+	margin-left: 10px;
+}
 
 
 
