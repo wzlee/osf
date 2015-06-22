@@ -141,34 +141,46 @@
 			</div>	
 			<div class="features row1">
 				<div class="feature">
-					<div class="circle"></div>
+					<div class="circle">
+						<i class="blue big font icon"></i>
+					</div>
 					<div class="header">说说</div>
 					<div class="desc">发送简短的消息<br/>分享你此时的状态</div>
 				</div>
 				<div class="feature">
-					<div class="circle"></div>
+					<div class="circle">
+						<i class="pink big photo icon"></i>
+					</div>
 					<div class="header">相册</div>
 					<div class="desc">上传图片<br/>记录美好时刻</div>
 				</div>
 				<div class="feature">
-					<div class="circle"></div>
+					<div class="circle">
+						<i class="big write icon"></i>
+					</div>
 					<div class="header">日志</div>
 					<div class="desc">记录生活点滴</div>
 				</div>
 			</div>	
 			<div class="features row1">
 				<div class="feature">
-					<div class="circle"></div>
+					<div class="circle">
+						<i class="big orange tag icon"></i>
+					</div>
 					<div class="header">标签</div>
 					<div class="desc">兴趣<br/>从标签出发</div>
 				</div>
 				<div class="feature">
-					<div class="circle"></div>
+					<div class="circle">
+						<i class="big users icon"></i>
+					</div>
 					<div class="header">朋友</div>
 					<div class="desc">关注喜欢的朋友<br/>不错过他的动态</div>
 				</div>
 				<div class="feature">
-					<div class="circle"></div>
+					<div class="circle">
+						<i class="big red heart icon"></i>
+					</div>
 					<div class="header">喜欢</div>
 					<div class="desc">相册、日志<br/>喜欢就收藏起来吧</div>
 				</div>
