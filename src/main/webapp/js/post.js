@@ -33,9 +33,39 @@ $(document).ready(function(){
 	});
 
 	$('#like').click(function() {
-		if($(this).hasClass('empty'))
+		var object_type = $('meta[name=type]').attr('content');
+		var object_id = $('meta[name=id]').attr('content');
+		var url = basePath;
+
+		if(object_type == 'post') {
+			object_type = 0;
+		} else if(object_type == 'photo') {
+			object_type = 1;
+		} else if(object_type == 'album') {
+			object_type = 2;
+		} else {
+			return;
+		}		
+
+		if($(this).hasClass('empty')){
+			url += '/do';
 			$(this).removeClass().addClass('red heart icon');
-		else 
+		}
+		else {
+			url += '/undo';
 			$(this).removeClass().addClass('empty red heart icon');
+		}
+		$.ajax({
+			url: url,
+			type: 'POST',
+			dataType: 'json',
+			data:{
+				object_type: object_type,
+				object_id: object_id
+			}
+		})
+		.success(function(data){
+			
+		})	
 	});
 })

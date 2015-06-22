@@ -26,6 +26,10 @@
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/label.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/page.css"> --%>
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">
+  
+  <script src="<%=request.getContextPath() %>/js/jquery.js"></script>
+  <script src="<%=request.getContextPath() %>/js/basic.js"></script>
+  <script src="<%=request.getContextPath() %>/js/like.js"></script>
 </head>
 <body>
   <%@ include file="topbar.jsp" %>
@@ -36,7 +40,7 @@
                 	<img src="img/avatar.png">
                 </div>                
 				<div class="ui labeled icon menu newpost_buttons" id="action_bar">
-				  <a class="item" href="<c:url value="/post/create"/>">
+				  <%-- <a class="item" href="<c:url value="/post/create"/>">
 				    <i class="blue big font icon"></i>
 				    发状态
 				  </a>
@@ -51,13 +55,23 @@
 				  <a class="item">
 				    <i class="green big linkify icon"></i>
 				    链接
-				  </a>				  
+				  </a> --%>	
+				  <div class="short_post">
+				  	<textarea rows="" cols="">
+				  	
+				  	</textarea>
+				  	<div class="bar">
+				  		<div class="ui basic button">
+				  			发表
+				  		</div>
+				  	</div>
+				  </div>			  
 				</div>
                         
                   <div class="ui feed">
                    <c:forEach items="${feeds }" var="feed"> 
                    <!-- new post -->
-                    <c:if test="${feed.object_type == 0 }">
+                    <c:if test="${feed.object_type == dic.object_type_post }">
                     <div class="event">
                       <div class="label">
                         <img src="${feed.user_avatar }">
@@ -91,7 +105,8 @@
 	                            <i class="comment outline icon"></i> ${feed.comment_count }
 	                          </a>                           
 	                          <a class="like">
-	                            <i class="like icon"></i> ${feed.like_count } 
+	                            <i class="heart icon" object_type=${feed.object_type } object_id=${feed.object_id }>
+	                            </i> ${feed.like_count } 
 	                          </a>                          
                           </div>
 
@@ -102,7 +117,7 @@
                     </c:if>
                     
                     <!-- new album -->
-                    <c:if test="${feed.object_type == 2 }">
+                    <c:if test="${feed.object_type == dic.object_type_album }">
                     <div class="event">
                       <div class="label">
                         <img src="img/avatar.png">
@@ -134,17 +149,27 @@
 	                            <i class="comment outline icon"></i> ${feed.comment_count }
 	                          </a>                           
 	                          <a class="like">
-	                            <i class="heart icon"></i> ${feed.like_count } 
+	                          	<c:if test="${feed.is_like }">
+	                          		<i class="red heart icon" object_type=${feed.object_type } object_id=${feed.object_id }></i> 
+	                          		<span>${feed.like_count }</span> 
+	                          	</c:if>
+	                          	<c:if test="${!feed.is_like }">
+	                          		<i class="heart icon" object_type=${feed.object_type } object_id=${feed.object_id }></i> 
+	                          		<span>${feed.like_count }</span> 
+	                          	</c:if>	                          	
 	                          </a>                          
                           </div>
                         </div>
                         <div class="ui divider"></div>
                       </div>
                     </div>                    
-                    
-                    
                     </c:if>
-                                    
+                    <!-- end album  -->    
+                    
+                    <c:if test="">
+                    	
+                    </c:if>
+                                
                   </c:forEach>
                     <div class="event">
                       <div class="label">

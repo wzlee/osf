@@ -23,6 +23,7 @@ public class Event {
 	private String following_user_name;
 	private int follower_user_id;
 	private String follower_user_name;
+	private boolean is_like;
 	public int getId() {
 		return id;
 	}
@@ -130,5 +131,11 @@ public class Event {
 	}
 	public void setFollower_user_name(String follower_user_name) {
 		this.follower_user_name = follower_user_name;
+	}
+	public boolean isIs_like() {
+		return is_like;
+	}
+	public void setIs_like(boolean is_like) {
+		this.is_like = is_like;
 	}
 }
