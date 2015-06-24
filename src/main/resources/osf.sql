@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS `osf`.`osf_posts` (
   `post_author` INT NOT NULL COMMENT '作者ID',
   `post_ts` TIMESTAMP NOT NULL DEFAULT current_timestamp,
   `post_content` LONGTEXT NOT NULL,
-  `post_title` TEXT NOT NULL,
+  `post_title` TEXT  NULL,
   `post_excerpt` TEXT NULL COMMENT '摘要',
   `post_status` INT NOT NULL DEFAULT 0,
   `comment_status` INT NOT NULL DEFAULT 0,
