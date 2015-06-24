@@ -16,6 +16,7 @@ import com.lvwang.osf.model.Event;
 import com.lvwang.osf.model.Photo;
 import com.lvwang.osf.model.Post;
 import com.lvwang.osf.model.Relation;
+import com.lvwang.osf.model.ShortPost;
 import com.lvwang.osf.util.Dic;
 
 @Service("eventService")
@@ -68,6 +69,15 @@ public class EventService {
 			
 		} else if(Dic.OBJECT_TYPE_PHOTO == object_type) {
 			//event_id = eventDao.savePhotoEvent((Photo)obj);
+		} else if(Dic.OBJECT_TYPE_SHORTPOST == object_type){
+			ShortPost spost = (ShortPost) obj;
+			event.setObject_type(Dic.OBJECT_TYPE_SHORTPOST);
+			event.setObject_id(spost.getId());
+			event.setSummary(spost.getPost_content());
+			event.setUser_id(spost.getPost_author());
+			event.setLike_count(spost.getLike_count());
+			event.setShare_count(spost.getShare_count());
+			event.setComment_count(spost.getComment_count());
 		}
 		return event;
 	}

@@ -29,7 +29,9 @@
   
   <script src="<%=request.getContextPath() %>/js/jquery.js"></script>
   <script src="<%=request.getContextPath() %>/js/basic.js"></script>
+  <script src="<%=request.getContextPath() %>/js/code.js"></script>
   <script src="<%=request.getContextPath() %>/js/like.js"></script>
+  <script src="<%=request.getContextPath() %>/js/spost.js"></script>
 </head>
 <body>
   <%@ include file="topbar.jsp" %>
@@ -61,9 +63,9 @@
 						</div> --%>
 
 					  <div class="short_post">
-					  	<textarea placeholder="说点什么..."></textarea>
+					  	<textarea placeholder="说点什么..." id="spost_content"></textarea>
 					  	<div class="bar">
-					  		<div class="ui tiny blue button">
+					  		<div class="ui tiny blue button" id="spost_send">
 					  			发表
 					  		</div>
 					  		<div class="ui tiny basic button">
@@ -76,6 +78,38 @@
 	               <!-- end header_box -->         
                   <div class="ui feed">
                    <c:forEach items="${feeds }" var="feed"> 
+                   	<c:if test="${feed.object_type == dic.object_type_shortpost }">
+                   <div class="event">
+                      <div class="label">
+                        <img src="${feed.user_avatar }">
+                      </div>
+                      <div class="content">
+                        <div class="summary">
+                          <a href="<c:url value="/user/${feed.user_id }" />">${feed.user_name }</a> 说
+                          <div class="date">
+                            ${feed.ts }
+                          </div>
+                        </div>
+                        <div class="extra">                         
+                          ${feed.summary }
+                        </div>
+                        <div class="meta">							                     	
+                          <div class="actions">
+							  <a class="comment">
+	                            <i class="comment outline icon"></i> ${feed.comment_count }
+	                          </a>                           
+	                          <a class="like">
+	                            <i class="heart icon" object_type=${feed.object_type } object_id=${feed.object_id }>
+	                            </i> ${feed.like_count } 
+	                          </a>                          
+                          </div>
+
+                        </div>                                               
+                        <div class="ui divider"></div>
+                      </div>
+                    </div>                    		
+                   	</c:if>
+                   	
                    <!-- new post -->
                     <c:if test="${feed.object_type == dic.object_type_post }">
                     <div class="event">
