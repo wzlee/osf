@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
-import com.lvwang.osf.model.Post;
 import com.lvwang.osf.model.ShortPost;
 import com.lvwang.osf.util.Property;
 

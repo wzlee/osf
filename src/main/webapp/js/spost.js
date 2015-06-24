@@ -25,4 +25,15 @@ $(document).ready(function(){
 		});
 		
 	});
+
+
+	$(".actions .sport_link").click(function(){
+		$(this).parent('.actions:first').css('display', 'none');
+		$('.short_post').css('display', 'block');
+	});
+	
+	$('#sport_cancel').click(function(){
+		$('.short_post').css('display', 'none');
+		$('#action_bar .actions:first').css('display', 'block');
+	});
 })

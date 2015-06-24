@@ -168,9 +168,7 @@ a {
 	
 }
 .ui.labeled.icon.menu {
-	margin-top: 0;
-	margin-left: 10px;
-	margin-bottom: 30px;
+
 	
 }
 .ui.labeled.icon.menu > .item {
@@ -264,6 +262,9 @@ a {
 }
 #action_bar{
 	padding-left: 10px;
+}
+#action_bar .short_post{
+	display: none;
 }
 #action_bar .item {
 	height: 100px;

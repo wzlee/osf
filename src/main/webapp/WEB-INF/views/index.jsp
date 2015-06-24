@@ -43,24 +43,24 @@
 	                	<img src="img/avatar.png">
 	                </div>                
 					<div id="action_bar">
-<%-- 						<div class="ui labeled icon menu newpost_buttons" >
-						  <a class="item" href="<c:url value="/post/create"/>">
+						<div class="ui labeled icon menu actions" >
+						  <a class="item sport_link" href="#">
 						    <i class="blue big font icon"></i>
 						    发状态
 						  </a>
-						  <a class="item" href="<c:url value="/album/upload"/>">
+						  <a class="item album_link" href="<c:url value="/album/upload"/>">
 						    <i class="pink big photo icon"></i>
 						    传图片
 						  </a>
-						  <a class="item" href="<c:url value="/post/create"/>">
+						  <a class="item post_link" href="<c:url value="/post/create"/>">
 						    <i class="big write icon"></i>
 						    写日志
 						  </a>
-						  <a class="item">
+						  <a class="item link">
 						    <i class="green big linkify icon"></i>
 						    链接
 						  </a>							
-						</div> --%>
+						</div>
 
 					  <div class="short_post">
 					  	<textarea placeholder="说点什么..." id="spost_content"></textarea>
@@ -68,7 +68,7 @@
 					  		<div class="ui tiny blue button" id="spost_send">
 					  			发表
 					  		</div>
-					  		<div class="ui tiny basic button">
+					  		<div class="ui tiny basic button" id="sport_cancel">
 					  			取消
 					  		</div>
 					  	</div>
