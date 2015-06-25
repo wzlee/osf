@@ -77,6 +77,35 @@
 	               </div>	
 	               <!-- end header_box -->         
                   <div class="ui feed">
+                   <div class="event empty">
+                      <div class="label">
+                        <img src="">
+                      </div>
+                      <div class="content">
+                        <div class="summary">
+                          <a href=""></a> 说
+                          <div class="date">
+                            刚刚
+                          </div>
+                        </div>
+                        <div class="extra">
+                        </div>
+                        <div class="meta">							                     	
+                          <div class="actions">
+							  <a class="comment">
+	                            <i class="comment outline icon"></i><span>0</span>
+	                          </a>                           
+	                          <a class="like">
+	                          	<i class="heart icon" object_type="4" object_id=""></i><span>0</span>
+	                          </a>                         
+                          </div>
+
+                        </div>                                               
+                        <div class="ui divider"></div>
+                      </div>
+                    </div> 
+                    <!-- empty event , wait for full and show -->
+
                    <c:forEach items="${feeds }" var="feed"> 
                    	<c:if test="${feed.object_type == dic.object_type_shortpost }">
                    <div class="event">
@@ -99,9 +128,15 @@
 	                            <i class="comment outline icon"></i> ${feed.comment_count }
 	                          </a>                           
 	                          <a class="like">
-	                            <i class="heart icon" object_type=${feed.object_type } object_id=${feed.object_id }>
-	                            </i> ${feed.like_count } 
-	                          </a>                          
+	                          	<c:if test="${feed.is_like }">
+	                          		<i class="red heart icon" object_type=${feed.object_type } object_id=${feed.object_id }></i> 
+	                          		<span>${feed.like_count }</span> 
+	                          	</c:if>
+	                          	<c:if test="${!feed.is_like }">
+	                          		<i class="heart icon" object_type=${feed.object_type } object_id=${feed.object_id }></i> 
+	                          		<span>${feed.like_count }</span> 
+	                          	</c:if>	                          	
+	                          </a>                         
                           </div>
 
                         </div>                                               
@@ -145,9 +180,15 @@
 	                            <i class="comment outline icon"></i> ${feed.comment_count }
 	                          </a>                           
 	                          <a class="like">
-	                            <i class="heart icon" object_type=${feed.object_type } object_id=${feed.object_id }>
-	                            </i> ${feed.like_count } 
-	                          </a>                          
+	                          	<c:if test="${feed.is_like }">
+	                          		<i class="red heart icon" object_type=${feed.object_type } object_id=${feed.object_id }></i> 
+	                          		<span>${feed.like_count }</span> 
+	                          	</c:if>
+	                          	<c:if test="${!feed.is_like }">
+	                          		<i class="heart icon" object_type=${feed.object_type } object_id=${feed.object_id }></i> 
+	                          		<span>${feed.like_count }</span> 
+	                          	</c:if>	                          	
+	                          </a>                       
                           </div>
 
                         </div>                                               
@@ -160,7 +201,7 @@
                     <c:if test="${feed.object_type == dic.object_type_album }">
                     <div class="event">
                       <div class="label">
-                        <img src="img/avatar.png">
+                        <img src="${feed.user_avatar }">
                       </div>
                       <div class="content">
                         <div class="summary">
@@ -210,137 +251,7 @@
                     	
                     </c:if>
                                 
-                  </c:forEach>
-                    <div class="event">
-                      <div class="label">
-                        <img src="img/avatar.png">
-                      </div>
-                      <div class="content">
-                        <div class="summary">
-                          <a class="user">
-                            Elliot Fu
-                          </a> 关注了你
-                          <div class="date">
-                            1 Hour Ago
-                          </div>
-                        </div>
-                        <div class="meta">
-                          <a class="like">
-                            <i class="like icon"></i> 4 
-                          </a>  
-                          <a class="comment">
-                            <i class="comment outline icon"></i> 9
-                          </a>                           
-                        </div>
-                        <div class="ui divider"></div>
-                      </div>
-                    </div>
-
-                    <div class="event">
-                      <div class="label">
-                        <img src="img/avatar.png">
-                      </div>
-                      <div class="content">
-                        <div class="summary">
-                          <a>Joe Henderson</a> 发表了日志
-                          <div class="date">
-                            3 days ago
-                          </div>
-                        </div>
-                        <div class="extra">
-                          <div class="postheader">
-                            <a href="#">你好广州</a>
-                          </div>
-                          新华社北京12月30日电 中共中央总书记、国家主席、中央军委主席、中央全面深化改革领导小组组长习近平12月30日上午主持召开中央全面深化改革领导小组第八次会议并发表重要讲话。他强调，今年是全面深化改革的开局之年，改革形成了上下联动、主动作为、蹄疾步稳、狠抓落实的好局面，呈现出全面播种、次第开花的生动景象
-                        </div>
-                        <div class="meta">
-                          <div class="tags">
-                        	<i class="tag icon"></i>
-							<a href="#">摄影
-							</a>   
-							<a href="#">旅行
-							</a>
-						  </div>							                     	
-                          <div class="actions">
-							  <a class="comment">
-	                            <i class="comment outline icon"></i> 9
-	                          </a>                           
-	                          <a class="like">
-	                            <i class="like icon"></i> 5 
-	                          </a>                          
-                          </div>
-
-                        </div>                                               
-                        <div class="ui divider"></div>
-                      </div>
-                    </div>
-
-                    <div class="event">
-                      <div class="label">
-                        <img src="img/avatar.png">
-                      </div>
-                      <div class="content">
-                        <div class="summary">
-                          <a>Helen Troy</a> added <a>2 new illustrations</a>
-	                      <div class="date">
-	                        4 days ago
-	                      </div>                          
-                        </div>
-                        <div class="extra images">
-                          <a><img src="img/avatar.jpg"></a>
-                          <a><img src="img/avatar.jpg"></a>
-                          <a><img src="img/avatar.jpg"></a>
-                        </div>
-                        <div class="extra">
-                        	小组第八次会议并发表重要讲话。他强调，今年是全面深化改革的开局之年，改革形成了上下联动、主动作为、蹄疾步稳、狠抓落实的好局面，呈现出全面播种、次第开花的生动景象
-                        </div>
-                        <div class="meta">
-                          <a class="like">
-                            <i class="like icon"></i> 1 Like
-                          </a>
-                        </div>
-                        <div class="ui divider"></div>
-                      </div>
-                    </div>
-
-                    <div class="event">
-                      <div class="content">
-                        <div class="text">
-                        	<div class="row">
-                        		<div class="span6">
-                        			<h3 class="ui header">First header</h3>
-                        			<div>
-                        				Ours is a life of constant reruns. We're always circling back to where we'd we started, then starting all over again. Even if we don't run extra laps that day, we surely will come back for more of the same another day soon.
-                        			</div>
-                        			<div class="postmeta">
-                        				<div class="avatar">
-                        					<img class="ui avatar image" src="img/avatar.jpg">
-                        				</div>
-                        				<div class="author">
- 									      <div class="date">
-									        4 days ago
-									      </div>
-									      <div class="summary">
-									        <a>Justen Kitsune</a>
-									      </div>                       				
-                        				</div>
-										<div class="tags">
-
-										</div>
-                        			</div>
-                        		</div>
-                        		<div class="span2">
-                        			<img class="ui small image" src="img/avatar.jpg" alt=""  />
-                        		</div>
-                        	</div>
-                        </div>
-                        <div class="meta">
-                          <a class="like">
-                            <i class="like icon"></i> 5 Likes
-                          </a>
-                        </div>
-                      </div>
-                    </div>                                        
+                  </c:forEach>                                      
                   </div>  <!--end feed -->
             </div>
           <div class="span4">

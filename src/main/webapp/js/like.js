@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	$('.heart.icon').click(function(){
+	$('.heart.icon').live('click', function(){
 		var user_id = $(this).attr('user_id');
 		var object_type = $(this).attr('object_type');
 		var object_id = $(this).attr('object_id');

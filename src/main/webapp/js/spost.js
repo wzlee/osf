@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	$('#spost_send').click(function() {
+	$('#spost_send').live('click',function() {
 		var content = $('#spost_content').val();
 
 		$.ajax({
@@ -14,7 +14,16 @@ $(document).ready(function(){
 			var status = data.status;
 			var author = data.spost.post_author;
 			if(SUCCESS_POST_CREATE == status) {
-				self.location = basePath + "/user/"+author;
+				var short_post=$('.empty.event:first').clone();
+				$(short_post).removeClass('empty');
+				$(short_post).find('img:first').attr('src', data.avatar);
+				$(short_post).find('.summary > a').attr('href', basePath+'/user/'+data.spost.post_author);
+				$(short_post).find('.summary > a').text(data.author_name);
+				$(short_post).find('.extra').text(data.spost.post_content);
+				$(short_post).find('.like > i').attr('object_id', data.spost.id);
+
+				$(short_post).css('display', 'block');
+				$('.feed:first').prepend($(short_post));
 			}
 		})
 		.fail(function() {

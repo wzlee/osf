@@ -57,6 +57,10 @@ a {
   	line-height: 20px;
   }
   
+.ui.feed >.event.empty{
+	display: none;
+}
+
   .post{
   	margin-top:30px;
   }
@@ -172,7 +176,7 @@ a {
 	
 }
 .ui.labeled.icon.menu > .item {
-	width: 141px;
+	width: 25%;
 }
 .ui.small.centered.circular.image {
 	width: 120px;
@@ -262,6 +266,10 @@ a {
 }
 #action_bar{
 	padding-left: 10px;
+	width: 586px;
+}
+#action_bar .actions{
+	width: 100%;
 }
 #action_bar .short_post{
 	display: none;
@@ -272,7 +280,7 @@ a {
 }
 
 .short_post{
-	width: 566px;
+	width: 100%;
 	height: 140px;
 	border-radius: 3px;
 	background: #FFFFFF;
