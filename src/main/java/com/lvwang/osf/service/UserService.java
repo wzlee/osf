@@ -4,16 +4,11 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.annotation.Resource;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.data.redis.core.HashOperations;
-import org.springframework.data.redis.core.ListOperations;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.hash.HashMapper;
 import org.springframework.stereotype.Service;
 
 import com.lvwang.osf.dao.UserDAO;
@@ -37,13 +32,7 @@ public class UserService {
 	@Qualifier("userDao")
 	private UserDAO userDao;
 	
-	@Autowired
-	@Qualifier("redisTemplate")
-	private RedisTemplate<String, String> redisTemplate; 
-	
-	
-	@Resource(name="redisTemplate")
-	private HashOperations<String, String, Object> mapOps;
+
 		
 	private boolean ValidateEmail(String email) {
 		boolean result = true;
@@ -76,45 +65,11 @@ public class UserService {
 	}
 	
 	public User findById(int id) {
-		String key = "user:"+id;
-		User user = (User) mapOps.get("user", key);
-		if(user == null) {
-			user = userDao.getUserByID(id);
-			mapOps.put("user", key, user);
-		}	
+		User user = userDao.getUserByID(id);
 		user.setUser_avatar(Property.IMG_BASE_URL+user.getUser_avatar());
 		return user;
 	}
 	
-	/*
-	public String login(String email, String password) {
-		//1 empty check
-		if(email == null || email.length() <= 0)
-			return Property.ERROR_EMAIL_EMPTY;
-		if(password == null || password.length() <= 0)
-			return Property.ERROR_PWD_EMPTY;
-		
-		//2 ValidateEmail 
-		if(!ValidateEmail(email))
-			return Property.ERROR_EMAIL_FORMAT;	
-
-		//3 email exist?
-		User user = findByEmail(email);
-		if(user == null)
-			return Property.ERROR_USERNAME_NOTEXIST;
-		else {
-			//4 check user status
-			if(STATUS_USER_NORMAL != user.getUser_status())
-				return String.valueOf(user.getUser_status());	
-		}
-		
-		//5 password validate
-		if(!CipherUtil.validatePassword(user.getUser_pwd(), password))
-			return Property.ERROR_PWD_DIFF;
-		
-		return Property.SUCCESS_ACCOUNT_LOGIN; 
-	}
-	*/
 	
 	public Map<String, Object> login(String email, String password) {
 		Map<String, Object> ret = new HashMap<String, Object>();

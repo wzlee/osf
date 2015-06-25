@@ -6,8 +6,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.redis.core.HashOperations;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -26,7 +31,14 @@ public class UserDAOImpl implements UserDAO{
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
-		
+
+	@Autowired
+	@Qualifier("redisTemplate")
+	private RedisTemplate<String, String> redisTemplate; 
+	
+	@Resource(name="redisTemplate")
+	private HashOperations<String, String, Object> mapOps;
+	
 	private User queryUser(String sql, Object[] args) {
 		User user = jdbcTemplate.query(sql, args, new ResultSetExtractor<User>(){
 
@@ -53,8 +65,13 @@ public class UserDAOImpl implements UserDAO{
 	}
 	
 	public User getUserByID(int id) {
-		String sql = "select * from "+TABLE + " where id=?";
-		return queryUser(sql, new Object[]{id});
+		String key = "user:"+id;
+		User user = (User) mapOps.get("user", key);
+		if(user == null) {
+			String sql = "select * from "+TABLE + " where id=?";
+			user = queryUser(sql, new Object[]{id});
+		}
+		return user;
 	}
 
 	public User getUserByEmail(String email) {
