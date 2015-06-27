@@ -50,27 +50,82 @@ a {
  #rightside {
 	padding-left:45px;
  }
+ #rightside .ui.vertical.menu{
+ 	width:100%;
+ 	border: none;
+ 	box-shadow:none;
+ }
+  #rightside .ui.vertical.menu .item{
+  	padding: 15px 20px;
+  	
+  }
+ #rightside .item .right{
+ 	float: right;
+ 	padding-top: 10px;
+ }
+  #rightside .item .avatar{
+  	float: left;
+  }
+ #rightside .item .content{
+ 	height: 36px;
+ 	padding: 10px;
+ }
+ #rightside .item .content .header{
+ 	font-size: 16px;
+ 	color:black;
+ 	cursor: pointer;
+ }
+ #rightside .hottags .tagitem{
+ 	position: relative;
+ 	margin: 0;
+ 	padding: 0;
+ 	height: 80px;
+ 	width: 100%;
+ }
+ .tagitem .mask{
+	 	position: absolute;
+	 	top:0;
+	 	left:0;
+	 	width:100%;
+	 	height:80px;
+ 	 	background-color: black;
+		filter:alpha(opacity=50);
+  -moz-opacity:0.5;
+	   opacity:0.5; 
+	   
+ }
+ .tagitem .tag{
+ 	position: absolute;
+ 	left: 20px;
+ 	top: 30px;
+ 	color:white;
+ 	font-size: 20px;
+ }
 .ui.feed > .event > .content .extra.images img{
 	width: 32%;
 }
-  .ui.feed > .event > .content {
-  	line-height: 20px;
-  }
+
+.ui.feed > .event > .label{
+	display: block;
+	width: 70%;
+}
+
+
   
 .ui.feed >.event.empty{
 	display: none;
 }
 
-  .post{
-  	margin-top:30px;
-  }
-  .post p {
-  	line-height: 24px;
-  }
-  .post.like{
-		float: right;
-  
-  }  
+.post{
+	margin-top:30px;
+}
+.post p {
+	line-height: 24px;
+}
+.post.like{
+float: right;
+
+}  
   
 /*   .tags{
         font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
@@ -248,14 +303,24 @@ a {
 }
 
 .ui.feed > .event > .label + .content {
-	margin-top: 0px;
-	padding-top: 0px;
+	width: 85%;
+	background-color: white;
+	padding: 20px;
+	border-radius: 2px;
+	line-height: 20px;
 }
 
 .ui.feed .content .extra img {
 	width: 100%;
 }
 
+.ui.feed > .event > .content .meta{
+	width: 100%;
+}
+.ui.feed > .event > .content .divider{
+	margin-left: -20px;
+	margin-right: -20px;
+}
 .header_box{
 	display: table;
 	margin-bottom: 40px;
@@ -309,5 +374,138 @@ a {
 	margin-left: 10px;
 }
 
+
+
+
+/********************
+ * explore page style
+ * ------------------
+ ********************/
+
+.explore{
+	margin-top: -40px;
+    padding-top: 50px;
+    height: 200px;
+    background-color: white;
+}
+
+ .explore .header{
+ 	position: relative;
+ 	width: 100%;
+ 	margin-bottom: 0;
+ }
+.explore .topbar{
+	position: relative;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #D1CDCD;
+}
+.explore .topbar .header > div{
+	display: inline-block;
+	width: 33%;
+	text-align: center;
+	font-size: 30px;
+	color: black;
+	cursor: pointer;
+}
+.explore .main .gallery{
+	padding: 40px;
+	padding-top: 50px;
+}
+.explore .main .gallery .box{
+	display: inline;
+	float: left;
+	margin-bottom: 5px;
+	overflow: hidden;
+}
+.explore .main .gallery img{
+	height: 200px;
+}
+.explore .active{
+	position: absolute;
+	left: 19.5%;
+	bottom: 0px;
+	width: 150px;
+	border-bottom: 4px solid orange;
+}
+.explore .tags {
+	text-align: center;
+	margin-bottom: 50px;
+}
+.explore .tags .tagbox{
+	position: relative;
+	display: inline-block;
+	height: 180px;
+	width: 180px;
+	overflow: hidden;
+}
+.explore .tags .tagbox .desc{
+	position: absolute;
+	left: 10px;
+	bottom: 10px;
+	font-size: 18px;
+	color: white;
+}
+.explore .tags .hidden{
+	display: table;
+	position: absolute;
+	top: 0;
+	left:0;
+	height: 180px;
+	width: 180px;
+	opacity: 0;
+	background-color: black;
+	transition: opacity 0.3s linear;
+}
+.explore .tags .hidden:HOVER {
+	opacity: 0.5;
+}
+.explore .tags .hidden a{
+	display: table-cell;
+	text-decoration: none;
+	font-size: 18px;
+	color: white;
+	vertical-align: middle;
+}
+
+
+
+.explore .users .userbox{ 
+	height: 180px;
+	width: 916px;
+	margin: 0 auto;
+	background-color: white;
+	overflow: hidden;
+	margin-bottom: 30px;
+}
+.explore .users .userbox .header{
+	display: inline-block;
+	width: 180px;
+	height: 180px;
+	overflow: hidden;
+	text-align: center;
+}
+
+.explore .userbox .header .avatar{
+	width: 70px;
+	height: 70px;
+	border-radius: 60px;
+	margin-top: 20px;
+	margin-bottom: 5px;
+}
+.explore .userbox .header .desc{
+	margin: 10px;
+}
+.explore .userbox .content{
+	display: inline-block;
+	height: 180px;
+	overflow: hidden;
+	
+}
+.explore .userbox .content > div{
+	display: inline-block;
+	height: 180px;
+	width: 180px;
+	overflow: hidden;
+}
 
 
