@@ -7,8 +7,10 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
@@ -27,9 +29,37 @@ public class CommentDAOImpl implements CommentDAO{
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
+	
+	public int getCommentAuthor(int comment_id){
+		String sql = "select comment_author from " + TABLE + " where id=?";
+		return jdbcTemplate.query(sql, new Object[]{comment_id}, new ResultSetExtractor<Integer>(){
+
+			public Integer extractData(ResultSet rs) throws SQLException,
+					DataAccessException {
+				if(rs.next()){
+					return rs.getInt("comment_author");
+				} else{
+					return 0;
+				}
+			}
+			
+		});
+	}
+	
 	public Comment getCommentByID(int id) {
 		String sql = "select * from " + TABLE + " where id=?";
-		Comment comment = jdbcTemplate.queryForObject(sql, new Object[]{id}, Comment.class);
+		Comment comment = jdbcTemplate.query(sql, new Object[]{id}, new ResultSetExtractor<Comment>(){
+
+			public Comment extractData(ResultSet rs) throws SQLException,
+					DataAccessException {
+				if(rs.next()){
+					return generateComment(rs);
+				} else{
+					return null;
+				}
+			}
+			
+		});
 		return comment;
 	}
 

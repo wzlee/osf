@@ -181,3 +181,16 @@ CREATE TABLE IF NOT EXISTS `osf`.`osf_likes` (
   `ts` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
+
+
+CREATE TABLE IF NOT EXISTS `osf`.`osf_notifications` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `notify_type` INT NOT NULL,
+  `notify_id` INT NOT NULL,
+  `object_type` INT NOT NULL,
+  `object_id` INT NOT NULL,
+  `notified_user` INT NOT NULL,
+  `notifier` INT NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+

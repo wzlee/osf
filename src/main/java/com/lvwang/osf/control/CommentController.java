@@ -16,9 +16,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.lvwang.osf.model.Comment;
+import com.lvwang.osf.model.Notification;
 import com.lvwang.osf.model.User;
 import com.lvwang.osf.service.CommentService;
+import com.lvwang.osf.service.NotificationService;
+import com.lvwang.osf.service.PostService;
 import com.lvwang.osf.service.UserService;
+import com.lvwang.osf.util.Dic;
 import com.lvwang.osf.util.Property;
 
 @Controller
@@ -32,6 +36,14 @@ public class CommentController {
 	@Autowired
 	@Qualifier("userService")
 	private UserService userService;
+	
+	@Autowired
+	@Qualifier("notificationService")
+	private NotificationService notificationService;
+	 
+	@Autowired
+	@Qualifier("postService")
+	private PostService postService;
 	
 	@ResponseBody
 	@RequestMapping("/{id}")
@@ -61,7 +73,24 @@ public class CommentController {
 															user.getUser_email(), 
 															comment_content, 
 															comment_parent,
-															comment_parent!=0?userService.findById(comment_parent).getUser_email():null);
+															null);
+		Notification notification =  new Notification(Dic.NOTIFY_TYPE_COMMENT,
+													  Integer.parseInt(ret.get("id")),
+													  Dic.OBJECT_TYPE_POST,
+													  comment_object_id,
+													  postService.getAuthorOfPost(comment_object_id).getId(),
+													  user.getId()
+													  );
+		notificationService.doNotify(notification);
+		
+		//comment reply notify
+		if(comment_parent!=0) {
+			notification.setNotify_type(Dic.NOTIFY_TYPE_COMMENT_REPLY);
+			notification.setNotified_user(commentService.getCommentAuthor(comment_parent));
+			notificationService.doNotify(notification);
+		}
+		
+		
 		ret.put("avatar", userService.findById(user.getId()).getUser_avatar());
 		return ret;
 	}

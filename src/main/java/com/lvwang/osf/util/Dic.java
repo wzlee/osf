@@ -7,6 +7,12 @@ public class Dic {
 	public static final int OBJECT_TYPE_FOLLOWING = 3;
 	public static final int OBJECT_TYPE_SHORTPOST = 4;
 	
+	public static final int NOTIFY_TYPE_SYSTEM = 0;
+	public static final int NOTIFY_TYPE_COMMENT = 1;
+	public static final int NOTIFY_TYPE_COMMENT_REPLY = 2;
+	public static final int NOTIFY_TYPE_LIKE = 3;
+	public static final int NOTIFY_TYPE_FOLLOW = 4;
+	
 	private int object_type_post = 0;
 	private int object_type_photo = 1;
 	private int object_type_album = 2;

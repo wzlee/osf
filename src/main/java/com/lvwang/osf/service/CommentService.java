@@ -85,4 +85,8 @@ public class CommentService {
 		}
 		return comments;
 	}
+	
+	public int getCommentAuthor(int comment_id){
+		return commentDao.getCommentAuthor(comment_id);
+	}
 }
