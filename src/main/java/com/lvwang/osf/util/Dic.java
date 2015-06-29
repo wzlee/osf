@@ -6,6 +6,8 @@ public class Dic {
 	public static final int OBJECT_TYPE_ALBUM = 2;
 	public static final int OBJECT_TYPE_FOLLOWING = 3;
 	public static final int OBJECT_TYPE_SHORTPOST = 4;
+	public static final int OBJECT_TYPE_USER = 5;
+	
 	
 	public static final int NOTIFY_TYPE_SYSTEM = 0;
 	public static final int NOTIFY_TYPE_COMMENT = 1;
