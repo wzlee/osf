@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	$('.heart.icon').live('click', function(){
-		var user_id = $(this).attr('user_id');
+		var author = $(this).attr('author');
 		var object_type = $(this).attr('object_type');
 		var object_id = $(this).attr('object_id');
 		var url = basePath;
@@ -23,6 +23,7 @@ $(document).ready(function(){
 			type: 'POST',
 			dataType: 'json',
 			data:{
+				author:author,
 				object_type: object_type,
 				object_id: object_id
 			}
