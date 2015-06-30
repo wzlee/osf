@@ -230,6 +230,10 @@ float: right;
 
 	
 }
+.ui.vertical.menu .item {
+  width: 150px;
+}
+
 .ui.labeled.icon.menu > .item {
 	width: 25%;
 }

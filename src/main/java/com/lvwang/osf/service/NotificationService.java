@@ -1,5 +1,7 @@
 package com.lvwang.osf.service;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -22,5 +24,9 @@ public class NotificationService {
 	 */
 	public int doNotify(Notification notification){
 		return notificationDao.save(notification);
+	}
+	
+	public Map<String, Integer> getNotificationsCount(int user_id){
+		return notificationDao.getNotificationsCount(user_id);
 	}
 }

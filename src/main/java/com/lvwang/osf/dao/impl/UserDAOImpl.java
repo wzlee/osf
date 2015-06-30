@@ -70,6 +70,7 @@ public class UserDAOImpl implements UserDAO{
 		if(user == null) {
 			String sql = "select * from "+TABLE + " where id=?";
 			user = queryUser(sql, new Object[]{id});
+			mapOps.put("user", key, user);
 		}
 		return user;
 	}

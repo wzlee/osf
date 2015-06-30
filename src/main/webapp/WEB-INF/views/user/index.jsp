@@ -8,17 +8,7 @@
 	<title>Document</title>
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/bootstrap2.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/navbar.css">
-    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/feed.css">
-    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/button.css">
-    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/card.css">
-    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/image.css">
-    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/divider.css">
-    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/list.css">
-    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/label.css">
-    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/icon.css">
-    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/menu.css">
-    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/statistic.css">
-    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/page.css">
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/semantic.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">
     
   	<script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.js"></script>

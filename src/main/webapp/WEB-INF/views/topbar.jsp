@@ -2,8 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/menu.css">
-  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/dropdown.css">
-  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/label.css">
 	<nav class="navbar navbar-default navbar-fixed-top">
 	  <div class="nav-container container-fluid">
 	    <!-- Brand and toggle get grouped for better mobile display -->
@@ -25,17 +23,21 @@
 				      ${sessionScope.user.user_name }
 				      <i class="dropdown icon"></i>
 					  <div class="ui vertical menu">
-						  <a class="active teal item">
-						    InBox
-						    <div class="ui teal label">1</div>
+						  <a class="item">
+						    评论
+						    <div class="ui red label">${notifications.comment }</div>
 						  </a>
 						  <a class="item">
-						    Spam
-						    <div class="ui label">51</div>
+						    喜欢
+						    <div class="ui red label">${notifications.like }</div>
 						  </a>
 						  <a class="item">
-						    Updates
-						    <div class="ui label">1</div>
+						    关注
+						    <div class="ui red label">${notifications.follow }</div>
+						  </a>
+						  <a class="item">
+						    系统消息
+						    <div class="ui red label">${notifications.system }</div>
 						  </a>
 						  <a href='<c:url value="/account/logout" />' class="item">退出</a>
 					  </div>
