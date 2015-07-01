@@ -7,20 +7,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>Insert title here</title>
-  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/bootstrap2.css">
-  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/button.css">
-  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/header.css">
-  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/feed.css">
-  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/card.css">
-  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/image.css">
-  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/divider.css">
-  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/list.css">
-  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/icon.css">
-  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/navbar.css">
-  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/menu.css">
-  
-  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/page.css">
-  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/bootstrap2.css">	
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/semantic.css">
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">
 </head>
 <body>
 	<%@ include file="../topbar.jsp" %>
@@ -136,70 +126,8 @@
 				  		</div>
 				  	</c:if>
 				</div>          		
-				<div class="ui header">热门用户</div>
-				<div class="ui divider"></div>
-				<div class="ui divided list" id="hotusers">
-				     <div class="item">
-				     	  <a class="right floated compact">+关注</a>
-				      	  <img class="ui avatar image" src="../img/avatar.jpg">
-					      <div class="content">
-					      	<a class="header">两排杨树</a>
-					      	<div class="description"><a>码农</a></div>
-						  </div>
-					  </div>
-					  <div class="item">
-					  	<a class="right floated compact">+关注</a>
-					    <img class="ui avatar image" src="../img/avatar.png">
-					    <div class="content">
-					      <div class="header">段鸿</div>
-					    </div>
-					  </div>
-				</div>				
-					
-				<div class="ui header">热门标签</div>
-				<div class="ui divider"></div>
-				<div class="ui divided list" id="hottags">
-				  <div class="item">
-				    <i class="tag icon"></i>
-				    <div class="content">
-				      <a class="header">美食</a>
-					</div>
-				  </div>
-				  <div class="item">
-				    <i class="tag icon"></i>
-				    <div class="content">
-				      <a class="header">豆瓣</a>
-				    </div>
-				  </div>
-				  <div class="item">
-				    <i class="tag icon"></i>
-				    <div class="content">
-				      <a class="header">摄影</a>
-				    </div>
-				  </div>
-				  <div class="item">
-				    <i class="tag icon"></i>
-				    <div class="content">
-				      <a class="header">设计</a>
-				    </div>
-				  </div>
-				  <div class="item">
-				    <i class="tag icon"></i>
-				    <div class="content">
-				      <a class="header">理财</a>
-				    </div>
-				  </div>
-				  <div class="item">
-				    <i class="tag icon"></i>
-				    <div class="content">
-				      <a class="header">旅行</a>
-				    </div>
-				  </div>
-				</div>		
-				
-				
-	            
-
+			
+				<%@ include file="../sidebar.jsp" %>	
             </div>           
           </div>
         </div>

@@ -67,13 +67,19 @@ public class CommentController {
 											 @RequestParam("comment_parent") int comment_parent,
 											 HttpSession session) {
 		User user = (User)session.getAttribute("user");
+		User comment_parent_author = new User();
+		if(comment_parent !=0 ){
+			comment_parent_author = commentService.getCommentAuthor(comment_parent);
+		}
+		
 		Map<String, String> ret = commentService.newComment(comment_object_type, 
 															comment_object_id, 
 															user.getId(), 
-															user.getUser_email(), 
+															user.getUser_name(), 
 															comment_content, 
 															comment_parent,
-															null);
+															comment_parent_author.getId(),
+															comment_parent_author.getUser_name());
 		Notification notification =  new Notification(Dic.NOTIFY_TYPE_COMMENT,
 													  Integer.parseInt(ret.get("id")),
 													  Dic.OBJECT_TYPE_POST,
@@ -86,7 +92,7 @@ public class CommentController {
 		//comment reply notify
 		if(comment_parent!=0) {
 			notification.setNotify_type(Dic.NOTIFY_TYPE_COMMENT_REPLY);
-			notification.setNotified_user(commentService.getCommentAuthor(comment_parent));
+			notification.setNotified_user(comment_parent_author.getId());
 			notificationService.doNotify(notification);
 		}
 		

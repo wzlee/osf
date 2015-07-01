@@ -38,6 +38,20 @@ public class AccountController {
 		return "account/login";
 	}
 	
+	@RequestMapping(value="/setting/info")
+	public String settingInfo(HttpSession session){
+		return "account/setting/info";
+	}
+	
+	@RequestMapping(value="/setting/avatar")
+	public String settingAvatar(HttpSession session){
+		return "account/setting/avatar";
+	}
+	
+	@RequestMapping(value="/setting/security")
+	public String settingSecurity(HttpSession session){
+		return "account/setting/security";
+	}
 	
 	@ResponseBody
 	@RequestMapping(value="/login", method=RequestMethod.POST)

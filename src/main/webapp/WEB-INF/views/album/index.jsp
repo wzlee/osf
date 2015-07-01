@@ -10,18 +10,7 @@
 	<title>album index</title>
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/bootstrap2.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/navbar.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/card.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/image.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/header.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/divider.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/comment.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/feed.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/form.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/button.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/message.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/icon.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/statistic.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/page.css">
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/semantic.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">
 	<style>
   	body {
@@ -79,7 +68,7 @@
 						    <div class="field">
 						      <textarea id="replycontent"></textarea>
 						    </div>
-							<div class="ui primary button" id="replybtn">
+							<div class="ui tiny primary button" id="replybtn">
 							  评论
 							</div>							    
 						  </form>								

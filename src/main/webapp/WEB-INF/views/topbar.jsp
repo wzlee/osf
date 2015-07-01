@@ -39,6 +39,7 @@
 						    系统消息
 						    <div class="ui red label">${notifications.system }</div>
 						  </a>
+						  <a href='<c:url value="/account/setting/info" />' class="item">设置</a>
 						  <a href='<c:url value="/account/logout" />' class="item">退出</a>
 					  </div>
 				    </div>

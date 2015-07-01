@@ -7,12 +7,9 @@
 	<meta charset="UTF-8">
 	<title>Document</title>
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/bootstrap2.css">	
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/navbar.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/divider.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/button.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/form.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/page.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/step.css">
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/bootstrap2.css">
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/semantic.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">
 	
 	<script src="<%=request.getContextPath() %>/js/jquery.js"></script>
@@ -27,14 +24,14 @@
 					<div class="row">
 						<div class="span4 offset2">
 							<div class="registerArea">
-								<div class="ui form">
-								  <div class="field">
-								    <label>用户名<span id="usernameTip" class="tip"></span></label>
-								    <input type="text" name="username" id="username">
-								  </div>							
+								<div class="ui form">							
 								  <div class="field">
 								    <label>邮箱<span id="emailTip" class="tip"></span></label>
 								    <input type="text" name="email" id="email">
+								  </div>
+								  <div class="field">
+								    <label>用户名<span id="usernameTip" class="tip"></span></label>
+								    <input type="text" name="username" id="username">
 								  </div>
 								  <div class="field">
 								    <label>密码<span id="passwordTip" class="tip"></span></label>

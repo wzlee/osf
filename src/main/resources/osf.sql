@@ -48,11 +48,12 @@ CREATE TABLE IF NOT EXISTS `osf`.`osf_comments` (
   `comment_object_type` INT NOT NULL COMMENT 'post, album,...',
   `comment_object_id` INT NOT NULL,
   `comment_author` INT NOT NULL,
-  `comment_author_email` VARCHAR(100) NOT NULL,
+  `comment_author_name` VARCHAR(100) NOT NULL,
   `comment_ts` TIMESTAMP NOT NULL DEFAULT current_timestamp,
   `comment_content` TEXT NOT NULL,
   `comment_parent` INT NOT NULL DEFAULT 0,
-  `comment_parent_email` VARCHAR(100) NULL,
+  `comment_parent_author_name` VARCHAR(100) NULL,
+  `comment_parent_author` INT NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   INDEX `fk_osf_comments_comment_author_idx` (`comment_author` ASC),
   CONSTRAINT `fk_osf_comments_comment_author`
@@ -61,6 +62,7 @@ CREATE TABLE IF NOT EXISTS `osf`.`osf_comments` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
 
 
 CREATE TABLE IF NOT EXISTS `osf`.`osf_events` (

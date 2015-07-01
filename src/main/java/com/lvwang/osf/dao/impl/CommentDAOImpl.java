@@ -18,6 +18,7 @@ import org.springframework.stereotype.Repository;
 
 import com.lvwang.osf.dao.CommentDAO;
 import com.lvwang.osf.model.Comment;
+import com.lvwang.osf.model.User;
 import com.lvwang.osf.service.CommentService;
 
 
@@ -30,17 +31,18 @@ public class CommentDAOImpl implements CommentDAO{
 	private JdbcTemplate jdbcTemplate;
 	
 	
-	public int getCommentAuthor(int comment_id){
-		String sql = "select comment_author from " + TABLE + " where id=?";
-		return jdbcTemplate.query(sql, new Object[]{comment_id}, new ResultSetExtractor<Integer>(){
+	public User getCommentAuthor(int comment_id){
+		String sql = "select comment_author,comment_author_name from " + TABLE + " where id=?";
+		return jdbcTemplate.query(sql, new Object[]{comment_id}, new ResultSetExtractor<User>(){
 
-			public Integer extractData(ResultSet rs) throws SQLException,
+			public User extractData(ResultSet rs) throws SQLException,
 					DataAccessException {
+				User user = new User();
 				if(rs.next()){
-					return rs.getInt("comment_author");
-				} else{
-					return 0;
-				}
+					user.setId(rs.getInt("comment_author"));
+					user.setUser_name(rs.getString("comment_author_name"));
+				} 
+				return user;
 			}
 			
 		});
@@ -67,12 +69,13 @@ public class CommentDAOImpl implements CommentDAO{
 		Comment comment = new Comment();
 		comment.setId(rs.getInt("id"));
 		comment.setComment_author(rs.getInt("comment_author"));
-		comment.setComment_author_email(rs.getString("comment_author_email"));
+		comment.setComment_author_name(rs.getString("comment_author_name"));
 		comment.setComment_object_id(rs.getInt("comment_object_id"));
 		comment.setComment_content(rs.getString("comment_content"));
 		comment.setComment_object_type(rs.getInt("comment_object_type"));
 		comment.setComment_parent(rs.getInt("comment_parent"));
-		comment.setComment_parent_email(rs.getString("comment_parent_email"));
+		comment.setComment_parent_author(rs.getInt("comment_parent_author"));
+		comment.setComment_parent_author_name(rs.getString("comment_parent_author_name"));
 		comment.setComment_ts(rs.getTimestamp("comment_ts"));
 		
 		return comment;
@@ -114,8 +117,8 @@ public class CommentDAOImpl implements CommentDAO{
 
 	public int save(final Comment comment) {
 		final String sql = "insert into " + TABLE + "(comment_object_type, comment_object_id,"
-											+ "comment_author, comment_author_email,"
-											+ "comment_content, comment_parent, comment_parent_email) values(?,?,?,?,?,?,?)";
+											+ "comment_author, comment_author_name,"
+											+ "comment_content, comment_parent, comment_parent_author, comment_parent_author_name) values(?,?,?,?,?,?,?,?)";
 		System.out.println("parent:"+comment.getComment_parent());
 		
 		KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -127,10 +130,11 @@ public class CommentDAOImpl implements CommentDAO{
 				ps.setInt(1, comment.getComment_object_type());
 				ps.setInt(2, comment.getComment_object_id());
 				ps.setInt(3, comment.getComment_author());
-				ps.setString(4, comment.getComment_author_email());
+				ps.setString(4, comment.getComment_author_name());
 				ps.setString(5, comment.getComment_content());
 				ps.setInt(6, comment.getComment_parent());
-				ps.setString(7, comment.getComment_parent_email());
+				ps.setInt(7, comment.getComment_parent_author());
+				ps.setString(8, comment.getComment_parent_author_name());
 				return ps;
 			}
 		}, keyHolder);

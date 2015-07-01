@@ -5,21 +5,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Insert title here</title>
+	<title>相册</title>
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/bootstrap2.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/navbar.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/image.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/header.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/divider.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/comment.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/feed.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/form.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/button.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/message.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/icon.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/card.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/page.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">
+ 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/semantic.css">
+  	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">
+
 	<script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath() %>/js/ajaxfileupload.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath() %>/js/basic.js"></script>

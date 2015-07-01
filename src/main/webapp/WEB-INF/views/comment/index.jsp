@@ -9,10 +9,10 @@
 	  </a>
 	  <div class="content">
 	  	<c:if test="${comment.comment_parent == 0 }">
-	    	<a class="author">${comment.comment_author_email }</a>
+	    	<a class="author">${comment.comment_author_name }</a>
 	    </c:if>
 	    <c:if test="${comment.comment_parent != 0 }">
-	    	<a class="author">${comment.comment_author_email }</a> 回复 <a class="author">${comment.comment_parent_email }</a>
+	    	<a class="author">${comment.comment_author_name }</a> 回复 <a class="author">${comment.comment_parent_author_name }</a>
 	    </c:if>
 	    <div class="metadata">
 	      <span class="date">${comment.comment_ts }</span>
@@ -23,7 +23,7 @@
 	    <c:if test="${!empty sessionScope.user }">
 	    	<c:if test="${comment.comment_author ne sessionScope.user.id }">
 			    <div class="actions" >
-			      <a class="reply" ref="${comment.id }">Reply</a>
+			      <a class="reply" ref="${comment.id }">回复</a>
 			    </div>	    		
 	    	</c:if>
 	    </c:if>

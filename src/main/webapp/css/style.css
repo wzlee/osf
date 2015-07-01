@@ -56,6 +56,7 @@ a {
  	box-shadow:none;
  }
   #rightside .ui.vertical.menu .item{
+  	width:100%;
   	padding: 15px 20px;
   	
   }
@@ -193,7 +194,7 @@ float: right;
 
 	}
 	.social .button{
-	
+		width: 100%;
 		margin-bottom: 10px;
 	}
 
@@ -226,11 +227,7 @@ float: right;
 	background: none;
 	
 }
-.ui.labeled.icon.menu {
-
-	
-}
-.ui.vertical.menu .item {
+.nav .ui.vertical.menu .item {
   width: 150px;
 }
 
@@ -332,7 +329,14 @@ float: right;
 .header_box .ui.avatar.image, #action_bar {
 	display: table-cell;
 	vertical-align: middle;
+	width: 13.5%;
 }
+
+.header_box .ui.avatar.image img{
+	width: 65px;;
+	height: 65px;
+}
+
 #action_bar{
 	padding-left: 10px;
 	width: 586px;
@@ -511,5 +515,46 @@ float: right;
 	width: 180px;
 	overflow: hidden;
 }
+
+/****************
+	comment style
+*****************/
+
+.ui.comments .comment img.avatar, .ui.comments .comment .avatar img{
+	  border-radius: 100%;
+}
+
+.ui.comments #replyarea{
+	margin-bottom: 30px;
+}
+
+.ui.comments .reply.form textarea{
+	height: 100px;
+	resize:none;
+}
+
+
+/**
+form style
+*/
+
+.ui.form .inline.field > input{
+	width: 40%;
+}
+.ui.form .inline.field > textarea{
+	width: 80%;
+	height: 150px;
+	display: inline-block;
+	resize: none;
+}
+
+.ui.form .inline.field > label{
+	width: 10%;
+	text-align: right;
+}
+.setting.info.form{
+	margin-top: 30px;
+}
+
 
 
