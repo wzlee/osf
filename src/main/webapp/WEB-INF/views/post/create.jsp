@@ -9,6 +9,9 @@
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/bootstrap2.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/navbar.css">
  	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/semantic.css">
+ 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/font-awesome.min.css">
+  	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/froala_editor.min.css">
+  	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/froala_style.min.css">
   	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">
 
 

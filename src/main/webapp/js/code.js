@@ -14,6 +14,7 @@
 	 * 			   09:tag
 	 * 			   10:relation
 	 * 			   11:follow	
+	 * 			   12:interest
 	 * 			   ...)
 	 * 第4-6位标示对象的具体错误/成功类型
 	 * 
@@ -103,3 +104,5 @@
 	
 	var SUCCESS_FOLLOW = "111000";
 	var SUCCESS_FOLLOW_UNDO = "111001";
+	var SUCCESS_INTEREST = "112000";
+	var SUCCESS_INTEREST_UNDO = "112001";

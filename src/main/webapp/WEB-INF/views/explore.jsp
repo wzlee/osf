@@ -13,7 +13,7 @@
   <script src="<%=request.getContextPath() %>/js/jquery.row-grid.js"></script>
   <script src="<%=request.getContextPath() %>/js/basic.js"></script>
   <script src="<%=request.getContextPath() %>/js/code.js"></script>
-  
+  <script src="<%=request.getContextPath() %>/js/explore.js"></script>
 
 </head>
 <body>
@@ -56,62 +56,86 @@
 				<div class="container">
 					<div class="row">
 						<div>
+							<c:forEach items="${tags }" var="tag">
+								<div class="tagbox">
+									<div>
+									<img class="visible" src="<%=request.getContextPath() %>/img/gallery/tag2.png" alt="" />
+									<span class="desc">#${tag.tag }</span>
+									</div>
+									<c:if test="${!isInterests[tag.id] }">
+										<div class="hidden">
+											<a href="#" id="${tag.id }">加关注</a>
+										</div>									
+									</c:if>
+									<c:if test="${isInterests[tag.id] }">
+										<div class="interested">
+											<a href="#" id="${tag.id }">已关注</a>
+										</div>											
+									</c:if>
+
+								</div>								
+							</c:forEach>
 							<div class="tagbox">
 								<div>
 								<img class="visible" src="<%=request.getContextPath() %>/img/gallery/tag2.png" alt="" />
 								<span class="desc">#音乐</span>
 								</div>
 								<div class="hidden">
-									<a href="">加关注</a>
+									<a href="#" id="27">加关注</a>
 								</div>
 							</div>
 							<div class="tagbox">
 								<div>
 									<img src="<%=request.getContextPath() %>/img/gallery/tag3.png" alt="" />
-									<span class="desc">#生活</span>
+									<span class="desc">#摄影</span>
 								</div>
 								<div class="hidden">
-									<a href="">加关注</a>
+									<a href="#" id="28">加关注</a>
 								</div>
 							</div>
 							<div class="tagbox">
 								<div>
 									<img src="<%=request.getContextPath() %>/img/gallery/tag4.png" alt="" />
-									<span class="desc">#运动</span>
+									<span class="desc">#艺术</span>
 								</div>
 								<div class="hidden">
-									<a href="">加关注</a>
+									<a href="#" id="29">加关注</a>
 								</div>
 							</div>
 							<div class="tagbox">
 								<img src="<%=request.getContextPath() %>/img/gallery/tag1.png" alt="" />
+								<span class="desc">#动漫</span>
 								<div class="hidden">
-									<a href="">加关注</a>
+									<a href="#" id="30">加关注</a>
 								</div>
 							</div>
 
 							<div class="tagbox">
 								<img src="<%=request.getContextPath() %>/img/gallery/tag2.png" alt="" />
+								<span class="desc">#健康</span>
 								<div class="hidden">
-									<a href="">加关注</a>
+									<a href="#" id="31">加关注</a>
 								</div>
 							</div>
 							<div class="tagbox">
 								<img src="<%=request.getContextPath() %>/img/gallery/tag1.png" alt="" />
+								<span class="desc">#时尚</span>
 								<div class="hidden">
-									<a href="">加关注</a>
+									<a href="#" id="32">加关注</a>
 								</div>
 							</div>
 							<div class="tagbox">
 								<img src="<%=request.getContextPath() %>/img/gallery/tag2.png" alt="" />
+								<span class="desc">#搞笑</span>
 								<div class="hidden">
-									<a href="">加关注</a>
+									<a href="#" id="33">加关注</a>
 								</div>
 							</div>
 							<div class="tagbox">
 								<img src="<%=request.getContextPath() %>/img/gallery/tag3.png" alt="" />
+								<span class="desc">#运动</span>
 								<div class="hidden">
-									<a href="">加关注</a>
+									<a href="#" id="34">加关注</a>
 								</div>
 							</div>
 							<div class="tagbox">

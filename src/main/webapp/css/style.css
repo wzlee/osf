@@ -453,6 +453,17 @@ float: right;
 	font-size: 18px;
 	color: white;
 }
+.explore .tags .interested{
+	display: table;
+	position: absolute;
+	top: 0;
+	left:0;
+	height: 180px;
+	width: 180px;
+	opacity: 0.7;
+	background-color: black;
+}
+
 .explore .tags .hidden{
 	display: table;
 	position: absolute;
@@ -467,13 +478,14 @@ float: right;
 .explore .tags .hidden:HOVER {
 	opacity: 0.5;
 }
-.explore .tags .hidden a{
+.explore .tags .hidden a, .explore .tags .interested a{
 	display: table-cell;
 	text-decoration: none;
 	font-size: 18px;
 	color: white;
 	vertical-align: middle;
 }
+
 
 
 
@@ -538,17 +550,17 @@ float: right;
 form style
 */
 
-.ui.form .inline.field > input{
+.ui.form.setting .inline.field > input{
 	width: 40%;
 }
-.ui.form .inline.field > textarea{
+.ui.form.setting .inline.field > textarea{
 	width: 80%;
 	height: 150px;
 	display: inline-block;
 	resize: none;
 }
 
-.ui.form .inline.field > label{
+.ui.form.setting .inline.field > label{
 	width: 10%;
 	text-align: right;
 }

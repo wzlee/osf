@@ -73,7 +73,7 @@ public class TagController {
 		User user = (User) session.getAttribute("user");
 		interestService.interestInTag(user.getId(), tag_id);
 				
-		ret.put("satus", Property.SUCCESS_INTEREST);
+		ret.put("status", Property.SUCCESS_INTEREST);
 		return ret;
 	}
 	
@@ -89,7 +89,7 @@ public class TagController {
 		User user = (User) session.getAttribute("user");
 		interestService.undoInterestInTag(user.getId(), tag_id);
 		
-		ret.put("satus", Property.SUCCESS_INTEREST_UNDO);
+		ret.put("status", Property.SUCCESS_INTEREST_UNDO);
 		return ret;
 	}
 	

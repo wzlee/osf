@@ -4,9 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
-
-import javax.swing.tree.TreePath;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -14,6 +14,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.lvwang.osf.dao.InterestDAO;
@@ -25,6 +26,9 @@ public class InterestDAOImpl implements InterestDAO{
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
+	@Autowired
+	private NamedParameterJdbcTemplate namedParaJdbcTemplate;
 	
 	public void saveInterest(final int user_id, final int tag_id) {
 		final String sql = "insert into " + TABLE_INTEREST + " (user_id, tag_id) values(?,?)";
@@ -81,6 +85,36 @@ public class InterestDAOImpl implements InterestDAO{
 			
 		}, new Object[]{user_id, tag_id});
 		return count==0?false:true;
+	}
+	
+	private void initCheckResult(Map<Integer, Boolean> map, List<Integer> tags_id){
+		for(Integer id: tags_id){
+			map.put(id, false);
+		}
+	}
+	
+	public Map<Integer, Boolean> hasInterestInTags(int user_id, List<Integer> tags_id){
+		final Map<Integer, Boolean> result = new HashMap<Integer, Boolean>();
+		initCheckResult(result, tags_id);
+		
+		String sql = "select tag_id from " + TABLE_INTEREST +" where user_id=:user_id and tag_id in (:tags_id)";
+		HashMap<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("user_id", user_id);
+		paramMap.put("tags_id", tags_id);
+		namedParaJdbcTemplate.query(sql, paramMap, new ResultSetExtractor<Boolean>() {
+
+			public Boolean extractData(ResultSet rs) throws SQLException,
+					DataAccessException {
+				
+				while(rs.next()){
+					result.put(rs.getInt("tag_id"), true);
+				}
+				
+				return true;
+			}
+			
+		});
+		return result;
 	}
 	
 }
