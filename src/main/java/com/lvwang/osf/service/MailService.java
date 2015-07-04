@@ -13,6 +13,7 @@ public class MailService {
     
     public void sendMail(String to, String subject, String body) {
     	SimpleMailMessage mail = new SimpleMailMessage();
+    	mail.setFrom("opensharefreedom@aliyun.com");
     	mail.setTo(to);
     	mail.setSubject(subject);
     	mail.setText(body);
