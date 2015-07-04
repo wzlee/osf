@@ -94,7 +94,7 @@ public class UserService {
 		//3 email exist?
 		User user = findByEmail(email);
 		if(user == null) {
-			ret.put("status", Property.ERROR_USERNAME_NOTEXIST);
+			ret.put("status", Property.ERROR_EMAIL_NOT_REG);
 			return ret;
 		}
 		else {

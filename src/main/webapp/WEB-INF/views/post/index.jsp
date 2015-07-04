@@ -7,20 +7,31 @@
 	<meta charset="UTF-8">
 	<meta name="type" content="post">
 	<meta name="id" content="${post.id }">
-	<title>post index</title>
+	<meta name="author" content="${post.post_author }">
+	<c:if test="${not empty sessionScope.user}">
+		<meta name="isLogin" content="true"/>
+	</c:if>
+	<c:if test="${empty sessionScope.user}">
+		<meta name="isLogin" content="false"/>
+	</c:if>
+	<title>${post.post_title }</title>
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/bootstrap2.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/navbar.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/semantic.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">
   	<script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.js"></script>
+  	<script type="text/javascript" src="<%=request.getContextPath() %>/js/semantic.js"></script>
   	<script type="text/javascript" src="<%=request.getContextPath() %>/js/basic.js"></script>
+  	<script type="text/javascript" src="<%=request.getContextPath() %>/js/code.js"></script>
   	<script type="text/javascript" src="<%=request.getContextPath() %>/js/comment.js"></script>
   	<script type="text/javascript" src="<%=request.getContextPath() %>/js/post.js"></script>
   	<script type="text/javascript" src="<%=request.getContextPath() %>/js/follow.js"></script>
+  	<script type="text/javascript" src="<%=request.getContextPath() %>/js/login.js"></script>
 </head>
 <body>
 	<div class="container">
 		<%@ include file="../topbar.jsp" %>
+		<%@ include file="../login_modal.jsp" %>
 		<div class="row">
 			<div class="span8">
 						<div>

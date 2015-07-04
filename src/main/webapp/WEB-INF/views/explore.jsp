@@ -1,9 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<c:if test="${not empty sessionScope.user}">
+	<meta name="isLogin" content="true"/>
+</c:if>
+<c:if test="${empty sessionScope.user}">
+	<meta name="isLogin" content="false"/>
+</c:if>
 <title>探索OSF</title>
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/bootstrap2.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/navbar.css">
@@ -11,13 +18,17 @@
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">
   <script src="<%=request.getContextPath() %>/js/jquery.js"></script>
   <script src="<%=request.getContextPath() %>/js/jquery.row-grid.js"></script>
+  <script src="<%=request.getContextPath() %>/js/semantic.js"></script>
   <script src="<%=request.getContextPath() %>/js/basic.js"></script>
   <script src="<%=request.getContextPath() %>/js/code.js"></script>
   <script src="<%=request.getContextPath() %>/js/explore.js"></script>
-
+  <script src="<%=request.getContextPath() %>/js/follow.js"></script>
+  <script src="<%=request.getContextPath() %>/js/login.js"></script>
+  
 </head>
 <body>
  	<%@ include file="topbar.jsp" %>
+	<%@ include file="login_modal.jsp" %>
 	<div class="explore">
 		<div class="topbar">
 			<div class="container">

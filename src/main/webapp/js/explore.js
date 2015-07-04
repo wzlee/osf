@@ -1,5 +1,11 @@
 $(document).ready(function(){
+	var isLogin = $('meta[name=isLogin]').attr('content');
 	$('.explore .tags .tagbox a').live('click', function(){
+		if(isLogin == 'false'){
+			$('.ui.small.modal').modal('show');
+			return false;
+		}
+
 		var tag_id = $(this).attr('id');
 		var that = $(this);
 		var url=basePath+'/tag/'+tag_id;

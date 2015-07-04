@@ -14,6 +14,7 @@
 	
 	<script src="<%=request.getContextPath() %>/js/jquery.js"></script>
 	<script src="<%=request.getContextPath() %>/js/basic.js"></script>
+	<script src="<%=request.getContextPath() %>/js/code.js"></script>
 	<script src="<%=request.getContextPath() %>/js/login.js"></script>
 </head>
 <body>

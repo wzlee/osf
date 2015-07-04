@@ -39,6 +39,7 @@ public class Property {
 	public static final String ERROR_EMAIL_EXIST = "001000";			//"用户已注册";
 	public static final String ERROR_EMAIL_EMPTY = "001001";			//"邮箱输入为空";
 	public static final String ERROR_EMAIL_FORMAT = "001002";		//"邮箱地址格式错误";
+	public static final String ERROR_EMAIL_NOT_REG = "001003";		//邮箱未注册
 	
 	public static final String ERROR_PWD_EMPTY = "002000";			//"请输入密码";
 	public static final String ERROR_PWD_DIFF = "002001";			//"密码错误";

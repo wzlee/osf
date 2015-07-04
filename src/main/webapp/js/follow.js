@@ -1,5 +1,11 @@
 $(document).ready(function(){
 	$('.follow').live('click', function(event) {
+		var isLogin = $('meta[name=isLogin]').attr('content');
+		if(isLogin == 'false'){
+			$('.ui.small.modal').modal('show');
+			return false;
+		}
+		
 		var following_user_id = $(this).attr('following');
 		var url = '';
 		var that = $(this);

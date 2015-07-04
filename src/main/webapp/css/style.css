@@ -569,4 +569,18 @@ form style
 }
 
 
+/******************
+	modal style
+	----------
+******************/
+
+
+.ui.small.modal{
+	width: 35%;
+}
+.ui.modal{
+	left:55%;
+}
+
+
 

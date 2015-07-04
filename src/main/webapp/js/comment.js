@@ -4,6 +4,12 @@ $(document).ready(function(){
 	var commentParent = 0;
 
 	$("a.reply").live('click', function(){
+		var isLogin = $('meta[name=isLogin]').attr('content');
+		if(isLogin == 'false'){
+			$('.ui.small.modal').modal('show');
+			return false;
+		}
+		
 		if($("#comments").find("#replyarea").length != 0)
 			$("#replyarea").remove();
 		
@@ -43,6 +49,12 @@ $(document).ready(function(){
 
 
 	$('#replybtn').live('click', function() {
+		var isLogin = $('meta[name=isLogin]').attr('content');
+		if(isLogin == 'false'){
+			$('.ui.small.modal').modal('show');
+			return false;
+		}
+		
 		var header;		
 
 		if(commentType == 0) {

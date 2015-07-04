@@ -55,7 +55,7 @@ public class AccountController {
 	
 	@ResponseBody
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String login(@RequestParam("email") String email,
+	public Map<String, Object> login(@RequestParam("email") String email,
 					    @RequestParam("password") String password,
 					    HttpSession session) {
 		/*
@@ -70,7 +70,7 @@ public class AccountController {
 		if(Property.SUCCESS_ACCOUNT_LOGIN.equals(status)) {
 			session.setAttribute("user", (User)ret.get("user"));			
 		}
-		return status;		
+		return ret;		
 	}
 	
 	@RequestMapping(value="/register", method=RequestMethod.GET)

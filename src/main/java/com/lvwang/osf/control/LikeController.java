@@ -19,7 +19,8 @@ import com.lvwang.osf.service.NotificationService;
 import com.lvwang.osf.util.Dic;
 import com.lvwang.osf.util.Property;
 
-@Controller("/like")
+@Controller
+@RequestMapping("/like")
 public class LikeController {
 
 	@Autowired
