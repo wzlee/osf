@@ -64,12 +64,12 @@
 									</div>
 									<c:if test="${!isInterests[tag.id] }">
 										<div class="hidden">
-											<a href="#" id="${tag.id }">加关注</a>
+											<a href="#" id="${tag.id }" action="interest">加关注</a>
 										</div>									
 									</c:if>
 									<c:if test="${isInterests[tag.id] }">
 										<div class="interested">
-											<a href="#" id="${tag.id }">已关注</a>
+											<a href="#" id="${tag.id }" action="undointerest">已关注</a>
 										</div>											
 									</c:if>
 
