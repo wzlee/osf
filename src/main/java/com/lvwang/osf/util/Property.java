@@ -55,7 +55,7 @@ public class Property {
 	public static final String ERROR_ACCOUNT_INACTIVE= "004003";			//账户待激活
 	public static final String ERROR_ACCOUNT_LOCK= "004004";			//账户已锁定
 	public static final String ERROR_ACCOUNT_CANCELLED= "004005";			//账户已注销
-	public static final String ERROR_ACCOUNT_EXIST= "004006";			//账户已注销
+	public static final String ERROR_ACCOUNT_EXIST= "004006";			//账户已存在(已激活)
 	public static final String ERROR_ACCOUNT_NOTLOGIN = "004007";
 	
 	public static final String ERROR_POST_EMPTY = "005000";				//post相关字段空
@@ -98,6 +98,8 @@ public class Property {
 	public static final String SUCCESS_ACCOUNT_REG = "104000";			//"注册成功";
 	public static final String SUCCESS_ACCOUNT_LOGIN = "104001";		//"登陆成功";
 	public static final String SUCCESS_ACCOUNT_ACTIVATION = "104002";		//账户激活成功
+	public static final String SUCCESS_ACCOUNT_ACTIVATION_EMAIL_RESEND = "104003";	
+	public static final String SUCCESS_ACCOUNT_ACTIVATION_KEY_UPD = "104004";	
 	
 	public static final String SUCCESS_POST_CREATE = "105000";		//
 	

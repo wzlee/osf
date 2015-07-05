@@ -88,7 +88,7 @@ public class AccountController {
 		Map<String, String> map = new HashMap<String, String>();
 		String status = userService.register(username, email, password, cfmPwd, map);
 		if(Property.SUCCESS_ACCOUNT_REG.equals(status)){
-			mailService.sendMail(email, "OSF 激活", "hello");
+			mailService.sendMail(email, "OSF账户激活", map.get("activationKey"));
 		} 
 		map.put("status", status);
 		return map;
@@ -98,36 +98,48 @@ public class AccountController {
 	public ModelAndView actication(@RequestParam("email") String email) {
 		ModelAndView mav = new ModelAndView();	
 		mav.setViewName("account/activation");
-		User user = userService.findByEmail(email);
-		if(user != null) {
-			if(user.getUser_status() == UserService.STATUS_USER_NORMAL) {
-				mav.setViewName("/account/login");
-			} else if(user.getUser_status() == UserService.STATUS_USER_INACTIVE) {
-				
-			}
-			
-			//TO-DO
-			//send email
-			mav.addObject("email", email);
-		}
+		mav.addObject("email", email);
 		return mav;
 	}
 	
+	@ResponseBody
 	@RequestMapping("/activation/mail/resend")
-	public String acticationMailResend(@RequestParam("email") String email) {
-		return "account/activation";
+	public Map<String, String> acticationMailResend(@RequestParam("email") String email) {
+		Map<String, String> ret = new HashMap<String, String>();
+		Map<String, Object> map  = userService.updateActivationKey(email);
+		ret.put("status", (String)map.get("status"));
+		if(Property.SUCCESS_ACCOUNT_ACTIVATION_KEY_UPD.equals((String)map.get("status"))){
+			mailService.sendMail(email, "OSF账户激活", (String)map.get("activationKey"));
+			ret.put("status", Property.SUCCESS_ACCOUNT_ACTIVATION_EMAIL_RESEND);
+		}
+		return ret;
 	}	
 	
-	@ResponseBody
 	@RequestMapping("/activation/{key}")
-	public String activation(@PathVariable("key") String key) {
+	public ModelAndView activation(@PathVariable("key") String key, 
+								   @RequestParam("email") String email, 
+								   HttpSession session) {
+		ModelAndView mav = new ModelAndView();	
+				
 		String status = null;
 		try {
-			status = userService.activateUser(URLDecoder.decode(key, "utf-8"));
+			status = userService.activateUser(email, URLDecoder.decode(key, "utf-8"));
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-		return status;		
+		if(Property.SUCCESS_ACCOUNT_ACTIVATION.equals(status) ||
+		   Property.ERROR_ACCOUNT_EXIST.equals(status)){
+			mav.setViewName("redirect:/explore");
+			session.setAttribute("user", userService.findByEmail(email));
+		} else {
+			mav.setViewName("account/activation");
+			mav.addObject("status", status);
+			mav.addObject("email", email);
+			mav.addObject("ERROR_ACCOUNT_ACTIVATION_NOTEXIST", Property.ERROR_ACCOUNT_ACTIVATION_NOTEXIST);
+			mav.addObject("ERROR_ACCOUNT_ACTIVATION_EXPIRED", Property.ERROR_ACCOUNT_ACTIVATION_EXPIRED);
+			mav.addObject("ERROR_ACCOUNT_ACTIVATION", Property.ERROR_ACCOUNT_ACTIVATION);
+		}
+		return mav;
 	}
 	
 	@RequestMapping("/completeinfo")

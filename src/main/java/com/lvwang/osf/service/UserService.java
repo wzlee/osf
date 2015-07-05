@@ -1,6 +1,7 @@
 package com.lvwang.osf.service;
 
 import java.net.URLEncoder;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,7 +27,7 @@ public class UserService {
 	public static final int STATUS_USER_LOCK = 2;				//锁定
 	public static final int STATUS_USER_CANCELLED = 3;			//注销
 	
-	public static final String DEFAULT_USER_AVATAR = "default-avatar";
+	public static final String DEFAULT_USER_AVATAR = "default-avatar.jpg";
 	
 	@Autowired
 	@Qualifier("userDao")
@@ -119,53 +120,58 @@ public class UserService {
 	@SuppressWarnings("deprecation")
 	public String register(String username, String email, String password, String conformPwd, Map<String, String> map) {
 		//1 empty check
-		if(username == null || username.length() == 0) 
-			return Property.ERROR_USERNAME_EMPTY;
 		if(email == null || email.length() <= 0)
 			return Property.ERROR_EMAIL_EMPTY;
+		else{
+			//4 ValidateEmail
+			if(!ValidateEmail(email))
+				return Property.ERROR_EMAIL_FORMAT;
+			
+			//5 email exist?
+			User user = findByEmail(email);
+			if(user != null) {
+							
+				//6 user status check
+				if(STATUS_USER_NORMAL == user.getUser_status())
+					return Property.ERROR_ACCOUNT_EXIST;
+				else if(STATUS_USER_INACTIVE == user.getUser_status()){
+					map.put("activationKey", URLEncoder.encode(user.getUser_activationKey()));
+					return Property.ERROR_ACCOUNT_INACTIVE;
+				}
+				else if(STATUS_USER_LOCK == user.getUser_status())
+					return Property.ERROR_ACCOUNT_LOCK;
+				else if(STATUS_USER_CANCELLED == user.getUser_status()) 
+					return Property.ERROR_ACCOUNT_CANCELLED;
+			}			
+		}
+		
+		if(username == null || username.length() == 0) 
+			return Property.ERROR_USERNAME_EMPTY;
+		else {
+			//username exist check
+			if(findByUsername(username) != null) {
+				return Property.ERROR_USERNAME_EXIST;
+			}
+		}
+		
+		
 		if(password == null || password.length() <= 0)
 			return Property.ERROR_PWD_EMPTY;
+		else {
+			//3 password format validate
+			String vpf_rs = CipherUtil.validatePasswordFormat(password);
+			if(vpf_rs != Property.SUCCESS_PWD_FORMAT)
+				return vpf_rs;
+		}
 		if(conformPwd == null || conformPwd.length() <= 0)
 			return Property.ERROR_CFMPWD_EMPTY;
-		
-		//username exist check
-		if(findByUsername(username) != null) {
-			return Property.ERROR_USERNAME_EXIST;
-		}
-		//5 email exist?
-		User user = findByEmail(email);
-		if(user != null) {
-						
-			//6 user status check
-			if(STATUS_USER_NORMAL == user.getUser_status())
-				return Property.ERROR_ACCOUNT_EXIST;
-			else if(STATUS_USER_INACTIVE == user.getUser_status()){
-				map.put("activationKey", URLEncoder.encode(user.getUser_activationKey()));
-				return Property.ERROR_ACCOUNT_INACTIVE;
-			}
-			else if(STATUS_USER_LOCK == user.getUser_status())
-				return Property.ERROR_ACCOUNT_LOCK;
-			else if(STATUS_USER_CANCELLED == user.getUser_status()) 
-				return Property.ERROR_ACCOUNT_CANCELLED;
-		}
-		
-		
+				
 		//2 pwd == conformPwd ?
 		if(!password.equals(conformPwd))
 			return Property.ERROR_CFMPWD_NOTAGREE;
+					
 		
-		//3 password format validate
-		String vpf_rs = CipherUtil.validatePasswordFormat(password);
-		if(vpf_rs != Property.SUCCESS_PWD_FORMAT)
-			return vpf_rs;
-			
-		//4 ValidateEmail
-		if(!ValidateEmail(email))
-			return Property.ERROR_EMAIL_FORMAT;
-		
-
-		
-		user = new User();
+		User user = new User();
 		user.setUser_name(username);
 		user.setUser_pwd(CipherUtil.generatePassword(password));
 		user.setUser_email(email);
@@ -181,17 +187,56 @@ public class UserService {
 		
 	}
 	
-	public String activateUser(String key) {
-		User user = findByActivationKey(key);
+	public Map<String, Object> updateActivationKey(String email){
+		//1 check user status
+		User user = findByEmail(email);
+		String status = null;
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(user == null){
+			status = Property.ERROR_EMAIL_NOT_REG;
+		}
+		
+		if(STATUS_USER_INACTIVE == user.getUser_status()){
+			//2 gen activation key
+			String activationKey = CipherUtil.generateActivationUrl(email, new Date().toString());
+			userDao.updateActivationKey(user.getId(), activationKey);
+			status = Property.SUCCESS_ACCOUNT_ACTIVATION_KEY_UPD;
+			map.put("activationKey", activationKey);
+		} else {
+			if(STATUS_USER_NORMAL == user.getUser_status())
+				status = Property.ERROR_ACCOUNT_EXIST; //已激活
+			else if(STATUS_USER_CANCELLED == user.getUser_status()) 
+				status = Property.ERROR_ACCOUNT_CANCELLED;
+			
+			status = Property.ERROR_ACCOUNT_ACTIVATION;
+		}
+		map.put("status", status);
+		return map;
+	}
+	
+	public String activateUser(String email, String key) {
+		User user = findByEmail(email);
 		if(user == null)
 			return Property.ERROR_ACCOUNT_ACTIVATION_NOTEXIST;
 		else {
-			user.setUser_activationKey(null);
-			user.setUser_status(STATUS_USER_NORMAL);
 			
-			int effRows = userDao.activateUser(user);
-			if(effRows != 1)
-				return Property.ERROR_ACCOUNT_ACTIVATION;
+			if(user.getUser_status() == STATUS_USER_INACTIVE ){
+				if(user.getUser_activationKey().equals(key)){
+					user.setUser_activationKey(null);
+					user.setUser_status(STATUS_USER_NORMAL);
+					
+					userDao.activateUser(user);
+				}else {
+					return Property.ERROR_ACCOUNT_ACTIVATION_EXPIRED;
+				}
+			} else{
+				if(user.getUser_status() == STATUS_USER_NORMAL){
+					return Property.ERROR_ACCOUNT_EXIST;
+				} else{
+					return Property.ERROR_ACCOUNT_ACTIVATION;
+				}
+				
+			}
 		}
 		return Property.SUCCESS_ACCOUNT_ACTIVATION;
 	}
@@ -200,7 +245,7 @@ public class UserService {
 		return null;
 	}
 	
-	private User findByActivationKey(String key) {
+	public User findByActivationKey(String key) {
 		return userDao.getUser("user_activationKey", new Object[]{key});
 	}
 	

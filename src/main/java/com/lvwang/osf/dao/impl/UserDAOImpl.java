@@ -177,5 +177,17 @@ public class UserDAOImpl implements UserDAO{
 		
 	}
 	
-	
+	public void updateActivationKey(final int user_id, final String key){
+		final String  sql = "update " + TABLE + " set user_activationKey=? where id=?";
+		jdbcTemplate.update(new PreparedStatementCreator() {
+			
+			public PreparedStatement createPreparedStatement(Connection con)
+					throws SQLException {
+				PreparedStatement ps =  con.prepareStatement(sql);
+				ps.setString(1, key);
+				ps.setInt(2, user_id);
+				return ps;
+			}
+		});
+	}
 }

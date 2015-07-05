@@ -15,5 +15,5 @@ public interface UserDAO {
 	int save(User user);
 	int activateUser(User user);
 	boolean delete(int id);
-	
+	void updateActivationKey(int user_id, String key);
 }
