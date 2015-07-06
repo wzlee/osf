@@ -7,15 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.lvwang.osf.dao.EventDAO;
 import com.lvwang.osf.dao.FeedDAO;
 import com.lvwang.osf.model.Event;
-import com.lvwang.osf.model.Follower;
 import com.lvwang.osf.model.User;
 
 @Service("feedService")
 public class FeedService {
 
+	public static final int FEED_COUNT_PER_PAGE = 20;
+	
 	@Autowired
 	@Qualifier("followService")
 	private FollowService followService;
@@ -46,12 +46,16 @@ public class FeedService {
 		}
 	}
 	
-	private List<Integer> getEventIDs(int user_id) {
-		return feedDao.fetch("feed:user:"+user_id);
+	private List<Integer> getEventIDs(int user_id, int count) {
+		return feedDao.fetch("feed:user:"+user_id, 0, count);
 	}
 	
 	public List<Event> getFeeds(int user_id) {
-		List<Integer> event_ids = getEventIDs(user_id);
+		return getFeeds(user_id, FEED_COUNT_PER_PAGE);
+	}
+	
+	public List<Event> getFeeds(int user_id, int count){
+		List<Integer> event_ids = getEventIDs(user_id, count);
 		List<Event> events = new ArrayList<Event>();
 		if(event_ids != null && event_ids.size()!=0 ) {
 			events = eventService.getEventsWithIDs(event_ids);
@@ -60,7 +64,7 @@ public class FeedService {
 		}
 		return events;
 	}
-	
+		
 	public void addUserInfo(List<Event> events) {
 		if(events == null || events.size() == 0)
 			return;

@@ -182,9 +182,9 @@ float: right;
   	min-height: 330px;
   }
   
-  	.loginarea{
+  	.loginarea, .registerarea{
 		/*position: relative;*/
-		padding-top: 30%;		
+		padding-top: 30px;		
 	}
 	.forgetpwd{
 		float: right;
@@ -245,7 +245,7 @@ float: right;
 	padding-top: 30px;
 }
 
-.ui.cards > .card > .image > img, .ui.card > .image > img{
+.ui.card > .image > img{
 	  border-radius: 500rem;
 }
 .ui.cards > .card > .image, .ui.card > .image {

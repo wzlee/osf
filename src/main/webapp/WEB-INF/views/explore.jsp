@@ -190,16 +190,16 @@
 								<div class="ui tiny yellow button follow">+关注</div>
 							</div>
 							<div class="content">
-								<div class="">
-									<img src="<%=request.getContextPath() %>/img/gallery/tag3.png" alt="" />
-								</div>
-								<div class="">
+								<div class="image">
 									<img src="<%=request.getContextPath() %>/img/gallery/tag1.png" alt="" />
 								</div>
-								<div class="">
+								<div class="text">
+									呵呵
+								</div>
+								<div class="image">
 									<img src="<%=request.getContextPath() %>/img/gallery/tag2.png" alt="" />
 								</div>
-								<div class="">
+								<div class="image">
 									<img src="<%=request.getContextPath() %>/img/gallery/tag2.png" alt="" />
 								</div>
 							</div>

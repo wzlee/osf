@@ -190,4 +190,23 @@ public class UserDAOImpl implements UserDAO{
 			}
 		});
 	}
+
+	public List<User> getUsers(int count) {
+		// TODO Auto-generated method stub
+		String sql = "select * from " + TABLE + " limit ?";
+		return jdbcTemplate.query(sql, new Object[]{count}, new RowMapper<User>(){
+
+			public User mapRow(ResultSet rs, int arg1) throws SQLException {
+				User user = new User();
+				user.setId(rs.getInt("id"));
+				user.setUser_avatar(rs.getString("user_avatar"));
+				user.setUser_email(rs.getString("user_email"));
+				user.setUser_name(rs.getString("user_name"));
+				user.setUser_registered_date(rs.getTimestamp("user_registered_date"));
+				user.setUser_status(rs.getInt("user_status"));
+				return user;
+			}
+			
+		});
+	}
 }

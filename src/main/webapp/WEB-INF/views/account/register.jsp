@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
+	<title>注册</title>
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/bootstrap2.css">	
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/bootstrap2.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/navbar.css">
@@ -21,10 +21,12 @@
     <%@ include file="../topbar.jsp" %>
 	<div class="container">
 		<div class="row">
-			<div class="span9 offset2">				
+			<div class="span8 offset2">	
+					<div class="ui header">注册</div>
+					<div class="ui divider"></div>			
 					<div class="row">
 						<div class="span4 offset2">
-							<div class="registerArea">
+							<div class="registerarea">
 								<div class="ui form">							
 								  <div class="field">
 								    <label>邮箱<span id="emailTip" class="tip"></span></label>
@@ -44,7 +46,7 @@
 								  </div>
 	
 								  <div class="field">
-								  	<div class="ui green button" id="registerBtn">注册</div>
+								  	<div class="ui orange button" id="registerBtn">注册</div>
 								  </div>								
 								</div>				
 	

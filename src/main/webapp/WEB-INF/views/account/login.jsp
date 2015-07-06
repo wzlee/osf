@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
+	<title>登录</title>
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/bootstrap2.css">	
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/bootstrap2.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/navbar.css">
@@ -21,16 +21,18 @@
 	<%@ include file="../topbar.jsp" %>
 	<div class="container">
 		<div class="row">
-			<div class="span4 offset4">				
+			<div class="span8 offset2">	
+					<div class="ui header">登录</div>
+					<div class="ui divider"></div>			
 					<div class="row">
-						<div class="loginarea">
+						<div class="loginarea span4 offset2">
 							<div class="ui form">
 							  <div class="field">
-							    <label>邮箱<span id="emailTip"></span></label>
+							    <label>邮箱<span id="emailTip" class="tip"></span></label>
 							    <input type="text" name="email" id="email">
 							  </div>
 							  <div class="field">
-							    <label>密码<span id="paswordTip"></span></label>
+							    <label>密码<span id="paswordTip" class="tip"></span></label>
 							    <input type="password" name="password" id="password">
 							  </div>
 							  <div class="field">
@@ -43,7 +45,6 @@
 									邮箱注册
 								</a>		
 							</div>	
-
 						</div>
 					</div>					
 

@@ -3,6 +3,7 @@ package com.lvwang.osf.service;
 import java.net.URLEncoder;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.mail.internet.AddressException;
@@ -254,4 +255,14 @@ public class UserService {
 		return user.getUser_status();
 	}
 	
+	/**
+	 * 推荐用户
+	 * @param count
+	 * @return
+	 */
+	public List<User> getRecommendUsers(int count){
+		//to do recommend logic
+		
+		return userDao.getUsers(count);
+	}
 }

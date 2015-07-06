@@ -74,7 +74,6 @@ $(document).ready(function(){
 				}
 			} 
 
-			alert(data);
 		})
 		.fail(function() {
 			console.log("error");
