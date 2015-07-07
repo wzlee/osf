@@ -183,6 +183,24 @@
 			<div class="users" style="display: none">
 				<div class="container">
 					<div class="row">
+						
+						<c:forEach items="${feeds }" var="feed">
+							<div class="userbox">
+								<div class="header">
+									<img class="avatar" src="${feed.key.user_avatar }" alt="" />
+									<div class="desc">${feed.key.user_name }</div>
+									<div class="ui tiny yellow button follow">+关注</div>
+								</div>
+								<div class="content">	
+									<c:forEach items="${feed.value }" var="f">
+										<div class="image">
+											<img src="${imgBaseUrl }${f.title }" alt="" />
+										</div>								
+									</c:forEach>
+								</div>
+							</div>
+						</c:forEach>
+					
 						<div class="userbox">
 							<div class="header">
 								<img class="avatar" src="<%=request.getContextPath() %>/img/gallery/tag2.png" alt="" />

@@ -16,6 +16,14 @@ public class User implements Serializable{
 	private String user_avatar;
 	private String user_activationKey;
 	
+	public boolean equals(Object that){
+		User user = (User)that;
+		return this.id == user.getId()?true:false;
+	}
+	public int hashCode() {
+		return this.id;
+	}
+	
 	public String getUser_name() {
 		return user_name;
 	}

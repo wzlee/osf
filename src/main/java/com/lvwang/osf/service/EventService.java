@@ -50,6 +50,7 @@ public class EventService {
 			event.setObject_type(Dic.OBJECT_TYPE_ALBUM);
 			event.setObject_id(album.getId());
 			event.setUser_id(album.getUser_id());
+			event.setTitle(album.getCover());
 			event.setSummary(album.getAlbum_desc());
 			
 			List<Photo> photos = album.getPhotos();
@@ -112,5 +113,9 @@ public class EventService {
 	 */
 	public List<Event> getEventsWithIDs(List<Integer> event_ids) {
 		return eventDao.getEventsWithIDs(event_ids);
+	}
+	
+	public List<Event> getEventsOfUser(int user_id, int count){
+		return null;
 	}
 }

@@ -19,6 +19,7 @@ import com.lvwang.osf.service.FeedService;
 import com.lvwang.osf.service.InterestService;
 import com.lvwang.osf.service.TagService;
 import com.lvwang.osf.service.UserService;
+import com.lvwang.osf.util.Property;
 
 @Controller
 @RequestMapping("/explore")
@@ -52,12 +53,12 @@ public class ExploreController {
 		mav.addObject("isInterests", interestService.hasInterestInTags(user==null?0:user.getId(), tags_recommend));
 		
 		List<User> rec_users = userService.getRecommendUsers(4);
-		Map<Integer, List<Event>> feeds = new HashMap<Integer, List<Event>>();
+		Map<User, List<Event>> feeds = new HashMap<User, List<Event>>();
 		for(User rec_user: rec_users){
-			feeds.put(rec_user.getId(), feedService.getFeeds(rec_user.getId(), 5));
+			feeds.put(rec_user, feedService.getFeeds(rec_user.getId(), 5));
 		}
 		mav.addObject("feeds", feeds);
-		
+		mav.addObject("imgBaseUrl", Property.IMG_BASE_URL);
 		return mav;
 	}
 }

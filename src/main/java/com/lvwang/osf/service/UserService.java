@@ -68,10 +68,13 @@ public class UserService {
 	
 	public User findById(int id) {
 		User user = userDao.getUserByID(id);
-		user.setUser_avatar(Property.IMG_BASE_URL+user.getUser_avatar());
+		addAvatar(user);
 		return user;
 	}
 	
+	private void addAvatar(User user) {
+		user.setUser_avatar(Property.IMG_BASE_URL+user.getUser_avatar());
+	}
 	
 	public Map<String, Object> login(String email, String password) {
 		Map<String, Object> ret = new HashMap<String, Object>();
@@ -263,6 +266,10 @@ public class UserService {
 	public List<User> getRecommendUsers(int count){
 		//to do recommend logic
 		
-		return userDao.getUsers(count);
+		List<User> users = userDao.getUsers(count);
+		for(User user:users) {
+			addAvatar(user);
+		}
+		return users;
 	}
 }
