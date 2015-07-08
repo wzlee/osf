@@ -5,12 +5,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.core.Cursor;
 import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -18,7 +21,9 @@ import org.springframework.data.redis.core.ScanOptions;
 import org.springframework.data.redis.core.SetOperations;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
@@ -40,6 +45,8 @@ public class FollowDAOImpl implements FollowDAO{
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	@Autowired
+	private NamedParameterJdbcTemplate namedParaJdbcTemplate;
 	
 	@Autowired
 	@Qualifier("redisTemplate")
@@ -193,5 +200,38 @@ public class FollowDAOImpl implements FollowDAO{
 	
 	public boolean hasFollower(int user_a, int user_b) {
 		return setOps.isMember(FOLLOWER_KEY+user_a, user_b);
+	}
+
+	private void initCheckResult(Map<Integer, Boolean> map, List<Integer> following_ids){
+		for(Integer id: following_ids){
+			map.put(id, false);
+		}
+	}
+
+	public Map<Integer, Boolean> isFollowingUsers(int user_id,
+			List<Integer> following_ids) {
+		
+		final Map<Integer, Boolean> result = new HashMap<Integer, Boolean>();
+		initCheckResult(result, following_ids);
+		
+		String sql = "select following_user_id from " 
+					+ TABLE_FOLLOWING +" where user_id=:user_id and following_user_id in (:following_ids)";
+		HashMap<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("user_id", user_id);
+		paramMap.put("following_ids", following_ids);
+		namedParaJdbcTemplate.query(sql, paramMap, new ResultSetExtractor<Boolean>() {
+
+			public Boolean extractData(ResultSet rs) throws SQLException,
+					DataAccessException {
+				
+				while(rs.next()){
+					result.put(rs.getInt("following_user_id"), true);
+				}
+				
+				return true;
+			}
+			
+		});
+		return result;
 	}
 }

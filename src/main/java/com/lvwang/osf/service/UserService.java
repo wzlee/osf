@@ -1,8 +1,10 @@
 package com.lvwang.osf.service;
 
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -263,13 +265,36 @@ public class UserService {
 	 * @param count
 	 * @return
 	 */
-	public List<User> getRecommendUsers(int count){
+	public List<User> getRecommendUsers(int user_id, int count){
 		//to do recommend logic
 		
 		List<User> users = userDao.getUsers(count);
-		for(User user:users) {
+		Iterator<User> it = users.iterator();
+		while(it.hasNext()){
+			User user = it.next();
+			if(user.getId() == user_id) {
+				it.remove();
+				continue;
+			}
 			addAvatar(user);
 		}
+
 		return users;
 	}
+	
+	public List<Integer> getRecommendUsersID(int user_id, int count) {
+		List<User> users = userDao.getUsers(count);
+		List<Integer> ids =  new ArrayList<Integer>();
+		Iterator<User> it = users.iterator();
+		while(it.hasNext()){
+			User user = it.next();
+			if(user.getId() == user_id) {
+				it.remove();
+				continue;
+			}
+			ids.add(user.getId());
+		}
+		return ids;
+	}
+	
 }

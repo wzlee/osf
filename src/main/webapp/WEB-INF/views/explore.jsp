@@ -86,96 +86,7 @@
 
 								</div>								
 							</c:forEach>
-							<div class="tagbox">
-								<div>
-								<img class="visible" src="<%=request.getContextPath() %>/img/gallery/tag2.png" alt="" />
-								<span class="desc">#音乐</span>
-								</div>
-								<div class="hidden">
-									<a href="#" id="27">加关注</a>
-								</div>
-							</div>
-							<div class="tagbox">
-								<div>
-									<img src="<%=request.getContextPath() %>/img/gallery/tag3.png" alt="" />
-									<span class="desc">#摄影</span>
-								</div>
-								<div class="hidden">
-									<a href="#" id="28">加关注</a>
-								</div>
-							</div>
-							<div class="tagbox">
-								<div>
-									<img src="<%=request.getContextPath() %>/img/gallery/tag4.png" alt="" />
-									<span class="desc">#艺术</span>
-								</div>
-								<div class="hidden">
-									<a href="#" id="29">加关注</a>
-								</div>
-							</div>
-							<div class="tagbox">
-								<img src="<%=request.getContextPath() %>/img/gallery/tag1.png" alt="" />
-								<span class="desc">#动漫</span>
-								<div class="hidden">
-									<a href="#" id="30">加关注</a>
-								</div>
-							</div>
 
-							<div class="tagbox">
-								<img src="<%=request.getContextPath() %>/img/gallery/tag2.png" alt="" />
-								<span class="desc">#健康</span>
-								<div class="hidden">
-									<a href="#" id="31">加关注</a>
-								</div>
-							</div>
-							<div class="tagbox">
-								<img src="<%=request.getContextPath() %>/img/gallery/tag1.png" alt="" />
-								<span class="desc">#时尚</span>
-								<div class="hidden">
-									<a href="#" id="32">加关注</a>
-								</div>
-							</div>
-							<div class="tagbox">
-								<img src="<%=request.getContextPath() %>/img/gallery/tag2.png" alt="" />
-								<span class="desc">#搞笑</span>
-								<div class="hidden">
-									<a href="#" id="33">加关注</a>
-								</div>
-							</div>
-							<div class="tagbox">
-								<img src="<%=request.getContextPath() %>/img/gallery/tag3.png" alt="" />
-								<span class="desc">#运动</span>
-								<div class="hidden">
-									<a href="#" id="34">加关注</a>
-								</div>
-							</div>
-							<div class="tagbox">
-								<img src="<%=request.getContextPath() %>/img/gallery/tag4.png" alt="" />
-								<div class="hidden">
-									<a href="">加关注</a>
-								</div>
-							</div>
-							<div class="tagbox">
-								<img src="<%=request.getContextPath() %>/img/gallery/tag2.png" alt="" />
-								<div class="hidden">
-									<a href="">加关注</a>
-								</div>
-							</div>
-							<div class="tagbox">
-								<img src="<%=request.getContextPath() %>/img/gallery/tag1.png" alt="" />
-							</div>
-							<div class="tagbox">
-								<img src="<%=request.getContextPath() %>/img/gallery/tag4.png" alt="" />
-							</div>
-							<div class="tagbox">
-								<img src="<%=request.getContextPath() %>/img/gallery/tag2.png" alt="" />
-							</div>
-							<div class="tagbox">
-								<img src="<%=request.getContextPath() %>/img/gallery/tag3.png" alt="" />
-							</div>
-							<div class="tagbox">
-								<img src="<%=request.getContextPath() %>/img/gallery/tag4.png" alt="" />
-							</div>
 						</div>
 					</div>
 				</div>
@@ -189,90 +100,41 @@
 								<div class="header">
 									<img class="avatar" src="${feed.key.user_avatar }" alt="" />
 									<div class="desc">${feed.key.user_name }</div>
-									<div class="ui tiny yellow button follow">+关注</div>
+									<c:if test="${isFollowings[feed.key.id] }">
+										<div class="ui tiny  button follow">已关注</div>
+									</c:if>
+									<c:if test="${!isFollowings[feed.key.id] }">
+										<div class="ui yellow tiny  button follow">+关注</div>
+									</c:if>
 								</div>
 								<div class="content">	
 									<c:forEach items="${feed.value }" var="f">
-										<div class="image">
-											<img src="${imgBaseUrl }${f.title }" alt="" />
-										</div>								
+										<c:if test="${f.object_type eq dic.object_type_post }">
+											<div class="image">
+												<img src="${f.content }" alt="" />
+											</div>											
+										</c:if>							
+										<c:if test="${f.object_type eq dic.object_type_album }">
+											<div class="image">
+												<img src="${imgBaseUrl }${f.title }" alt="" />
+											</div>											
+										</c:if>	
+										<c:if test="${f.object_type eq dic.object_type_shortpost }">
+											<div class="image" style="text-align: center; vertical-align: middle">
+												<i class="disabled large quote left icon"></i>
+												${f.summary }
+												<i class="disabled large quote right icon"></i>
+											</div>											
+										</c:if>				
 									</c:forEach>
 								</div>
 							</div>
 						</c:forEach>
 					
-						<div class="userbox">
-							<div class="header">
-								<img class="avatar" src="<%=request.getContextPath() %>/img/gallery/tag2.png" alt="" />
-								<div class="desc">两排杨树</div>
-								<div class="ui tiny yellow button follow">+关注</div>
-							</div>
-							<div class="content">
-								<div class="image">
-									<img src="<%=request.getContextPath() %>/img/gallery/tag1.png" alt="" />
-								</div>
-								<div class="text">
-									呵呵
-								</div>
-								<div class="image">
-									<img src="<%=request.getContextPath() %>/img/gallery/tag2.png" alt="" />
-								</div>
-								<div class="image">
-									<img src="<%=request.getContextPath() %>/img/gallery/tag2.png" alt="" />
-								</div>
-							</div>
-						
-						</div>
+	
 					</div>
 					<!-- end a row -->
-					<div class="row">
-						<div class="userbox">
-							<div class="header">
-								<img class="avatar" src="<%=request.getContextPath() %>/img/gallery/tag2.png" alt="" />
-								<div class="desc">两排杨树</div>
-								<div class="ui tiny  button follow">已关注</div>
-							</div>
-							<div class="content">
-								<div class="">
-									<img src="<%=request.getContextPath() %>/img/gallery/tag3.png" alt="" />
-								</div>
-								<div class="">
-									<img src="<%=request.getContextPath() %>/img/gallery/tag1.png" alt="" />
-								</div>
-								<div class="">
-									<img src="<%=request.getContextPath() %>/img/gallery/tag2.png" alt="" />
-								</div>
-								<div class="">
-									<img src="<%=request.getContextPath() %>/img/gallery/tag2.png" alt="" />
-								</div>
-							</div>
-						
-						</div>
-					</div>
-					<div class="row">
-						<div class="userbox">
-							<div class="header">
-								<img class="avatar" src="<%=request.getContextPath() %>/img/gallery/tag2.png" alt="" />
-								<div class="desc">两排杨树</div>
-								<div class="ui tiny yellow button follow">+关注</div>
-							</div>
-							<div class="content">
-								<div class="">
-									<img src="<%=request.getContextPath() %>/img/gallery/tag3.png" alt="" />
-								</div>
-								<div class="">
-									<img src="<%=request.getContextPath() %>/img/gallery/tag1.png" alt="" />
-								</div>
-								<div class="">
-									<img src="<%=request.getContextPath() %>/img/gallery/tag2.png" alt="" />
-								</div>
-								<div class="">
-									<img src="<%=request.getContextPath() %>/img/gallery/tag2.png" alt="" />
-								</div>
-							</div>
-						
-						</div>
-					</div>
+
 				</div>
 				
 			</div>

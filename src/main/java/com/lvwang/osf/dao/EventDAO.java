@@ -10,4 +10,5 @@ public interface EventDAO {
 	int save(Event event);
 	List<Event> getEventsWithIDs(List<Integer> event_ids);
 	List<Event> getEventsWithRelations(Map<Integer, List<Integer>> relations);
+	List<Event> getEventsOfUser(int user_id, int count);
 }

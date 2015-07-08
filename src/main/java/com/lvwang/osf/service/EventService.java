@@ -116,6 +116,6 @@ public class EventService {
 	}
 	
 	public List<Event> getEventsOfUser(int user_id, int count){
-		return null;
+		return eventDao.getEventsOfUser(user_id, count);
 	}
 }

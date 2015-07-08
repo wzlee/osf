@@ -1,5 +1,6 @@
 package com.lvwang.osf.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.lvwang.osf.dao.FollowDAO;
 import com.lvwang.osf.model.Follower;
 import com.lvwang.osf.model.Following;
+import com.lvwang.osf.model.User;
 import com.lvwang.osf.util.Property;
 
 @Service("followService")
@@ -92,5 +94,18 @@ public class FollowService {
 	
 	public boolean isFollowing(int user_a, int user_b){
 		return followDao.hasFollowing(user_a, user_b);
+	}
+	
+	
+	public Map<Integer, Boolean> isFollowing(int user_id, List<User> users){
+		if(users == null || users.size() == 0) {
+			return null;
+		}
+		
+		List<Integer> users_id = new ArrayList<Integer>();
+		for(User user: users) {
+			users_id.add(user.getId());
+		}
+		return followDao.isFollowingUsers(user_id, users_id);
 	}
 }

@@ -1,7 +1,7 @@
 
-create database osf;
 use osf;
 
+drop table if EXISTS `osf`.`osf_users`;
 CREATE TABLE IF NOT EXISTS `osf`.`osf_users` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `user_name` VARCHAR(50) NULL,
@@ -16,6 +16,7 @@ ENGINE = InnoDB;
 alter table `osf_users` add unique(`user_name`, `user_email`);
 
 
+drop table if EXISTS `osf`.`osf_posts`;
 CREATE TABLE IF NOT EXISTS `osf`.`osf_posts` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `post_author` INT NOT NULL COMMENT '作者ID',
@@ -44,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `osf`.`osf_posts` (
 ENGINE = InnoDB;
 
 
-
+drop table if EXISTS `osf`.`osf_comments`;
 CREATE TABLE IF NOT EXISTS `osf`.`osf_comments` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `comment_object_type` INT NOT NULL COMMENT 'post, album,...',
@@ -66,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `osf`.`osf_comments` (
 ENGINE = InnoDB;
 
 
-
+drop table if EXISTS `osf`.`osf_events`;
 CREATE TABLE IF NOT EXISTS `osf`.`osf_events` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `object_type` INT NOT NULL,
@@ -90,6 +91,7 @@ CREATE TABLE IF NOT EXISTS `osf`.`osf_events` (
 ENGINE = InnoDB;
 
 
+drop table if EXISTS `osf`.`osf_followings`;
 CREATE TABLE IF NOT EXISTS `osf`.`osf_followings` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `user_id` INT NOT NULL,
@@ -102,6 +104,7 @@ ENGINE = InnoDB;
 alter table `osf`.`osf_followings` add unique(user_id, following_user_id);
 
 
+drop table if EXISTS `osf`.`osf_followers` ;
 CREATE TABLE IF NOT EXISTS `osf`.`osf_followers` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `user_id` INT NOT NULL,
@@ -113,6 +116,8 @@ CREATE TABLE IF NOT EXISTS `osf`.`osf_followers` (
 ENGINE = InnoDB;
 alter table `osf`.`osf_followers` add unique(user_id, follower_user_id);
 
+
+drop table if EXISTS `osf`.`osf_albums`;
 CREATE TABLE IF NOT EXISTS `osf`.`osf_albums` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `user_id` INT NOT NULL,
@@ -134,6 +139,7 @@ CREATE TABLE IF NOT EXISTS `osf`.`osf_albums` (
 ENGINE = InnoDB;
 
 
+drop table if EXISTS `osf`.`osf_photos`;
 CREATE TABLE IF NOT EXISTS `osf`.`osf_photos` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `key` VARCHAR(45) NOT NULL,
@@ -144,6 +150,8 @@ CREATE TABLE IF NOT EXISTS `osf`.`osf_photos` (
 ENGINE = InnoDB;
 
 
+
+drop table if EXISTS `osf`.`osf_tags`;
 CREATE TABLE IF NOT EXISTS `osf`.`osf_tags` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `tag` VARCHAR(30) NOT NULL,
@@ -152,6 +160,8 @@ CREATE TABLE IF NOT EXISTS `osf`.`osf_tags` (
 ENGINE = InnoDB;
 
 
+
+drop table if EXISTS `osf`.`osf_relations` ;
 CREATE TABLE IF NOT EXISTS `osf`.`osf_relations` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `object_type` INT NOT NULL,
@@ -168,6 +178,7 @@ CREATE TABLE IF NOT EXISTS `osf`.`osf_relations` (
 ENGINE = InnoDB;
 
 
+drop table if EXISTS `osf`.`osf_interests` ;
 CREATE TABLE IF NOT EXISTS `osf`.`osf_interests` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `user_id` INT NOT NULL,
@@ -178,6 +189,7 @@ ENGINE = InnoDB;
 alter table `osf_interests` add unique(`user_id`, `tag_id`);
 
 
+drop table if EXISTS `osf`.`osf_likes`;
 CREATE TABLE IF NOT EXISTS `osf`.`osf_likes` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `user_id` INT NOT NULL,
@@ -186,9 +198,10 @@ CREATE TABLE IF NOT EXISTS `osf`.`osf_likes` (
   `ts` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
-
 alter table `osf_likes` add unique(`user_id`, `object_type`, `object_id`);
 
+
+drop table if EXISTS `osf`.`osf_notifications`;
 CREATE TABLE IF NOT EXISTS `osf`.`osf_notifications` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `notify_type` INT NOT NULL,
