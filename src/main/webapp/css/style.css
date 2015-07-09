@@ -637,5 +637,23 @@ form style
 	left:55%;
 }
 
+/**************
+	album style
+*************/
+.ui.tiny.images img{
+	width: 88px;
+	height: 88px;
+}
 
-
+#imgcontainer {
+	margin-bottom: 30px;
+}
+#imgcontainer img {
+	width: 100%;
+}
+.album.metas .meta{
+	margin-bottom: 30px;
+}
+.album.metas .label{
+	margin: 0 5px 5px 0;
+}

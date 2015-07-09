@@ -181,6 +181,7 @@ public class AlbumDAOImpl implements AlbumDAO{
 					album.setUser_id(rs.getInt("user_id"));
 					album.setLast_add_ts(rs.getTimestamp("last_add_ts"));
 					album.setCreate_ts(rs.getTimestamp("create_ts"));
+					album.setAlbum_tags(TagService.toList(rs.getString("album_tags")));
 				}
 				return album;
 			}

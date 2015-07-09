@@ -66,9 +66,8 @@ public class AlbumController {
 		User me = (User) session.getAttribute("user");
 		
 		ModelAndView mav = new ModelAndView();
-		List<Photo> photos = albumService.getPhotosOfAlbum(id);
-		mav.addObject("album_id", id);
-		mav.addObject("photos", photos);
+		Album album = albumService.getAlbum(id);
+		mav.addObject("album", album);
 		
 		User author = albumService.getAuthorOfALbum(id); 
 		mav.addObject("u", author);

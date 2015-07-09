@@ -16,35 +16,9 @@
   	body {
     	font-family: "Microsoft YaHei","微软雅黑",tahoma,arial,"宋体";
   	}	
-	.ui.tiny.images img{
-		width: 88px;
-		height: 88px;
-	}
-	#replybtn{
-		margin-bottom: 20px;
-	}
-	.ui.avatar.image{
-		margin-right: .25em;
-		display: inline-block;
-		width: 2.5em;
-		height: 2.5em;
-		border-radius: 500rem;		
-	}	
-	#imgcontainer {
-		margin-bottom: 30px;
-	}
-	#imgcontainer img {
-		width: 100%;
-	}
-	.card div{
-		text-align: center;
-	}
-	#more{
-		width: 97%;
-	}
-	#rightside {
-		padding-left:20px;
-	}
+
+
+
 	</style>
 	<script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath() %>/js/basic.js"></script>
@@ -58,7 +32,7 @@
 		<div class="row">
 			<div class="span8">
 				<div id="imgcontainer">
-					<img src='<c:url value="/img/1.jpg"/>' alt="" id="mainimg" class="ui centered image"> 
+					<img src="" alt="" id="mainimg" class="ui centered image"> 
 				</div>
 			
 				<div class="ui comments" id="comments">
@@ -83,12 +57,24 @@
 			</div>
 			<div class="span4">
 				<div id="rightside">
-					<%@ include file="../usercard.jsp" %>  					
-					<div class="ui tiny images" id="imgbox">
-						<c:forEach items="${photos}" var="photo">
-							<a href="#"><img src="<c:url value="${imgBaseUrl}${photo.key }" />" alt="" id="preview_photo_${photo.id }"></a>
-						</c:forEach>
+					<div class="album metas">
+						<div class="meta author">
+							<a href="<c:url value="/user/${u.id }" />"><img class="ui avatar image" src="<c:url value="/img/avatar.jpg"/>"></a>
+							<span>${u.user_name }</span>	
+							<span class="ui inverted tiny yellow button">+关注</span>				
+						</div>
+						<div class="ui tiny images meta" id="imgbox">
+							<c:forEach items="${album.photos}" var="photo">
+								<a href="#"><img src="<c:url value="${imgBaseUrl}${photo.key }" />" alt="" id="preview_photo_${photo.id }"></a>
+							</c:forEach>
+						</div>
+						<div class="meta tags">
+							<c:forEach items="${album.album_tags }" var="tag">
+                        		<a class="ui label" href="<c:url value="/tag/${tag }"/>">${tag }</a>
+                        	</c:forEach>							
+						</div>					
 					</div>
+
 				</div>
 			</div>
 		</div>

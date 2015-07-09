@@ -191,7 +191,10 @@ public class AlbumService {
 	}
 	
 	public Album getAlbum(int id) {
-		return albumDao.getAlbum(id);
+		Album album = albumDao.getAlbum(id);
+		List<Photo> photos = getPhotosOfAlbum(id);
+		album.setPhotos(photos);
+		return album;
 	}
 	
 	public String getKeyofPhoto(int id) {
