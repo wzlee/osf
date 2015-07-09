@@ -29,15 +29,31 @@
   	<script type="text/javascript" src="<%=request.getContextPath() %>/js/login.js"></script>
 </head>
 <body>
+	
+	<%@ include file="../topbar.jsp" %>
+	<%@ include file="../login_modal.jsp" %>
 	<div class="container">
-		<%@ include file="../topbar.jsp" %>
-		<%@ include file="../login_modal.jsp" %>
 		<div class="row">
-			<div class="span8">
-						<div>
-							<h1 class="ui dividing header">${post.post_title }</h1>
-						</div>
+			<div class="span8 offset2">
+
 						<div class="post" id="post${post.id }">
+							<div class="header">
+								${post.post_title }
+							</div>
+							<div class="date">
+								<i class="wait icon"></i><span>2015-05-01</span>
+							</div>
+							<div class="meta">
+								<div class="author">
+									<img class="ui avatar image" src="<c:url value="/img/avatar.jpg" />">
+									<span>${u.user_name }</span>
+									<button class="ui inverted tiny yellow button">+关注</button>
+								</div>
+								<div class="tags">
+									<a class="ui label">旅行</a>
+									<a class="ui label">摄影</a>
+								</div>
+							</div>
 							<p>
 								${post.post_content }
 							</p>
@@ -67,32 +83,38 @@
 								</div>																
 							</div>
 						</div>
-						<div class="ui comments" id="comments">
-
+					</div>
+		</div>
+	</div>
+	
+	<!--  -->
+	<div class="post comments">
+		<div class="container">
+			<div class="row">
+				<div class="span8 offset2">
+					<div class="ui comments" id="comments">
 						  <div id="replyarea">
-								  <form class="ui reply form" id="replyform">
-								    <div class="field">
-								      <textarea id="replycontent"></textarea>
-								    </div>
-									<div class="ui tiny primary button" id="replybtn">
-									  评论
-									</div>							    
-								  </form>								
+							  <form class="ui reply form" id="replyform">
+							    <div class="field">
+							      <textarea id="replycontent"></textarea>
+							    </div>
+								<div class="ui tiny primary button" id="replybtn">
+								  评论
+								</div>							    
+							  </form>								
 						  </div>
 						  
 						  <div id="commentList">							
 							  <jsp:include page="/comment/post/${post.id }"></jsp:include>				  	
 						  </div>
-						  <!-- comment list -->
-						</div>
-						<!-- end comment -->
+						  <!-- comment list -->					
 					</div>
-					<div class="span4">
-					  <div id="rightside">
-			            <%@ include file="../usercard.jsp" %>  
-			          </div>			
-					</div>
+				</div>
+
+			 </div>
 		</div>
+		<!-- end comment -->
 	</div>
+	
 </body>
 </html>

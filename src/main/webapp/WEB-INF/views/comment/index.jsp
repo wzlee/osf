@@ -2,6 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.lvwang.osf.model.User" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<div class="header">
+	评论
+</div>
+<div class="ui divider"></div>
 <c:forEach items="${comments }" var="comment">
 	<div class="comment" id="comment${comment.id }" author="${comment.comment_author }">
 	  <a class="avatar">
