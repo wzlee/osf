@@ -76,7 +76,7 @@
 					</div>
 	               </div>	
 	               <!-- end header_box -->         
-                  <div class="ui feed">
+                  <div class="ui feed" id="feeds">
                    <div class="event empty">
                       <div class="label">
                         <img src="">
