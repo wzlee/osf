@@ -10,24 +10,10 @@
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/bootstrap2.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/navbar.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/semantic.css">
-<%--   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/button.css">
-  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/feed.css">
-  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/card.css">
-  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/image.css">
-  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/divider.css">
-  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/list.css">
-  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/icon.css">
-  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/navbar.css">
-  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/statistic.css">
-  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/form.css">
-  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/header.css">
-  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/menu.css">
-  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/dropdown.css">
-  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/label.css">
-  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/page.css"> --%>
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">
   
   <script src="<%=request.getContextPath() %>/js/jquery.js"></script>
+  <script src="<%=request.getContextPath() %>/js/jquery.infinitescroll.js"></script>
   <script src="<%=request.getContextPath() %>/js/basic.js"></script>
   <script src="<%=request.getContextPath() %>/js/code.js"></script>
   <script src="<%=request.getContextPath() %>/js/like.js"></script>
@@ -249,6 +235,7 @@
                                 
                   </c:forEach>                                      
                   </div>  <!--end feed -->
+                  <a id="next" href="<c:url value="/page/2" />"></a>
             </div>
           <div class="span4">
           	<div id="rightside">
@@ -376,5 +363,16 @@
     </div>
 
   </div>
+  <script type="text/javascript">
+  $(document).ready(function(){
+  	$('#feeds').infinitescroll({
+		navSelector  	: "#next:last",
+		nextSelector 	: "a#next:last",
+		itemSelector 	: ".event",
+		dataType	 	: 'html',
+		animate      : true, 
+  	});
+  })
+  </script>
 </body>
 </html>

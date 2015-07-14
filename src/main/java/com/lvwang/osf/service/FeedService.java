@@ -14,7 +14,7 @@ import com.lvwang.osf.model.User;
 @Service("feedService")
 public class FeedService {
 
-	public static final int FEED_COUNT_PER_PAGE = 20;
+	public static final int FEED_COUNT_PER_PAGE = 3;
 	
 	@Autowired
 	@Qualifier("followService")
@@ -46,8 +46,8 @@ public class FeedService {
 		}
 	}
 	
-	private List<Integer> getEventIDs(int user_id, int count) {
-		return feedDao.fetch("feed:user:"+user_id, 0, count);
+	private List<Integer> getEventIDs(int user_id, int start, int count) {
+		return feedDao.fetch("feed:user:"+user_id, start, count);
 	}
 	
 	public List<Event> getFeeds(int user_id) {
@@ -55,7 +55,11 @@ public class FeedService {
 	}
 	
 	public List<Event> getFeeds(int user_id, int count){
-		List<Integer> event_ids = getEventIDs(user_id, count);
+		List<Integer> event_ids = getEventIDs(user_id, 0, count-1);
+		return decorateFeeds(user_id, event_ids);
+	}
+	
+	private List<Event> decorateFeeds(int user_id, List<Integer> event_ids){
 		List<Event> events = new ArrayList<Event>();
 		if(event_ids != null && event_ids.size()!=0 ) {
 			events = eventService.getEventsWithIDs(event_ids);
@@ -64,7 +68,15 @@ public class FeedService {
 		}
 		return events;
 	}
+	
+	public List<Event> getFeedsOfPage(int user_id, int num) {
+		List<Integer> event_ids = feedDao.fetch("feed:user:"+user_id, 
+												FEED_COUNT_PER_PAGE*(num-1), 
+												FEED_COUNT_PER_PAGE-1);
+		return decorateFeeds(user_id, event_ids);
 		
+	}
+	
 	public void addUserInfo(List<Event> events) {
 		if(events == null || events.size() == 0)
 			return;
