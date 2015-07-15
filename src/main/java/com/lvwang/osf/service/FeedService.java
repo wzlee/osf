@@ -14,7 +14,7 @@ import com.lvwang.osf.model.User;
 @Service("feedService")
 public class FeedService {
 
-	public static final int FEED_COUNT_PER_PAGE = 3;
+	public static final int FEED_COUNT_PER_PAGE = 10;
 	
 	@Autowired
 	@Qualifier("followService")

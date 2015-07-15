@@ -11,7 +11,7 @@
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/navbar.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/semantic.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">
-  
+
   <script src="<%=request.getContextPath() %>/js/jquery.js"></script>
   <script src="<%=request.getContextPath() %>/js/jquery.infinitescroll.js"></script>
   <script src="<%=request.getContextPath() %>/js/basic.js"></script>
@@ -366,11 +366,22 @@
   <script type="text/javascript">
   $(document).ready(function(){
   	$('#feeds').infinitescroll({
+  		loading: {
+  		    finished: undefined,
+  		    finishedMsg: "没有更多的了",
+  		                img: null,
+  		    msg: null,
+  		    msgText: "正在加载...",
+  		    selector: null,
+  		    speed: 'fast',
+  		    start: undefined
+  		},
 		navSelector  	: "#next:last",
 		nextSelector 	: "a#next:last",
 		itemSelector 	: ".event",
 		dataType	 	: 'html',
 		animate      : true, 
+		extraScrollPx: 50
   	});
   })
   </script>

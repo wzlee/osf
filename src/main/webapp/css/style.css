@@ -102,13 +102,18 @@ a {
  	color:white;
  	font-size: 20px;
  }
+
+.ui.feed > .event {
+	margin-bottom: 10px;
+} 
+ 
 .ui.feed > .event > .content .extra.images img{
 	width: 32%;
 }
 
 .ui.feed > .event > .label{
 	display: block;
-	width: 70%;
+	width: 60%;
 }
 
 
@@ -657,3 +662,17 @@ form style
 .album.metas .label{
 	margin: 0 5px 5px 0;
 }
+
+/**
+	scroll style
+**/
+#infscr-loading div{
+	text-align: center;
+}
+
+
+
+
+
+
+
