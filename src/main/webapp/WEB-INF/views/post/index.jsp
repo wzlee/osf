@@ -45,13 +45,25 @@
 							</div>
 							<div class="meta">
 								<div class="author">
-									<img class="ui avatar image" src="<c:url value="/img/avatar.jpg" />">
+									<a href="<c:url value="/user/${u.id }" />">
+										<img class="ui avatar image" src="<c:url value="${u.user_avatar }" />">
+									</a>
 									<span>${u.user_name }</span>
-									<button class="ui inverted tiny yellow button">+关注</button>
+									<c:if test="${!empty sessionScope.user }">
+										<c:if test="${sessionScope.user.id ne u.id }">
+											<c:if test="${follow }">
+												<span class="ui tiny basic button">已关注</span>
+											</c:if>
+											<c:if test="${!follow }">
+												<span class="ui inverted tiny yellow button">+关注</span> 
+											</c:if>									
+										</c:if>						
+									</c:if>	
 								</div>
 								<div class="tags">
-									<a class="ui label">旅行</a>
-									<a class="ui label">摄影</a>
+									<c:forEach items="${post.post_tags }" var="tag">
+										<a class="ui label">${tag }</a>
+									</c:forEach>
 								</div>
 							</div>
 							<p>

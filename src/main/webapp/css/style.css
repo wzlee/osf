@@ -340,7 +340,7 @@ a {
 .ui.feed > .event > .label + .content {
 	width: 85%;
 	background-color: white;
-	padding: 20px;
+	padding: 20px 20px 10px 20px;
 	border-radius: 2px;
 	line-height: 20px;
 }
@@ -351,6 +351,7 @@ a {
 
 .ui.feed > .event > .content .meta{
 	width: 100%;
+	margin-top: 10px;
 }
 .ui.feed > .event > .content .divider{
 	margin-left: -20px;
@@ -555,11 +556,25 @@ a {
 	overflow: hidden;
 	
 }
-.explore .userbox .content > div{
+.explore .userbox .content  .box{
+	position: relative;
 	display: inline-block;
 	height: 180px;
 	width: 180px;
 	overflow: hidden;
+}
+.explore .userbox .content .cover{
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 180px;
+	width: 180px;
+	overflow: hidden;
+	background-color: black;
+	opacity: 0.5;
+	color: white;
+	font-size: 16px;
+	padding: 10px;
 }
 
 /****************
@@ -580,14 +595,14 @@ a {
 }
 
 
-.post.comments{
+.comments{
 	width: 100%;
 	background-color: white;
 }
-.post.comments #replyarea{
+.comments #replyarea{
 	margin-top: 50px;
 }
-.post.comments .header{
+.comments .header{
 	width: 60px;
 	font-size: 20px;
 	text-align: center;
@@ -595,15 +610,15 @@ a {
 	margin-bottom: 0;
 	padding-bottom: 10px;
 }
-.post.comments .ui.divider{
+.comments .ui.divider{
 	margin-top: 0;
 }
 
-.post.comments .date{
+.comments .date{
 	font-size: 13px;
 }
 
-.post.comments .ui.comments .comment .text{
+.comments .ui.comments .comment .text{
 	margin: 5px 0 10px 0;
 }
 /**

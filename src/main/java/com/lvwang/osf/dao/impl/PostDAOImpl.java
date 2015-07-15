@@ -45,6 +45,7 @@ public class PostDAOImpl implements PostDAO{
 					post.setPost_content(rs.getString("post_content"));
 					post.setPost_excerpt(rs.getString("post_excerpt"));
 					post.setPost_lastts(rs.getTimestamp("post_lastts"));
+					post.setPost_tags(TagService.toList(rs.getString("post_tags")));
 					post.setComment_count(rs.getInt("comment_count"));
 				}
 				return post;
