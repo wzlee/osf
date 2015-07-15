@@ -112,8 +112,8 @@ a {
 }
 
 .ui.feed > .event > .label{
-	display: block;
-	width: 60%;
+	width: 52px;
+	height: 52px;
 }
 
 

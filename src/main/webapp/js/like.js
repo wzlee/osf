@@ -3,7 +3,7 @@ $(document).ready(function(){
 		var author = $(this).attr('author');
 		var object_type = $(this).attr('object_type');
 		var object_id = $(this).attr('object_id');
-		var url = basePath;
+		var url = basePath+"/like";
 		var like_count =parseInt($(this).next().text());
 
 		//已经喜欢 点击取消喜欢
