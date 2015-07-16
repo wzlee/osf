@@ -558,7 +558,7 @@ a {
 }
 .explore .userbox .content  .box{
 	position: relative;
-	display: inline-block;
+	display: table-cell;
 	height: 180px;
 	width: 180px;
 	overflow: hidden;
@@ -602,6 +602,9 @@ a {
 .comments #replyarea{
 	margin-top: 50px;
 }
+.comments #replyform{
+	margin-top: 10px;
+}
 .comments .header{
 	width: 60px;
 	font-size: 20px;
@@ -620,6 +623,13 @@ a {
 
 .comments .ui.comments .comment .text{
 	margin: 5px 0 10px 0;
+}
+
+.ui.comments .comment{
+	margin-bottom: 20px;
+}
+.ui.comments .comment:FIRST-CHILD {
+	margin-top: 40px;
 }
 /**
 form style

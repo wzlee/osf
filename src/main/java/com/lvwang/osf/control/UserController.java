@@ -1,8 +1,6 @@
 package com.lvwang.osf.control;
 
 import java.util.List;
-import java.util.Map;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +47,8 @@ public class UserController {
 		User user = userService.findById(id);
 		mav.addObject("u", user);
 		mav.addObject("follow", followService.isFollowing(me==null?0:me.getId(), id));
+		
+		mav.addObject("counter", userService.getCounterOfFollowAndShortPost(user.getId()));
 		
 		List<Post> posts = postService.findPostsOfUser(id);
 		mav.addObject("posts", posts);

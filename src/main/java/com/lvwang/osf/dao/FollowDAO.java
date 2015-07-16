@@ -19,4 +19,7 @@ public interface FollowDAO {
 	boolean hasFollowing(int user_a, int user_b);
 	boolean hasFollower(int user_a, int user_b);
 	Map<Integer, Boolean> isFollowingUsers(int user_id, List<Integer> following_ids);
+	
+	long getFollowersCount(int user_id);
+	long getFollowingsCount(int user_id);
 }

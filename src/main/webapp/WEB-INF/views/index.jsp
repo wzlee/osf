@@ -239,7 +239,7 @@
 		itemSelector 	: ".event",
 		dataType	 	: 'html',
 		animate      : true, 
-		extraScrollPx: 50
+		extraScrollPx: 100
   	});
   })
   </script>

@@ -24,10 +24,10 @@ import com.lvwang.osf.service.TagService;
 @Repository("postDao")
 public class PostDAOImpl implements PostDAO{
 
-	private static final String TABLE = "osf_posts"; 
+	protected static final String TABLE = "osf_posts"; 
 	
 	@Autowired
-	private JdbcTemplate jdbcTemplate;
+	protected JdbcTemplate jdbcTemplate;
 	
 	public Post getPostByID(int id) {
 		String sql = "select * from " + TABLE + " where id=?";
@@ -59,7 +59,7 @@ public class PostDAOImpl implements PostDAO{
 	}
 
 	public List<Post> getPostsByUserID(int id) {
-		String sql = "select * from " + TABLE + " where post_author=?";
+		String sql = "select * from " + TABLE + " where post_author=? and post_title is not null";
 		List<Post> posts = jdbcTemplate.query(sql, new Object[]{id}, new RowMapper<Post>(){
 
 			public Post mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -133,6 +133,22 @@ public class PostDAOImpl implements PostDAO{
 			
 		});
 
+	}
+	
+	public long count(int user_id){
+		final String sql = "select count(1) counter from " + TABLE + " where post_author=? and post_title is not null";
+		return jdbcTemplate.query(sql, new Object[]{user_id}, new ResultSetExtractor<Integer>(){
+
+			public Integer extractData(ResultSet rs) throws SQLException,
+					DataAccessException {
+				int user_id = 0;
+				if(rs.next()) {
+					user_id = rs.getInt("counter");
+				}
+				return user_id;
+			}
+			
+		});
 	}
 	
 }

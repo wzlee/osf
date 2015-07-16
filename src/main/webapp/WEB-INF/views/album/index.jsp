@@ -7,27 +7,31 @@
 	<meta charset="UTF-8">
 	<meta name="type" content="album">
 	<meta name="id" content="${album.id }">
-	<title>album index</title>
+	<c:if test="${not empty sessionScope.user}">
+		<meta name="isLogin" content="true"/>
+	</c:if>
+	<c:if test="${empty sessionScope.user}">
+		<meta name="isLogin" content="false"/>
+	</c:if>
+	<title></title>
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/bootstrap2.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/navbar.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/semantic.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">
-	<style>
-  	body {
-    	font-family: "Microsoft YaHei","微软雅黑",tahoma,arial,"宋体";
-  	}	
 
-
-
-	</style>
 	<script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath() %>/js/semantic.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath() %>/js/basic.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath() %>/js/code.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath() %>/js/album.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath() %>/js/comment.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath() %>/js/follow.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath() %>/js/login.js"></script>
 
 </head>
 <body>
 	<%@ include file="../topbar.jsp" %>
+	<%@ include file="../login_modal.jsp" %>
 	<div class="container">
 		<div class="row">
 			<div class="span8">
@@ -44,15 +48,15 @@
 							<c:if test="${!empty sessionScope.user }">
 								<c:if test="${sessionScope.user.id ne u.id }">
 									<c:if test="${follow }">
-										<span class="ui tiny basic button">已关注</span>
+										<span class="ui tiny basic button follow" following="${u.id }">已关注</span>
 									</c:if>
 									<c:if test="${!follow }">
-										<span class="ui inverted tiny yellow button">+关注</span> 
+										<span class="ui inverted tiny yellow button follow" following="${u.id }">+关注</span> 
 									</c:if>									
 								</c:if>						
 							</c:if>	
 							<c:if test="${empty sessionScope.user }">
-								<span class="ui inverted tiny yellow button">+关注</span> 
+								<span class="ui inverted tiny yellow button follow" following="${u.id }">+关注</span> 
 							</c:if>				
 						</div>
 						<div class="ui tiny images meta" id="imgbox">
@@ -84,15 +88,15 @@
 							    <div class="field">
 							      <textarea id="replycontent"></textarea>
 							    </div>
-								<div class="ui tiny primary button" id="replybtn">
+								<div class="ui tiny blue button" id="replybtn">
 								  评论
 								</div>							    
 							  </form>								
 					  </div>
 					  
-					  <div id="commentList">							
-						  <jsp:include page="/comment/album/${album.id }"></jsp:include>				  	
-					  </div>
+						
+					  <jsp:include page="/comment/album/${album.id }"></jsp:include>				  	
+					  
 					  <!-- comment list -->
 					</div>
 					<!-- end comment -->

@@ -6,7 +6,7 @@
 	<c:if test="${feed.object_type == dic.object_type_shortpost }">
 		<div class="event row">
 		   <div class="label span2">
-		     <img src="${feed.user_avatar }">
+		     <a href="<c:url value="/user/${feed.user_id }" />"><img src="${feed.user_avatar }"></a>
 		   </div>
 		   <div class="content span6">
 		     <div class="summary">
@@ -48,7 +48,7 @@
  <c:if test="${feed.object_type == dic.object_type_post }">
  <div class="event row">
    <div class="label span2">
-     <img src="${feed.user_avatar }">
+     <a href="<c:url value="/user/${feed.user_id }" />"><img src="${feed.user_avatar }"></a>
    </div>
    <div class="content span6">
      <div class="summary">
@@ -101,7 +101,7 @@
  <c:if test="${feed.object_type == dic.object_type_album }">
  <div class="event row">
    <div class="label span2">
-     <img src="${feed.user_avatar }">
+     <a href="<c:url value="/user/${feed.user_id }" />"><img src="${feed.user_avatar }"></a>
    </div>
    <div class="content span6">
      <div class="summary">

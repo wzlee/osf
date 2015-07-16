@@ -108,6 +108,14 @@ public class FollowDAOImpl implements FollowDAO{
 		return keyHolder.getKey().intValue();
 	}
 
+	public long getFollowersCount(int user_id) {
+		return setOps.size(FOLLOWER_KEY+user_id);
+	}
+	
+	public long getFollowingsCount(int user_id) {
+		return setOps.size(FOLLOWING_KEY+user_id);
+	}
+	
 	public List<Integer> getFollowingIDs(int user_id) {
 		Cursor<Integer> cursor = setOps.scan(FOLLOWING_KEY+user_id, ScanOptions.scanOptions().count(FOLLOW_SCAN_COUNT).build());
 		//List<Integer> following_ids = listOps.range(FOLLOWING_KEY+user_id, 0, listOps.size(FOLLOWING_KEY+user_id)-1);

@@ -159,4 +159,8 @@ public class PostService {
 		int user_id = postDao.getAuthorOfPost(id);
 		return userService.findById(user_id);
 	}
+	
+	public long count(int user_id){
+		return postDao.count(user_id);
+	}
 }

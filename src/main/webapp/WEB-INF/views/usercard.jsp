@@ -4,7 +4,7 @@
 
 	            <div class="ui card">
 	              <div class="ui small centered circular  image">
-	                <img src="<c:url value="${u.user_avatar }"/> ">
+	                <a href="<c:url value="/user/${u.id }" />"><img src="<c:url value="${u.user_avatar }"/> "></a>
 	              </div>
 	              <div class="content">
 	                <a class="header centered" href="<c:url value="/user/${u.id}" />">
@@ -16,21 +16,21 @@
 					<div class="ui mini statistics">
 					  <div class="statistic">
 					    <div class="value">
-					      22
+					      ${counter.follower }
 					    </div>
 					    <div class="label">粉丝
 					    </div>
 					  </div>
 					  <div class="statistic">
 					    <div class="value">
-					      31
+					      ${counter.following }
 					    </div>
 					    <div class="label">关注
 					    </div>
 					  </div>
 					  <div class="statistic">
 					    <div class="value">
-					      22
+					      ${counter.spost }
 					    </div>
 					    <div class="label">状态
 					    </div>
@@ -40,11 +40,18 @@
 					               
 	              </div>
 	              <div class="extra content">
-	              	<c:if test="${follow }">
-	              		<div class="mini ui basic button follow" following="${u.id}">已关注</div>
-	              	</c:if>
-	              	<c:if test="${!follow }">
+	              	<c:if test="${not empty sessionScope.user }">
+	              		<c:if test="${sessionScope.user.id != u.id }">
+			              	<c:if test="${follow }">
+			              		<div class="mini ui basic button follow" following="${u.id}">已关注</div>
+			              	</c:if>
+			              	<c:if test="${!follow }">
+								<div class="mini ui yellow button follow" following="${u.id}">+关注</div>
+							</c:if>	    
+						</c:if>
+					</c:if>          
+					<c:if test="${empty sessionScope.user }">
 						<div class="mini ui yellow button follow" following="${u.id}">+关注</div>
-					</c:if>	              
+					</c:if>
 	              </div>
 	            </div> 

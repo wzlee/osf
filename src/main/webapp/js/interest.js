@@ -1,19 +1,19 @@
 $(document).ready(function(){
-	$('.follow').live('click', function(event) {
+	$('.interest').live('click', function(event) {
 		var isLogin = $('meta[name=isLogin]').attr('content');
 		if(isLogin == 'false'){
 			$('.ui.small.modal').modal('show');
 			return false;
 		}
 		
-		var following_user_id = $(this).attr('following');
+		var tag_id = $(this).attr('tag_id');
 		var url = '';
 		var that = $(this);
 
 		if(!$(this).hasClass('basic')) {
-			url = basePath + '/follow/'+following_user_id;
+			url = basePath + '/tag/'+tag_id+'/interest';
 		} else {
-			url = basePath + '/follow/undo/'+following_user_id;
+			url = basePath + '/tag/'+tag_id+'/undointerest';
 		}
 		$.ajax({
 			url: url,
@@ -22,12 +22,12 @@ $(document).ready(function(){
 			data: {param1: 'value1'},
 		})
 		.done(function(data) {
-			if(SUCCESS_FOLLOW == data.status) {
+			if(SUCCESS_INTEREST == data.status) {
 				$(that).text('已关注');
 				$(that).removeClass('yellow');
 				$(that).removeClass('inverted');
 				$(that).addClass('basic');
-			} else if(SUCCESS_FOLLOW_UNDO == data.status) {
+			} else if(SUCCESS_INTEREST_UNDO == data.status) {
 				$(that).text('+关注');
 				$(that).removeClass('basic');
 				$(that).addClass('yellow');

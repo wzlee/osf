@@ -52,13 +52,16 @@
 									<c:if test="${!empty sessionScope.user }">
 										<c:if test="${sessionScope.user.id ne u.id }">
 											<c:if test="${follow }">
-												<span class="ui tiny basic button">已关注</span>
+												<span class="ui tiny basic button follow" following="${u.id }">已关注</span>
 											</c:if>
 											<c:if test="${!follow }">
-												<span class="ui inverted tiny yellow button">+关注</span> 
+												<span class="ui inverted tiny yellow button follow" following="${u.id }">+关注</span> 
 											</c:if>									
 										</c:if>						
 									</c:if>	
+									<c:if test="${empty sessionScope.user }">
+										<span class="ui inverted tiny yellow button follow" following="${u.id }">+关注</span>
+									</c:if>
 								</div>
 								<div class="tags">
 									<c:forEach items="${post.post_tags }" var="tag">
@@ -100,7 +103,7 @@
 	</div>
 	
 	<!--  -->
-	<div class="post comments">
+	<div class="comments">
 		<div class="container">
 			<div class="row">
 				<div class="span8 offset2">
@@ -116,10 +119,11 @@
 							  </form>								
 						  </div>
 						  
-						  <div id="commentList">							
-							  <jsp:include page="/comment/post/${post.id }"></jsp:include>				  	
-						  </div>
-						  <!-- comment list -->					
+						  							
+						  <jsp:include page="/comment/post/${post.id }"></jsp:include>				  	
+						  
+					  </div>
+					  <!-- comment list -->					
 					</div>
 				</div>
 

@@ -20,7 +20,7 @@ import com.lvwang.osf.model.User;
 import com.lvwang.osf.util.CipherUtil;
 import com.lvwang.osf.util.Property;
 
-@Service
+@Service("userService")
 public class UserService {
 
 
@@ -36,8 +36,15 @@ public class UserService {
 	@Qualifier("userDao")
 	private UserDAO userDao;
 	
-
-		
+	@Autowired
+	@Qualifier("followService")
+	private FollowService followService;
+	
+	@Autowired
+	@Qualifier("shortPostService")
+	private ShortPostService shortPostService;
+	
+	
 	private boolean ValidateEmail(String email) {
 		boolean result = true;
 		try {
@@ -297,4 +304,11 @@ public class UserService {
 		return ids;
 	}
 	
+	public Map<String, Long> getCounterOfFollowAndShortPost(int user_id){
+		Map<String, Long> counter = new HashMap<String, Long>();
+		counter.put("follower", followService.followersCount(user_id));
+		counter.put("following", followService.followingsCount(user_id));
+		counter.put("spost", shortPostService.count(user_id));
+		return counter;
+	}
 }

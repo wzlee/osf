@@ -76,6 +76,13 @@ public class FollowService {
 		return map;
 	}
 	
+	public long followersCount(int user_id) {
+		return followDao.getFollowersCount(user_id);
+	}
+	public long followingsCount(int user_id) {
+		return followDao.getFollowingsCount(user_id);
+	}
+	
 	public List<Integer> getFollowerIDs(int user_id) {
 		return followDao.getFollowerIDs(user_id);
 	}

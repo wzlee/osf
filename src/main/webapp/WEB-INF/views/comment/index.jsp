@@ -7,6 +7,7 @@
 	评论
 </div>
 <div class="ui divider"></div>
+<div id="commentList">
 <c:forEach items="${comments }" var="comment">
 	<div class="comment" id="comment${comment.id }" author="${comment.comment_author }">
 	  <a class="avatar">
@@ -40,3 +41,4 @@
 	  </div>
 	</div>
 </c:forEach>
+</div>

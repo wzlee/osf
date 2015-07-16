@@ -101,10 +101,10 @@
 									<img class="avatar" src="${feed.key.user_avatar }" alt="" />
 									<div class="desc">${feed.key.user_name }</div>
 									<c:if test="${isFollowings[feed.key.id] }">
-										<div class="ui tiny  button follow">已关注</div>
+										<div class="ui tiny basic button follow" following="${feed.key.id }">已关注</div>
 									</c:if>
 									<c:if test="${!isFollowings[feed.key.id] }">
-										<div class="ui yellow tiny  button follow">+关注</div>
+										<div class="ui inverted yellow tiny  button follow" following="${feed.key.id }">+关注</div>
 									</c:if>
 								</div>
 								<div class="content">	

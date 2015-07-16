@@ -9,39 +9,18 @@ $(document).ready(function(){
 			$('.ui.small.modal').modal('show');
 			return false;
 		}
-		
-		if($("#comments").find("#replyarea").length != 0)
-			$("#replyarea").remove();
+
 		
 		commentType = 1;
 		var ref = $(this).attr('ref');		
-		var $commentRef = $('#comment'+ref);
-		var replyTo = $commentRef.find('.author:first()').text();
-		var avatarRef = $commentRef.find('a.avatar img:first').attr('src');
-		var commentContentRef = $commentRef.find('.commentContent p:first()').text();
-		commentParent = $commentRef.attr('author');
+		var commentRef = $('#comment'+ref);
+			replyTo = $(commentRef).find('.author:first').text();
+		var avatarRef = $(commentRef).find('a.avatar img:first').attr('src');
+		var commentContentRef = $(commentRef).find('.commentContent p:first()').text();
+		commentParent = $(commentRef).attr('author');
 
-		var $replyarea = $('<div id="replyarea">'+
-								'<div class="comment">'+
-								  '<a href="#" class="avatar">'+
-								    '<img src='+ avatarRef +'>'+
-								  '</a>'+
-								  '<div class="text commentContent">'+
-								    '<p>'+commentContentRef+'</p>'+
-								  '</div>'+
-								'</div>'+
-								'<div>'+
-								  '<form class="ui reply form" id="replyform">'+
-								    '<div class="field">'+
-								      '<textarea id="replycontent"></textarea>'+
-								    '</div>'+
-								    '<div class="ui primary button" id="replybtn" replyTo="'+replyTo+'">'+
-								      '评论'+
-								    '</div>'+
-								  '</form>'+								
-								'</div>'+
-							  '</div>');
-		$('#comments').prepend($replyarea);
+		var header = $('<div id="header"><img  class="ui avatar image" src="'+avatarRef+'"><span>'+commentContentRef+'</span></div>');
+		$('#replyarea').prepend($(header));
 		$('#replycontent').focus();
 
 	});
@@ -61,7 +40,7 @@ $(document).ready(function(){
 			header = '<a class="author">me</a>';
 		}
 		else if(commentType == 1) {
-			var replyTo = $(this).attr('replyTo');
+			//var replyTo = $(this).attr('replyTo');
 			header = '<a class="author">me</a> 回复 ' + '<a class="author">'+replyTo+'</a>';
 		}			
 		var commentContent = $('#replycontent').val();
@@ -99,7 +78,7 @@ $(document).ready(function(){
 							    '<div class="content">'+
 							      header+
 							      '<div class="metadata">'+
-							        '<span class="date">5 days ago</span>'+
+							        '<span class="date">刚刚</span>'+
 							      '</div>'+
 							      '<div class="text commentContent">'+
 							        '<p>'+commentContent+'</p>'+
@@ -107,24 +86,11 @@ $(document).ready(function(){
 							    '</div>'+
 							  '</div>');
 			$('#commentList').prepend($comment);
-			$('#replyarea').remove();
-			
-			var $replyarea = $('<div id="replyarea">'+
-								'<div>'+
-								  '<form class="ui reply form" id="replyform">'+
-								    '<div class="field">'+
-								      '<textarea id="replycontent"></textarea>'+
-								    '</div>'+
-								    '<div class="ui primary button" id="replybtn">'+
-								      '评论'+
-								    '</div>'+
-								  '</form>'+								
-								'</div>'+
-							  '</div>');
-			$('#comments').prepend($replyarea);
+			$('#header').remove();
+			$('#replycontent').val('');
 			$('#replycontent').focus();
 			commentType = 0;
-			commentParent =0;
+			commentParent = 0;
 		})
 		.fail(function() {
 			console.log("error");

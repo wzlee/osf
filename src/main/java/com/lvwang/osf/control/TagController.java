@@ -21,6 +21,7 @@ import com.lvwang.osf.model.User;
 import com.lvwang.osf.service.FeedService;
 import com.lvwang.osf.service.InterestService;
 import com.lvwang.osf.service.TagService;
+import com.lvwang.osf.util.Dic;
 import com.lvwang.osf.util.Property;
 
 @Controller
@@ -38,20 +39,22 @@ public class TagController {
 	
 	@RequestMapping("/{tag}")
 	public ModelAndView getFeedsWithTag(@PathVariable("tag") String tag, HttpSession session) {
-		try {
-			tag = new String(tag.getBytes("ISO-8859-1"), "UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			tag = new String(tag.getBytes("ISO-8859-1"), "UTF-8");
+//		} catch (UnsupportedEncodingException e) {
+//			e.printStackTrace();
+//		}
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("tag/index");
 		
+		int id = tagService.getID(tag);
 		mav.addObject("tag", tag);
+		mav.addObject("id", id);
 		
 		User user = (User)session.getAttribute("user");
 		if(user != null) {
 			mav.addObject("isInterest", 
-						  interestService.hasInterestInTag(user.getId(), tagService.getID(tag)));
+						  interestService.hasInterestInTag(user.getId(), id));
 			
 		} else {
 			mav.addObject("isInterest", false);
@@ -59,7 +62,8 @@ public class TagController {
 		
 		List<Event> feeds = tagService.getWithTag(tag);
 		mav.addObject("feeds", feeds);
-		mav.addObject("imgBaseUrl", "http://osfimgs.oss-cn-hangzhou.aliyuncs.com/");
+		mav.addObject("dic", new Dic());
+		mav.addObject("imgBaseUrl", Property.IMG_BASE_URL);
 		return mav;
 	}
 	/**
