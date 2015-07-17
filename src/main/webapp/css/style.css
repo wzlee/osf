@@ -558,10 +558,15 @@ a {
 }
 .explore .userbox .content  .box{
 	position: relative;
-	display: table-cell;
+	display: inline-block;
 	height: 180px;
 	width: 180px;
+	line-height: 180px;
 	overflow: hidden;
+}
+.explore .userbox .content  .box img{
+	height: 180px;
+	width: 180px;
 }
 .explore .userbox .content .cover{
 	position: absolute;

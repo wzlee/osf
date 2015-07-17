@@ -8,7 +8,7 @@
 	  		<ul class="list"></ul>
 	  	</div>
 	    <form class="ui large form">
-	      <div class="ui stacked segment">
+<!-- 	      <div class="ui stacked segment"> -->
 	        <div class="field">
 	          <div class="ui left icon input">
 	            <i class="user icon"></i>
@@ -26,7 +26,7 @@
 			    Or
 			</div>
 			<a href='<c:url value="/account/register"/>' class="ui fluid large  submit button">注册</a>
-	      </div>
+<!-- 	      </div> -->
 	
 	    </form>
 	  </div>

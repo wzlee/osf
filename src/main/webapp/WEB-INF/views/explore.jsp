@@ -110,24 +110,24 @@
 								<div class="content">	
 									<c:forEach items="${feed.value }" var="f">
 										<c:if test="${f.object_type eq dic.object_type_post }">
-											<a class="box" href="<c:url value="/post/${f.object_id }" />">
+										   <a class="box" href="<c:url value="/post/${f.object_id }" />" href="<c:url value="/post/${f.object_id }" />">
 												<img src="${f.content }" alt="" />
 												<div class="cover">
 													${f.title }
 												</div>
-											</a>										
+											</a>
+								
 										</c:if>							
 										<c:if test="${f.object_type eq dic.object_type_album }">
-											<a class="box" href="<c:url value="/album/${f.object_id }/photos" />">
+											<a class="box" href="<c:url value="/album/${f.object_id }/photos" />" href="<c:url value="/album/${f.object_id }/photos" />">
 												<img src="${imgBaseUrl }${f.title }" alt="" />
 												<div class="cover">
 													${f.summary }
 												</div>		
-											</a>	
-							
+											</a>							
 										</c:if>	
 										<c:if test="${f.object_type eq dic.object_type_shortpost }">
-											<div class="box"  style="text-align: center; vertical-align: middle">
+											<div class="box" >
 												<i class="disabled large quote left icon"></i>
 												${f.summary }
 												<i class="disabled large quote right icon"></i>
