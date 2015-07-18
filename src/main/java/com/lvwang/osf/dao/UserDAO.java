@@ -17,4 +17,5 @@ public interface UserDAO {
 	int activateUser(User user);
 	boolean delete(int id);
 	void updateActivationKey(int user_id, String key);
+	void updateAvatar(int user_id, String avatar);
 }

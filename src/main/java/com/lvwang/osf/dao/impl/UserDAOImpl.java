@@ -190,6 +190,20 @@ public class UserDAOImpl implements UserDAO{
 			}
 		});
 	}
+	
+	public void updateAvatar(final int user_id, final String avatar){
+		final String sql = "update " + TABLE + " set user_avatar=? where id=?";
+		jdbcTemplate.update(new PreparedStatementCreator() {
+			
+			public PreparedStatement createPreparedStatement(Connection con)
+					throws SQLException {
+				PreparedStatement ps =  con.prepareStatement(sql);
+				ps.setString(1, avatar);
+				ps.setInt(2, user_id);
+				return ps;
+			}
+		});
+	}
 
 	public List<User> getUsers(int count) {
 		// TODO Auto-generated method stub

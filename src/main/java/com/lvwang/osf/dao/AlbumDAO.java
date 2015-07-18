@@ -1,5 +1,6 @@
 package com.lvwang.osf.dao;
 
+import java.io.InputStream;
 import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -15,6 +16,7 @@ public interface AlbumDAO {
 	
 	//return photo etag
 	String uploadPhoto(MultipartFile img, Photo details);
+	String uploadPhoto(InputStream img, String key);
 	
 	String getKey(int id);
 	List<String> getKeys(List<Integer> ids);
@@ -34,4 +36,6 @@ public interface AlbumDAO {
 	List<Photo> getPhotos(int album_id);
 	
 	int getAuthorOfAlbum(int id);
+	
+	void delPhotoInBucket(String key);
 }

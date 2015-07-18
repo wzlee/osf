@@ -68,11 +68,15 @@ public class UserService {
 	}
 	
 	public User findByUsername(String username) {
-		return userDao.getUserByUsername(username);
+		User user = userDao.getUserByUsername(username);
+		addAvatar(user);
+		return user;
 	}
 	
 	public User findByEmail(String email) {
-		return userDao.getUserByEmail(email);
+		User user = userDao.getUserByEmail(email);
+		addAvatar(user);
+		return user;
 	}
 	
 	public User findById(int id) {
@@ -311,4 +315,10 @@ public class UserService {
 		counter.put("spost", shortPostService.count(user_id));
 		return counter;
 	}
+	
+	public String changeAvatar(int user_id, String avatar) {
+		userDao.updateAvatar(user_id, avatar);
+		return Property.SUCCESS_AVATAR_CHANGE;
+	}
+	
 }

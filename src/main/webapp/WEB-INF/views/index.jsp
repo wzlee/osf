@@ -100,11 +100,11 @@
           		<c:if test="${not empty sessionScope.user}">
 	            <div class="ui card">
 	              <div class="ui small centered circular  image">
-	                <img src="<c:url value="${imgBaseUrl }/${sessionScope.user.user_avatar }"/> ">
+	                <img src="<c:url value="${user.user_avatar }"/> ">
 	              </div>
 	              <div class="content">
-	                <a class="header centered" href="<c:url value="/user/${sessionScope.user.id}" />">
-	                	${sessionScope.user.user_name }
+	                <a class="header centered" href="<c:url value="/user/${user.id}" />">
+	                	${user.user_name }
 	                </a>
 	                <div class="meta centered">
 	                  <span class="date">不想成为画家的黑客不是好摄影师</span>

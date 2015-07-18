@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>个人信息</title>
+<title>头像设置</title>
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/bootstrap2.css">	
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/navbar.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/semantic.css">
@@ -97,7 +97,7 @@
 				<div class="row">
 					<div class="span2">
 						<div class="avatar">
-							<img class="ui small circular image" src='<c:url value="/img/avatar.jpg"></c:url>'>
+							<img class="ui small circular image" src='<c:url value="${user.user_avatar }"></c:url>'>
 						</div>					
 					</div>
 					<div class="span2">

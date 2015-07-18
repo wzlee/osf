@@ -33,6 +33,7 @@ import com.lvwang.osf.service.EventService;
 import com.lvwang.osf.service.FeedService;
 import com.lvwang.osf.service.FollowService;
 import com.lvwang.osf.service.InterestService;
+import com.lvwang.osf.service.UserService;
 import com.lvwang.osf.util.Dic;
 import com.lvwang.osf.util.Property;
 
@@ -60,6 +61,10 @@ public class AlbumController {
 	@Autowired
 	@Qualifier("followService")
 	private FollowService followService;
+	
+	@Autowired
+	@Qualifier("userService")
+	private UserService userService;
 	
 	@RequestMapping("/{id}/photos")
 	public ModelAndView album(@PathVariable("id") int id, HttpSession session) {
@@ -323,14 +328,23 @@ public class AlbumController {
 										 @RequestParam("height") int height,
 									     HttpSession session){
 		
-		System.out.println("x:"+x+" y:"+y + " width:"+width+ " height:"+height);
+		//System.out.println("x:"+x+" y:"+y + " width:"+width+ " height:"+height);
+		Map<String, Object> map = new HashMap<String, Object>();
 		
 		String key = (String) session.getAttribute("temp_avatar");
 		if(key == null || key.length() == 0){
-			return null;
+			map.put("status", Property.ERROR_AVATAR_CHANGE);
+			return map;
 		}
 		
-		return null;
+		albumService.cropAvatar(key, x, y, width, height);
+		String status = userService.changeAvatar(((User)session.getAttribute("user")).getId(), key);
+		if(Property.SUCCESS_AVATAR_CHANGE.equals(status)) {
+			((User)session.getAttribute("user")).setUser_avatar(Property.IMG_BASE_URL+key);
+		}
+		
+		map.put("status", status);
+		return map;
 		
 	}
 	

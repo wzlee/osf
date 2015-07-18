@@ -22,6 +22,7 @@ public class Property {
 	 * 			   11:follow
 	 * 			   12:interest	
 	 * 			   13:like
+	 * 			   14:avatar
 	 * 			   ...)
 	 * 第4-6位标示对象的具体错误/成功类型
 	 * 
@@ -88,6 +89,9 @@ public class Property {
 	public static final String ERROR_LIKE = "013000";
 	public static final String ERROR_LIKE_UNDO = "013001";
 	
+	public static final String ERROR_AVATAR_CROP = "014000";
+	public static final String ERROR_AVATAR_CHANGE = "014001";
+	
 	/***********************************************************************
 	 * SUCCESS
 	 ***********************************************************************/
@@ -126,4 +130,7 @@ public class Property {
 	
 	public static final String SUCCESS_LIKE = "113000";
 	public static final String SUCCESS_LIKE_UNDO = "113001";
+	
+	public static final String SUCCESS_AVATAR_CROP = "114000";
+	public static final String SUCCESS_AVATAR_CHANGE = "114001";
 }

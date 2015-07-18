@@ -75,6 +75,9 @@
 	var ERROR_FOLLOW = "011000";				//follow failed
 	var ERROR_FOLLOW_UNDO = "011001";				//undo failed
 	
+	var ERROR_AVATAR_CROP = "014000";
+	var ERROR_AVATAR_CHANGE = "014001";
+	
 	/***********************************************************************
 	 * SUCCESS
 	 ***********************************************************************/
@@ -108,3 +111,6 @@
 	var SUCCESS_FOLLOW_UNDO = "111001";
 	var SUCCESS_INTEREST = "112000";
 	var SUCCESS_INTEREST_UNDO = "112001";
+	
+	var SUCCESS_AVATAR_CROP = "114000";
+	var SUCCESS_AVATAR_CHANGE = "114001";

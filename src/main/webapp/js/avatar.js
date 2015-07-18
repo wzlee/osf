@@ -69,7 +69,6 @@ $(document).ready(function(){
  	                		secureuri:false,
  	                		fileElementId:'avatar_file',
  	                		success: function (data, status){
- 	                				var imgUrl = 'http://osfimgs.oss-cn-hangzhou.aliyuncs.com/';
  	                				data = jQuery(data).find('pre:first').text();
  	                				data = jQuery.parseJSON(data);
  	                				
@@ -86,7 +85,24 @@ $(document).ready(function(){
  	});    
     
     $('#avatar_save').live('click', function(){
-    	
+        //console.log('x:'+x+' y:'+y +' width:'+width+' height:'+height);
+        var current_url = window.location.href;
+        $.ajax({
+          url: basePath + '/album/cropavatar',
+          type: 'POST',
+          dataType: 'json',
+          data:{
+            x:x,
+            y:y,
+            width: Math.round(width),
+            height: Math.round(height)
+          }
+        })
+        .success(function(data){
+          if(data.status == SUCCESS_AVATAR_CHANGE){
+            self.location=current_url;
+          }
+        })      	
     	
     });
     
@@ -94,10 +110,7 @@ $(document).ready(function(){
     	$('.crop_avatar_area').hide();
     });
     
-    
-    
-    
-    
+
     
 
   });

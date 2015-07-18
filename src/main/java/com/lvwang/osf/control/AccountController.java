@@ -44,8 +44,10 @@ public class AccountController {
 	}
 	
 	@RequestMapping(value="/setting/avatar")
-	public String settingAvatar(HttpSession session){
-		return "account/setting/avatar";
+	public ModelAndView settingAvatar(HttpSession session){
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("account/setting/avatar");
+		return mav;
 	}
 	
 	@RequestMapping(value="/setting/security")

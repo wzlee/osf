@@ -1,6 +1,8 @@
 package com.lvwang.osf.service;
 
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,6 +13,10 @@ import java.util.UUID;
 
 import javax.imageio.ImageIO;
 
+import net.coobird.thumbnailator.Thumbnails;
+
+import org.codehaus.plexus.util.StringUtils;
+import org.jsoup.helper.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -224,8 +230,32 @@ public class AlbumService {
 		return userService.findById(user_id);
 	}
 	
-	public String cropAvatar(String key) {
-		return null;
+	public String cropAvatar(String key, int x, int y, int width, int height) {
+		String status = null;
+		
+		String classpath = AlbumService.class.getClassLoader().getResource("").getPath();
+		try {
+			BufferedImage croped_img = Thumbnails.of(ImageIO.read(new File(classpath+"/tmp/"+key)))
+									  .sourceRegion(x, y, width, height)
+									  .size(200, 200).asBufferedImage();
+			String img_type = key.split("\\.")[1];
+			//convert bufferedimage to inputstream
+			ByteArrayOutputStream bos = new ByteArrayOutputStream();  
+			ImageIO.write(croped_img, img_type, bos);  
+			InputStream is = new ByteArrayInputStream(bos.toByteArray());
+			albumDao.delPhotoInBucket(key);
+			if( albumDao.uploadPhoto(is, key) != null ){
+				status = Property.SUCCESS_AVATAR_CROP;
+			} else {
+				status = Property.ERROR_AVATAR_CROP;
+			}
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return status;
 	}
+	
+
 	
 }
