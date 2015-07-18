@@ -1,9 +1,15 @@
 package com.lvwang.osf.service;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+
+import javax.imageio.ImageIO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -70,6 +76,17 @@ public class AlbumService {
 		return map;
 	}
 	
+	public void saveImgToLocal(MultipartFile img, String key){
+		try {
+			BufferedImage imgBuf = ImageIO.read(img.getInputStream());
+			String classpath = AlbumService.class.getClassLoader().getResource("").getPath();
+			ImageIO.write(imgBuf, getImgType(img), new File(classpath+"/tmp/"+key));
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public Map<String, Object> uploadPhoto(MultipartFile img) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		Photo details = new Photo();
@@ -80,6 +97,7 @@ public class AlbumService {
 			map.put("status", Property.ERROR_PHOTO_CREATE);
 			return map;
 		} else {	
+			map.put("key", key);
 			map.put("link", BASE_URL+key);
 			map.put("status", Property.SUCCESS_PHOTO_CREATE);			
 		}
@@ -205,4 +223,9 @@ public class AlbumService {
 		int user_id = albumDao.getAuthorOfAlbum(id);
 		return userService.findById(user_id);
 	}
+	
+	public String cropAvatar(String key) {
+		return null;
+	}
+	
 }

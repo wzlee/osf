@@ -287,4 +287,53 @@ public class AlbumController {
 		return map;
 	}
 	
+	/**
+	 * 上传头像 
+	 * @param img
+	 * @param session
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/upload/avatar", method=RequestMethod.POST)
+	public Map<String, Object> avatarUpload(@RequestParam("avatar_file") MultipartFile img,
+										    HttpSession session) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if(img.isEmpty()) {
+			map.put("status", Property.ERROR_PHOTO_EMPTY);
+			return map;
+		}
+		
+		//upload photo
+		map = albumService.uploadPhoto(img);
+		
+		//save to local
+		albumService.saveImgToLocal(img, (String)map.get("key"));
+		
+		session.setAttribute("temp_avatar", map.get("key"));
+		
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/cropavatar", method=RequestMethod.POST)
+	public Map<String, Object> cropAvatar(@RequestParam("x") int x,
+										 @RequestParam("y") int y,
+										 @RequestParam("width") int width,
+										 @RequestParam("height") int height,
+									     HttpSession session){
+		
+		System.out.println("x:"+x+" y:"+y + " width:"+width+ " height:"+height);
+		
+		String key = (String) session.getAttribute("temp_avatar");
+		if(key == null || key.length() == 0){
+			return null;
+		}
+		
+		return null;
+		
+	}
+	
+	
+	
 }
