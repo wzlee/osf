@@ -1,5 +1,6 @@
 $(document).ready(function(){
 
+	
     // Create variables (in this scope) to hold the API and image size
     var jcrop_api,
         boundx,
@@ -12,16 +13,17 @@ $(document).ready(function(){
 
         xsize = $pcnt.width(),
         ysize = $pcnt.height();
-    	x=0;
-    	y=0;
-    	width=0;
-    	height=0;
+		x=0;
+		y=0;
+		width=0;
+		height=0;
 
     $('#target').Jcrop({
       onChange: updatePreview,
       onSelect: updatePreview,
       aspectRatio: 1,
-      allowMove: true
+      allowMove: true,
+      boxWidth: 500
     },function(){
       // Use the API to get the real image size
       var bounds = this.getBounds();
@@ -29,13 +31,16 @@ $(document).ready(function(){
       boundy = bounds[1];
       // Store the API in the jcrop_api variable
       jcrop_api = this;
-
       // Move the preview into the jcrop container for css positioning
       $preview.appendTo(jcrop_api.ui.holder);
     });
 
     function updatePreview(c)
     {
+      var bounds = jcrop_api.getBounds();
+      boundx = bounds[0];
+      boundy = bounds[1];
+        
       if (parseInt(c.w) > 0)
       {
         var rx = xsize / c.w;
@@ -54,7 +59,8 @@ $(document).ready(function(){
           marginTop: '-' + y + 'px'
         });
       }
-    };
+    };		
+
     
     
     $('#avatar_file').live('change', function(event) {
@@ -66,19 +72,11 @@ $(document).ready(function(){
  	                				var imgUrl = 'http://osfimgs.oss-cn-hangzhou.aliyuncs.com/';
  	                				data = jQuery(data).find('pre:first').text();
  	                				data = jQuery.parseJSON(data);
- 	                				var $imgCard = $();
- 	                				$('#uploadedphotos').append($imgCard);
-
- 	                    			if(typeof(data.error) != 'undefined')
- 	                   				{
- 				                        if(data.error != '')
- 				                        {
- 				                            alert(data.error);
- 				                        }else
- 				                        {
- 				                            alert(data.msg);
- 				                        }
- 	                    			}
+ 	                				
+ 	                				jcrop_api.setImage(data.link);
+ 	                				$('#target_img_cnt img').attr('src', data.link);
+ 	                				$('#preview-pane img').attr('src', data.link);
+ 	                				$('.crop_avatar_area').show();
  	                		},
  	                		error: function (data, status, e){
  	                    			alert(e);
@@ -87,6 +85,14 @@ $(document).ready(function(){
  	        		);
  	});    
     
+    $('#avatar_save').live('click', function(){
+    	
+    	
+    });
+    
+    $('#avatar_cancle').live('click', function(){
+    	$('.crop_avatar_area').hide();
+    });
     
     
     

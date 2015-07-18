@@ -24,11 +24,9 @@
 	.jcrop-holder #preview-pane {
 	  display: block;
 	  position: absolute;
-	  z-index: 2000;
 	  top: 0px;
 	  right: -200px;
-	  padding: 6px;
-	  background-color: white;
+	  
 	}
 	
 	/* The Javascript code will set the aspect ratio of the crop
@@ -38,10 +36,12 @@
 	  width: 150px;
 	  height: 150px;
 	  overflow: hidden;
+	  margin-bottom: 20px;
 	}
 	
 	.change_avatar{
 		position: relative;
+		margin-top: 60px;
 	}
 	.change_avatar .button{
 		position: relative;
@@ -57,6 +57,14 @@
 		height: 30px;
 		opacity: 0;
 		text-align: center;
+	}
+	.crop_avatar_area{
+		display: none;
+		margin-top: 40px;
+	}
+	#avatar_save, #avatar_cancle{
+		width: 100%;
+		margin-bottom: 10px;
 	}
 	</style>
 	
@@ -84,33 +92,45 @@
 				<div class="ui header">
 					头像
 				</div>
-				<div class="ui divider">
+				<div class="ui divider"></div>
 				
-					<div class="avatar" style="margin-top: 30px">
-						<img class="ui small circular image" src='<c:url value="/img/avatar.jpg"></c:url>'>
+				<div class="row">
+					<div class="span2">
+						<div class="avatar">
+							<img class="ui small circular image" src='<c:url value="/img/avatar.jpg"></c:url>'>
+						</div>					
 					</div>
-					
-					<div class="change_avatar">
-						<div class="ui tiny button">更改头像</div>
-						<input type="file" id="avatar_file" name="avatar_file" class="ui tiny button" />
+					<div class="span2">
+						<div class="change_avatar">
+							<div class="ui tiny button">更改头像</div>
+							<input type="file" id="avatar_file" name="avatar_file" class="ui tiny button" />
+						</div>					
 					</div>
-					
-					
-					  <div id="target_img_cnt">	
-					  	<img src="<c:url value="/img/avatar.jpg"></c:url>" id="target" alt="[Jcrop Example]" />
-					  </div>
-					  
-					  <div id="preview-pane">
-					    <div class="preview-container">
-					      <img src="<c:url value="/img/avatar.jpg"></c:url>" class="jcrop-preview" alt="Preview" />
-					    </div>
-					  </div>					
-					  
-					  <div class="ui tiny blue button" id="avatar_save">
-					  	保存
-					  </div>
-						
 				</div>
+
+				
+
+				
+				<div class="crop_avatar_area">
+				  <div id="target_img_cnt">	
+				  	<img src="<c:url value="/img/avatar.jpg"></c:url>" id="target" alt="[Jcrop Example]" />
+				  </div>
+				  
+				  <div id="preview-pane">
+			    	<div class="preview-container">
+			      		<img src="<c:url value="/img/avatar.jpg"></c:url>" class="jcrop-preview" alt="Preview" />
+			    	</div>
+					<div class="ui tiny blue button" id="avatar_save">
+				  		保存
+					</div>
+					<div class="ui tiny  button" id="avatar_cancle">
+				  		取消
+					</div>						
+			  	 </div>					
+			   </div>  
+
+						
+				
 				
 			</div>
 		</div>
