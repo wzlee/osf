@@ -203,6 +203,11 @@ public class UserDAOImpl implements UserDAO{
 				return ps;
 			}
 		});
+		
+		//update cahce
+		User user = (User)mapOps.get("user", "user:"+user_id);
+		user.setUser_avatar(avatar);
+		mapOps.put("user", "user:"+user_id, user);
 	}
 
 	public List<User> getUsers(int count) {

@@ -235,7 +235,9 @@ public class AlbumService {
 		
 		String classpath = AlbumService.class.getClassLoader().getResource("").getPath();
 		try {
-			BufferedImage croped_img = Thumbnails.of(ImageIO.read(new File(classpath+"/tmp/"+key)))
+			File ori_img = new File(classpath+"/tmp/"+key);
+			
+			BufferedImage croped_img = Thumbnails.of(ImageIO.read(ori_img))
 									  .sourceRegion(x, y, width, height)
 									  .size(200, 200).asBufferedImage();
 			String img_type = key.split("\\.")[1];
@@ -245,6 +247,9 @@ public class AlbumService {
 			InputStream is = new ByteArrayInputStream(bos.toByteArray());
 			albumDao.delPhotoInBucket(key);
 			if( albumDao.uploadPhoto(is, key) != null ){
+				if(ori_img.exists()){
+					ori_img.delete();
+				}
 				status = Property.SUCCESS_AVATAR_CROP;
 			} else {
 				status = Property.ERROR_AVATAR_CROP;

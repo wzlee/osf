@@ -340,7 +340,8 @@ public class AlbumController {
 		albumService.cropAvatar(key, x, y, width, height);
 		String status = userService.changeAvatar(((User)session.getAttribute("user")).getId(), key);
 		if(Property.SUCCESS_AVATAR_CHANGE.equals(status)) {
-			((User)session.getAttribute("user")).setUser_avatar(Property.IMG_BASE_URL+key);
+			//update session
+			((User)session.getAttribute("user")).setUser_avatar(Property.IMG_BASE_URL+key);			
 		}
 		
 		map.put("status", status);
