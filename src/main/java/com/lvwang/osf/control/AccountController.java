@@ -38,10 +38,42 @@ public class AccountController {
 		return "account/login";
 	}
 	
-	@RequestMapping(value="/setting/info")
-	public String settingInfo(HttpSession session){
+	@RequestMapping(value="/setting/info", method=RequestMethod.GET)
+	public String settingInfoPage(HttpSession session){		
 		return "account/setting/info";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/setting/info", method=RequestMethod.POST)
+	public Map<String, Object> settingInfo(@RequestParam("user_name") String user_name, 
+							  @RequestParam("user_desc") String user_desc,
+							  HttpSession session){	
+		User me = (User)session.getAttribute("user");
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if(user_name == null || user_name.length() == 0){
+			map.put("status", Property.ERROR_USERNAME_EMPTY);
+			return map;
+		}
+		
+		String status = null;
+		User user = userService.findByUsername(user_name);
+		if(user != null){
+			status = Property.ERROR_USERNAME_EXIST;
+		}else {
+			//username is ok, but return a error status
+			status = Property.ERROR_USERNAME_NOTEXIST;
+			userService.updateUsernameAndDesc(me.getId(), 
+											  user_name,
+											  user_desc);
+			//update session
+			me.setUser_name(user_name);
+			me.setUser_desc(user_desc);
+		}
+		map.put("status", status);
+		return map;
+	}
+	
 	
 	@RequestMapping(value="/setting/avatar")
 	public ModelAndView settingAvatar(HttpSession session){

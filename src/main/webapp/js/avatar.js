@@ -109,8 +109,6 @@ $(document).ready(function(){
     $('#avatar_cancle').live('click', function(){
     	$('.crop_avatar_area').hide();
     });
-    
-
-    
+        
 
   });

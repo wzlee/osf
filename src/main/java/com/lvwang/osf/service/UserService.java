@@ -69,19 +69,25 @@ public class UserService {
 	
 	public User findByUsername(String username) {
 		User user = userDao.getUserByUsername(username);
-		addAvatar(user);
+		if(user != null){
+			addAvatar(user);
+		}
 		return user;
 	}
 	
 	public User findByEmail(String email) {
 		User user = userDao.getUserByEmail(email);
-		addAvatar(user);
+		if(user != null) {
+			addAvatar(user);
+		}
 		return user;
 	}
 	
 	public User findById(int id) {
 		User user = userDao.getUserByID(id);
-		addAvatar(user);
+		if(user != null) {
+			addAvatar(user);
+		}
 		return user;
 	}
 	
@@ -321,4 +327,8 @@ public class UserService {
 		return Property.SUCCESS_AVATAR_CHANGE;
 	}
 	
+	public void updateUsernameAndDesc(int user_id, String username, String desc){
+		userDao.updateUsernameAndDesc(user_id, username, desc);
+	}
+
 }

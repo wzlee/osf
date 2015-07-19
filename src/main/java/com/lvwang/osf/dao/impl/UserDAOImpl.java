@@ -55,6 +55,7 @@ public class UserDAOImpl implements UserDAO{
 					user.setUser_status(rs.getInt("user_status"));	
 					user.setUser_activationKey(rs.getString("user_activationKey"));
 					user.setUser_avatar(rs.getString("user_avatar"));
+					user.setUser_desc(rs.getString("user_desc"));
 				}
 				return user;
 			}
@@ -115,6 +116,7 @@ public class UserDAOImpl implements UserDAO{
 				user.setUser_pwd(rs.getString("user_pwd"));
 				user.setUser_registered_date(rs.getDate("user_registered_date"));
 				user.setUser_status(rs.getInt("user_status"));	
+				user.setUser_desc(rs.getString("user_desc"));
 				return user;
 			}
 		});
@@ -223,9 +225,33 @@ public class UserDAOImpl implements UserDAO{
 				user.setUser_name(rs.getString("user_name"));
 				user.setUser_registered_date(rs.getTimestamp("user_registered_date"));
 				user.setUser_status(rs.getInt("user_status"));
+				user.setUser_desc(rs.getString("user_desc"));
 				return user;
 			}
 			
 		});
 	}
+
+	public void updateUsernameAndDesc(final int user_id, final String username, final String desc) {
+		final String sql = "update " + TABLE + " set user_name=?, user_desc=? where id=?";
+		jdbcTemplate.update(new PreparedStatementCreator() {
+			
+			public PreparedStatement createPreparedStatement(Connection con)
+					throws SQLException {
+				PreparedStatement ps =  con.prepareStatement(sql);
+				ps.setString(1, username);
+				ps.setString(2, desc);
+				ps.setInt(3, user_id);
+				return ps;
+			}
+		});
+		
+		//update cahce
+		User user = (User)mapOps.get("user", "user:"+user_id);
+		user.setUser_name(username);
+		user.setUser_desc(desc);
+		mapOps.put("user", "user:"+user_id, user);
+		
+	}
+	
 }

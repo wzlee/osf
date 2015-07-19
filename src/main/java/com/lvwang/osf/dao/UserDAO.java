@@ -18,4 +18,5 @@ public interface UserDAO {
 	boolean delete(int id);
 	void updateActivationKey(int user_id, String key);
 	void updateAvatar(int user_id, String avatar);
+	void updateUsernameAndDesc(int user_id, String username, String desc);
 }

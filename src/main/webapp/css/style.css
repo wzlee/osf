@@ -657,6 +657,9 @@ form style
 .setting.info.form{
 	margin-top: 30px;
 }
+.setting.info .cancle{
+	display: none;
+}
 
 
 /******************

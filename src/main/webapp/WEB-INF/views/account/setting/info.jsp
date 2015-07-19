@@ -9,6 +9,11 @@
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/navbar.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/semantic.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">
+	
+	<script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath() %>/js/basic.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath() %>/js/code.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath() %>/js/setting.js"></script>
 </head>
 <body>
 	<%@ include file="../../topbar.jsp" %>
@@ -35,17 +40,19 @@
 				<div class="ui divider">
 				
 					<div class="ui form setting info">
-					    <div class="inline field">
+					    <div class="inline disabled field">
 					      <label>用户名</label>
-					      <input type="text" placeholder="两排杨树">
+					      <input type="text" id="user_name" placeholder="${user.user_name }">
+					      <span id="user_name_tip" style="color: red"></span>
 					    </div>
-					    <div class="inline field">
+					    <div class="inline disabled field">
 					      <label>签名</label>
-					      <textarea plcaeholder=""></textarea>
+					      <textarea id="user_desc" plcaeholder="">${user.user_desc }</textarea>
 					    </div>
 					    <div class="inline field">
-					   		<label for=""></label>
-					    	<div class="ui tiny blue button">保存</div>
+					   		<label for="#"></label>
+					    	<div class="ui tiny button modify" id="info_save">修改</div>
+					    	<div class="ui tiny basic button cancle" id="info_cancle">取消</div>
 					    </div>
 
 					</div>
