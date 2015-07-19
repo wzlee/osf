@@ -253,5 +253,21 @@ public class UserDAOImpl implements UserDAO{
 		mapOps.put("user", "user:"+user_id, user);
 		
 	}
+
+	public String getRestPwdKey(String email) {
+		String sql = "select resetpwd_key from " + TABLE + " where user_email=?";
+		return jdbcTemplate.query(sql, new Object[]{email}, new ResultSetExtractor<String>(){
+
+			public String extractData(ResultSet rs) throws SQLException,
+					DataAccessException {
+				String key = null;
+				if(rs.next()) {
+					key = rs.getString("resetpwd_key");
+				}
+				return key;
+			}
+			
+		});
+	}
 	
 }

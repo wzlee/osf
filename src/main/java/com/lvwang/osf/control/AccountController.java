@@ -86,6 +86,28 @@ public class AccountController {
 	public String settingSecurity(HttpSession session){
 		return "account/setting/security";
 	}
+
+	@RequestMapping(value="/setting/resetpwd")
+	public ModelAndView resetpwd(@RequestParam("key") String key, 
+						   @RequestParam("email") String email,
+						   HttpSession session){
+		ModelAndView mav = new ModelAndView();
+		//set user login
+		User user = userService.findByEmail(email);
+		session.setAttribute("user", user);
+		
+		String status = null;
+		if(userService.isAllowedResetPwd(email, key)){
+			status = Property.SUCCESS_PWD_RESET_ALLOWED;
+		} else {
+			status = Property.ERROR_PWD_RESET_NOTALLOWED;
+		}
+		mav.addObject("status", status);
+		mav.addObject("SUCCESS_PWD_RESET_ALLOWED", Property.SUCCESS_PWD_RESET_ALLOWED);
+		mav.addObject("ERROR_PWD_RESET_NOTALLOWED", Property.ERROR_PWD_RESET_NOTALLOWED);
+		mav.setViewName("account/setting/resetpwd");
+		return mav;
+	}
 	
 	@ResponseBody
 	@RequestMapping(value="/login", method=RequestMethod.POST)

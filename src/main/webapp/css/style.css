@@ -661,6 +661,11 @@ form style
 	display: none;
 }
 
+.security .reset_pwd_area, .security .email_check_area{
+	display: none;
+}
+
+
 
 /******************
 	modal style

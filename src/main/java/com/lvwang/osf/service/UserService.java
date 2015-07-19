@@ -330,5 +330,26 @@ public class UserService {
 	public void updateUsernameAndDesc(int user_id, String username, String desc){
 		userDao.updateUsernameAndDesc(user_id, username, desc);
 	}
+	
+	/**
+	 * 检查是否有权限充值密码
+	 * @param email
+	 * @param key
+	 */
+	public boolean isAllowedResetPwd(String email, String key){
+		if( (email==null) || (key==null)){
+			return false;
+		}
+		
+		String resetpwd_key = userDao.getRestPwdKey(email);
+		boolean result = false;
+		if(resetpwd_key == null || resetpwd_key.length() ==0){
+			result = false;
+		} else {
+			result = resetpwd_key.equals(key) ? true : false;
+		}
+		
+		return result;
+	}
 
 }

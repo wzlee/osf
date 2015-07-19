@@ -46,6 +46,7 @@ public class Property {
 	public static final String ERROR_PWD_DIFF = "002001";			//"密码错误";
 	public static final String ERROR_PWD_SHORT = "002002";			//"密码太短";
 	public static final String ERROR_PWD_LONG = "002003";			//"密码太长";
+	public static final String ERROR_PWD_RESET_NOTALLOWED = "002004";			//
 
 	public static final String ERROR_CFMPWD_EMPTY = "003000";		//"请输入确认密码";
 	public static final String ERROR_CFMPWD_NOTAGREE = "003001";		//"密码输入不一致";	
@@ -98,6 +99,7 @@ public class Property {
 	public static final String SUCCESS = "1";
 	
 	public static final String SUCCESS_PWD_FORMAT = "102000";			//密码格式正确
+	public static final String SUCCESS_PWD_RESET_ALLOWED = "102001";			
 	
 	public static final String SUCCESS_ACCOUNT_REG = "104000";			//"注册成功";
 	public static final String SUCCESS_ACCOUNT_LOGIN = "104001";		//"登陆成功";
