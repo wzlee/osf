@@ -33,12 +33,14 @@
 	var ERROR_EMAIL_EMPTY = "001001";			//"邮箱输入为空";
 	var ERROR_EMAIL_FORMAT = "001002";		//"邮箱地址格式错误";
 	var ERROR_EMAIL_NOT_REG = "001003";		//邮箱未注册
+	var ERROR_EMAIL_RESETPWD_SEND = "001004";		//密码重置邮件发送失败
 	
 	var ERROR_PWD_EMPTY = "002000";			//"请输入密码";
 	var ERROR_PWD_DIFF = "002001";			//"密码错误";
 	var ERROR_PWD_SHORT = "002002";			//"密码太短";
 	var ERROR_PWD_LONG = "002003";			//"密码太长";
-
+	var ERROR_PWD_RESET = "002005";			//重置密码错误
+	
 	var ERROR_CFMPWD_EMPTY = "003000";		//"请输入确认密码";
 	var ERROR_CFMPWD_NOTAGREE = "003001";		//"密码输入不一致";	
 		
@@ -83,7 +85,10 @@
 	 ***********************************************************************/
 	var SUCCESS = "1";
 	
+	var SUCCESS_EMAIL_RESETPWD_SEND = "101000"; //重置密码邮件发送成功
+		
 	var SUCCESS_PWD_FORMAT = "102000";			//密码格式正确
+	var SUCCESS_PWD_RESET = "102002";
 	
 	var SUCCESS_ACCOUNT_REG = "104000";			//"注册成功";
 	var SUCCESS_ACCOUNT_LOGIN = "104001";		//"登陆成功";

@@ -269,5 +269,34 @@ public class UserDAOImpl implements UserDAO{
 			
 		});
 	}
+
+	public void updateResetPwdKey(final String email, final String key) {
+		final String sql = "update " + TABLE + " set resetpwd_key=? where user_email=?";
+		jdbcTemplate.update(new PreparedStatementCreator() {
+			
+			public PreparedStatement createPreparedStatement(Connection con)
+					throws SQLException {
+				PreparedStatement ps =  con.prepareStatement(sql);
+				ps.setString(1, key);
+				ps.setString(2, email);
+				return ps;
+			}
+		});
+		
+	}
+
+	public void updatePassword(final String email, final String password) {
+		final String sql = "update " + TABLE + " set user_pwd=? where user_email=?";
+		jdbcTemplate.update(new PreparedStatementCreator() {
+			
+			public PreparedStatement createPreparedStatement(Connection con)
+					throws SQLException {
+				PreparedStatement ps =  con.prepareStatement(sql);
+				ps.setString(1, password);
+				ps.setString(2, email);
+				return ps;
+			}
+		});
+	}
 	
 }

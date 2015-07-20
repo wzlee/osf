@@ -20,4 +20,6 @@ public interface UserDAO {
 	void updateAvatar(int user_id, String avatar);
 	void updateUsernameAndDesc(int user_id, String username, String desc);
 	String getRestPwdKey(String email);
+	void updateResetPwdKey(String email, String key);
+	void updatePassword(String email, String password);
 }

@@ -332,7 +332,18 @@ public class UserService {
 	}
 	
 	/**
-	 * 检查是否有权限充值密码
+	 * return reset password key
+	 * @param user_id
+	 * @return
+	 */
+	public String updateResetPwdKey(String email){
+		String key = CipherUtil.generateRandomLinkUseEmail(email);
+		userDao.updateResetPwdKey(email, key);
+		return key;
+	}
+	
+	/**
+	 * 检查是否有权限重置密码
 	 * @param email
 	 * @param key
 	 */
@@ -352,4 +363,27 @@ public class UserService {
 		return result;
 	}
 
+	/**
+	 * 
+	 * @param email
+	 * @param password
+	 * @return
+	 */
+	public String resetPassword(String email, String password, String cfm_pwd){
+		if( (password == null || password.length() == 0) || 
+			 (cfm_pwd == null || cfm_pwd.length()==0)){
+			return Property.ERROR_PWD_EMPTY;
+		}
+		if(!password.equals(cfm_pwd)) {
+			return Property.ERROR_PWD_DIFF;
+		}
+		
+		String vpf_rs = CipherUtil.validatePasswordFormat(password);
+		if(vpf_rs != Property.SUCCESS_PWD_FORMAT)
+			return vpf_rs;
+		
+		userDao.updatePassword(email, CipherUtil.generatePassword(password));
+		userDao.updateResetPwdKey(email, null);
+		return Property.SUCCESS_PWD_RESET;
+	}
 }

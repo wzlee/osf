@@ -87,8 +87,8 @@ public class AccountController {
 		return "account/setting/security";
 	}
 
-	@RequestMapping(value="/setting/resetpwd")
-	public ModelAndView resetpwd(@RequestParam("key") String key, 
+	@RequestMapping(value="/resetpwd", method=RequestMethod.GET)
+	public ModelAndView resetpwdPage(@RequestParam("key") String key, 
 						   @RequestParam("email") String email,
 						   HttpSession session){
 		ModelAndView mav = new ModelAndView();
@@ -105,9 +105,34 @@ public class AccountController {
 		mav.addObject("status", status);
 		mav.addObject("SUCCESS_PWD_RESET_ALLOWED", Property.SUCCESS_PWD_RESET_ALLOWED);
 		mav.addObject("ERROR_PWD_RESET_NOTALLOWED", Property.ERROR_PWD_RESET_NOTALLOWED);
-		mav.setViewName("account/setting/resetpwd");
+		mav.setViewName("account/resetpwd");
 		return mav;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/resetpwd", method=RequestMethod.POST)
+	public Map<String, Object> resetpwd(@RequestParam("password") String password, 
+										@RequestParam("cfm_pwd") String cfm_pwd,
+										HttpSession session){
+		Map<String, Object> map = new HashMap<String, Object>();
+		User user = (User)session.getAttribute("user");
+		
+		map.put("status", userService.resetPassword(user.getUser_email(), password, cfm_pwd));
+		return map;
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value="/send_resetpwd_email")
+	public Map<String, Object> sendResetPwdEmail(HttpSession session){
+		Map<String, Object> map = new HashMap<String, Object>();
+		User user = (User) session.getAttribute("user");
+		mailService.sendResetPwdEmail(user.getUser_email(), userService.updateResetPwdKey(user.getUser_email()));
+		map.put("status", Property.SUCCESS_EMAIL_RESETPWD_SEND);
+		return map;
+	}
+	
+	
 	
 	@ResponseBody
 	@RequestMapping(value="/login", method=RequestMethod.POST)
@@ -144,7 +169,7 @@ public class AccountController {
 		Map<String, String> map = new HashMap<String, String>();
 		String status = userService.register(username, email, password, cfmPwd, map);
 		if(Property.SUCCESS_ACCOUNT_REG.equals(status)){
-			mailService.sendMail(email, "OSF账户激活", map.get("activationKey"));
+			mailService.sendAccountActivationEmail(email, map.get("activationKey"));
 		} 
 		map.put("status", status);
 		return map;
@@ -165,7 +190,7 @@ public class AccountController {
 		Map<String, Object> map  = userService.updateActivationKey(email);
 		ret.put("status", (String)map.get("status"));
 		if(Property.SUCCESS_ACCOUNT_ACTIVATION_KEY_UPD.equals((String)map.get("status"))){
-			mailService.sendMail(email, "OSF账户激活", (String)map.get("activationKey"));
+			mailService.sendAccountActivationEmail(email, (String)map.get("activationKey"));
 			ret.put("status", Property.SUCCESS_ACCOUNT_ACTIVATION_EMAIL_RESEND);
 		}
 		return ret;

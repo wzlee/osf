@@ -69,18 +69,12 @@ $(document).ready(function(){
     });
     
     $('#send_check_email').live('click', function(){
-        $.ajax({
-            url: basePath + '/account/setting/info',
-            type: 'POST',
-            dataType: 'json',
-            data:{
-          	  user_name: user_name,
-          	  user_desc:user_desc
-            }
-        })
-        .success(function(data){
-        	
-        })
+    	$(this).addClass("loading");
+    	$.get(basePath + '/account/send_resetpwd_email', function(data){
+    		if(data.status == SUCCESS_EMAIL_RESETPWD_SEND){
+    			$('#send_check_email').removeClass("loading").addClass("disabled").text("已发送");
+    		}
+    	})
     	
     });
 })

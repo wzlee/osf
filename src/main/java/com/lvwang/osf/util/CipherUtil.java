@@ -74,6 +74,21 @@ public class CipherUtil {
 		return null;
 	}
 	
+	public static String generateRandomLinkUseEmail(String email){
+		MessageDigest md;
+		try {
+			md = MessageDigest.getInstance("MD5");
+			byte[] results = md.digest(new String(email+System.currentTimeMillis()).getBytes("utf-8"));
+			
+			return Base64.encodeBase64String(results).replace('+', '-').replace('/', '_').substring(0, 24);
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	private static String encodeByMD5(String originString) {
 		if(originString != null && originString.length() != 0) {
 			MessageDigest md;

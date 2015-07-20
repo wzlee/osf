@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS `osf`.`osf_users` (
   `user_activationKey` VARCHAR(24) NULL,
   `user_avatar` VARCHAR(100) null,
   `user_desc` TEXT null,
+  `resetpwd_key` VARCHAR(100) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 alter table `osf_users` add unique(`user_name`, `user_email`);
