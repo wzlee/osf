@@ -8,7 +8,7 @@ public interface UserDAO {
 	User getUserByID(int id);
 	User getUserByEmail(String email);
 	User getUserByUsername(String username);
-	String getPwdByUsername(String username);
+	String getPwdByEmail(String email);
 	List<User> getUsersByIDs(int[] ids);
 	List<User> getUsers(int count);
 	User getUser(String condition, Object[] args);

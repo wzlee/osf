@@ -50,7 +50,7 @@ public class UserDAOImpl implements UserDAO{
 					user.setId(rs.getInt("id"));
 					user.setUser_name(rs.getString("user_name"));
 					user.setUser_email(rs.getString("user_email"));
-					user.setUser_pwd(rs.getString("user_pwd"));
+					//user.setUser_pwd(rs.getString("user_pwd"));
 					user.setUser_registered_date(rs.getDate("user_registered_date"));
 					user.setUser_status(rs.getInt("user_status"));	
 					user.setUser_activationKey(rs.getString("user_activationKey"));
@@ -86,8 +86,20 @@ public class UserDAOImpl implements UserDAO{
 		return queryUser(sql, new Object[]{username});
 	}
 
-	public String getPwdByUsername(String username) {
-		return null;
+	public String getPwdByEmail(String email) {
+		String sql = "select user_pwd from " + TABLE + " where user_email=?";
+		return jdbcTemplate.query(sql, new Object[]{email}, new ResultSetExtractor<String>(){
+
+			public String extractData(ResultSet rs) throws SQLException,
+					DataAccessException {
+				String password = null;
+				if(rs.next()){
+					password = rs.getString("user_pwd");
+				}
+				return password;
+			}
+			
+		});
 	}
 
 	public User getUser(String condition, Object[] args){

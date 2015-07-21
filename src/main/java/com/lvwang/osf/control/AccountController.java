@@ -121,6 +121,17 @@ public class AccountController {
 		return map;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/changepwd", method=RequestMethod.POST)
+	public Map<String, Object> changepwd(@RequestParam("old_pwd") String old_pwd, 
+										@RequestParam("new_pwd") String new_pwd,
+										HttpSession session){
+		Map<String, Object> map = new HashMap<String, Object>();
+		User user = (User)session.getAttribute("user");
+		map.put("status", userService.changePassword(user.getUser_email(), old_pwd, new_pwd));
+		return map;
+	}
+	
 	
 	@ResponseBody
 	@RequestMapping(value="/send_resetpwd_email")

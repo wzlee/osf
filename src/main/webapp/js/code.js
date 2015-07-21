@@ -40,10 +40,12 @@
 	var ERROR_PWD_SHORT = "002002";			//"密码太短";
 	var ERROR_PWD_LONG = "002003";			//"密码太长";
 	var ERROR_PWD_RESET = "002005";			//重置密码错误
+	var ERROR_PWD_NOTAGREE = "002006";			//修改密码时输入的旧密码与原始密码不符
 	
 	var ERROR_CFMPWD_EMPTY = "003000";		//"请输入确认密码";
 	var ERROR_CFMPWD_NOTAGREE = "003001";		//"密码输入不一致";	
-		
+	var ERROR_CFMPWD_SAME = "003002";		//新旧密码相同;	
+	
 	var ERROR_ACCOUNT_ACTIVATION = "004000";			//账户激活错误
 	var ERROR_ACCOUNT_ACTIVATION_EXPIRED = "004001";	//激活链接过期
 	var ERROR_ACCOUNT_ACTIVATION_NOTEXIST = "004002";	//激活账户不存在
@@ -89,6 +91,7 @@
 		
 	var SUCCESS_PWD_FORMAT = "102000";			//密码格式正确
 	var SUCCESS_PWD_RESET = "102002";
+	var SUCCESS_PWD_CHANGE = "102003";
 	
 	var SUCCESS_ACCOUNT_REG = "104000";			//"注册成功";
 	var SUCCESS_ACCOUNT_LOGIN = "104001";		//"登陆成功";

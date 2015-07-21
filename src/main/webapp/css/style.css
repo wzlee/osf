@@ -661,10 +661,12 @@ form style
 	display: none;
 }
 
-.security .reset_pwd_area, .security .email_check_area{
+.security .change_pwd_area, .security .email_check_area{
 	display: none;
 }
-
+.reset_pwd .ui.form .inline.field >label{
+	width:60px;
+}
 
 
 /******************

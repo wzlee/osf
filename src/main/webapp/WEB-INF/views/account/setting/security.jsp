@@ -46,15 +46,17 @@
 							<label for="">密码</label>
 							<a href="#" class="ui tiny button" id="change_pwd">修改</a>
 						</div>
-						<div class="reset_pwd_area">
+						<div class="change_pwd_area">
 							
 							<div class="inline field">
 								<label for="#">旧密码</label>
-								<input type="text" id="old_pwd">
+								<input type="password" id="old_pwd">
+								<span id="old_pwd_tip" style="color: red; display: none"></span>
 							</div>
 							<div class="inline field">
 								<label for="#">新密码</label>
-								<input type="text" id="new_pwd" >
+								<input type="password" id="new_pwd" >
+								<span id="new_pwd_tip" style="color: red; display: none"></span>
 							</div>					
 
 							<div class="ui tiny blue button" id="save_pwd">保存</div>

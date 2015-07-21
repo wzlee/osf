@@ -56,16 +56,16 @@ public class UserService {
 		return result;
 	}
 	
-	public String confirmPwd(String user_name, String user_pwd) {
-		if(user_pwd == null || user_name.length() == 0)
-			return Property.ERROR_PWD_EMPTY;
-		String pwd = userDao.getPwdByUsername(user_name);
-		if(pwd.equals(user_pwd)) 
-			return null;
-		else
-			return Property.ERROR_PWD_DIFF;
-			
-	}
+//	public String confirmPwd(String user_name, String user_pwd) {
+//		if(user_pwd == null || user_name.length() == 0)
+//			return Property.ERROR_PWD_EMPTY;
+//		String pwd = userDao.getPwdByUsername(user_name);
+//		if(pwd.equals(user_pwd)) 
+//			return null;
+//		else
+//			return Property.ERROR_PWD_DIFF;
+//			
+//	}
 	
 	public User findByUsername(String username) {
 		User user = userDao.getUserByUsername(username);
@@ -130,7 +130,7 @@ public class UserService {
 		}
 		
 		//5 password validate
-		if(!CipherUtil.validatePassword(user.getUser_pwd(), password)) {
+		if(!CipherUtil.validatePassword(userDao.getPwdByEmail(email), password)) {
 			ret.put("status", Property.ERROR_PWD_DIFF);
 			return ret;
 		}
@@ -364,18 +364,21 @@ public class UserService {
 	}
 
 	/**
-	 * 
+	 * 重置密码
 	 * @param email
 	 * @param password
 	 * @return
 	 */
 	public String resetPassword(String email, String password, String cfm_pwd){
-		if( (password == null || password.length() == 0) || 
-			 (cfm_pwd == null || cfm_pwd.length()==0)){
+		if( password == null || password.length() == 0){
 			return Property.ERROR_PWD_EMPTY;
 		}
+		if(cfm_pwd == null || cfm_pwd.length()==0){
+			return Property.ERROR_CFMPWD_EMPTY;
+		}
+			 
 		if(!password.equals(cfm_pwd)) {
-			return Property.ERROR_PWD_DIFF;
+			return Property.ERROR_CFMPWD_NOTAGREE;
 		}
 		
 		String vpf_rs = CipherUtil.validatePasswordFormat(password);
@@ -385,5 +388,36 @@ public class UserService {
 		userDao.updatePassword(email, CipherUtil.generatePassword(password));
 		userDao.updateResetPwdKey(email, null);
 		return Property.SUCCESS_PWD_RESET;
+	}
+	
+	/**
+	 * 修改密码
+	 * @param email
+	 * @param old_pwd
+	 * @param new_pwd
+	 * @return
+	 */
+	public String changePassword(String email, String old_pwd, String new_pwd){
+		if( old_pwd == null || old_pwd.length() == 0){
+			return Property.ERROR_PWD_EMPTY;
+		}
+		if( new_pwd == null || new_pwd.length() == 0){
+			return Property.ERROR_PWD_EMPTY;
+		}
+		if(new_pwd.equals(old_pwd)){
+			return Property.ERROR_CFMPWD_SAME;
+		}
+				
+		String vpf_rs = CipherUtil.validatePasswordFormat(new_pwd);
+		if(vpf_rs != Property.SUCCESS_PWD_FORMAT)
+			return vpf_rs;
+		
+		String current_pwd = userDao.getPwdByEmail(email);
+		if(!current_pwd.equals(CipherUtil.generatePassword(old_pwd))){
+			return Property.ERROR_PWD_NOTAGREE;
+		}
+		
+		userDao.updatePassword(email, CipherUtil.generatePassword(new_pwd));
+		return Property.SUCCESS_PWD_CHANGE;
 	}
 }

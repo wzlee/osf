@@ -47,9 +47,21 @@ $(document).ready(function(){
 				$(reset_btn).removeClass('loading').text('密码已重置');
 				setTimeout(function(){
 					self.location=basePath;
-				},1000);
+				},1500);
 				
 			} else {
+				if(data.status == ERROR_PWD_EMPTY){
+					$(password_tip).parent().addClass('error');
+					$(password_tip).text('请输入密码').show();
+				} else if(data.status == ERROR_CFMPWD_EMPTY){
+					$(cfm_pwd_tip).parent().addClass('error');
+					$(cfm_pwd_tip).text('请确认密码').show();
+				} else if(data.status == ERROR_CFMPWD_NOTAGREE){
+					$(password_tip).parent().addClass('error');
+					$(cfm_pwd_tip).parent().addClass('error');
+					$(cfm_pwd_tip).text('密码不一致').show();
+				} 
+				
 				$(password_tip).parent().removeClass('disabled');
 				$(cfm_pwd_tip).parent().removeClass('disabled');
 				$(this).removeClass("loading").text('保存');

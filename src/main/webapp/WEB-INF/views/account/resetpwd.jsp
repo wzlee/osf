@@ -35,7 +35,7 @@
 							<span id="password_tip" style="color: red; display: none"></span>
 						</div>
 						<div class="inline field">
-							<label for="#">新密码</label>
+							<label for="#">确认密码</label>
 							<input type="password" id="cfm_pwd">
 							<span id="cfm_pwd_tip" style="color: red; display: none"></span>
 						</div>

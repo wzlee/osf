@@ -55,13 +55,13 @@ $(document).ready(function(){
     
     $('#change_pwd').live('click', function(){
     	$(this).parent().hide();
-    	$('.reset_pwd_area').show();
+    	$('.change_pwd_area').show();
     	$('.email_check_area').hide();
     	
     });
     $('#cancle_save_pwd').live('click', function(){
-    	$('.reset_pwd_area').hide();
-    	$('.reset_pwd_area').prev().show();
+    	$('.change_pwd_area').hide();
+    	$('.change_pwd_area').prev().show();
     });
     
     $('#forget_pwd').live('click', function(){
@@ -77,4 +77,72 @@ $(document).ready(function(){
     	})
     	
     });
+    
+    
+    
+    //change password 
+	$('#new_pwd, #old_pwd').focus(function(){
+		$(this).next().hide();
+		$(this).parent().removeClass('error');
+	});
+	
+	$('#save_pwd').live('click', function(){
+		var old_pwd = $('#old_pwd').val();
+		var new_pwd = $('#new_pwd').val();
+		var save_pwd_btn = $(this);
+		var new_pwd_tip = $('#new_pwd_tip');
+		var old_pwd_tip = $('#old_pwd_tip');
+		
+		if(old_pwd == null || old_pwd.length == 0){
+			$(old_pwd_tip).parent().addClass('error');
+			$(old_pwd_tip).text('请输入旧密码').show();
+			return false;
+		}
+		if(new_pwd == null || new_pwd.length == 0){
+			$(new_pwd_tip).parent().addClass('error');
+			$(new_pwd_tip).text('请确认新密码').show();
+			return false;
+		}
+		if(new_pwd == old_pwd){
+			$(new_pwd_tip).parent().addClass('error');
+			$(new_pwd_tip).text('新密码不能与原密码一样').show();
+			return false;
+		}
+			
+		$(new_pwd_tip).parent().addClass('disabled');
+		$(old_pwd_tip).parent().addClass('disabled');
+		$(this).addClass("loading");
+		
+		$.ajax({
+			url:basePath+"/account/changepwd",
+			type: 'POST',
+	        dataType: 'json',
+	        data:{
+	        	old_pwd:old_pwd,
+	        	new_pwd:new_pwd
+	        }
+		})
+		.success(function(data){
+			if(data.status == SUCCESS_PWD_CHANGE){
+				$(save_pwd_btn).removeClass('loading').text('密码已修改');
+				setTimeout(function(){
+					self.location=basePath;
+				},1500);
+				
+			} else {		
+				if(data.status == ERROR_PWD_NOTAGREE){
+					$(old_pwd_tip).parent().addClass('error');
+					$(old_pwd_tip).text('旧密码输入错误').show();
+				}
+				$(old_pwd_tip).parent().removeClass('disabled');
+				$(new_pwd_tip).parent().removeClass('disabled');
+				$(save_pwd_btn).removeClass("loading").text('保存');
+			}
+		})
+		
+	});
+    
+    
+    
+    
 })
