@@ -25,11 +25,11 @@ $(document).ready(function(){
         var current_url = window.location.href;
         var user_name = $('#user_name').val();
         var user_desc = $('#user_desc').val();
-        if(user_name == null || user_name == '' || user_name.length == 0){
-        	$('#user_name').parent('.field:first').addClass('error');
-        	$('#user_name_tip').text('请输入用户名');
-        	return false;
-        }
+//        if(user_name == null || user_name == '' || user_name.length == 0){
+//        	$('#user_name').parent('.field:first').addClass('error');
+//        	$('#user_name_tip').text('请输入用户名');
+//        	return false;
+//        }
         
         $.ajax({
           url: basePath + '/account/setting/info',
@@ -44,10 +44,12 @@ $(document).ready(function(){
           if(data.status == ERROR_USERNAME_EXIST){
         	  $('#user_name').parent('.field:first').addClass('error');
         	  $('#user_name_tip').text('用户名已存在');
-          } else if(data.status == ERROR_USERNAME_EMPTY ){
-          	  $('#user_name').parent('.field:first').addClass('error');
-        	  $('#user_name_tip').text('请输入用户名');
-          } else {
+          } 
+//          else if(data.status == ERROR_USERNAME_EMPTY ){
+//          	  $('#user_name').parent('.field:first').addClass('error');
+//        	  $('#user_name_tip').text('请输入用户名');
+//          } 
+          else {
         	  self.location = current_url;
           }
         })       	
