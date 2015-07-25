@@ -49,7 +49,7 @@ public class HomePage {
 		
 	}
 	
-	@RequestMapping("/{key}")
+	@RequestMapping("/{key}.html")
 	public String aliyuncheck(@PathVariable("key") String key){
 		return key;
 	}
