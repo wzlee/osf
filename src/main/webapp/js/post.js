@@ -1,8 +1,8 @@
 $(document).ready(function(){
-	$('#send').click(function() {
+	$('#send').click(function() {		
 		var title = $('#title').val();
 		var content = $('#content').val();
-		//var tags = $('#tags').val();
+
 		var post_status = $('input[name="post_status"][checked]').val();
 		var comment_status = $('input[name="comment_status"][checked]').val();
 		$.ajax({
@@ -33,9 +33,16 @@ $(document).ready(function(){
 	});
 
 	$('#like').click(function() {
+		var isLogin = $('meta[name=isLogin]').attr('content');
+		if(isLogin == 'false'){
+			$('.ui.small.modal').modal('show');
+			return false;
+		}
+		
 		var object_type = $('meta[name=type]').attr('content');
 		var object_id = $('meta[name=id]').attr('content');
-		var url = basePath;
+		var author = $('meta[name=author]').attr('content');
+		var url = basePath+"/like";
 
 		if(object_type == 'post') {
 			object_type = 0;
@@ -60,6 +67,7 @@ $(document).ready(function(){
 			type: 'POST',
 			dataType: 'json',
 			data:{
+				author:author,
 				object_type: object_type,
 				object_id: object_id
 			}

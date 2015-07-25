@@ -12,20 +12,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.lvwang.osf.model.Notification;
 import com.lvwang.osf.model.User;
 import com.lvwang.osf.service.LikeService;
+import com.lvwang.osf.service.NotificationService;
+import com.lvwang.osf.util.Dic;
 import com.lvwang.osf.util.Property;
 
-@Controller("/like")
+@Controller
+@RequestMapping("/like")
 public class LikeController {
 
 	@Autowired
 	@Qualifier("likeService")
 	private LikeService likeService;
 	
+	@Autowired
+	@Qualifier("notificationService")
+	private NotificationService notificationService;
+	
 	@ResponseBody
 	@RequestMapping("/do")
-	public Map<String, String> like(@RequestParam("object_type") int object_type,
+	public Map<String, String> like(@RequestParam("author") int author,
+									@RequestParam("object_type") int object_type,
 					  				@RequestParam("object_id") int object_id,
 					  				HttpSession session){
 		User me = (User) session.getAttribute("user");
@@ -33,6 +42,15 @@ public class LikeController {
 		likeService.like(me.getId(), object_type, object_id);
 		Map<String, String> ret = new HashMap<String, String>();
 		ret.put("status", Property.SUCCESS_LIKE);
+		
+		Notification notification = new Notification(Dic.NOTIFY_TYPE_LIKE, 
+													 0, 
+													 object_type, 
+													 object_id, 
+													 author, 
+													 me.getId()
+													 );
+		notificationService.doNotify(notification);
 		return ret;
 	}
 	

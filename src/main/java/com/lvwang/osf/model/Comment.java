@@ -8,12 +8,12 @@ public class Comment {
 	private int comment_object_id;
 	private int comment_author;
 	private String comment_author_name;
-	private String comment_author_email;
 	private String comment_author_avatar;
 	private Date comment_ts;
 	private String comment_content;
 	private int comment_parent;
-	private String comment_parent_email;
+	private int comment_parent_author;
+	private String comment_parent_author_name;
 	public int getId() {
 		return id;
 	}
@@ -38,12 +38,7 @@ public class Comment {
 	public void setComment_author(int comment_author) {
 		this.comment_author = comment_author;
 	}
-	public String getComment_author_email() {
-		return comment_author_email;
-	}
-	public void setComment_author_email(String comment_author_email) {
-		this.comment_author_email = comment_author_email;
-	}
+
 	public Date getComment_ts() {
 		return comment_ts;
 	}
@@ -68,16 +63,23 @@ public class Comment {
 	public void setComment_author_name(String comment_author_name) {
 		this.comment_author_name = comment_author_name;
 	}
-	public String getComment_parent_email() {
-		return comment_parent_email;
-	}
-	public void setComment_parent_email(String comment_parent_email) {
-		this.comment_parent_email = comment_parent_email;
-	}
+
 	public String getComment_author_avatar() {
 		return comment_author_avatar;
 	}
 	public void setComment_author_avatar(String comment_author_avatar) {
 		this.comment_author_avatar = comment_author_avatar;
+	}
+	public String getComment_parent_author_name() {
+		return comment_parent_author_name;
+	}
+	public void setComment_parent_author_name(String comment_parent_author_name) {
+		this.comment_parent_author_name = comment_parent_author_name;
+	}
+	public int getComment_parent_author() {
+		return comment_parent_author;
+	}
+	public void setComment_parent_author(int comment_parent_author) {
+		this.comment_parent_author = comment_parent_author;
 	}
 }

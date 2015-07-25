@@ -1,9 +1,9 @@
 $(document).ready(function(){
-	$('.heart.icon').click(function(){
-		var user_id = $(this).attr('user_id');
+	$('.heart.icon').live('click', function(){
+		var author = $(this).attr('author');
 		var object_type = $(this).attr('object_type');
 		var object_id = $(this).attr('object_id');
-		var url = basePath;
+		var url = basePath+"/like";
 		var like_count =parseInt($(this).next().text());
 
 		//已经喜欢 点击取消喜欢
@@ -23,6 +23,7 @@ $(document).ready(function(){
 			type: 'POST',
 			dataType: 'json',
 			data:{
+				author:author,
 				object_type: object_type,
 				object_id: object_id
 			}

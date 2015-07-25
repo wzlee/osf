@@ -38,10 +38,116 @@ public class AccountController {
 		return "account/login";
 	}
 	
+	@RequestMapping(value="/setting/info", method=RequestMethod.GET)
+	public String settingInfoPage(HttpSession session){		
+		return "account/setting/info";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/setting/info", method=RequestMethod.POST)
+	public Map<String, Object> settingInfo(@RequestParam("user_name") String user_name, 
+							  @RequestParam("user_desc") String user_desc,
+							  HttpSession session){	
+		User me = (User)session.getAttribute("user");
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if(user_name == null || user_name.length() == 0){
+			map.put("status", Property.ERROR_USERNAME_EMPTY);
+			return map;
+		}
+		
+		String status = null;
+		User user = userService.findByUsername(user_name);
+		if(user != null){
+			status = Property.ERROR_USERNAME_EXIST;
+		}else {
+			//username is ok, but return a error status
+			status = Property.ERROR_USERNAME_NOTEXIST;
+			userService.updateUsernameAndDesc(me.getId(), 
+											  user_name,
+											  user_desc);
+			//update session
+			me.setUser_name(user_name);
+			me.setUser_desc(user_desc);
+		}
+		map.put("status", status);
+		return map;
+	}
+	
+	
+	@RequestMapping(value="/setting/avatar")
+	public ModelAndView settingAvatar(HttpSession session){
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("account/setting/avatar");
+		return mav;
+	}
+	
+	@RequestMapping(value="/setting/security")
+	public String settingSecurity(HttpSession session){
+		return "account/setting/security";
+	}
+
+	@RequestMapping(value="/resetpwd", method=RequestMethod.GET)
+	public ModelAndView resetpwdPage(@RequestParam("key") String key, 
+						   @RequestParam("email") String email,
+						   HttpSession session){
+		ModelAndView mav = new ModelAndView();
+		//set user login
+		User user = userService.findByEmail(email);
+		session.setAttribute("user", user);
+		
+		String status = null;
+		if(userService.isAllowedResetPwd(email, key)){
+			status = Property.SUCCESS_PWD_RESET_ALLOWED;
+		} else {
+			status = Property.ERROR_PWD_RESET_NOTALLOWED;
+		}
+		mav.addObject("status", status);
+		mav.addObject("SUCCESS_PWD_RESET_ALLOWED", Property.SUCCESS_PWD_RESET_ALLOWED);
+		mav.addObject("ERROR_PWD_RESET_NOTALLOWED", Property.ERROR_PWD_RESET_NOTALLOWED);
+		mav.setViewName("account/resetpwd");
+		return mav;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/resetpwd", method=RequestMethod.POST)
+	public Map<String, Object> resetpwd(@RequestParam("password") String password, 
+										@RequestParam("cfm_pwd") String cfm_pwd,
+										HttpSession session){
+		Map<String, Object> map = new HashMap<String, Object>();
+		User user = (User)session.getAttribute("user");
+		
+		map.put("status", userService.resetPassword(user.getUser_email(), password, cfm_pwd));
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/changepwd", method=RequestMethod.POST)
+	public Map<String, Object> changepwd(@RequestParam("old_pwd") String old_pwd, 
+										@RequestParam("new_pwd") String new_pwd,
+										HttpSession session){
+		Map<String, Object> map = new HashMap<String, Object>();
+		User user = (User)session.getAttribute("user");
+		map.put("status", userService.changePassword(user.getUser_email(), old_pwd, new_pwd));
+		return map;
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value="/send_resetpwd_email")
+	public Map<String, Object> sendResetPwdEmail(HttpSession session){
+		Map<String, Object> map = new HashMap<String, Object>();
+		User user = (User) session.getAttribute("user");
+		mailService.sendResetPwdEmail(user.getUser_email(), userService.updateResetPwdKey(user.getUser_email()));
+		map.put("status", Property.SUCCESS_EMAIL_RESETPWD_SEND);
+		return map;
+	}
+	
+	
 	
 	@ResponseBody
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String login(@RequestParam("email") String email,
+	public Map<String, Object> login(@RequestParam("email") String email,
 					    @RequestParam("password") String password,
 					    HttpSession session) {
 		/*
@@ -56,7 +162,7 @@ public class AccountController {
 		if(Property.SUCCESS_ACCOUNT_LOGIN.equals(status)) {
 			session.setAttribute("user", (User)ret.get("user"));			
 		}
-		return status;		
+		return ret;		
 	}
 	
 	@RequestMapping(value="/register", method=RequestMethod.GET)
@@ -74,7 +180,7 @@ public class AccountController {
 		Map<String, String> map = new HashMap<String, String>();
 		String status = userService.register(username, email, password, cfmPwd, map);
 		if(Property.SUCCESS_ACCOUNT_REG.equals(status)){
-			mailService.sendMail(email, "OSF 激活", "hello");
+			mailService.sendAccountActivationEmail(email, map.get("activationKey"));
 		} 
 		map.put("status", status);
 		return map;
@@ -84,36 +190,48 @@ public class AccountController {
 	public ModelAndView actication(@RequestParam("email") String email) {
 		ModelAndView mav = new ModelAndView();	
 		mav.setViewName("account/activation");
-		User user = userService.findByEmail(email);
-		if(user != null) {
-			if(user.getUser_status() == UserService.STATUS_USER_NORMAL) {
-				mav.setViewName("/account/login");
-			} else if(user.getUser_status() == UserService.STATUS_USER_INACTIVE) {
-				
-			}
-			
-			//TO-DO
-			//send email
-			mav.addObject("email", email);
-		}
+		mav.addObject("email", email);
 		return mav;
 	}
 	
+	@ResponseBody
 	@RequestMapping("/activation/mail/resend")
-	public String acticationMailResend(@RequestParam("email") String email) {
-		return "account/activation";
+	public Map<String, String> acticationMailResend(@RequestParam("email") String email) {
+		Map<String, String> ret = new HashMap<String, String>();
+		Map<String, Object> map  = userService.updateActivationKey(email);
+		ret.put("status", (String)map.get("status"));
+		if(Property.SUCCESS_ACCOUNT_ACTIVATION_KEY_UPD.equals((String)map.get("status"))){
+			mailService.sendAccountActivationEmail(email, (String)map.get("activationKey"));
+			ret.put("status", Property.SUCCESS_ACCOUNT_ACTIVATION_EMAIL_RESEND);
+		}
+		return ret;
 	}	
 	
-	@ResponseBody
 	@RequestMapping("/activation/{key}")
-	public String activation(@PathVariable("key") String key) {
+	public ModelAndView activation(@PathVariable("key") String key, 
+								   @RequestParam("email") String email, 
+								   HttpSession session) {
+		ModelAndView mav = new ModelAndView();	
+				
 		String status = null;
 		try {
-			status = userService.activateUser(URLDecoder.decode(key, "utf-8"));
+			status = userService.activateUser(email, URLDecoder.decode(key, "utf-8"));
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-		return status;		
+		if(Property.SUCCESS_ACCOUNT_ACTIVATION.equals(status) ||
+		   Property.ERROR_ACCOUNT_EXIST.equals(status)){
+			mav.setViewName("redirect:/explore");
+			session.setAttribute("user", userService.findByEmail(email));
+		} else {
+			mav.setViewName("account/activation");
+			mav.addObject("status", status);
+			mav.addObject("email", email);
+			mav.addObject("ERROR_ACCOUNT_ACTIVATION_NOTEXIST", Property.ERROR_ACCOUNT_ACTIVATION_NOTEXIST);
+			mav.addObject("ERROR_ACCOUNT_ACTIVATION_EXPIRED", Property.ERROR_ACCOUNT_ACTIVATION_EXPIRED);
+			mav.addObject("ERROR_ACCOUNT_ACTIVATION", Property.ERROR_ACCOUNT_ACTIVATION);
+		}
+		return mav;
 	}
 	
 	@RequestMapping("/completeinfo")

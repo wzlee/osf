@@ -1,10 +1,22 @@
 package com.lvwang.osf.service;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.imageio.ImageIO;
+
+import net.coobird.thumbnailator.Thumbnails;
+
+import org.codehaus.plexus.util.StringUtils;
+import org.jsoup.helper.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -70,6 +82,17 @@ public class AlbumService {
 		return map;
 	}
 	
+	public void saveImgToLocal(MultipartFile img, String key){
+		try {
+			BufferedImage imgBuf = ImageIO.read(img.getInputStream());
+			String classpath = AlbumService.class.getClassLoader().getResource("").getPath();
+			ImageIO.write(imgBuf, getImgType(img), new File(classpath+"/tmp/"+key));
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public Map<String, Object> uploadPhoto(MultipartFile img) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		Photo details = new Photo();
@@ -80,6 +103,7 @@ public class AlbumService {
 			map.put("status", Property.ERROR_PHOTO_CREATE);
 			return map;
 		} else {	
+			map.put("key", key);
 			map.put("link", BASE_URL+key);
 			map.put("status", Property.SUCCESS_PHOTO_CREATE);			
 		}
@@ -191,7 +215,10 @@ public class AlbumService {
 	}
 	
 	public Album getAlbum(int id) {
-		return albumDao.getAlbum(id);
+		Album album = albumDao.getAlbum(id);
+		List<Photo> photos = getPhotosOfAlbum(id);
+		album.setPhotos(photos);
+		return album;
 	}
 	
 	public String getKeyofPhoto(int id) {
@@ -202,4 +229,38 @@ public class AlbumService {
 		int user_id = albumDao.getAuthorOfAlbum(id);
 		return userService.findById(user_id);
 	}
+	
+	public String cropAvatar(String key, int x, int y, int width, int height) {
+		String status = null;
+		
+		String classpath = AlbumService.class.getClassLoader().getResource("").getPath();
+		try {
+			File ori_img = new File(classpath+"/tmp/"+key);
+			
+			BufferedImage croped_img = Thumbnails.of(ImageIO.read(ori_img))
+									  .sourceRegion(x, y, width, height)
+									  .size(200, 200).asBufferedImage();
+			String img_type = key.split("\\.")[1];
+			//convert bufferedimage to inputstream
+			ByteArrayOutputStream bos = new ByteArrayOutputStream();  
+			ImageIO.write(croped_img, img_type, bos);  
+			InputStream is = new ByteArrayInputStream(bos.toByteArray());
+			albumDao.delPhotoInBucket(key);
+			if( albumDao.uploadPhoto(is, key) != null ){
+				if(ori_img.exists()){
+					ori_img.delete();
+				}
+				status = Property.SUCCESS_AVATAR_CROP;
+			} else {
+				status = Property.ERROR_AVATAR_CROP;
+			}
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return status;
+	}
+	
+
+	
 }

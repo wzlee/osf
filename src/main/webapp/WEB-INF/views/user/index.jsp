@@ -5,20 +5,10 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8" />
-	<title>Document</title>
+	<title>${u.user_name }</title>
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/bootstrap2.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/navbar.css">
-    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/feed.css">
-    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/button.css">
-    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/card.css">
-    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/image.css">
-    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/divider.css">
-    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/list.css">
-    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/label.css">
-    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/icon.css">
-    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/menu.css">
-    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/statistic.css">
-    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/page.css">
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/semantic.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">
     
   	<script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.js"></script>
@@ -67,106 +57,30 @@
 	                        	</div>
 	                        </div>
 	                        <div class="meta">
-	                          <a class="like">
-	                            <i class="like icon"></i> ${post.like_count } Likes
-	                          </a>
-	                          <a class="share">
-	                            <i class="share alternate icon"></i> ${post.share_count } shares
-	                          </a>   
-	                          <a class="comment">
-	                            <i class="comment outline icon"></i> ${post.comment_count } comments
-	                          </a>                                                 
-	                        </div>
-	                        <div class="meta" id="tags">
+	                          <span style="float: left"> 
 	                        	<i class="tag icon"></i>
 	                        	<c:forEach items="${post.post_tags }" var="tag">
-	                        		<a href="#">${tag }</a>
+	                        		<a href="<c:url value="/tag/${tag }" />">${tag }</a>
 	                        	</c:forEach>
-								</a>							                     	
+	                          </span>
+	                          <span style="float: right">
+		                          <a class="like">
+		                            <i class="like icon"></i> ${post.like_count }
+		                          </a>
+		                          <a class="share">
+		                            <i class="share alternate icon"></i> ${post.share_count }
+		                          </a>   
+		                          <a class="comment">
+		                            <i class="comment outline icon"></i> ${post.comment_count }
+		                          </a>   
+							  </span>
 	                        </div>
+
+
 	                      </div>
 	                    </div>     <!-- end event -->  
                     </c:forEach>
-                              			
-          			<div class="ui divider"></div>
-                    <div class="event">                    
-                      <div class="content">
-                        <div class="text">
-                        	<div class="row">
-                        		<div class="span6">
-                        			<h3 class="ui header">First header</h3>
-                        			<div>
-                        				Ours is a life of constant reruns. We're always circling back to where we'd we started, then starting all over again. Even if we don't run extra laps that day, we surely will come back for more of the same another day soon.
-                        			</div>
-                        			<div class="postmeta">
 
-                        			</div>
-                        		</div>
-                        		<div class="span2">
-                        			<img class="ui small image" src="<c:url value="/img/avatar.jpg"/>" alt=""  />
-                        		</div>
-                        	</div>
-                        </div>
-                        <div class="meta">
-                          <a class="like">
-                            <i class="like icon"></i> 5 Likes
-                          </a>
-                          <a class="share">
-                            <i class="share alternate icon"></i> 10 shares
-                          </a>   
-                          <a class="comment">
-                            <i class="comment outline icon"></i> 10 comments
-                          </a>                                                 
-                        </div>
-                        <div class="meta" id="tags">
-                        	<i class="tag icon"></i>
-							<a href="#">#tag1
-							</a>   
-							<a href="#">#tag1
-							</a>							                     	
-                        </div>
-                      </div>
-                    </div>     <!-- end event -->       	
-			
-          			<div class="ui divider"></div>
-                    <div class="event">                    
-                      <div class="content">
-                        <div class="text">
-                        	<div class="row">
-                        		<div class="span6">
-                        			<h3 class="ui header">First header</h3>
-                        			<div>
-                        				Ours is a life of constant reruns. We're always circling back to where we'd we started, then starting all over again. Even if we don't run extra laps that day, we surely will come back for more of the same another day soon.
-                        			</div>
-                        			<div class="postmeta">
-
-                        			</div>
-                        		</div>
-                        		<div class="span2">
-                        			<img class="ui small image" src="<c:url value="/img/avatar.jpg"/>" alt=""  />
-                        		</div>
-                        	</div>
-                        </div>
-                        <div class="meta">
-                          <a class="like">
-                            <i class="like icon"></i> 5 Likes
-                          </a>
-                          <a class="share">
-                            <i class="share alternate icon"></i> 10 shares
-                          </a>   
-                          <a class="comment">
-                            <i class="comment outline icon"></i> 10 comments
-                          </a>                                                 
-                        </div>
-                        <div class="meta" id="tags">
-                        	<i class="tag icon"></i>
-							<a href="#">#tag1
-							</a>   
-							<a href="#">#tag1
-							</a>							                     	
-                        </div>
-                      </div>
-                    </div>   <!-- end event -->
           		
           			<h4 class="ui header albumheader">我的相册 (<a href="#"> 全部 </a>)</h4>
           			<div class="ui divider"></div>

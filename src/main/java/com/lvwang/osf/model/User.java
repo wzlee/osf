@@ -15,6 +15,15 @@ public class User implements Serializable{
 	private int user_status;
 	private String user_avatar;
 	private String user_activationKey;
+	private String user_desc;
+	
+	public boolean equals(Object that){
+		User user = (User)that;
+		return this.id == user.getId()?true:false;
+	}
+	public int hashCode() {
+		return this.id;
+	}
 	
 	public String getUser_name() {
 		return user_name;
@@ -69,5 +78,11 @@ public class User implements Serializable{
 	}
 	public void setUser_avatar(String user_avatar) {
 		this.user_avatar = user_avatar;
+	}
+	public String getUser_desc() {
+		return user_desc;
+	}
+	public void setUser_desc(String user_desc) {
+		this.user_desc = user_desc;
 	}
 }

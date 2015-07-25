@@ -14,6 +14,7 @@
 	 * 			   09:tag
 	 * 			   10:relation
 	 * 			   11:follow	
+	 * 			   12:interest
 	 * 			   ...)
 	 * 第4-6位标示对象的具体错误/成功类型
 	 * 
@@ -31,15 +32,20 @@
 	var ERROR_EMAIL_EXIST = "001000";			//"用户已注册";
 	var ERROR_EMAIL_EMPTY = "001001";			//"邮箱输入为空";
 	var ERROR_EMAIL_FORMAT = "001002";		//"邮箱地址格式错误";
+	var ERROR_EMAIL_NOT_REG = "001003";		//邮箱未注册
+	var ERROR_EMAIL_RESETPWD_SEND = "001004";		//密码重置邮件发送失败
 	
 	var ERROR_PWD_EMPTY = "002000";			//"请输入密码";
 	var ERROR_PWD_DIFF = "002001";			//"密码错误";
 	var ERROR_PWD_SHORT = "002002";			//"密码太短";
 	var ERROR_PWD_LONG = "002003";			//"密码太长";
-
+	var ERROR_PWD_RESET = "002005";			//重置密码错误
+	var ERROR_PWD_NOTAGREE = "002006";			//修改密码时输入的旧密码与原始密码不符
+	
 	var ERROR_CFMPWD_EMPTY = "003000";		//"请输入确认密码";
 	var ERROR_CFMPWD_NOTAGREE = "003001";		//"密码输入不一致";	
-		
+	var ERROR_CFMPWD_SAME = "003002";		//新旧密码相同;	
+	
 	var ERROR_ACCOUNT_ACTIVATION = "004000";			//账户激活错误
 	var ERROR_ACCOUNT_ACTIVATION_EXPIRED = "004001";	//激活链接过期
 	var ERROR_ACCOUNT_ACTIVATION_NOTEXIST = "004002";	//激活账户不存在
@@ -73,17 +79,25 @@
 	var ERROR_FOLLOW = "011000";				//follow failed
 	var ERROR_FOLLOW_UNDO = "011001";				//undo failed
 	
+	var ERROR_AVATAR_CROP = "014000";
+	var ERROR_AVATAR_CHANGE = "014001";
+	
 	/***********************************************************************
 	 * SUCCESS
 	 ***********************************************************************/
 	var SUCCESS = "1";
 	
+	var SUCCESS_EMAIL_RESETPWD_SEND = "101000"; //重置密码邮件发送成功
+		
 	var SUCCESS_PWD_FORMAT = "102000";			//密码格式正确
+	var SUCCESS_PWD_RESET = "102002";
+	var SUCCESS_PWD_CHANGE = "102003";
 	
 	var SUCCESS_ACCOUNT_REG = "104000";			//"注册成功";
 	var SUCCESS_ACCOUNT_LOGIN = "104001";		//"登陆成功";
 	var SUCCESS_ACCOUNT_ACTIVATION = "104002";		//账户激活成功
-	
+	var SUCCESS_ACCOUNT_ACTIVATION_EMAIL_RESEND = "104003";
+
 	var SUCCESS_POST_CREATE = "105000";		//
 	
 	var SUCCESS_ALBUM_CREATE = "106000";
@@ -103,3 +117,8 @@
 	
 	var SUCCESS_FOLLOW = "111000";
 	var SUCCESS_FOLLOW_UNDO = "111001";
+	var SUCCESS_INTEREST = "112000";
+	var SUCCESS_INTEREST_UNDO = "112001";
+	
+	var SUCCESS_AVATAR_CROP = "114000";
+	var SUCCESS_AVATAR_CHANGE = "114001";

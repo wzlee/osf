@@ -12,4 +12,6 @@ public interface PostDAO {
 	int save(Post post);
 	boolean delete(int id);
 	int getAuthorOfPost(int id);
+	
+	long count(int user_id);
 }

@@ -129,10 +129,27 @@ public class TagService {
 		return tagDao.getTagID(tag);
 	}
 	
+	/**
+	 * 需重构，迁移到feed或event
+	 * @param tag
+	 * @return
+	 */
 	public List<Event> getWithTag(String tag) {
 		List<Event> events = eventService.getEventsWithRelations(relationService.getRelationsWithTag(tag));
 		feedService.addUserInfo(events);
 		return events;
 	}
-		
+	
+	/**
+	 * 获取推荐tag
+	 * @param user_id
+	 * @return
+	 */
+	public List<Tag> getRecommendTags(int user_id){
+		List<Integer> tags_rec = new ArrayList<Integer>();
+		for(int i=00; i<10; i++){
+			tags_rec.add(i);
+		}
+		return tagDao.getTags(tags_rec);
+	}
 }

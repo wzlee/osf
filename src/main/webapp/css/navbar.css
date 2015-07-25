@@ -1567,7 +1567,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   border: 0;
 }
 .hidden {
-  display: none !important;
+  /* display: none !important; */
 }
 .affix {
   position: fixed;

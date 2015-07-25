@@ -50,23 +50,117 @@ a {
  #rightside {
 	padding-left:45px;
  }
+ #rightside .ui.vertical.menu{
+ 	width:100%;
+ 	border: none;
+ 	box-shadow:none;
+ }
+  #rightside .ui.vertical.menu .item{
+  	width:100%;
+  	padding: 15px 20px;
+  	
+  }
+ #rightside .item .right{
+ 	float: right;
+ 	padding-top: 10px;
+ }
+  #rightside .item .avatar{
+  	float: left;
+  }
+ #rightside .item .content{
+ 	height: 36px;
+ 	padding: 10px;
+ }
+ #rightside .item .content .header{
+ 	font-size: 16px;
+ 	color:black;
+ 	cursor: pointer;
+ }
+ #rightside .hottags .tagitem{
+ 	position: relative;
+ 	margin: 0;
+ 	padding: 0;
+ 	height: 80px;
+ 	width: 100%;
+ }
+ .tagitem .mask{
+	 	position: absolute;
+	 	top:0;
+	 	left:0;
+	 	width:100%;
+	 	height:80px;
+ 	 	background-color: black;
+		filter:alpha(opacity=50);
+  -moz-opacity:0.5;
+	   opacity:0.5; 
+	   
+ }
+ .tagitem .tag{
+ 	position: absolute;
+ 	left: 20px;
+ 	top: 30px;
+ 	color:white;
+ 	font-size: 20px;
+ }
+
+.ui.feed > .event {
+	margin-bottom: 10px;
+} 
+ 
 .ui.feed > .event > .content .extra.images img{
 	width: 32%;
 }
-  .ui.feed > .event > .content {
-  	line-height: 20px;
-  }
+
+.ui.feed > .event > .label{
+	width: 52px;
+	height: 52px;
+}
+
+
   
-  .post{
-  	margin-top:30px;
-  }
-  .post p {
-  	line-height: 24px;
-  }
-  .post.like{
-		float: right;
-  
-  }  
+.ui.feed >.event.empty{
+	display: none;
+}
+
+
+/*******************
+ 	post style
+ -------------
+ *******************/
+
+.post{
+	margin-top:30px;
+}
+.post .header{
+	font-size: 36px;
+	margin-bottom: 10px;
+}
+.post .date{
+	color: rgb(150, 150, 150);
+	font-size: 16px;
+}
+.post .author{
+	float: left;
+}
+.post .meta{
+	width: 100%;
+	height: 40px;
+	margin: 30px 0;
+}
+.post .author span{
+	font-size: 16px;
+}
+.post .tags{
+	float: right;
+}
+.post p {
+	line-height: 22px;
+	font-size: 13px;
+}
+.post.like{
+	float: right;
+
+}  
   
 /*   .tags{
         font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
@@ -122,9 +216,9 @@ a {
   	min-height: 330px;
   }
   
-  	.loginarea{
+  	.loginarea, .registerarea{
 		/*position: relative;*/
-		padding-top: 30%;		
+		padding-top: 30px;		
 	}
 	.forgetpwd{
 		float: right;
@@ -134,7 +228,7 @@ a {
 
 	}
 	.social .button{
-	
+		width: 100%;
 		margin-bottom: 10px;
 	}
 
@@ -167,14 +261,12 @@ a {
 	background: none;
 	
 }
-.ui.labeled.icon.menu {
-	margin-top: 0;
-	margin-left: 10px;
-	margin-bottom: 30px;
-	
+.nav .ui.vertical.menu .item {
+  width: 150px;
 }
+
 .ui.labeled.icon.menu > .item {
-	width: 141px;
+	width: 25%;
 }
 .ui.small.centered.circular.image {
 	width: 120px;
@@ -187,7 +279,7 @@ a {
 	padding-top: 30px;
 }
 
-.ui.cards > .card > .image > img, .ui.card > .image > img{
+.ui.card > .image > img{
 	  border-radius: 500rem;
 }
 .ui.cards > .card > .image, .ui.card > .image {
@@ -246,19 +338,377 @@ a {
 }
 
 .ui.feed > .event > .label + .content {
-	margin-top: 0px;
-	padding-top: 0px;
+	width: 85%;
+	background-color: white;
+	padding: 20px 20px 10px 20px;
+	border-radius: 2px;
+	line-height: 20px;
 }
 
 .ui.feed .content .extra img {
 	width: 100%;
 }
 
+.ui.feed > .event > .content .meta{
+	width: 100%;
+	margin-top: 10px;
+}
+.ui.feed > .event > .content .divider{
+	margin-left: -20px;
+	margin-right: -20px;
+}
+.header_box{
+	display: table;
+	margin-bottom: 40px;
+}
+.header_box .ui.avatar.image, #action_bar {
+	display: table-cell;
+	vertical-align: middle;
+	width: 13.5%;
+}
+
+.header_box .ui.avatar.image img{
+	width: 65px;;
+	height: 65px;
+}
+
+#action_bar{
+	padding-left: 10px;
+	width: 586px;
+}
+#action_bar .actions{
+	width: 100%;
+}
+#action_bar .short_post{
+	display: none;
+}
 #action_bar .item {
 	height: 100px;
 	padding: 28px;
 }
 
+.short_post{
+	width: 100%;
+	height: 140px;
+	border-radius: 3px;
+	background: #FFFFFF;
+	border: 1px solid #DEDEDE;	
+}
+
+#action_bar textarea {
+	width: 100%;
+	height: 90px;
+	border:none;
+	resize: none;
+	padding: 10px;
+}
+#action_bar textarea:FOCUS{
+	outline: none;
+	border:none;
+}
+#action_bar .bar{
+	padding: 5px;
+	border-top: 1px solid #DEDEDE;
+}
+#action_bar .bar .button{
+	float: right;
+}
+#action_bar .bar .button:FIRST-CHILD {
+	margin-left: 10px;
+}
+
+
+
+
+/********************
+ * explore page style
+ * ------------------
+ ********************/
+
+.explore{
+	margin-top: -40px;
+    padding-top: 50px;
+    height: 200px;
+    background-color: white;
+}
+
+ .explore .header{
+ 	position: relative;
+ 	width: 100%;
+ 	margin-bottom: 0;
+ }
+.explore .topbar{
+	position: relative;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #D1CDCD;
+}
+.explore .topbar .header > div{
+	display: inline-block;
+	width: 33%;
+	text-align: center;
+	font-size: 30px;
+	color: black;
+	cursor: pointer;
+}
+.explore .main .gallery{
+	padding: 40px;
+	padding-top: 50px;
+}
+.explore .main .gallery .box{
+	display: inline;
+	float: left;
+	margin-bottom: 5px;
+	overflow: hidden;
+}
+.explore .main .gallery img{
+	height: 200px;
+}
+.explore .active{
+	position: absolute;
+	left: 19.5%;
+	bottom: 0px;
+	width: 150px;
+	border-bottom: 4px solid orange;
+}
+.explore .tags {
+	text-align: center;
+	margin-bottom: 50px;
+}
+.explore .tags .tagbox{
+	position: relative;
+	display: inline-block;
+	height: 180px;
+	width: 180px;
+	overflow: hidden;
+}
+.explore .tags .tagbox .desc{
+	position: absolute;
+	left: 10px;
+	bottom: 10px;
+	font-size: 18px;
+	color: white;
+}
+.explore .tags .interested{
+	display: table;
+	position: absolute;
+	top: 0;
+	left:0;
+	height: 180px;
+	width: 180px;
+	opacity: 0.7;
+	background-color: black;
+}
+
+.explore .tags .hidden{
+	display: table;
+	position: absolute;
+	top: 0;
+	left:0;
+	height: 180px;
+	width: 180px;
+	opacity: 0;
+	background-color: black;
+	transition: opacity 0.3s linear;
+}
+.explore .tags .hidden:HOVER {
+	opacity: 0.5;
+}
+.explore .tags .hidden a, .explore .tags .interested a{
+	display: table-cell;
+	text-decoration: none;
+	font-size: 18px;
+	color: white;
+	vertical-align: middle;
+}
+
+
+
+
+.explore .users .userbox{ 
+	height: 180px;
+	width: 916px;
+	margin: 0 auto;
+	background-color: white;
+	overflow: hidden;
+	margin-bottom: 30px;
+}
+.explore .users .userbox .header{
+	display: inline-block;
+	width: 180px;
+	height: 180px;
+	overflow: hidden;
+	text-align: center;
+}
+
+.explore .userbox .header .avatar{
+	width: 70px;
+	height: 70px;
+	border-radius: 60px;
+	margin-top: 20px;
+	margin-bottom: 5px;
+}
+.explore .userbox .header .desc{
+	margin: 10px;
+}
+.explore .userbox .content{
+	display: inline-block;
+	height: 180px;
+	overflow: hidden;
+	
+}
+.explore .userbox .content  .box{
+	position: relative;
+	display: inline-block;
+	height: 180px;
+	width: 180px;
+	line-height: 180px;
+	overflow: hidden;
+}
+.explore .userbox .content  .box img{
+	height: 180px;
+	width: 180px;
+}
+.explore .userbox .content .cover{
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 180px;
+	width: 180px;
+	overflow: hidden;
+	background-color: black;
+	opacity: 0.5;
+	color: white;
+	font-size: 16px;
+	padding: 10px;
+}
+
+/****************
+	comment style
+*****************/
+
+.ui.comments .comment img.avatar, .ui.comments .comment .avatar img{
+	  border-radius: 100%;
+}
+
+.ui.comments #replyarea{
+	margin-bottom: 30px;
+}
+
+.ui.comments .reply.form textarea{
+	height: 100px;
+	resize:none;
+}
+
+
+.comments{
+	width: 100%;
+	background-color: white;
+}
+.comments #replyarea{
+	margin-top: 50px;
+}
+.comments #replyform{
+	margin-top: 10px;
+}
+.comments .header{
+	width: 60px;
+	font-size: 20px;
+	text-align: center;
+	border-bottom: 2px solid black;
+	margin-bottom: 0;
+	padding-bottom: 10px;
+}
+.comments .ui.divider{
+	margin-top: 0;
+}
+
+.comments .date{
+	font-size: 13px;
+}
+
+.comments .ui.comments .comment .text{
+	margin: 5px 0 10px 0;
+}
+
+.ui.comments .comment{
+	margin-bottom: 20px;
+}
+.ui.comments .comment:FIRST-CHILD {
+	margin-top: 40px;
+}
+/**
+form style
+*/
+
+.ui.form.setting .inline.field > input{
+	width: 40%;
+}
+.ui.form.setting .inline.field > textarea{
+	width: 80%;
+	height: 150px;
+	display: inline-block;
+	resize: none;
+}
+
+.ui.form.setting .inline.field > label{
+	width: 10%;
+	text-align: right;
+}
+.setting.info.form{
+	margin-top: 30px;
+}
+.setting.info .cancle{
+	display: none;
+}
+
+.security .change_pwd_area, .security .email_check_area{
+	display: none;
+}
+.reset_pwd .ui.form .inline.field >label{
+	width:60px;
+}
+
+
+/******************
+	modal style
+	----------
+******************/
+
+
+.ui.small.modal{
+	width: 35%;
+}
+.ui.modal{
+	left:55%;
+}
+
+/**************
+	album style
+*************/
+.ui.tiny.images img{
+	width: 88px;
+	height: 88px;
+}
+
+#imgcontainer {
+	margin-bottom: 30px;
+}
+#imgcontainer img {
+	width: 100%;
+}
+.album.metas .meta{
+	margin-bottom: 30px;
+}
+.album.metas .label{
+	margin: 0 5px 5px 0;
+}
+
+/**
+	scroll style
+**/
+#infscr-loading div{
+	text-align: center;
+}
 
 
 

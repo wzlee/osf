@@ -91,7 +91,7 @@
 				</div>
 			</div>
 			<div class="pulldown_tip">
-				<img src="/com.lvwang.osf/img/pulldown_tip.png" alt="向下滑动">
+				<img src="<%=request.getContextPath() %>/img/pulldown_tip.png" alt="向下滑动">
 			</div>
 		</div>
 		<div class="section section2">

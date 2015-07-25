@@ -5,21 +5,13 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
+	<title>写日志</title>
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/bootstrap2.css">
-  	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/divider.css">
-  	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/header.css">
-  	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/form.css">
-  	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/button.css">
-  	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/message.css">
-  	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/image.css">
-  	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/label.css">
-  	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/icon.css">
-  	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/navbar.css">
-  	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/navbar.css">
+ 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/semantic.css">
+ 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/font-awesome.min.css">
   	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/froala_editor.min.css">
   	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/froala_style.min.css">
-  	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/page.css">
   	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">
 
 

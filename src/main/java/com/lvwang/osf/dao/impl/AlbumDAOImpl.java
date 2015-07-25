@@ -98,17 +98,31 @@ public class AlbumDAOImpl implements AlbumDAO{
 
 		} catch (OSSException e) {
 			e.printStackTrace();
-			return null;
 		} catch (ClientException e) {
 			e.printStackTrace();
-			return null;
 		} catch (IOException e) {
 			e.printStackTrace();
-			return null;
 		}
-		
-		
+		return null;				
 	}
+	public String uploadPhoto(InputStream img, String key){
+		ObjectMetadata meta = new ObjectMetadata();
+		try {
+			meta.setContentLength(img.available());
+			
+			//上传到图片服务器
+			PutObjectResult result = client.putObject(bucket, key, img, meta);
+			return result.getETag();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public void delPhotoInBucket(String key){
+		client.deleteObject(bucket, key);
+	}
+	
 
 	public int getAlbumUser(int id) {
 		String sql = "select user_id from "+TABLE_ALBUM + " where id=?";
@@ -181,6 +195,7 @@ public class AlbumDAOImpl implements AlbumDAO{
 					album.setUser_id(rs.getInt("user_id"));
 					album.setLast_add_ts(rs.getTimestamp("last_add_ts"));
 					album.setCreate_ts(rs.getTimestamp("create_ts"));
+					album.setAlbum_tags(TagService.toList(rs.getString("album_tags")));
 				}
 				return album;
 			}

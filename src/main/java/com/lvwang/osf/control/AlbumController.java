@@ -33,6 +33,7 @@ import com.lvwang.osf.service.EventService;
 import com.lvwang.osf.service.FeedService;
 import com.lvwang.osf.service.FollowService;
 import com.lvwang.osf.service.InterestService;
+import com.lvwang.osf.service.UserService;
 import com.lvwang.osf.util.Dic;
 import com.lvwang.osf.util.Property;
 
@@ -61,14 +62,17 @@ public class AlbumController {
 	@Qualifier("followService")
 	private FollowService followService;
 	
+	@Autowired
+	@Qualifier("userService")
+	private UserService userService;
+	
 	@RequestMapping("/{id}/photos")
 	public ModelAndView album(@PathVariable("id") int id, HttpSession session) {
 		User me = (User) session.getAttribute("user");
 		
 		ModelAndView mav = new ModelAndView();
-		List<Photo> photos = albumService.getPhotosOfAlbum(id);
-		mav.addObject("album_id", id);
-		mav.addObject("photos", photos);
+		Album album = albumService.getAlbum(id);
+		mav.addObject("album", album);
 		
 		User author = albumService.getAuthorOfALbum(id); 
 		mav.addObject("u", author);
@@ -287,5 +291,64 @@ public class AlbumController {
 		session.setAttribute("post_cover", map.get("link"));
 		return map;
 	}
+	
+	/**
+	 * 上传头像 
+	 * @param img
+	 * @param session
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/upload/avatar", method=RequestMethod.POST)
+	public Map<String, Object> avatarUpload(@RequestParam("avatar_file") MultipartFile img,
+										    HttpSession session) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if(img.isEmpty()) {
+			map.put("status", Property.ERROR_PHOTO_EMPTY);
+			return map;
+		}
+		
+		//upload photo
+		map = albumService.uploadPhoto(img);
+		
+		//save to local
+		albumService.saveImgToLocal(img, (String)map.get("key"));
+		
+		session.setAttribute("temp_avatar", map.get("key"));
+		
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/cropavatar", method=RequestMethod.POST)
+	public Map<String, Object> cropAvatar(@RequestParam("x") int x,
+										 @RequestParam("y") int y,
+										 @RequestParam("width") int width,
+										 @RequestParam("height") int height,
+									     HttpSession session){
+		
+		//System.out.println("x:"+x+" y:"+y + " width:"+width+ " height:"+height);
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		String key = (String) session.getAttribute("temp_avatar");
+		if(key == null || key.length() == 0){
+			map.put("status", Property.ERROR_AVATAR_CHANGE);
+			return map;
+		}
+		
+		albumService.cropAvatar(key, x, y, width, height);
+		String status = userService.changeAvatar(((User)session.getAttribute("user")).getId(), key);
+		if(Property.SUCCESS_AVATAR_CHANGE.equals(status)) {
+			//update session
+			((User)session.getAttribute("user")).setUser_avatar(Property.IMG_BASE_URL+key);			
+		}
+		
+		map.put("status", status);
+		return map;
+		
+	}
+	
+	
 	
 }

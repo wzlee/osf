@@ -17,7 +17,6 @@
 	<context:component-scan base-package="com.lvwang.osf.dao.impl" />
 	<context:component-scan base-package="com.lvwang.osf.service" />
 	
-	
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" >
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/osf" />
@@ -57,16 +56,14 @@
 	
 	
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-		<property name="host" value="smtp.gmail.com" />
-		<property name="port" value="587" />
-		<property name="username" value="gavindlutsw@gmail.com" />
-		<property name="password" value="*********" />
+		<property name="host" value="smtp.aliyun.com" />
+		<property name="username" value="opensharefreedom@aliyun.com" />
+		<property name="password" value="osf123456" />
 		<property name="javaMailProperties">
 	        <!-- additional properties specific to JavaMail -->
 			<props>
                 <prop key="mail.smtp.auth">true</prop>
-                <prop key="mail.smtp.starttls.enable">true</prop>
-                <prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
+                <prop key="mail.smtp.timeout">25000</prop>
             </props>
 
 	    </property>

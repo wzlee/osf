@@ -97,7 +97,7 @@ public class PostService {
 		post.setComment_count(0);
 		post.setPost_tags(TagService.toList(param_tags));
 		post.setPost_cover(post_cover);
-		int id = postDao.save(post);
+		int id = savePost(post);
 		post.setId(id);
 		
 		//3 save tags
@@ -118,6 +118,10 @@ public class PostService {
 		map.put("post", post);
 		map.put("status", Property.SUCCESS_POST_CREATE);
 		return map;
+	}
+	
+	protected int savePost(Post post){
+		return postDao.save(post);
 	}
 	
 	public Post findPostByID(int id) {
@@ -154,5 +158,9 @@ public class PostService {
 	public User getAuthorOfPost(int id) {
 		int user_id = postDao.getAuthorOfPost(id);
 		return userService.findById(user_id);
+	}
+	
+	public long count(int user_id){
+		return postDao.count(user_id);
 	}
 }

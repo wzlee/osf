@@ -22,6 +22,7 @@ public class Property {
 	 * 			   11:follow
 	 * 			   12:interest	
 	 * 			   13:like
+	 * 			   14:avatar
 	 * 			   ...)
 	 * 第4-6位标示对象的具体错误/成功类型
 	 * 
@@ -39,14 +40,20 @@ public class Property {
 	public static final String ERROR_EMAIL_EXIST = "001000";			//"用户已注册";
 	public static final String ERROR_EMAIL_EMPTY = "001001";			//"邮箱输入为空";
 	public static final String ERROR_EMAIL_FORMAT = "001002";		//"邮箱地址格式错误";
+	public static final String ERROR_EMAIL_NOT_REG = "001003";		//邮箱未注册
+	public static final String ERROR_EMAIL_RESETPWD_SEND = "001004";		//密码重置邮件发送失败
 	
 	public static final String ERROR_PWD_EMPTY = "002000";			//"请输入密码";
 	public static final String ERROR_PWD_DIFF = "002001";			//"密码错误";
 	public static final String ERROR_PWD_SHORT = "002002";			//"密码太短";
 	public static final String ERROR_PWD_LONG = "002003";			//"密码太长";
+	public static final String ERROR_PWD_RESET_NOTALLOWED = "002004";			//不允许重置密码
+	public static final String ERROR_PWD_RESET = "002005";			//重置密码错误
+	public static final String ERROR_PWD_NOTAGREE = "002006";			//修改密码时输入的旧密码与原始密码不符
 
 	public static final String ERROR_CFMPWD_EMPTY = "003000";		//"请输入确认密码";
 	public static final String ERROR_CFMPWD_NOTAGREE = "003001";		//"密码输入不一致";	
+	public static final String ERROR_CFMPWD_SAME = "003002";		//新旧密码相同;	
 		
 	public static final String ERROR_ACCOUNT_ACTIVATION = "004000";			//账户激活错误
 	public static final String ERROR_ACCOUNT_ACTIVATION_EXPIRED = "004001";	//激活链接过期
@@ -54,7 +61,7 @@ public class Property {
 	public static final String ERROR_ACCOUNT_INACTIVE= "004003";			//账户待激活
 	public static final String ERROR_ACCOUNT_LOCK= "004004";			//账户已锁定
 	public static final String ERROR_ACCOUNT_CANCELLED= "004005";			//账户已注销
-	public static final String ERROR_ACCOUNT_EXIST= "004006";			//账户已注销
+	public static final String ERROR_ACCOUNT_EXIST= "004006";			//账户已存在(已激活)
 	public static final String ERROR_ACCOUNT_NOTLOGIN = "004007";
 	
 	public static final String ERROR_POST_EMPTY = "005000";				//post相关字段空
@@ -87,16 +94,26 @@ public class Property {
 	public static final String ERROR_LIKE = "013000";
 	public static final String ERROR_LIKE_UNDO = "013001";
 	
+	public static final String ERROR_AVATAR_CROP = "014000";
+	public static final String ERROR_AVATAR_CHANGE = "014001";
+	
 	/***********************************************************************
 	 * SUCCESS
 	 ***********************************************************************/
 	public static final String SUCCESS = "1";
 	
+	public static final String SUCCESS_EMAIL_RESETPWD_SEND = "101000";		//密码重置邮件发送成功
+	
 	public static final String SUCCESS_PWD_FORMAT = "102000";			//密码格式正确
+	public static final String SUCCESS_PWD_RESET_ALLOWED = "102001";
+	public static final String SUCCESS_PWD_RESET = "102002";
+	public static final String SUCCESS_PWD_CHANGE = "102003";
 	
 	public static final String SUCCESS_ACCOUNT_REG = "104000";			//"注册成功";
 	public static final String SUCCESS_ACCOUNT_LOGIN = "104001";		//"登陆成功";
 	public static final String SUCCESS_ACCOUNT_ACTIVATION = "104002";		//账户激活成功
+	public static final String SUCCESS_ACCOUNT_ACTIVATION_EMAIL_RESEND = "104003";	
+	public static final String SUCCESS_ACCOUNT_ACTIVATION_KEY_UPD = "104004";	
 	
 	public static final String SUCCESS_POST_CREATE = "105000";		//
 	
@@ -123,4 +140,7 @@ public class Property {
 	
 	public static final String SUCCESS_LIKE = "113000";
 	public static final String SUCCESS_LIKE_UNDO = "113001";
+	
+	public static final String SUCCESS_AVATAR_CROP = "114000";
+	public static final String SUCCESS_AVATAR_CHANGE = "114001";
 }

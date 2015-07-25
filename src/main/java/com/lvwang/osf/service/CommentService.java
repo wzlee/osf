@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.lvwang.osf.dao.CommentDAO;
 import com.lvwang.osf.model.Comment;
+import com.lvwang.osf.model.User;
 import com.lvwang.osf.util.Property;
 
 @Service("commentService")
@@ -32,8 +33,9 @@ public class CommentService {
 	private UserService userService;
 	
 	public Map<String, String> newComment(Integer comment_object_type, Integer comment_object_id,
-							 Integer comment_author, String comment_author_email, 
-							 String comment_content, Integer comment_parent, String comment_parent_email){
+							 Integer comment_author, String comment_author_name, 
+							 String comment_content, Integer comment_parent, 
+							 int comment_parent_author, String comment_parent_author_name){
 		
 		Map<String, String> ret = new HashMap<String, String>();
 		if(comment_content == null || comment_content.length() == 0) {
@@ -50,10 +52,11 @@ public class CommentService {
 		comment.setComment_object_type(comment_object_type);
 		comment.setComment_object_id(comment_object_id);
 		comment.setComment_author(comment_author);
-		comment.setComment_author_email(comment_author_email);
+		comment.setComment_author_name(comment_author_name);
 		comment.setComment_content(comment_content);
 		comment.setComment_parent(comment_parent);
-		comment.setComment_parent_email(comment_parent_email);
+		comment.setComment_parent_author(comment_parent_author);
+		comment.setComment_parent_author_name(comment_parent_author_name);
 		int id = commentDao.save(comment);
 		ret.put("status", Property.SUCCESS_COMMENT_CREATE);
 		ret.put("id", String.valueOf(id));
@@ -84,5 +87,9 @@ public class CommentService {
 			}
 		}
 		return comments;
+	}
+	
+	public User getCommentAuthor(int comment_id){
+		return commentDao.getCommentAuthor(comment_id);
 	}
 }

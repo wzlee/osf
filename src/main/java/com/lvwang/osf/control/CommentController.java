@@ -16,9 +16,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.lvwang.osf.model.Comment;
+import com.lvwang.osf.model.Notification;
 import com.lvwang.osf.model.User;
 import com.lvwang.osf.service.CommentService;
+import com.lvwang.osf.service.NotificationService;
+import com.lvwang.osf.service.PostService;
 import com.lvwang.osf.service.UserService;
+import com.lvwang.osf.util.Dic;
 import com.lvwang.osf.util.Property;
 
 @Controller
@@ -32,6 +36,14 @@ public class CommentController {
 	@Autowired
 	@Qualifier("userService")
 	private UserService userService;
+	
+	@Autowired
+	@Qualifier("notificationService")
+	private NotificationService notificationService;
+	 
+	@Autowired
+	@Qualifier("postService")
+	private PostService postService;
 	
 	@ResponseBody
 	@RequestMapping("/{id}")
@@ -55,13 +67,36 @@ public class CommentController {
 											 @RequestParam("comment_parent") int comment_parent,
 											 HttpSession session) {
 		User user = (User)session.getAttribute("user");
+		User comment_parent_author = new User();
+		if(comment_parent !=0 ){
+			comment_parent_author = commentService.getCommentAuthor(comment_parent);
+		}
+		
 		Map<String, String> ret = commentService.newComment(comment_object_type, 
 															comment_object_id, 
 															user.getId(), 
-															user.getUser_email(), 
+															user.getUser_name(), 
 															comment_content, 
 															comment_parent,
-															comment_parent!=0?userService.findById(comment_parent).getUser_email():null);
+															comment_parent_author.getId(),
+															comment_parent_author.getUser_name());
+		Notification notification =  new Notification(Dic.NOTIFY_TYPE_COMMENT,
+													  Integer.parseInt(ret.get("id")),
+													  Dic.OBJECT_TYPE_POST,
+													  comment_object_id,
+													  postService.getAuthorOfPost(comment_object_id).getId(),
+													  user.getId()
+													  );
+		notificationService.doNotify(notification);
+		
+		//comment reply notify
+		if(comment_parent!=0) {
+			notification.setNotify_type(Dic.NOTIFY_TYPE_COMMENT_REPLY);
+			notification.setNotified_user(comment_parent_author.getId());
+			notificationService.doNotify(notification);
+		}
+		
+		
 		ret.put("avatar", userService.findById(user.getId()).getUser_avatar());
 		return ret;
 	}
