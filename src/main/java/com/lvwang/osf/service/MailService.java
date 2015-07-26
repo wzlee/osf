@@ -30,12 +30,14 @@ public class MailService {
 		try {
 			InputStream in = new FileInputStream(classpath+"/spring/property.properties");  
 			prop.load(in);
-			ACTIVATE_CONTEXT = "http://"+prop.getProperty("domain.name")+":"+
-								prop.getProperty("domain.port")+"/"+prop.getProperty("context")+
+			ACTIVATE_CONTEXT = "http://"+prop.getProperty("domain.name")
+								+(prop.getProperty("domain.port")==null?null:":"+prop.getProperty("domain.port"))
+								+(prop.getProperty("context")==null?null:"/"+prop.getProperty("context"))+
 								"/account/activation/";
 			
-			RESETPWD_CONTEXT = "http://"+prop.getProperty("domain.name")+":"+
-								prop.getProperty("domain.port")+"/"+prop.getProperty("context")+
+			RESETPWD_CONTEXT = "http://"+prop.getProperty("domain.name")
+								+(prop.getProperty("domain.port")==null?null:":"+prop.getProperty("domain.port"))
+								+(prop.getProperty("context")==null?null:"/"+prop.getProperty("context"))+
 								"/account/resetpwd";
 			
 			MAIL_FROM = prop.getProperty("mail.from");
