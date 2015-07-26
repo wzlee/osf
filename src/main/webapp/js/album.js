@@ -1,10 +1,10 @@
 $(document).ready(function(){
 	var photos = [];
 
-	$('#mainimg').attr('src', $('#imgbox img:first').attr('src'));
+	$('#mainimg').attr('src', $('#imgbox img:first').attr('src').split('?')[0]);
 	
 	$('#imgbox img').click(function() {
-		var src = $(this).attr('src');
+		var src = $(this).attr('src').split('?')[0];
 		$('#mainimg').attr('src', src);
 	});
 
@@ -14,7 +14,7 @@ $(document).ready(function(){
 	                		secureuri:false,
 	                		fileElementId:'uploader_input',
 	                		success: function (data, status){
-	                				var imgUrl = 'http://osfimgs.oss-cn-hangzhou.aliyuncs.com/';
+	                				var imgUrl = 'http://7xkkim.com1.z0.glb.clouddn.com/';
 	                				data = jQuery(data).find('pre:first').text();
 	                				data = jQuery.parseJSON(data);
 	                				var $imgCard = $('<div class="card" id="card'+data.id+'">'+

@@ -231,7 +231,6 @@ public class AlbumService {
 	
 	public String cropAvatar(String key, int x, int y, int width, int height) {
 		String status = null;
-		
 		String classpath = AlbumService.class.getClassLoader().getResource("").getPath();
 		try {
 			File ori_img = new File(classpath+"/tmp/"+key);
@@ -243,21 +242,23 @@ public class AlbumService {
 			//convert bufferedimage to inputstream
 			ByteArrayOutputStream bos = new ByteArrayOutputStream();  
 			ImageIO.write(croped_img, img_type, bos);  
-			InputStream is = new ByteArrayInputStream(bos.toByteArray());
+			
 			albumDao.delPhotoInBucket(key);
-			if( albumDao.uploadPhoto(is, key) != null ){
+			
+			String new_key = UUID.randomUUID().toString()+"."+img_type;
+			if( albumDao.uploadPhoto(bos.toByteArray(), new_key) != null ){
 				if(ori_img.exists()){
 					ori_img.delete();
 				}
-				status = Property.SUCCESS_AVATAR_CROP;
+				return new_key;
 			} else {
-				status = Property.ERROR_AVATAR_CROP;
+				return key;
 			}
 			
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-		return status;
+		}		
+		return key;
 	}
 	
 

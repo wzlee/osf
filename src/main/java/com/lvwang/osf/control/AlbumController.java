@@ -336,11 +336,11 @@ public class AlbumController {
 			return map;
 		}
 		
-		albumService.cropAvatar(key, x, y, width, height);
-		String status = userService.changeAvatar(((User)session.getAttribute("user")).getId(), key);
+		String avatar_img = albumService.cropAvatar(key, x, y, width, height);
+		String status = userService.changeAvatar(((User)session.getAttribute("user")).getId(), avatar_img);
 		if(Property.SUCCESS_AVATAR_CHANGE.equals(status)) {
 			//update session
-			((User)session.getAttribute("user")).setUser_avatar(key);			
+			((User)session.getAttribute("user")).setUser_avatar(avatar_img);			
 		}
 		
 		map.put("status", status);

@@ -16,7 +16,7 @@ public interface AlbumDAO {
 	
 	//return photo etag
 	String uploadPhoto(MultipartFile img, Photo details);
-	String uploadPhoto(InputStream img, String key);
+	String uploadPhoto(byte[] img, String key);
 	
 	String getKey(int id);
 	List<String> getKeys(List<Integer> ids);
