@@ -44,7 +44,6 @@ public class HomePage {
 		List<Event> feeds = feedService.getFeeds(user.getId());
 		mav.addObject("feeds", feeds);
 		mav.addObject("dic", new Dic());
-		mav.addObject("imgBaseUrl", Property.IMG_BASE_URL);
 		return mav;
 		
 	}
@@ -65,7 +64,6 @@ public class HomePage {
 		List<Event> feeds = feedService.getFeedsOfPage(user.getId(), num);
 		mav.addObject("feeds", feeds);
 		mav.addObject("dic", new Dic());
-		mav.addObject("imgBaseUrl", Property.IMG_BASE_URL);
 		return mav;
 	}
 	

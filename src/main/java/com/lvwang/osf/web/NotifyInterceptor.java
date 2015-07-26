@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.lvwang.osf.model.Thumbnail;
 import com.lvwang.osf.model.User;
 import com.lvwang.osf.service.NotificationService;
+import com.lvwang.osf.util.Property;
 
 public class NotifyInterceptor implements HandlerInterceptor{
 
@@ -19,9 +19,6 @@ public class NotifyInterceptor implements HandlerInterceptor{
 	@Qualifier("notificationService")
 	private NotificationService notificationService;
 	
-	@Autowired
-	@Qualifier("thumbnail")
-	private Thumbnail thumbnail;
 	
 	public void afterCompletion(HttpServletRequest arg0,
 			HttpServletResponse arg1, Object arg2, Exception arg3)
@@ -44,7 +41,9 @@ public class NotifyInterceptor implements HandlerInterceptor{
 		if(user != null){
 			session.setAttribute("notifications", notificationService.getNotificationsCount(user.getId()));
 		}
-		session.setAttribute("thumbnail", thumbnail);
+		session.setAttribute("img_base_url", Property.IMG_BASE_URL);
+		session.setAttribute("post_cover_thumbnail", Property.POST_COVER_THUMBNAIL);
+		session.setAttribute("album_thumbnail", Property.ALBUM_THUMBNAIL);
 		return true;
 	}
 

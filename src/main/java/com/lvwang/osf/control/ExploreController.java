@@ -66,7 +66,6 @@ public class ExploreController {
 			feeds.put(rec_user, eventService.getEventsOfUser(rec_user.getId(), 4));
 		}
 		mav.addObject("feeds", feeds);
-		mav.addObject("imgBaseUrl", Property.IMG_BASE_URL);
 		mav.addObject("dic", new Dic());
 		return mav;
 	}

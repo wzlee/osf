@@ -80,7 +80,6 @@ public class AlbumController {
 		mav.addObject("follow", followService.isFollowing(me==null?0:me.getId(), author.getId()));
 		
 		mav.setViewName("album/index");
-		mav.addObject("imgBaseUrl", Property.IMG_BASE_URL);
 		return mav;
 	}
 	
@@ -288,7 +287,7 @@ public class AlbumController {
 		//upload photo
 		map = albumService.uploadPhoto(img);
 		//set post cover
-		session.setAttribute("post_cover", map.get("link"));
+		session.setAttribute("post_cover", map.get("key"));
 		return map;
 	}
 	
@@ -341,7 +340,7 @@ public class AlbumController {
 		String status = userService.changeAvatar(((User)session.getAttribute("user")).getId(), key);
 		if(Property.SUCCESS_AVATAR_CHANGE.equals(status)) {
 			//update session
-			((User)session.getAttribute("user")).setUser_avatar(Property.IMG_BASE_URL+key);			
+			((User)session.getAttribute("user")).setUser_avatar(key);			
 		}
 		
 		map.put("status", status);

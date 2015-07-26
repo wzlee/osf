@@ -6,7 +6,7 @@
 	<c:if test="${feed.object_type == dic.object_type_shortpost }">
 		<div class="event row">
 		   <div class="label span2">
-		     <a href="<c:url value="/user/${feed.user_id }" />"><img src="${feed.user_avatar }"></a>
+		     <a href="<c:url value="/user/${feed.user_id }" />"><img src="${img_base_url}${feed.user_avatar }"></a>
 		   </div>
 		   <div class="content span6">
 		     <div class="summary">
@@ -48,7 +48,7 @@
  <c:if test="${feed.object_type == dic.object_type_post }">
  <div class="event row">
    <div class="label span2">
-     <a href="<c:url value="/user/${feed.user_id }" />"><img src="${feed.user_avatar }"></a>
+     <a href="<c:url value="/user/${feed.user_id }" />"><img src="${img_base_url}${feed.user_avatar }"></a>
    </div>
    <div class="content span6">
      <div class="summary">
@@ -61,7 +61,7 @@
      	<div class="postheader">
         		<a href="<c:url value="/post/${feed.object_id }" />">${feed.title }</a>
          </div>
-   		<img src="<c:url value="${feed.content }"/>${thumbnail.post_cover}" alt="" />
+   		<img src="<c:url value="${img_base_url}${feed.content }${post_cover_thumbnail}"/>" alt="" />
    	</div>
      <div class="extra">
        
@@ -101,7 +101,7 @@
  <c:if test="${feed.object_type == dic.object_type_album }">
  <div class="event row">
    <div class="label span2">
-     <a href="<c:url value="/user/${feed.user_id }" />"><img src="${feed.user_avatar }"></a>
+     <a href="<c:url value="/user/${feed.user_id }" />"><img src="${img_base_url}${feed.user_avatar }"></a>
    </div>
    <div class="content span6">
      <div class="summary">
@@ -112,7 +112,7 @@
      </div>
      <div class="extra images">
        <c:forTokens items="${feed.content }" delims=":" var="img">
-       	<a href="<c:url value="/album/${feed.object_id }/photos" />"><img alt="" src="${imgBaseUrl }${img }${thumbnail.album_thumbnail}"></a>
+       	<a href="<c:url value="/album/${feed.object_id }/photos" />"><img alt="" src="${img_base_url }${img }${album_thumbnail}"></a>
        </c:forTokens>
      </div>
      <div class="extra">${feed.summary }</div>

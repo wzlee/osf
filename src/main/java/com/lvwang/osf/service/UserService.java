@@ -92,7 +92,7 @@ public class UserService {
 	}
 	
 	private void addAvatar(User user) {
-		user.setUser_avatar(Property.IMG_BASE_URL+user.getUser_avatar());
+		user.setUser_avatar(user.getUser_avatar());
 	}
 	
 	public Map<String, Object> login(String email, String password) {

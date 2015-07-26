@@ -63,7 +63,6 @@ public class TagController {
 		List<Event> feeds = tagService.getWithTag(tag);
 		mav.addObject("feeds", feeds);
 		mav.addObject("dic", new Dic());
-		mav.addObject("imgBaseUrl", Property.IMG_BASE_URL);
 		return mav;
 	}
 	/**

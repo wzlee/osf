@@ -98,7 +98,7 @@
 						<c:forEach items="${feeds }" var="feed">
 							<div class="userbox">
 								<div class="header">
-									<img class="avatar" src="${feed.key.user_avatar }" alt="" />
+									<img class="avatar" src="${img_base_url }${feed.key.user_avatar }" alt="" />
 									<div class="desc">${feed.key.user_name }</div>
 									<c:if test="${isFollowings[feed.key.id] }">
 										<div class="ui tiny basic button follow" following="${feed.key.id }">已关注</div>
@@ -111,7 +111,7 @@
 									<c:forEach items="${feed.value }" var="f">
 										<c:if test="${f.object_type eq dic.object_type_post }">
 										   <a class="box" href="<c:url value="/post/${f.object_id }" />" href="<c:url value="/post/${f.object_id }" />">
-												<img src="${f.content }" alt="" />
+												<img src="${img_base_url }${f.content }" alt="" />
 												<div class="cover">
 													${f.title }
 												</div>
@@ -120,7 +120,7 @@
 										</c:if>							
 										<c:if test="${f.object_type eq dic.object_type_album }">
 											<a class="box" href="<c:url value="/album/${f.object_id }/photos" />" href="<c:url value="/album/${f.object_id }/photos" />">
-												<img src="${imgBaseUrl }${f.title }" alt="" />
+												<img src="${img_base_url }${f.title }" alt="" />
 												<div class="cover">
 													${f.summary }
 												</div>		

@@ -97,7 +97,7 @@
 				<div class="row">
 					<div class="span2">
 						<div class="avatar">
-							<img class="ui small circular image" src='<c:url value="${user.user_avatar }"></c:url>'>
+							<img class="ui small circular image" src='<c:url value="${img_base_url }${user.user_avatar }"></c:url>'>
 						</div>					
 					</div>
 					<div class="span2">

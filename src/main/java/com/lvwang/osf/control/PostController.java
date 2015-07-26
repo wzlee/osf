@@ -76,7 +76,6 @@ public class PostController {
 		mav.addObject("follow", followService.isFollowing(me==null?0:me.getId(), author.getId()));
 		mav.addObject("is_like", likeService.isLike(me==null?0:me.getId(), Dic.OBJECT_TYPE_POST, id));
 		mav.addObject("post", postService.findPostByID(id));
-		mav.addObject("imgBaseUrl", Property.IMG_BASE_URL);
 		mav.setViewName("post/index");
 		return mav;
 	}

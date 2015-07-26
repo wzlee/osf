@@ -54,7 +54,6 @@ public class UserController {
 		mav.addObject("posts", posts);
 		List<Album> albums = albumService.getAlbumsOfUser(id);
 		mav.addObject("albums", albums);
-		mav.addObject("imgBaseUrl", Property.IMG_BASE_URL);
 		mav.setViewName("user/index");
 		return mav;
 	}

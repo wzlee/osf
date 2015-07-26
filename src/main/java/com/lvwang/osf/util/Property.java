@@ -1,9 +1,31 @@
 package com.lvwang.osf.util;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 public class Property {
+
+	static{
+		String classpath = Property.class.getClassLoader().getResource("").getPath();
+		 
+		Properties prop = new Properties();  
+		try {
+			InputStream in = new FileInputStream(classpath+"/spring/property.properties");  
+			prop.load(in);
+			IMG_BASE_URL = prop.getProperty("img_base_url");
+			POST_COVER_THUMBNAIL = prop.getProperty("post_cover_thumbnail");
+			ALBUM_THUMBNAIL = prop.getProperty("album_thumbnail");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	public static String IMG_BASE_URL;
 	
-	public static String IMG_BASE_URL = "http://osfimgs.oss-cn-hangzhou.aliyuncs.com/";
+	public static String POST_COVER_THUMBNAIL;
 	
+	public static String ALBUM_THUMBNAIL;
 	/*
 	 * 数据字典(6位)
 	 * rules:

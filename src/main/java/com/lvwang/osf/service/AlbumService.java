@@ -14,9 +14,6 @@ import java.util.UUID;
 import javax.imageio.ImageIO;
 
 import net.coobird.thumbnailator.Thumbnails;
-
-import org.codehaus.plexus.util.StringUtils;
-import org.jsoup.helper.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -34,7 +31,9 @@ public class AlbumService {
 	
 	public static final int ALBUM_STAUS_NORMAL = 0;
 	public static final int ALBUM_STAUS_TOBERELEASED = 1; //待发布
-	public static final String BASE_URL = "http://osfimgs.oss-cn-hangzhou.aliyuncs.com/";
+	
+	
+	public static String IMG_BASE_URL = Property.IMG_BASE_URL;
 	
 	
 	@Autowired
@@ -104,7 +103,7 @@ public class AlbumService {
 			return map;
 		} else {	
 			map.put("key", key);
-			map.put("link", BASE_URL+key);
+			map.put("link", IMG_BASE_URL+key);
 			map.put("status", Property.SUCCESS_PHOTO_CREATE);			
 		}
 		return map;

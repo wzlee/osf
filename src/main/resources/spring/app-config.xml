@@ -16,6 +16,7 @@
 	<context:component-scan base-package="com.lvwang.osf.model" />
 	<context:component-scan base-package="com.lvwang.osf.dao.impl" />
 	<context:component-scan base-package="com.lvwang.osf.service" />
+	<context:component-scan base-package="com.lvwang.osf.util" />
 	
 	<context:property-placeholder location="classpath:spring/property.properties"/>
 	
