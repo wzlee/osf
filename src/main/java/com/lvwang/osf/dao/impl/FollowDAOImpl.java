@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
@@ -31,6 +32,7 @@ import org.springframework.stereotype.Repository;
 import com.lvwang.osf.dao.FollowDAO;
 import com.lvwang.osf.model.Follower;
 import com.lvwang.osf.model.Following;
+import com.lvwang.osf.util.OSFUtils;
 
 @Repository("followDao")
 public class FollowDAOImpl implements FollowDAO{
@@ -117,23 +119,26 @@ public class FollowDAOImpl implements FollowDAO{
 	}
 	
 	public List<Integer> getFollowingIDs(int user_id) {
-		Cursor<Integer> cursor = setOps.scan(FOLLOWING_KEY+user_id, ScanOptions.scanOptions().count(FOLLOW_SCAN_COUNT).build());
-		//List<Integer> following_ids = listOps.range(FOLLOWING_KEY+user_id, 0, listOps.size(FOLLOWING_KEY+user_id)-1);
+//		Cursor<Integer> cursor = setOps.scan(FOLLOWING_KEY+user_id, ScanOptions.scanOptions().count(FOLLOW_SCAN_COUNT).build());
+//		//List<Integer> following_ids = listOps.range(FOLLOWING_KEY+user_id, 0, listOps.size(FOLLOWING_KEY+user_id)-1);
+//		
+//		
+//		while(cursor.hasNext()) {
+//			following_ids.add(cursor.next());
+//		}
+		Set<Integer> members = setOps.members(FOLLOWING_KEY+user_id);
+		return OSFUtils.toList(members);
 		
-		List<Integer> following_ids = new ArrayList<Integer>();
-		while(cursor.hasNext()) {
-			following_ids.add(cursor.next());
-		}
-		return following_ids;
 	}
 	
 	public List<Integer> getFollowerIDs(int user_id) {
-		Cursor<Integer> cursor = setOps.scan(FOLLOWER_KEY+user_id, ScanOptions.scanOptions().count(FOLLOW_SCAN_COUNT).build());
-		List<Integer> follower_ids = new ArrayList<Integer>();
-		while(cursor.hasNext()) {
-			follower_ids.add(cursor.next());
-		}
-		return follower_ids;
+//		Cursor<Integer> cursor = setOps.scan(FOLLOWER_KEY+user_id, ScanOptions.scanOptions().count(FOLLOW_SCAN_COUNT).build());
+//		List<Integer> follower_ids = new ArrayList<Integer>();
+//		while(cursor.hasNext()) {
+//			follower_ids.add(cursor.next());
+//		}
+		Set<Integer> members = setOps.members(FOLLOWER_KEY+user_id);
+		return OSFUtils.toList(members);
 	}
 	
 	public List<Following> getFollowings(int user_id) {
