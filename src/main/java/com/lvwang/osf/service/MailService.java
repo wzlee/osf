@@ -1,5 +1,10 @@
 package com.lvwang.osf.service;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
@@ -12,14 +17,37 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import com.lvwang.osf.util.CipherUtil;
+import com.lvwang.osf.util.Property;
 
 
 @Service("mailService")
 public class MailService {
 	
-	public static final String MAIL_FROM = "opensharefreedom@aliyun.com";
-	public static final String ACTIVATE_CONTEXT = "http://localhost:8080/com.lvwang.osf/account/activation/";
-	public static final String RESETPWD_CONTEXT = "http://localhost:8080/com.lvwang.osf/account/resetpwd";
+	static{
+		String classpath = MailService.class.getClassLoader().getResource("").getPath();
+		 
+		Properties prop = new Properties();  
+		try {
+			InputStream in = new FileInputStream(classpath+"/spring/property.properties");  
+			prop.load(in);
+			ACTIVATE_CONTEXT = "http://"+prop.getProperty("domain.name")+":"+
+								prop.getProperty("domain.port")+"/"+prop.getProperty("context")+
+								"/account/activation/";
+			
+			RESETPWD_CONTEXT = "http://"+prop.getProperty("domain.name")+":"+
+								prop.getProperty("domain.port")+"/"+prop.getProperty("context")+
+								"/account/resetpwd";
+			
+			MAIL_FROM = prop.getProperty("mail.from");
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static String MAIL_FROM;
+	public static String ACTIVATE_CONTEXT;
+	public static String RESETPWD_CONTEXT;
 	
     @Autowired
     private JavaMailSenderImpl mailSender;
