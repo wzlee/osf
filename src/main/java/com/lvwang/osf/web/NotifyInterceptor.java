@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.lvwang.osf.model.Thumbnail;
 import com.lvwang.osf.model.User;
 import com.lvwang.osf.service.NotificationService;
 
@@ -17,6 +18,10 @@ public class NotifyInterceptor implements HandlerInterceptor{
 	@Autowired
 	@Qualifier("notificationService")
 	private NotificationService notificationService;
+	
+	@Autowired
+	@Qualifier("thumbnail")
+	private Thumbnail thumbnail;
 	
 	public void afterCompletion(HttpServletRequest arg0,
 			HttpServletResponse arg1, Object arg2, Exception arg3)
@@ -39,6 +44,7 @@ public class NotifyInterceptor implements HandlerInterceptor{
 		if(user != null){
 			session.setAttribute("notifications", notificationService.getNotificationsCount(user.getId()));
 		}
+		session.setAttribute("thumbnail", thumbnail);
 		return true;
 	}
 

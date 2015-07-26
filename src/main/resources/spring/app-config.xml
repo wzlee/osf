@@ -17,11 +17,13 @@
 	<context:component-scan base-package="com.lvwang.osf.dao.impl" />
 	<context:component-scan base-package="com.lvwang.osf.service" />
 	
+	<context:property-placeholder location="classpath:spring/property.properties"/>
+	
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" >
-		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/osf" />
-		<property name="username" value="root" />
-		<property name="password" value="123456" />
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
 		<property name="initialSize" value="10" />
 		<property name="maxActive" value="50" />
 	
@@ -36,7 +38,10 @@
 	
 	<bean id="jedisConnFactory" 
 	    class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" 
-	    p:use-pool="true"/>
+	    p:use-pool="true"
+	    p:hostName="${redis.host}"
+	    p:port="${redis.port}"
+	    p:password="${redis.password}"/>
 	
 	<!-- redis template definition -->
 	<bean id="redisTemplate" 

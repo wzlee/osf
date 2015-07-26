@@ -61,7 +61,7 @@
      	<div class="postheader">
         		<a href="<c:url value="/post/${feed.object_id }" />">${feed.title }</a>
          </div>
-   		<img src="<c:url value="${feed.content }"/>" alt="" />
+   		<img src="<c:url value="${feed.content }"/>${thumbnail.post_cover}" alt="" />
    	</div>
      <div class="extra">
        
@@ -112,7 +112,7 @@
      </div>
      <div class="extra images">
        <c:forTokens items="${feed.content }" delims=":" var="img">
-       	<a href="<c:url value="/album/${feed.object_id }/photos" />"><img alt="" src="${imgBaseUrl }${img }"></a>
+       	<a href="<c:url value="/album/${feed.object_id }/photos" />"><img alt="" src="${imgBaseUrl }${img }${thumbnail.album_thumbnail}"></a>
        </c:forTokens>
      </div>
      <div class="extra">${feed.summary }</div>

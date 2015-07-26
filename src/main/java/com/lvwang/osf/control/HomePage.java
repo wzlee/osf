@@ -48,13 +48,7 @@ public class HomePage {
 		return mav;
 		
 	}
-	
-	@RequestMapping("/{key}.html")
-	public String aliyuncheck(@PathVariable("key") String key){
-		return key;
-	}
-	
-	
+
 	@RequestMapping("/page/{num}")
 	public ModelAndView nextPage(@PathVariable("num") String num_str, HttpSession session) {
 		System.out.println(num_str);
