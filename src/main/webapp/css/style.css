@@ -57,7 +57,7 @@ a {
  }
   #rightside .ui.vertical.menu .item{
   	width:100%;
-  	padding: 15px 20px;
+  	padding: 0;
   	
   }
  #rightside .item .right{
@@ -106,7 +106,13 @@ a {
 .ui.feed > .event {
 	margin-bottom: 10px;
 } 
- 
+.ui.feed > .event  .comments-attach {
+	display: none;
+}
+.comments-attach a{
+	font-weight: bold;
+	color: #009fda;
+}
 .ui.feed > .event > .content .extra.images img{
 	width: 32%;
 }
@@ -257,9 +263,22 @@ a {
 .tip{
 	float: right;
 }
-.ui.menu {
+/* .ui.menu {
 	background: none;
 	
+} */
+.ui.vertical.menu.popusers{
+	background-color: rgb(247, 247, 247);
+}
+.popusers .image{
+	width: 26.3%;
+  	margin: 3%;
+  	border-radius: 8px;
+}
+.popup .follow{
+	padding-left: 16px;
+  	padding-right: 16px;
+  	margin-top: 6px;
 }
 .nav .ui.vertical.menu .item {
   width: 150px;
@@ -356,7 +375,10 @@ a {
 .ui.feed > .event > .content .divider{
 	margin-left: -20px;
 	margin-right: -20px;
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
+
 .header_box{
 	display: table;
 	margin-bottom: 40px;

@@ -108,4 +108,19 @@ public class CommentController {
 		mav.addObject("comments", commentService.getComments(type, id));
 		return mav;
 	}
+	
+	/**
+	 * feed附属的comments
+	 * @param type
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value="/attach/{type}/{id}")
+	public ModelAndView getAttachComments(@PathVariable("type") String type, @PathVariable("id") int id) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("comment/attach_comments");
+		mav.addObject("comments", commentService.getComments(type, id, 0, 5));
+		return mav;
+	}
+	
 }

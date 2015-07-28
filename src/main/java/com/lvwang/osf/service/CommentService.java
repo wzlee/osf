@@ -24,6 +24,8 @@ public class CommentService {
 	public static final String TYPE_PHOTO = "photo";
 	public static final String TYPE_ALBUM = "album";
 	
+	public static final int COUNT = 10;	//默认返回comment条数
+	
 	@Autowired
 	@Qualifier("commentDao")
 	private CommentDAO commentDao;
@@ -69,15 +71,19 @@ public class CommentService {
 	}
 	
 	public List<Comment> getComments(String type, int id) {
+		return getComments(type, id, 0, COUNT);
+	}
+	
+	public List<Comment> getComments(String type, int id, int offset, int count) {
 		if(type == null || type.length() == 0)
 			return null;
 		List<Comment> comments = null;
 		if(type.equals(TYPE_POST)) {
-			comments = commentDao.getCommentsOfPost(id);
+			comments = commentDao.getCommentsOfPost(id, offset, count);
 		} else if(type.equals(TYPE_PHOTO)) {
-			comments = commentDao.getCommentsOfPhoto(id);
+			comments = commentDao.getCommentsOfPhoto(id, offset, count);
 		} else if(type.equals(TYPE_ALBUM)){
-			comments = commentDao.getCommentsOfAlbum(id);
+			comments = commentDao.getCommentsOfAlbum(id, offset, count);
 		} 
 		
 		//add avatars;

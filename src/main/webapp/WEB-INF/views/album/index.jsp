@@ -59,6 +59,9 @@
 								<span class="ui inverted tiny yellow button follow" following="${u.id }">+关注</span> 
 							</c:if>				
 						</div>
+						
+						<%-- <jsp:include page="/popup_usercard/${u.id }" flush="true"></jsp:include>	 --%>
+						
 						<div class="ui tiny images meta" id="imgbox">
 							<c:forEach items="${album.photos}" var="photo">
 								<a href="#"><img src="<c:url value="${img_base_url}${photo.key }${album_thumbnail }" />" alt="" id="preview_photo_${photo.id }"></a>

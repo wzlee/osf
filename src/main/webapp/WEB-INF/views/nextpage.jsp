@@ -4,7 +4,7 @@
 
 <c:forEach items="${feeds }" var="feed"> 
 	<c:if test="${feed.object_type == dic.object_type_shortpost }">
-		<div class="event row">
+		<div class="event row" type="spost" object_type="${feed.object_type }" object_id="${feed.object_id }">
 		   <div class="label span2">
 		     <a href="<c:url value="/user/${feed.user_id }" />"><img src="${img_base_url}${feed.user_avatar }"></a>
 		   </div>
@@ -37,7 +37,9 @@
 				    	</a>                         
 			   		</div>
 		 	</div>
-		 	<!-- end meta -->                                               
+		 	<!-- end meta -->   
+		    <div class="comments-attach"></div>
+		    <!-- end comments-attach -->   
 		   </div>
 		   <!-- end content -->
 		 </div>   
@@ -45,8 +47,8 @@
 	</c:if>
 	
 <!-- new post -->
- <c:if test="${feed.object_type == dic.object_type_post }">
- <div class="event row">
+ <c:if test="${feed.object_type == dic.object_type_post}">
+ <div class="event row" type="post" object_type="${feed.object_type }" object_id="${feed.object_id }">
    <div class="label span2">
      <a href="<c:url value="/user/${feed.user_id }" />"><img src="${img_base_url}${feed.user_avatar }"></a>
    </div>
@@ -91,15 +93,18 @@
        </div>
 
      </div>  
-     <!-- end meta -->                                             
+     <!-- end meta --> 
+     <div class="comments-attach"></div>
+     <!-- end comments-attach -->                                            
    </div>
    <!-- end content -->
+
  </div>                    	
  </c:if>
  
  <!-- new album -->
  <c:if test="${feed.object_type == dic.object_type_album }">
- <div class="event row">
+ <div class="event row" type="album" object_type="${feed.object_type }" object_id="${feed.object_id }">
    <div class="label span2">
      <a href="<c:url value="/user/${feed.user_id }" />"><img src="${img_base_url}${feed.user_avatar }"></a>
    </div>
@@ -143,6 +148,8 @@
        <!-- end actions -->
      </div>
      <!-- end meta -->
+     <div class="comments-attach"></div>
+     <!-- end comments-attach -->   
    </div>
  </div>                    
  </c:if>

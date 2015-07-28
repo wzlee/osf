@@ -14,6 +14,7 @@
 
   <script src="<%=request.getContextPath() %>/js/jquery.js"></script>
   <script src="<%=request.getContextPath() %>/js/jquery.infinitescroll.js"></script>
+  <script src="<%=request.getContextPath() %>/js/semantic.js"></script>
   <script src="<%=request.getContextPath() %>/js/basic.js"></script>
   <script src="<%=request.getContextPath() %>/js/code.js"></script>
   <script src="<%=request.getContextPath() %>/js/like.js"></script>
@@ -112,21 +113,21 @@
 					<div class="ui mini statistics">
 					  <div class="statistic">
 					    <div class="value">
-					      22
+					      ${counter.follower }
 					    </div>
 					    <div class="label">粉丝
 					    </div>
 					  </div>
 					  <div class="statistic">
 					    <div class="value">
-					      31
+					      ${counter.following }
 					    </div>
 					    <div class="label">关注
 					    </div>
 					  </div>
 					  <div class="statistic">
 					    <div class="value">
-					      22
+					      ${counter.spost }
 					    </div>
 					    <div class="label">状态
 					    </div>
@@ -140,43 +141,19 @@
 				<div class="ui header">
 				    热门用户
 				</div>
-				<div class="ui vertical menu">
+				<div class="ui vertical menu popusers">
 				  <div class="item">
-				   	  <a class="right floated compact">+关注</a>
-				      <img class="ui avatar image" src="img/avatar.jpg">
-				      <div class="content">
-				     	<a class="header">两排杨树</a>
-				      </div>
+				  	<c:forEach items="${popusers }" var="popuser">
+						<a href="#" class="popuser">
+							<img class="ui inline image" src="${img_base_url }${popuser.user_avatar}">
+						</a>
+						<%-- <jsp:include page="/popup_usercard/${popuser.id }" flush="true"></jsp:include>	 --%>
+					</c:forEach>
+					<!-- end popup -->
+
+					
 				  </div>
-				  <div class="item">
-				   	  <a class="right floated compact">+关注</a>
-				      <img class="ui avatar image" src="img/avatar.jpg">
-				      <div class="content">
-				     	<a class="header">两排杨树</a>
-				      </div>
-				  </div>
-				  <div class="item">
-				   	  <a class="right floated compact">+关注</a>
-				      <img class="ui avatar image" src="img/avatar.jpg">
-				      <div class="content">
-				     	<a class="header">两排杨树</a>
-				      </div>
-				  </div>
-				  <div class="item">
-				   	  <a class="right floated compact">+关注</a>
-				      <img class="ui avatar image" src="img/avatar.jpg">
-				      <div class="content">
-				     	<a class="header">两排杨树</a>
-				      </div>
-				  </div>
-				  <div class="item">
-				   	  <a class="right floated compact">+关注</a>
-				      <img class="ui avatar image" src="img/avatar.jpg">
-				      <div class="content">
-				     	<a class="header">两排杨树</a>
-				      </div>
-				  </div>
-				</div>		
+				</div>
 				<!-- end menu -->	
 				
 				<div class="ui header">
@@ -221,27 +198,6 @@
     </div>
 
   </div>
-  <script type="text/javascript">
-  $(document).ready(function(){
-  	$('#feeds').infinitescroll({
-  		loading: {
-  		    finished: undefined,
-  		    finishedMsg: "没有更多的了",
-  		                img: null,
-  		    msg: null,
-  		    msgText: "正在加载...",
-  		    selector: null,
-  		    speed: 'fast',
-  		    start: undefined
-  		},
-		navSelector  	: "#next:last",
-		nextSelector 	: "a#next:last",
-		itemSelector 	: ".event",
-		dataType	 	: 'html',
-		animate      : true, 
-		extraScrollPx: 100
-  	});
-  })
-  </script>
+  <script src="<%=request.getContextPath() %>/js/index.js"></script>
 </body>
 </html>

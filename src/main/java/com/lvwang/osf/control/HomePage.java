@@ -16,6 +16,8 @@ import com.lvwang.osf.model.Event;
 import com.lvwang.osf.model.User;
 import com.lvwang.osf.service.EventService;
 import com.lvwang.osf.service.FeedService;
+import com.lvwang.osf.service.FollowService;
+import com.lvwang.osf.service.UserService;
 import com.lvwang.osf.util.Dic;
 import com.lvwang.osf.util.Property;
 
@@ -31,6 +33,14 @@ public class HomePage {
 	@Qualifier("feedService")
 	private FeedService feedService;
 	
+	@Autowired
+	@Qualifier("userService")
+	private UserService userService;
+	
+	@Autowired
+	@Qualifier("followService")
+	private FollowService followService;
+	
 	@RequestMapping("/")
 	public ModelAndView showHomePage(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
@@ -40,12 +50,30 @@ public class HomePage {
 		if(user == null) {
 			return mav;
 		}
-		
+		mav.addObject("counter", userService.getCounterOfFollowAndShortPost(user.getId()));
 		List<Event> feeds = feedService.getFeeds(user.getId());
 		mav.addObject("feeds", feeds);
+		
+		List<User> rec_users = userService.getRecommendUsers(user==null?0:user.getId(), 4);
+		mav.addObject("isFollowings", followService.isFollowing(user==null?0:user.getId(), rec_users));
+		mav.addObject("popusers", rec_users);
+		
 		mav.addObject("dic", new Dic());
 		return mav;
 		
+	}
+	
+	@RequestMapping("/popup_usercard/{user_id}")
+	public ModelAndView getPopupUserCard(@PathVariable("user_id") String user_id){
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("popup_usercard");
+		User user = userService.findById(Integer.valueOf(user_id));
+		if(user != null) {
+			mav.addObject("u", user);
+			mav.addObject("counter", userService.getCounterOfFollowAndShortPost(Integer.valueOf(user_id)));
+		}
+		
+		return mav;
 	}
 
 	@RequestMapping("/page/{num}")

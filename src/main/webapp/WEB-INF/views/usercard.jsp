@@ -4,7 +4,7 @@
 
 	            <div class="ui card">
 	              <div class="ui small centered circular  image">
-	                <a href="<c:url value="/user/${u.id }" />"><img src="<c:url value="${u.user_avatar }"/> "></a>
+	                <a href="<c:url value="/user/${u.id }" />"><img src="<c:url value="${img_base_url }${u.user_avatar }"/> "></a>
 	              </div>
 	              <div class="content">
 	                <a class="header centered" href="<c:url value="/user/${u.id}" />">

@@ -10813,7 +10813,8 @@ ol.ui.list ol,
 
 .ui.list .item a {
   cursor: pointer;
-  color: rgba(0, 0, 0, 0.8) !important;
+  /* color: rgba(0, 0, 0, 0.8) !important; */
+  color: #009fda;
 }
 
 .ui.list .item a:hover {

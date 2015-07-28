@@ -81,9 +81,9 @@ public class CommentDAOImpl implements CommentDAO{
 		return comment;
 	}
 	
-	public List<Comment> getCommentsOfPost(int id) {
-		String sql = "select * from " + TABLE + " where comment_object_type=? and comment_object_id=?";
-		List<Comment> comments = jdbcTemplate.query(sql, new Object[]{CommentService.COMMENT_TYPE_POST, id}, 
+	public List<Comment> getCommentsOfPost(int id, int offset, int count) {
+		String sql = "select * from " + TABLE + " where comment_object_type=? and comment_object_id=? order by comment_ts desc limit ?,?";
+		List<Comment> comments = jdbcTemplate.query(sql, new Object[]{CommentService.COMMENT_TYPE_POST, id, offset, count}, 
 				new RowMapper<Comment>() {
 
 					public Comment mapRow(ResultSet rs, int rowNum)
@@ -95,15 +95,15 @@ public class CommentDAOImpl implements CommentDAO{
 		return comments;
 	}
 
-	public List<Comment> getCommentsOfPhoto(int id) {
-		String sql = "select * from " + TABLE + " where comment_object_type=? and comment_object_id=?";
-		List<Comment> comments = jdbcTemplate.queryForList(sql, new Object[]{CommentService.COMMENT_TYPE_PHOTO, id}, Comment.class);
+	public List<Comment> getCommentsOfPhoto(int id, int offset, int count) {
+		String sql = "select * from " + TABLE + " where comment_object_type=? and comment_object_id=? order by comment_ts desc  limit ?,?";
+		List<Comment> comments = jdbcTemplate.queryForList(sql, new Object[]{CommentService.COMMENT_TYPE_PHOTO, id, offset, count}, Comment.class);
 		return comments;
 	}
 
-	public List<Comment> getCommentsOfAlbum(int id) {
-		String sql = "select * from " + TABLE + " where comment_object_type=? and comment_object_id=?";
-		List<Comment> comments = jdbcTemplate.query(sql, new Object[]{CommentService.COMMENT_TYPE_ALBUM, id}, 
+	public List<Comment> getCommentsOfAlbum(int id, int offset, int count) {
+		String sql = "select * from " + TABLE + " where comment_object_type=? and comment_object_id=? order by comment_ts desc  limit ?,?";
+		List<Comment> comments = jdbcTemplate.query(sql, new Object[]{CommentService.COMMENT_TYPE_ALBUM, id, offset, count}, 
 				new RowMapper<Comment>() {
 
 					public Comment mapRow(ResultSet rs, int rowNum)
