@@ -126,7 +126,7 @@
         <div class="tags">
 	      	<i class="tag icon"></i>
 	      	<c:forEach items="${feed.tags }" var="tag">
-	      		<a href="#">${tag }</a>
+	      		<a href="<c:url value="/tag/${tag }"/>">${tag }</a>
 	      	</c:forEach>
 		</div> 
 		</c:if>                       

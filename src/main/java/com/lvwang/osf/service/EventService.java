@@ -67,6 +67,7 @@ public class EventService {
 			event.setLike_count(0);
 			event.setShare_count(0);
 			event.setComment_count(0);
+			event.setTags(album.getAlbum_tags());
 			
 		} else if(Dic.OBJECT_TYPE_PHOTO == object_type) {
 			//event_id = eventDao.savePhotoEvent((Photo)obj);
