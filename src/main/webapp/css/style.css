@@ -113,6 +113,10 @@ a {
 	font-weight: bold;
 	color: #009fda;
 }
+
+.comments-attach .cancle{
+	margin-left: 10px;
+}
 .ui.feed > .event > .content .extra.images img{
 	width: 32%;
 }

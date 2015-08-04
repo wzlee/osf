@@ -26,7 +26,8 @@
 		var comment_object_type = $(event).attr('object_type');
 		var comment_object_id = $(event).attr('object_id');
 		var comment_content = $(this).prev().val();
-		comment_parent = '0';
+		var that = this;
+		//comment_parent = '0';
 		$.ajax({
 			url: basePath + '/comment/create',
 			type: 'POST',
@@ -38,13 +39,34 @@
 				   }
 		})
 		.success(function(data){
-			alert('hehhe');
+			var comment = $('<div class="item">'+
+								'<img class="ui avatar image" src="">'+
+								'<div class="content">'+
+									'<a class="author" href=""></a>'+
+								'</div>'+
+							'</div>'+
+							'<div class="ui divider"></div>');
+			$(comment).find('img').attr('src', img_base_url + data.avatar);
+			$(comment).find('a').attr('href', basePath + '/user/' + data.author_id).text(data.author_name);
+			$(comment).find('.content').append(comment_content);
+			
+			$(that).parents('.item').after($(comment));
+			$(that).prev().val('');
+			comment_parent = '0';
 		});
 	});  	
   	
+	$('.input .cancle').live('click', function(){		
+		var comment_area = $(this).parents('.input');
+		$(comment_area).removeClass('labeled').find('.label').remove();
+		$(comment_area).find(':input').val(''); 
+		comment_parent = '0';
+		
+	});
+	
   	$('.actions .reply').live('click', function(){
   		
-  		var comment_area = $('.input');
+  		var comment_area = $(this).parents('.list').find('.input');
   		$(comment_area).removeClass('labeled').find('.label').remove();
   		$(comment_area).find(':input').val('').focus();
   		
@@ -57,11 +79,12 @@
 		
   		$(comment_area).addClass('labeled').prepend($(reply_to_html).append('回复:'+reply_to_authorname));
   		
-  		$('.input :input').live('blur', function(){
-  			$(comment_area).removeClass('labeled').find('.label').remove();
-  	  		$(this).val(''); 			
-  		});
+//  		$('.input :input').live('blur', function(){
+//  			$(comment_area).removeClass('labeled').find('.label').remove();
+//  	  		$(this).val(''); 			
+//  		});
   	});
+
   	
   	$('.comment.outline.icon').live('click', function(){
   		

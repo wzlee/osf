@@ -9,12 +9,14 @@
 			<div class="ui middle aligned list">
 			  <div class="item" style="margin-bottom: 20px;margin-top: 14px">
 			    <div class="content">
-					<div class="ui fluid  action input">
+					<div class="ui fluid mini action input">
 					  <input type="text">
 					  <div class="ui blue button reply">评论</div>
+					  <div class="ui button cancle" style="margin-left: 10px">取消</div>
 					</div>
 			    </div>
 			  </div>
+			  
 			  
 			  <c:forEach items="${comments }" var="comment">
 				  <div class="item">

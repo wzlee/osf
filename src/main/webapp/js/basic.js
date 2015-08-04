@@ -1,4 +1,6 @@
 basePath = '/com.lvwang.osf';
+img_base_url= 'http://7xkkim.com1.z0.glb.clouddn.com/'
+
 var current_version = 'develop';
 var osf = {
 		develop:{

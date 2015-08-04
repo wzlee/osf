@@ -98,6 +98,8 @@ public class CommentController {
 		
 		
 		ret.put("avatar", userService.findById(user.getId()).getUser_avatar());
+		ret.put("author_id", String.valueOf(user.getId()));
+		ret.put("author_name", user.getUser_name());
 		return ret;
 	}
 	

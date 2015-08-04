@@ -16,7 +16,7 @@ $(document).ready(function(){
 			if(SUCCESS_POST_CREATE == status) {
 				var short_post=$('.empty.event:first').clone();
 				$(short_post).removeClass('empty');
-				$(short_post).find('img:first').attr('src', data.avatar);
+				$(short_post).find('img:first').attr('src', img_base_url + data.avatar);
 				$(short_post).find('.summary > a').attr('href', basePath+'/user/'+data.spost.post_author);
 				$(short_post).find('.summary > a').text(data.author_name);
 				$(short_post).find('.extra').text(data.spost.post_content);
