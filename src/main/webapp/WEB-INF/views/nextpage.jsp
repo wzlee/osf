@@ -116,7 +116,7 @@
     </div>                          
      </div>
      <div class="extra images">
-       <c:forTokens items="${feed.content }" delims=":" var="img">
+       <c:forTokens items="${feed.content }" delims=":" var="img" begin="0" end="2">
        	<a href="<c:url value="/album/${feed.object_id }/photos" />"><img alt="" src="${img_base_url }${img }${album_thumbnail}"></a>
        </c:forTokens>
      </div>
