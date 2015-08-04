@@ -90,13 +90,13 @@ public class TagService {
 	public Map<String, Object> newTags(List<String> tags) {
 				
 		Map<String, Object> ret = new HashMap<String, Object>();
+		List<Tag> taglist = new ArrayList<Tag>();
+		ret.put("tags", taglist);
+		
 		if(tags == null || tags.size() == 0) {
 			ret.put("status", Property.SUCCESS_TAG_CREATE);
 			return ret;
 		}
-		
-		List<Tag> taglist = new ArrayList<Tag>();
-		ret.put("tags", taglist);
 		
 		for(String tag: tags) {
 			String status = check(tag);

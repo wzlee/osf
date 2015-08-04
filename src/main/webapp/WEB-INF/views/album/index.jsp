@@ -23,7 +23,7 @@
 	<script type="text/javascript" src="<%=request.getContextPath() %>/js/semantic.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath() %>/js/basic.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath() %>/js/code.js"></script>
-	<script type="text/javascript" src="<%=request.getContextPath() %>/js/album.js"></script>
+	<%-- <script type="text/javascript" src="<%=request.getContextPath() %>/js/album.js"></script> --%>
 	<script type="text/javascript" src="<%=request.getContextPath() %>/js/comment.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath() %>/js/follow.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath() %>/js/login.js"></script>
@@ -107,6 +107,16 @@
 			</div>
 		</div>
 	</div>	
+	<script>
+	$(document).ready(function(){
+		$('#mainimg').attr('src', $('#imgbox img:first').attr('src').split('?')[0]);
+		
+		$('#imgbox img').click(function() {
+			var src = $(this).attr('src').split('?')[0];
+			$('#mainimg').attr('src', src);
+		});		
+	});
 
+	</script>
 </body>
 </html>

@@ -1,12 +1,6 @@
 $(document).ready(function(){
 	var photos = [];
 
-	$('#mainimg').attr('src', $('#imgbox img:first').attr('src').split('?')[0]);
-	
-	$('#imgbox img').click(function() {
-		var src = $(this).attr('src').split('?')[0];
-		$('#mainimg').attr('src', src);
-	});
 
 	$('#uploader_input').live('change', function(event) {
 	   $.ajaxFileUpload({
