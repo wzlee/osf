@@ -18,11 +18,13 @@
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/semantic.css">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">
   	<script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.js"></script>
+  	<script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.infinitescroll.js"></script>
   	<script type="text/javascript" src="<%=request.getContextPath() %>/js/semantic.js"></script>
   	<script type="text/javascript" src="<%=request.getContextPath() %>/js/basic.js"></script>
   	<script type="text/javascript" src="<%=request.getContextPath() %>/js/code.js"></script>
   	<script type="text/javascript" src="<%=request.getContextPath() %>/js/interest.js"></script>
   	<script type="text/javascript" src="<%=request.getContextPath() %>/js/login.js"></script>
+  	<script type="text/javascript" src="<%=request.getContextPath() %>/js/feed.js"></script>
 </head>
 <body>
 	<%@ include file="../topbar.jsp" %>
@@ -30,9 +32,10 @@
 	<div class="container">
     <div class="row">  
           <div class="span8">             
-                  <div class="ui feed">
+                  <div class="ui feed" id="feeds">
  					<%@ include file="../nextpage.jsp" %>                                     
                   </div>  <!--end feed -->
+                  <a id="next" href="<c:url value="/page/2" />"></a>
             </div> <!-- end span8  -->
           <div class="span4">
           	<div id="rightside">

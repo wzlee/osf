@@ -100,6 +100,8 @@ public class CommentController {
 		ret.put("avatar", userService.findById(user.getId()).getUser_avatar());
 		ret.put("author_id", String.valueOf(user.getId()));
 		ret.put("author_name", user.getUser_name());
+		ret.put("reply_to_author", String.valueOf(comment_parent_author.getId()));
+		ret.put("reply_to_authorname", comment_parent_author.getUser_name());
 		return ret;
 	}
 	

@@ -198,6 +198,6 @@
     </div>
 
   </div>
-  <script src="<%=request.getContextPath() %>/js/index.js"></script>
+  <script src="<%=request.getContextPath() %>/js/feed.js"></script>
 </body>
 </html>

@@ -26,6 +26,7 @@
 		var comment_object_type = $(event).attr('object_type');
 		var comment_object_id = $(event).attr('object_id');
 		var comment_content = $(this).prev().val();
+		
 		var that = this;
 		//comment_parent = '0';
 		$.ajax({
@@ -42,15 +43,17 @@
 			var comment = $('<div class="item">'+
 								'<img class="ui avatar image" src="">'+
 								'<div class="content">'+
-									'<a class="author" href=""></a>'+
+									'<a class="author replyer" href=""></a>回复<a class="author replyto" href=""/>'+
 								'</div>'+
 							'</div>'+
 							'<div class="ui divider"></div>');
 			$(comment).find('img').attr('src', img_base_url + data.avatar);
-			$(comment).find('a').attr('href', basePath + '/user/' + data.author_id).text(data.author_name);
+			$(comment).find('a.replyer').attr('href', basePath + '/user/' + data.author_id).text(data.author_name);
+			$(comment).find('a.replyto').attr('href', basePath + '/user/' + data.reply_to_author).text(data.reply_to_authorname);
 			$(comment).find('.content').append(comment_content);
 			
 			$(that).parents('.item').after($(comment));
+			$(that).parents('.item').find('.labeled').removeClass('labeled').find('.label').remove();
 			$(that).prev().val('');
 			comment_parent = '0';
 		});
