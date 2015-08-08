@@ -316,4 +316,10 @@ public class AlbumDAOImpl implements AlbumDAO{
 													 TagService.toString(album.getAlbum_tags()),
 													 album.getId()});
 	}
+
+	public void delPhoto(int id) {
+		String sql = "delete from " + TABLE_PHOTO + " where id=?";
+		jdbcTemplate.update(sql, new Object[]{id});
+		
+	}
 }

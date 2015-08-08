@@ -145,6 +145,7 @@ public class Property {
 	
 	public static final String SUCCESS_PHOTO_CREATE = "107000";
 	public static final String SUCCESS_PHOTO_UPDATE = "107001";
+	public static final String SUCCESS_PHOTO_DELETE = "107002";
 	
 	public static final String SUCCESS_COMMENT_CREATE = "108000";
 	

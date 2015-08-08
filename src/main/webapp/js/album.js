@@ -71,5 +71,24 @@ $(document).ready(function(){
 		});
 		
 	});
+	
+	$('.delete.icon').live('click', function(){
+		var card = $(this).parents('.card');
+		var photo_id = $(card).attr('id').substring(4);
+		var that = this;
+		
+		$.ajax({
+			url: basePath+'/album/delete/photo/'+photo_id,
+			type: 'GET',
+			dataType: 'json'
+		})
+		.success(function(data){
+			if(data.status == SUCCESS_PHOTO_DELETE){
+				$(card).remove();
+			}
+			
+		});
+		return false;
+	});
 
 })

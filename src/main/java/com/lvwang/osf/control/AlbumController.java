@@ -115,6 +115,15 @@ public class AlbumController {
 		return mav;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/delete/photo/{id}", method=RequestMethod.GET)
+	public Map<String, Object> deletePhoto(@PathVariable("id") int id){
+		Map<String, Object> map = new HashMap<String, Object>();
+		albumService.deletePhoto(id);
+		map.put("status", Property.SUCCESS_PHOTO_DELETE);
+		return map;
+	}
+	
 	/*
 	 * 上传图片到相册
 	 */

@@ -37,5 +37,6 @@ public interface AlbumDAO {
 	
 	int getAuthorOfAlbum(int id);
 	
+	void delPhoto(int id);
 	void delPhotoInBucket(String key);
 }

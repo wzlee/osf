@@ -261,6 +261,9 @@ public class AlbumService {
 		return key;
 	}
 	
+	public void deletePhoto(int id){
+		albumDao.delPhoto(id);
+	}
 
 	
 }

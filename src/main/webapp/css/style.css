@@ -624,7 +624,9 @@ a {
 	height: 100px;
 	resize:none;
 }
-
+.ui.form textarea{
+	resize:none;
+}
 
 .comments{
 	width: 100%;
@@ -737,8 +739,14 @@ form style
 }
 
 
+/**
+	img upload page style
+**/
 
+#uploadedphotos{
+}
 
-
-
+#saveAlbumBtn, #uploadarea{
+	margin-top: 20px;
+}
 

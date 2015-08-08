@@ -31,6 +31,7 @@
 	#uploadedphotos textarea {
 		border: 0;
 		resize: none;
+		width: 100%;
 	}
 	</style>
 </head>
@@ -43,13 +44,13 @@
 				  <c:forEach items="${photos }" var="photo">
 					  <div class="card" id="card${photo.id }">
 					    <a class="image" href="#">
-					      <img src="<c:url value="http://osfimgs.oss-cn-hangzhou.aliyuncs.com/${photo.key }" />">
+					      <img src="<c:url value="${img_base_url }${photo.key }?imageView2/1/w/200/h/200" />">
 					    </a>
 					    <div class="content">
 					    	<textarea rows="" cols="" placeholder="添加描述..."></textarea>
 					    </div>
 					    <div class="extra meta">
-							<a href=""><i class="delete icon"></i>删除</a>
+							<a href="#"><i class="delete icon"></i>删除</a>
 					    </div>
 					  </div>
 				  </c:forEach>
@@ -84,7 +85,7 @@
 						</div>
 						
 					</div>
-					<div class="ui blue button" id="saveAlbumBtn">
+					<div class="ui tiny blue button" id="saveAlbumBtn">
 						保存
 					</div>
 					
