@@ -63,7 +63,9 @@
      	<div class="postheader">
         		<a href="<c:url value="/post/${feed.object_id }" />">${feed.title }</a>
          </div>
-   		<img src="<c:url value="${img_base_url}${feed.content }${post_cover_thumbnail}"/>" alt="" />
+         <c:if test="${not empty feed.content }">
+   		 	<img src="<c:url value="${img_base_url}${feed.content }${post_cover_thumbnail}"/>" alt="" />
+   		 </c:if>
    	</div>
      <div class="extra">
        
