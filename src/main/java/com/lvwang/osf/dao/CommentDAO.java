@@ -11,6 +11,7 @@ public interface CommentDAO {
 	List<Comment> getCommentsOfPost(int id, int offset, int count);
 	List<Comment> getCommentsOfPhoto(int id, int offset, int count);
 	List<Comment> getCommentsOfAlbum(int id, int offset, int count);
+	List<Comment> getCommentsOfShortPost(int id, int offset, int count);
 
 	int save(Comment comment);
 	boolean delete(int id);

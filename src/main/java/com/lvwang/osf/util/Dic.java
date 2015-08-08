@@ -56,8 +56,12 @@ public class Dic {
 			return "post";
 		} else if(object_type == OBJECT_TYPE_SHORTPOST){
 			return "shortpost";
-		} else {
+		} else if(object_type == OBJECT_TYPE_FOLLOWING){
 			return "following";
+		} else if(object_type == OBJECT_TYPE_USER) {
+			return "user";
+		} else {
+			return null;
 		}
 	}
 

@@ -20,6 +20,7 @@ import com.lvwang.osf.dao.CommentDAO;
 import com.lvwang.osf.model.Comment;
 import com.lvwang.osf.model.User;
 import com.lvwang.osf.service.CommentService;
+import com.lvwang.osf.util.Dic;
 
 
 @Repository("commentDao")
@@ -95,6 +96,20 @@ public class CommentDAOImpl implements CommentDAO{
 		return comments;
 	}
 
+	public List<Comment> getCommentsOfShortPost(int id, int offset, int count) {
+		String sql = "select * from " + TABLE + " where comment_object_type=? and comment_object_id=? order by comment_ts desc limit ?,?";
+		List<Comment> comments = jdbcTemplate.query(sql, new Object[]{Dic.OBJECT_TYPE_SHORTPOST, id, offset, count}, 
+				new RowMapper<Comment>() {
+
+					public Comment mapRow(ResultSet rs, int rowNum)
+							throws SQLException {
+						return generateComment(rs);
+					}
+			
+		});
+		return comments;
+	}
+	
 	public List<Comment> getCommentsOfPhoto(int id, int offset, int count) {
 		String sql = "select * from " + TABLE + " where comment_object_type=? and comment_object_id=? order by comment_ts desc  limit ?,?";
 		List<Comment> comments = jdbcTemplate.queryForList(sql, new Object[]{CommentService.COMMENT_TYPE_PHOTO, id, offset, count}, Comment.class);

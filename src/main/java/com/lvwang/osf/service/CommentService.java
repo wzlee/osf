@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.lvwang.osf.dao.CommentDAO;
 import com.lvwang.osf.model.Comment;
 import com.lvwang.osf.model.User;
+import com.lvwang.osf.util.Dic;
 import com.lvwang.osf.util.Property;
 
 @Service("commentService")
@@ -23,6 +24,7 @@ public class CommentService {
 	public static final String TYPE_POST = "post";
 	public static final String TYPE_PHOTO = "photo";
 	public static final String TYPE_ALBUM = "album";
+	public static final String TYPE_SPOST = "spost";
 	
 	public static final int COUNT = 10;	//默认返回comment条数
 	
@@ -44,12 +46,12 @@ public class CommentService {
 			ret.put("status", Property.ERROR_COMMENT_EMPTY);
 			return ret;
 		}
-		if(comment_object_type != COMMENT_TYPE_POST &&
-		   comment_object_type != COMMENT_TYPE_PHOTO &&
-		   comment_object_type != COMMENT_TYPE_ALBUM) {
+		//不支持的评论类型
+		if(Dic.checkType(comment_object_type) == null){
 			ret.put("status", Property.ERROR_COMMENT_TYPE);
 			return ret;
 		}
+
 		Comment comment = new Comment();
 		comment.setComment_object_type(comment_object_type);
 		comment.setComment_object_id(comment_object_id);
@@ -84,7 +86,9 @@ public class CommentService {
 			comments = commentDao.getCommentsOfPhoto(id, offset, count);
 		} else if(type.equals(TYPE_ALBUM)){
 			comments = commentDao.getCommentsOfAlbum(id, offset, count);
-		} 
+		} else if(type.equals(TYPE_SPOST)){
+			comments = commentDao.getCommentsOfShortPost(id, offset, count);
+		}
 		
 		//add avatars;
 		if(comments != null && comments.size() !=0) {
