@@ -50,7 +50,7 @@
 	                        		</div>
 	                        		<c:if test="${not empty post.post_cover}">
 		                        		<div class="span2">
-		                        			<img class="ui small image" src="${post.post_cover }" alt=""  />
+		                        			<img class="ui small image" src="${img_base_url }${post.post_cover }?imageView2/1/w/200/h/200" alt=""  />
 		                        		</div>
 	                        		</c:if>
 	                        		
@@ -90,7 +90,7 @@
 						  <c:forEach items="${albums }" var="album">
 							  <div class="card">
 							    <a class="image" href="<c:url value="/album/${album.id}/photos"/>">
-							      <img src="<c:url value="${imgBaseUrl}${album.cover }"/>">
+							      <img src="<c:url value="${img_base_url}${album.cover }?imageView2/1/w/200/h/200"/>">
 							    </a>
 							    <div class="extra">
 							      ${album.album_desc }
