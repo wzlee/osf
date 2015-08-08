@@ -228,9 +228,16 @@ public class AlbumService {
 		int user_id = albumDao.getAuthorOfAlbum(id);
 		return userService.findById(user_id);
 	}
+	public User getAuthorOfPhoto(int id){
+		Album album = albumDao.getAlbumContainPhoto(id);
+		User user = new User();
+		if(album != null){
+			user.setId(album.getUser_id());
+		}
+		return user;
+	}
 	
 	public String cropAvatar(String key, int x, int y, int width, int height) {
-		String status = null;
 		String classpath = AlbumService.class.getClassLoader().getResource("").getPath();
 		try {
 			File ori_img = new File(classpath+"/tmp/"+key);

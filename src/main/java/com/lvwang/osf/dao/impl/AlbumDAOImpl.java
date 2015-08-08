@@ -322,4 +322,25 @@ public class AlbumDAOImpl implements AlbumDAO{
 		jdbcTemplate.update(sql, new Object[]{id});
 		
 	}
+
+	public Album getAlbumContainPhoto(int photo_id) {
+		String sql = "select * from " + TABLE_PHOTO + " t1," + TABLE_ALBUM + " t2 where t1.id=? and t1.album_id=t2.id";
+		return jdbcTemplate.query(sql, new Object[]{photo_id}, new ResultSetExtractor<Album>(){
+
+			public Album extractData(ResultSet rs) throws SQLException,
+					DataAccessException {
+				Album album = new Album();
+				if(rs.next()) {
+					album.setAlbum_desc(rs.getString("album_desc"));
+					album.setAlbum_title(rs.getString("album_title"));
+					album.setCover(rs.getString("cover"));
+					album.setId(rs.getInt("id"));
+					album.setUser_id(rs.getInt("user_id"));
+					album.setLast_add_ts(rs.getTimestamp("last_add_ts"));
+					album.setCreate_ts(rs.getTimestamp("create_ts"));
+					album.setAlbum_tags(TagService.toList(rs.getString("album_tags")));
+				}
+				return album;
+			}});
+	}
 }

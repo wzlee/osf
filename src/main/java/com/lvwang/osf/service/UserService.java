@@ -436,6 +436,8 @@ public class UserService {
 			return albumService.getAuthorOfALbum(object_id);
 		} else if(object_type == Dic.OBJECT_TYPE_SHORTPOST) {
 			return shortPostService.getAuthorOfPost(object_id);
+		} else if(object_type == Dic.OBJECT_TYPE_PHOTO) {
+			return albumService.getAuthorOfPhoto(object_id);
 		} else {
 			return new User();
 		}

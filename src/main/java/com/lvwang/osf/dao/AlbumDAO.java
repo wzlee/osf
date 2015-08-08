@@ -36,6 +36,7 @@ public interface AlbumDAO {
 	List<Photo> getPhotos(int album_id);
 	
 	int getAuthorOfAlbum(int id);
+	Album getAlbumContainPhoto(int photo_id);
 	
 	void delPhoto(int id);
 	void delPhotoInBucket(String key);
