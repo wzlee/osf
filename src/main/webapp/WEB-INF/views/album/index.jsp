@@ -5,8 +5,8 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<meta name="type" content="album">
-	<meta name="id" content="${album.id }">
+	<meta name="type" content="photo">
+	<meta name="id" content="">
 	<c:if test="${not empty sessionScope.user}">
 		<meta name="isLogin" content="true"/>
 	</c:if>
@@ -97,9 +97,9 @@
 							  </form>								
 					  </div>
 					  
-						
-					  <jsp:include page="/comment/album/${album.id }"></jsp:include>				  	
-					  
+					  <c:forEach items="${album.photos}" var="photo" begin="0" end="0">	
+					  	<jsp:include page="/comment/photo/${photo.id }"></jsp:include>				  	
+					  </c:forEach>
 					  <!-- comment list -->
 					</div>
 					<!-- end comment -->
@@ -109,11 +109,25 @@
 	</div>	
 	<script>
 	$(document).ready(function(){
+		var first_img_id = $('#imgbox img:first').attr('id').split('_')[2];
+		$('meta[name=id]').attr('content', first_img_id);
+		
 		$('#mainimg').attr('src', $('#imgbox img:first').attr('src').split('?')[0]);
 		
 		$('#imgbox img').click(function() {
 			var src = $(this).attr('src').split('?')[0];
+			var img_id = $(this).attr('id').split('_')[2];
 			$('#mainimg').attr('src', src);
+			$('meta[name=id]').attr('content', img_id);
+			
+			$.ajax({
+				url: basePath + '/comment/photo/'+img_id,
+				type: 'GET',
+			})
+			.success(function(data){
+				$('#commentList').remove();
+				$('#comments').append($('<code></code>').append(data).find('#commentList'));
+			});
 		});		
 	});
 

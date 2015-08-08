@@ -112,7 +112,15 @@ public class CommentDAOImpl implements CommentDAO{
 	
 	public List<Comment> getCommentsOfPhoto(int id, int offset, int count) {
 		String sql = "select * from " + TABLE + " where comment_object_type=? and comment_object_id=? order by comment_ts desc  limit ?,?";
-		List<Comment> comments = jdbcTemplate.queryForList(sql, new Object[]{CommentService.COMMENT_TYPE_PHOTO, id, offset, count}, Comment.class);
+		List<Comment> comments = jdbcTemplate.query(sql, new Object[]{CommentService.COMMENT_TYPE_PHOTO, id, offset, count}, 
+				new RowMapper<Comment>() {
+
+					public Comment mapRow(ResultSet rs, int rowNum)
+							throws SQLException {
+						return generateComment(rs);
+					}
+			
+		});
 		return comments;
 	}
 
