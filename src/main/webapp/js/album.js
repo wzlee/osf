@@ -8,12 +8,11 @@ $(document).ready(function(){
 	                		secureuri:false,
 	                		fileElementId:'uploader_input',
 	                		success: function (data, status){
-	                				var imgUrl = 'http://7xkkim.com1.z0.glb.clouddn.com/';
 	                				data = jQuery(data).find('pre:first').text();
 	                				data = jQuery.parseJSON(data);
 	                				var $imgCard = $('<div class="card" id="card'+data.id+'">'+
 				    									'<a class="image" href="#">'+
-				      										'<img src="'+imgUrl+data.key+'">'+
+				      										'<img src="'+img_base_url+data.key+album_thumbnail+'">'+
 				    									'</a>'+
 				    									'<div class="content">'+
 				    										'<textarea rows="" cols="" placeholder="添加描述..."></textarea>'+
