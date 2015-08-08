@@ -167,9 +167,9 @@ a {
 	line-height: 22px;
 	font-size: 13px;
 }
-.post.like{
+.post.like, .post.trash{
 	float: right;
-
+	margin-left: 10px;
 }  
   
 /*   .tags{
@@ -750,3 +750,13 @@ form style
 	margin-top: 20px;
 }
 
+
+/**
+trash-tip style
+**/
+.ui.basic.small.modal.trash-tip {
+	text-align: center;
+}
+.ui.basic.small.modal.trash-tip .actions{
+	text-align: center;
+}

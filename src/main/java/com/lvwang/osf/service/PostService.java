@@ -22,9 +22,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.lvwang.osf.dao.PostDAO;
+import com.lvwang.osf.model.Event;
 import com.lvwang.osf.model.Post;
 import com.lvwang.osf.model.Tag;
 import com.lvwang.osf.model.User;
+import com.lvwang.osf.util.Dic;
 import com.lvwang.osf.util.Property;
 
 @Service("postService")
@@ -51,6 +53,14 @@ public class PostService {
 	@Autowired
 	@Qualifier("userService")
 	private UserService userService;
+
+	@Autowired
+	@Qualifier("eventService")
+	private EventService eventService;
+
+	@Autowired
+	@Qualifier("feedService")
+	private FeedService feedService;
 	
 	@Autowired
 	@Qualifier("postDao")
@@ -162,5 +172,14 @@ public class PostService {
 	
 	public long count(int user_id){
 		return postDao.count(user_id);
+	}
+	
+	public void deletePost(int id){
+		postDao.delete(id);
+		Event event = eventService.getEvent(Dic.OBJECT_TYPE_POST, id);
+		if(event != null){
+			eventService.delete(Dic.OBJECT_TYPE_POST, id);
+			feedService.delete(event.getObject_type(), event.getObject_id());
+		}
 	}
 }

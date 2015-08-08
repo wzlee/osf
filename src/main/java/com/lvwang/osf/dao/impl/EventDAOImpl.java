@@ -10,8 +10,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -180,6 +182,39 @@ public class EventDAOImpl implements EventDAO{
 				return generateEvent(rs);
 			}
 			
+		});
+	}
+
+	public void delete(int id) {
+ 		String sql = "delete from " + TABLE + " where id=?";
+ 		jdbcTemplate.update(sql, new Object[]{id});
+	}
+
+	public void delete(int object_type, int object_id) {
+		String sql = "delete from " + TABLE + " where object_type=? and object_id=?";
+		jdbcTemplate.update(sql, new Object[]{object_type, object_id});
+	}
+
+	public Event getEvent(final int object_type, final int object_id) {
+		final String sql = "select * from " + TABLE + " where object_type=? and object_id=?";
+		return jdbcTemplate.query(new PreparedStatementCreator() {
+			
+			public PreparedStatement createPreparedStatement(Connection con)
+					throws SQLException {
+				PreparedStatement ps = con.prepareStatement(sql);
+				ps.setInt(1, object_type);
+				ps.setInt(2, object_id);
+				return ps;
+			}
+		}, new ResultSetExtractor<Event>() {
+
+			public Event extractData(ResultSet rs) throws SQLException,
+					DataAccessException {
+				if(rs.next()){
+					return generateEvent(rs);
+				}
+				return new Event();
+			}
 		});
 	}
 }

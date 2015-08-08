@@ -1,6 +1,7 @@
 package com.lvwang.osf.control;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -133,7 +134,14 @@ public class PostController {
 		
 	}
 	
-	
+	@ResponseBody
+	@RequestMapping("/delete/{id}")
+	public Map<String, Object> deletePost(@PathVariable("id") int id){
+		Map<String, Object> map = new HashMap<String, Object>();
+		postService.deletePost(id);
+		map.put("status", Property.SUCCESS_POST_DELETE);
+		return map;
+	}
 	
 	
 }

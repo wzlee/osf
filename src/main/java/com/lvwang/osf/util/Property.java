@@ -138,6 +138,8 @@ public class Property {
 	public static final String SUCCESS_ACCOUNT_ACTIVATION_KEY_UPD = "104004";	
 	
 	public static final String SUCCESS_POST_CREATE = "105000";		//
+	public static final String SUCCESS_POST_UPDATE = "105001";		//
+	public static final String SUCCESS_POST_DELETE = "105002";		//
 	
 	public static final String SUCCESS_ALBUM_CREATE = "106000";
 	public static final String SUCCESS_ALBUM_ALLOWED = "106001";

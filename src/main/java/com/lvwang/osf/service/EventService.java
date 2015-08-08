@@ -109,6 +109,10 @@ public class EventService {
 		return events;
 	}
 	
+	public Event getEvent(int object_type, int object_id){
+		return eventDao.getEvent(object_type, object_id);
+	}
+	
 	/*
 	 * 根据event id查询event
 	 */
@@ -118,5 +122,13 @@ public class EventService {
 	
 	public List<Event> getEventsOfUser(int user_id, int count){
 		return eventDao.getEventsOfUser(user_id, count);
+	}
+	
+	public void delete(int id){
+		eventDao.delete(id);
+	}
+	
+	public void delete(int object_type, int object_id){
+		eventDao.delete(object_type, object_id);
 	}
 }

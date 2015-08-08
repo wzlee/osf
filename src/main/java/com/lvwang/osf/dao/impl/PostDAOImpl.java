@@ -113,9 +113,10 @@ public class PostDAOImpl implements PostDAO{
 		return keyHolder.getKey().intValue();
 	}
 
-	public boolean delete(int id) {
-		// TODO Auto-generated method stub
-		return false;
+	public void delete(int id) {
+		String sql = "delete from " + TABLE + " where id=?";
+		jdbcTemplate.update(sql, new Object[]{id});
+		
 	}
 
 	public int getAuthorOfPost(int id) {

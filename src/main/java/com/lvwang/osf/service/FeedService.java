@@ -103,4 +103,8 @@ public class FeedService {
 		
 	}
 	
+	public void delete(int user_id, int event_id) {
+		feedDao.delete("feed:user:"+user_id, event_id);
+	}
+	
 }

@@ -76,4 +76,34 @@ $(document).ready(function(){
 			
 		})	
 	});
+	
+	
+	$('.trash').live('click', function(){
+		$('.trash-tip')
+		  .modal({
+		    closable  : true,
+		    onDeny    : function(){
+		      return true;
+		    },
+		    onApprove : function() {
+				var id = $('meta[name=id]').attr('content');
+				$.ajax({
+					url: basePath + '/post/delete/'+id,
+					type: 'GET',
+					dataType: 'json'
+				})
+				.success(function(data){
+					if(data.status == SUCCESS_POST_DELETE) {
+						self.location = basePath;
+					}
+				});
+		    }
+		  })
+		  .modal('show');
+		
+
+	});
+	
+	
+	
 })

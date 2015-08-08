@@ -10,7 +10,7 @@ public interface PostDAO {
 	List<Post> getPostsByUserID(int id);
 	
 	int save(Post post);
-	boolean delete(int id);
+	void delete(int id);
 	int getAuthorOfPost(int id);
 	
 	long count(int user_id);

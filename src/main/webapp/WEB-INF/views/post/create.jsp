@@ -57,7 +57,6 @@
 				  <div class="ui button" id="cancel">取消</div>
 				</div>				
 				
-
 			</div>
 		</div>
 	</div>
@@ -65,8 +64,8 @@
   	<script type="text/javascript" src="<%=request.getContextPath() %>/js/froala_editor.min.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath() %>/js/basic.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath() %>/js/code.js"></script>
-  	<script type="text/javascript" src="<%=request.getContextPath() %>/js/post.js"></script>
   	<script type="text/javascript" src="<%=request.getContextPath() %>/js/tag.js"></script>
+  	<script type="text/javascript" src="<%=request.getContextPath() %>/js/post.js"></script>
   	<script>
       $(function() {
           $('#content').editable({

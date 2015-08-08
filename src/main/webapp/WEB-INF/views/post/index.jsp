@@ -95,7 +95,12 @@
 								  <c:if test="${is_like }">
 								  	<i class="red heart icon" id="like"></i>
 								  </c:if>
-								</div>																
+								</div>	
+								<c:if test="${u.id eq user.id}">
+								<div class="ui circular icon basic button post trash">
+									<i class="trash outline icon"></i>
+								</div>
+								</c:if>
 							</div>
 						</div>
 					</div>
@@ -132,5 +137,6 @@
 		<!-- end comment -->
 	</div>
 	
+	<%@ include file="../trash_tip.jsp" %>
 </body>
 </html>
