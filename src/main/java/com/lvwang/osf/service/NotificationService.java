@@ -23,10 +23,16 @@ public class NotificationService {
 	 * @return notification id
 	 */
 	public int doNotify(Notification notification){
-		return notificationDao.save(notification);
+		int id = notificationDao.save(notification);
+		refreshNotifications(notification.getNotified_user());
+		return id;
 	}
 	
 	public Map<String, Integer> getNotificationsCount(int user_id){
 		return notificationDao.getNotificationsCount(user_id);
+	}
+	
+	public void refreshNotifications(int user_id){
+		notificationDao.refresh(user_id);
 	}
 }

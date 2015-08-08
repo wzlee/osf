@@ -13,4 +13,5 @@ public interface NotificationDAO {
 	List<Notification> getNotificationsOfType(int user_id, int notify_type);
 	
 	Map<String, Integer> getNotificationsCount(int user_id);
+	void refresh(int user_id);
 }

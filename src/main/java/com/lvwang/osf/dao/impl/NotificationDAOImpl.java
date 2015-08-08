@@ -96,30 +96,36 @@ public class NotificationDAOImpl implements NotificationDAO{
 		notifications.put("system", 0);
 	}
 	
-
+	private Map<String, Integer> getNotifications(final Map<String, Integer> notifications, int user_id){
+		initNotification(notifications);
+		String sql = "select notified_user,notify_type,count(*) count from " 
+				 + TABLE + " where notified_user=? group by notified_user,notify_type";			
+	
+		jdbcTemplate.query(sql, new Object[]{user_id}, new ResultSetExtractor<Integer>(){
+	
+			public Integer extractData(ResultSet rs) throws SQLException,
+					DataAccessException {
+				while(rs.next()){
+					notifications.put(Dic.toNotifyTypeDesc(rs.getInt("notify_type")), rs.getInt("count"));
+				}
+				return null;
+			}
+			
+		});
+		return notifications;
+	}
+	
+	public void refresh(int user_id){
+		Map<String, Integer> notifications = new HashMap<String, Integer>();
+		hashOps.putAll(NOTIFY_KEY+user_id, getNotifications(notifications, user_id));
+	}
 	
 	public Map<String, Integer> getNotificationsCount(int user_id) {
 		final Map<String, Integer> notifications = new HashMap<String, Integer>();
 		
 		if(!redisTemplate.hasKey(NOTIFY_KEY+user_id)){
-			initNotification(notifications);
 			
-			String sql = "select notified_user,notify_type,count(*) count from " 
-						 + TABLE + " where notified_user=? group by notified_user,notify_type";			
-			
-			jdbcTemplate.query(sql, new Object[]{user_id}, new ResultSetExtractor<Integer>(){
-
-				public Integer extractData(ResultSet rs) throws SQLException,
-						DataAccessException {
-					while(rs.next()){
-						notifications.put(Dic.toNotifyTypeDesc(rs.getInt("notify_type")), rs.getInt("count"));
-					}
-					return null;
-				}
-				
-			});
-			
-			hashOps.putAll(NOTIFY_KEY+user_id, notifications);
+			hashOps.putAll(NOTIFY_KEY+user_id, getNotifications(notifications, user_id));
 
 		} else{
 			for(String key: hashOps.keys(NOTIFY_KEY+user_id)){
