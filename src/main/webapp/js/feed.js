@@ -43,13 +43,18 @@
 			var comment = $('<div class="item">'+
 								'<img class="ui avatar image" src="">'+
 								'<div class="content">'+
-									'<a class="author replyer" href=""></a>回复<a class="author replyto" href=""/>'+
+									'<a class="author replyer" href=""></a>'+
 								'</div>'+
 							'</div>'+
 							'<div class="ui divider"></div>');
 			$(comment).find('img').attr('src', img_base_url + data.avatar);
 			$(comment).find('a.replyer').attr('href', basePath + '/user/' + data.author_id).text(data.author_name);
-			$(comment).find('a.replyto').attr('href', basePath + '/user/' + data.reply_to_author).text(data.reply_to_authorname);
+			if(comment_parent != '0'){
+				var reply_to_html = $('回复<a class="author replyto" href=""/>');
+				$(reply_to_html).attr('href', basePath + '/user/' + data.reply_to_author).text(data.reply_to_authorname);
+				$(comment).find('a.replyer').after($(reply_to_html));
+			}
+			
 			$(comment).find('.content').append(comment_content);
 			
 			$(that).parents('.item').after($(comment));

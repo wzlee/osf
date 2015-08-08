@@ -84,7 +84,7 @@ public class CommentController {
 													  Integer.parseInt(ret.get("id")),
 													  Dic.OBJECT_TYPE_POST,
 													  comment_object_id,
-													  postService.getAuthorOfPost(comment_object_id).getId(),
+													  userService.getAuthor(comment_object_type, comment_object_id).getId(),
 													  user.getId()
 													  );
 		notificationService.doNotify(notification);

@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import com.lvwang.osf.dao.UserDAO;
 import com.lvwang.osf.model.User;
 import com.lvwang.osf.util.CipherUtil;
+import com.lvwang.osf.util.Dic;
 import com.lvwang.osf.util.Property;
 
 @Service("userService")
@@ -44,6 +45,13 @@ public class UserService {
 	@Qualifier("shortPostService")
 	private ShortPostService shortPostService;
 	
+	@Autowired
+	@Qualifier("postService")
+	private PostService postService;
+	
+	@Autowired
+	@Qualifier("albumService")
+	private AlbumService albumService;
 	
 	private boolean ValidateEmail(String email) {
 		boolean result = true;
@@ -419,5 +427,17 @@ public class UserService {
 		
 		userDao.updatePassword(email, CipherUtil.generatePassword(new_pwd));
 		return Property.SUCCESS_PWD_CHANGE;
+	}
+	
+	public User getAuthor(int object_type, int object_id){
+		if(object_type == Dic.OBJECT_TYPE_POST){
+			return postService.getAuthorOfPost(object_id);
+		} else if(object_type == Dic.OBJECT_TYPE_ALBUM){
+			return albumService.getAuthorOfALbum(object_id);
+		} else if(object_type == Dic.OBJECT_TYPE_SHORTPOST) {
+			return shortPostService.getAuthorOfPost(object_id);
+		} else {
+			return new User();
+		}
 	}
 }
