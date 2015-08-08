@@ -73,7 +73,7 @@ $(document).ready(function(){
 			var status = data.status;
 			var $comment = $('<div class="comment" id="4">'+
 							    '<a class="avatar">'+
-							      '<img src="'+data.avatar+'">'+
+							      '<img src="'+img_base_url+data.avatar+'?imageView2/1/w/48/h/48">'+
 							    '</a>'+
 							    '<div class="content">'+
 							      header+

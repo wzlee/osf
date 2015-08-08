@@ -11,7 +11,7 @@
 <c:forEach items="${comments }" var="comment">
 	<div class="comment" id="comment${comment.id }" author="${comment.comment_author }">
 	  <a class="avatar" href="<c:url value="/user/${comment.comment_author }" />">
-	  	<img src="<c:url value="${img_base_url }${comment.comment_author_avatar }"/>" alt="" />
+	  	<img src="<c:url value="${img_base_url }${comment.comment_author_avatar }?imageView2/1/w/48/h/48"/>" alt="" />
 	  </a>
 	  <div class="content">
 	  	<c:if test="${comment.comment_parent == 0 }">
