@@ -158,6 +158,7 @@ CREATE TABLE IF NOT EXISTS `osf`.`osf_tags` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `tag` VARCHAR(30) NOT NULL,
   `add_ts` TIMESTAMP NOT NULL DEFAULT current_timestamp,
+  `cover` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 

@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.lvwang.osf.model.Event;
+import com.lvwang.osf.model.Tag;
 import com.lvwang.osf.model.User;
 import com.lvwang.osf.service.EventService;
 import com.lvwang.osf.service.FeedService;
 import com.lvwang.osf.service.FollowService;
+import com.lvwang.osf.service.TagService;
 import com.lvwang.osf.service.UserService;
 import com.lvwang.osf.util.Dic;
 import com.lvwang.osf.util.Property;
@@ -41,6 +43,10 @@ public class HomePage {
 	@Qualifier("followService")
 	private FollowService followService;
 	
+	@Autowired
+	@Qualifier("tagService")
+	private TagService tagService;
+	
 	@RequestMapping("/")
 	public ModelAndView showHomePage(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
@@ -53,10 +59,6 @@ public class HomePage {
 		mav.addObject("counter", userService.getCounterOfFollowAndShortPost(user.getId()));
 		List<Event> feeds = feedService.getFeeds(user.getId());
 		mav.addObject("feeds", feeds);
-		
-		List<User> rec_users = userService.getRecommendUsers(user==null?0:user.getId(), 4);
-		mav.addObject("isFollowings", followService.isFollowing(user==null?0:user.getId(), rec_users));
-		mav.addObject("popusers", rec_users);
 		
 		mav.addObject("dic", new Dic());
 		return mav;
@@ -100,7 +102,24 @@ public class HomePage {
 		return "welcome";
 	}
 	
-	
+	@RequestMapping("/sidebar")
+	public ModelAndView sideBar(HttpSession session){
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("sidebar");
+		User user = (User)session.getAttribute("user");
+		if(user == null){
+			return mav;
+		}
+		
+		List<User> rec_users = userService.getRecommendUsers(user==null?0:user.getId(), 4);
+		mav.addObject("isFollowings", followService.isFollowing(user==null?0:user.getId(), rec_users));
+		mav.addObject("popusers", rec_users);
+				
+		List<Tag> tags_recommend = tagService.getRecommendTags(user==null?0:user.getId());
+		mav.addObject("poptags", tags_recommend);
+		
+		return mav;
+	}
 	
 	
 	

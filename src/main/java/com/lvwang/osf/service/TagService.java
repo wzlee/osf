@@ -140,16 +140,15 @@ public class TagService {
 		return events;
 	}
 	
+	
 	/**
 	 * 获取推荐tag
+	 * 简单实现，获取有cover的tag
 	 * @param user_id
 	 * @return
 	 */
 	public List<Tag> getRecommendTags(int user_id){
-		List<Integer> tags_rec = new ArrayList<Integer>();
-		for(int i=00; i<10; i++){
-			tags_rec.add(i);
-		}
-		return tagDao.getTags(tags_rec);
+
+		return tagDao.getTagsHasCover();
 	}
 }

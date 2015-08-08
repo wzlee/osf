@@ -55,7 +55,7 @@
 				  	</c:if>
 				</div>          		
 			
-				<%@ include file="../sidebar.jsp" %>	
+				<jsp:include page="/sidebar"></jsp:include>		
             </div>           
           </div>
         </div>

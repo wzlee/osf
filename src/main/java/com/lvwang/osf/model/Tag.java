@@ -6,6 +6,7 @@ public class Tag {
 	private int id;
 	private String tag;
 	private Date add_ts;
+	private String cover;
 	public int getId() {
 		return id;
 	}
@@ -23,5 +24,11 @@ public class Tag {
 	}
 	public void setAdd_ts(Date add_ts) {
 		this.add_ts = add_ts;
+	}
+	public String getCover() {
+		return cover;
+	}
+	public void setCover(String cover) {
+		this.cover = cover;
 	}
 }

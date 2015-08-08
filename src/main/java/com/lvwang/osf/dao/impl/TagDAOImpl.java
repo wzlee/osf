@@ -87,6 +87,22 @@ public class TagDAOImpl implements TagDAO{
 				tag.setId(rs.getInt("id"));
 				tag.setTag(rs.getString("tag"));
 				tag.setAdd_ts(rs.getTimestamp("add_ts"));
+				tag.setCover(rs.getString("cover"));
+				return tag;
+			}
+		});
+	}
+	
+	public List<Tag> getTagsHasCover() {
+		String sql = "select * from "+ TABLE + " where cover is not null limit 10";
+		return jdbcTemplate.query(sql, new RowMapper<Tag>() {
+
+			public Tag mapRow(ResultSet rs, int row) throws SQLException {
+				Tag tag = new Tag();
+				tag.setId(rs.getInt("id"));
+				tag.setTag(rs.getString("tag"));
+				tag.setAdd_ts(rs.getTimestamp("add_ts"));
+				tag.setCover(rs.getString("cover"));
 				return tag;
 			}
 		});

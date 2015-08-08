@@ -1,6 +1,5 @@
 package com.lvwang.osf.control;
 
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,13 +11,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.lvwang.osf.model.Event;
 import com.lvwang.osf.model.User;
-import com.lvwang.osf.service.FeedService;
 import com.lvwang.osf.service.InterestService;
 import com.lvwang.osf.service.TagService;
 import com.lvwang.osf.util.Dic;
@@ -95,7 +92,6 @@ public class TagController {
 		ret.put("status", Property.SUCCESS_INTEREST_UNDO);
 		return ret;
 	}
-	
 	
 	
 	

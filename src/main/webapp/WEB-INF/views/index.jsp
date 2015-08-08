@@ -138,56 +138,7 @@
 	              </div>
 	            </div> 
 	            </c:if>
-				<div class="ui header">
-				    热门用户
-				</div>
-				<div class="ui vertical menu popusers">
-				  <div class="item">
-				  	<c:forEach items="${popusers }" var="popuser">
-						<a href="#" class="popuser">
-							<img class="ui inline image" src="${img_base_url }${popuser.user_avatar}">
-						</a>
-						<%-- <jsp:include page="/popup_usercard/${popuser.id }" flush="true"></jsp:include>	 --%>
-					</c:forEach>
-					<!-- end popup -->
-
-					
-				  </div>
-				</div>
-				<!-- end menu -->	
-				
-				<div class="ui header">
-				    热门标签
-				</div>
-				<div class="ui vertical menu hottags">
-				  <div class="tagitem" style="background: url(img/gallery/art.png)">
-				  	<div class="mask"></div>
-				  	<div class="tag">
-				  		#艺术
-				  	</div>
-				  </div>
-				  
-				  <div class="tagitem" style="background: url(img/gallery/life.png)">
-				  	<div class="mask"></div>
-				  	<div class="tag">
-				  		#生活
-				  	</div>
-				  </div>
-				  <div class="tagitem" style="background: url(img/gallery/music.png); background-position: cover">
-				  	<div class="mask"></div>
-				  	<div class="tag">
-				  		#音乐
-				  	</div>
-				  </div>
-				  <div class="tagitem" style="background: url(img/gallery/sport.png)">
-				  	<div class="mask"></div>
-				  	<div class="tag">
-				  		#运动
-				  	</div>
-				  </div>
-				  <div class="tagitem">
-				  </div>
-				</div>					
+				<jsp:include page="/sidebar"></jsp:include>					
 										
             </div>           
           </div>

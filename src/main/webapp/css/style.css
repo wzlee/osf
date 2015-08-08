@@ -76,7 +76,7 @@ a {
  	color:black;
  	cursor: pointer;
  }
- #rightside .hottags .tagitem{
+ #rightside .poptags .tagitem{
  	position: relative;
  	margin: 0;
  	padding: 0;
@@ -330,7 +330,7 @@ a {
 	font-size: 1.5em;
 }
 
-#hottags .item {
+#poptags .item {
 	padding: 10px 0;
 	
 }

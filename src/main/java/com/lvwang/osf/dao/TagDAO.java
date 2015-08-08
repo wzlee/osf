@@ -10,4 +10,5 @@ public interface TagDAO {
 	String getTagByID(int id);
 	int getTagID(String tag);
 	List<Tag> getTags(List<Integer> tags_id);
+	List<Tag> getTagsHasCover();
 }

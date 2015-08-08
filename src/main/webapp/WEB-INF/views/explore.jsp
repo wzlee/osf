@@ -70,8 +70,8 @@
 							<c:forEach items="${tags }" var="tag">
 								<div class="tagbox">
 									<div>
-									<img class="visible" src="<%=request.getContextPath() %>/img/gallery/tag2.png" alt="" />
-									<span class="desc">#${tag.tag }</span>
+										<img class="visible" src="<c:url value="${img_base_url }${tag.cover }?imageView2/1/w/200/h/200" />" alt="" />
+										<span class="desc">#${tag.tag }</span>
 									</div>
 									<c:if test="${!isInterests[tag.id] }">
 										<div class="hidden">
