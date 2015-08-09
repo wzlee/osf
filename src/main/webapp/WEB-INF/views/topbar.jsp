@@ -23,7 +23,7 @@
 				      ${sessionScope.user.user_name }
 				      <i class="dropdown icon"></i>
 					  <div class="ui vertical menu">
-						  <a class="item">
+						  <a class="item" href="<c:url value="/notifications/comment" />">
 						    评论
 						    <div class="ui red label">${notifications.comment }</div>
 						  </a>

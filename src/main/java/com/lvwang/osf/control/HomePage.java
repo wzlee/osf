@@ -1,6 +1,5 @@
 package com.lvwang.osf.control;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -21,7 +20,6 @@ import com.lvwang.osf.service.FollowService;
 import com.lvwang.osf.service.TagService;
 import com.lvwang.osf.service.UserService;
 import com.lvwang.osf.util.Dic;
-import com.lvwang.osf.util.Property;
 
 
 @Controller

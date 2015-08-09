@@ -213,6 +213,9 @@ CREATE TABLE IF NOT EXISTS `osf`.`osf_notifications` (
   `object_id` INT NOT NULL,
   `notified_user` INT NOT NULL,
   `notifier` INT NOT NULL,
+  `ts` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `status` INT NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
+
 

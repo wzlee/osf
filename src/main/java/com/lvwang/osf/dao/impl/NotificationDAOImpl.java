@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,11 +21,14 @@ import org.springframework.data.redis.core.SetOperations;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.lvwang.osf.dao.NotificationDAO;
+import com.lvwang.osf.model.Event;
 import com.lvwang.osf.model.Notification;
 import com.lvwang.osf.util.Dic;
 
@@ -36,6 +41,9 @@ public class NotificationDAOImpl implements NotificationDAO{
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
+	@Autowired
+	private NamedParameterJdbcTemplate namedParaJdbcTemplate;
 	
 	@Autowired
 	@Qualifier("redisTemplate")
@@ -84,10 +92,53 @@ public class NotificationDAOImpl implements NotificationDAO{
 
 	public List<Notification> getNotificationsOfType(int user_id,
 			int notify_type) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from " + TABLE + " where notified_user=? and notify_type=? order by ts desc";
+		return jdbcTemplate.query(sql, new Object[]{user_id, notify_type}, new RowMapper<Notification>(){
+
+			public Notification mapRow(ResultSet rs, int row)
+					throws SQLException {
+				Notification notification = new Notification();
+				notification.setId(rs.getInt("id"));
+				notification.setNotified_user(rs.getInt("notified_user"));
+				notification.setNotifier(rs.getInt("notifier"));
+				notification.setNotify_id(rs.getInt("notify_id"));
+				notification.setNotify_type(rs.getInt("notify_type"));
+				notification.setObject_id(rs.getInt("object_id"));
+				notification.setObject_type(rs.getInt("object_type"));
+				notification.setStatus(rs.getInt("status"));
+				notification.setTs(rs.getTimestamp("ts"));
+				return notification;
+			}
+			
+		});
 	}
 
+	public List<Notification> getNotificationsOfType(int user_id,
+			Object... notify_types) {
+		String sql = "select * from " + TABLE + " where notified_user= :id and notify_type in (:types) order by ts desc";
+		HashMap<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("id", user_id);
+		paramMap.put("types", Arrays.asList(notify_types));
+		return namedParaJdbcTemplate.query(sql, paramMap, new RowMapper<Notification>() {
+
+			public Notification mapRow(ResultSet rs, int row)
+					throws SQLException {
+				Notification notification = new Notification();
+				notification.setId(rs.getInt("id"));
+				notification.setNotified_user(rs.getInt("notified_user"));
+				notification.setNotifier(rs.getInt("notifier"));
+				notification.setNotify_id(rs.getInt("notify_id"));
+				notification.setNotify_type(rs.getInt("notify_type"));
+				notification.setObject_id(rs.getInt("object_id"));
+				notification.setObject_type(rs.getInt("object_type"));
+				notification.setStatus(rs.getInt("status"));
+				notification.setTs(rs.getTimestamp("ts"));
+				return notification;
+			}
+			
+		});
+	}
+	
 	private void initNotification(Map<String, Integer> notifications){
 		notifications.put("comment", 0);
 		notifications.put("comment_reply", 0);

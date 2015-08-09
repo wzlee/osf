@@ -21,6 +21,13 @@ public class Dic {
 	private int object_type_following = 3;
 	private int object_type_shortpost = 4;
 	
+	
+	private  int notify_type_system = 0;
+	private  int notify_type_comment = 1;
+	private  int notify_type_comment_reply = 2;
+	private  int notify_type_like = 3;
+	private  int notify_type_follow = 4;
+	
 	public static String toNotifyTypeDesc(int notify_type){
 		String type = null;
 		
@@ -103,6 +110,46 @@ public class Dic {
 
 	public void setObject_type_shortpost(int object_type_shortpost) {
 		this.object_type_shortpost = object_type_shortpost;
+	}
+
+	public int getNotify_type_system() {
+		return notify_type_system;
+	}
+
+	public void setNotify_type_system(int notify_type_system) {
+		this.notify_type_system = notify_type_system;
+	}
+
+	public int getNotify_type_comment() {
+		return notify_type_comment;
+	}
+
+	public void setNotify_type_comment(int notify_type_comment) {
+		this.notify_type_comment = notify_type_comment;
+	}
+
+	public int getNotify_type_comment_reply() {
+		return notify_type_comment_reply;
+	}
+
+	public void setNotify_type_comment_reply(int notify_type_comment_reply) {
+		this.notify_type_comment_reply = notify_type_comment_reply;
+	}
+
+	public int getNotify_type_like() {
+		return notify_type_like;
+	}
+
+	public void setNotify_type_like(int notify_type_like) {
+		this.notify_type_like = notify_type_like;
+	}
+
+	public int getNotify_type_follow() {
+		return notify_type_follow;
+	}
+
+	public void setNotify_type_follow(int notify_type_follow) {
+		this.notify_type_follow = notify_type_follow;
 	}
 
 }

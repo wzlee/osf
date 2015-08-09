@@ -1,5 +1,7 @@
 package com.lvwang.osf.model;
 
+import java.sql.Timestamp;
+
 public class Notification {
 	private int id;
 	private int notify_type;	//通知类型 Dic里有定义
@@ -8,6 +10,14 @@ public class Notification {
 	private int object_id;		//被通告对象的ID 
 	private int notified_user;	//被通告的用户
 	private int notifier;		//通告者
+	private Timestamp ts;		//通知时间戳
+	private int status;			//状态 0未读 1已读
+	
+	//以下属性用于通知展现
+	private String notifier_name;
+	private String notifier_avatar;
+	private String object_title;
+	
 	
 	public Notification(){
 		
@@ -65,6 +75,46 @@ public class Notification {
 
 	public void setNotify_id(int notify_id) {
 		this.notify_id = notify_id;
+	}
+
+	public Timestamp getTs() {
+		return ts;
+	}
+
+	public void setTs(Timestamp ts) {
+		this.ts = ts;
+	}
+
+	public String getNotifier_name() {
+		return notifier_name;
+	}
+
+	public void setNotifier_name(String notifier_name) {
+		this.notifier_name = notifier_name;
+	}
+
+	public String getNotifier_avatar() {
+		return notifier_avatar;
+	}
+
+	public void setNotifier_avatar(String notifier_avatar) {
+		this.notifier_avatar = notifier_avatar;
+	}
+
+	public String getObject_title() {
+		return object_title;
+	}
+
+	public void setObject_title(String object_title) {
+		this.object_title = object_title;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 	
 }

@@ -82,17 +82,20 @@ public class CommentController {
 															comment_parent_author.getUser_name());
 		Notification notification =  new Notification(Dic.NOTIFY_TYPE_COMMENT,
 													  Integer.parseInt(ret.get("id")),
-													  Dic.OBJECT_TYPE_POST,
+													  comment_object_type,
 													  comment_object_id,
 													  userService.getAuthor(comment_object_type, comment_object_id).getId(),
 													  user.getId()
 													  );
-		notificationService.doNotify(notification);
 		
-		//comment reply notify
+		
 		if(comment_parent!=0) {
+			//reply notification
 			notification.setNotify_type(Dic.NOTIFY_TYPE_COMMENT_REPLY);
 			notification.setNotified_user(comment_parent_author.getId());
+			notificationService.doNotify(notification);
+		} else {
+			//comment notification
 			notificationService.doNotify(notification);
 		}
 		
