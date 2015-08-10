@@ -27,15 +27,15 @@
 						    评论
 						    <div class="ui red label">${notifications.comment }</div>
 						  </a>
-						  <a class="item">
+						  <a class="item" href="<c:url value="/notifications/like" />">
 						    喜欢
 						    <div class="ui red label">${notifications.like }</div>
 						  </a>
-						  <a class="item">
+						  <a class="item" href="<c:url value="/notifications/follow" />">
 						    关注
 						    <div class="ui red label">${notifications.follow }</div>
 						  </a>
-						  <a class="item">
+						  <a class="item" href="<c:url value="/notifications/system" />">
 						    系统消息
 						    <div class="ui red label">${notifications.system }</div>
 						  </a>

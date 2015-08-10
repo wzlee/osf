@@ -30,4 +30,35 @@ public class NotifyController {
 		mav.addObject("notis", notificationService.getNotifications(user.getId(), Dic.NOTIFY_TYPE_COMMENT));
 		return mav;
 	}
+	
+	@RequestMapping("/like")
+	public ModelAndView like(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("notifications/like");
+		User user = (User) session.getAttribute("user");
+		mav.addObject("dic", new Dic());
+		mav.addObject("notis", notificationService.getNotifications(user.getId(), Dic.NOTIFY_TYPE_LIKE));
+		return mav;
+	}
+	
+	@RequestMapping("/follow")
+	public ModelAndView follow(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("notifications/follow");
+		User user = (User) session.getAttribute("user");
+		mav.addObject("dic", new Dic());
+		mav.addObject("notis", notificationService.getNotifications(user.getId(), Dic.NOTIFY_TYPE_FOLLOW));
+		return mav;
+	}
+
+	@RequestMapping("/system")
+	public ModelAndView system(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("notifications/system");
+		User user = (User) session.getAttribute("user");
+		mav.addObject("dic", new Dic());
+		mav.addObject("notis", notificationService.getNotifications(user.getId(), Dic.NOTIFY_TYPE_SYSTEM));
+		return mav;
+	}
+	
 }
