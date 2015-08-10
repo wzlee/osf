@@ -21,6 +21,7 @@
   	
   	var comment_parent = '0';
   	
+  	//发送评论
 	$('.input .reply').live('click', function(){
 		var event = $(this).parents('.event');
 		var comment_object_type = $(event).attr('object_type');
@@ -50,9 +51,9 @@
 			$(comment).find('img').attr('src', img_base_url + data.avatar);
 			$(comment).find('a.replyer').attr('href', basePath + '/user/' + data.author_id).text(data.author_name);
 			if(comment_parent != '0'){
-				var reply_to_html = $('回复<a class="author replyto" href=""/>');
+				var reply_to_html = $('<a class="author replyto" href=""></a>');
 				$(reply_to_html).attr('href', basePath + '/user/' + data.reply_to_author).text(data.reply_to_authorname);
-				$(comment).find('a.replyer').after($(reply_to_html));
+				$(comment).find('.content').append('回复').append($(reply_to_html));
 			}
 			
 			$(comment).find('.content').append(comment_content);
@@ -64,6 +65,7 @@
 		});
 	});  	
   	
+	//取消评论
 	$('.input .cancle').live('click', function(){		
 		var comment_area = $(this).parents('.input');
 		$(comment_area).removeClass('labeled').find('.label').remove();
@@ -72,6 +74,7 @@
 		
 	});
 	
+	//回复评论
   	$('.actions .reply').live('click', function(){
   		
   		var comment_area = $(this).parents('.list').find('.input');
@@ -93,7 +96,7 @@
 //  		});
   	});
 
-  	
+  	//获取feed
   	$('.comment.outline.icon').live('click', function(){
   		
   		var comments_attach = $(this).parents('.content').find('.comments-attach');

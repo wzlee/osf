@@ -193,7 +193,7 @@ public class AlbumDAOImpl implements AlbumDAO{
 	}
 
 	public List<Photo> getPhotos(int album_id) {
-		final String sql = "select * from " + TABLE_PHOTO +" where album_id=?";
+		final String sql = "select * from " + TABLE_PHOTO +" where album_id=? order by ts asc";
 		List<Photo> photos = jdbcTemplate.query(sql, new Object[]{album_id}, new RowMapper<Photo>(){
 
 			public Photo mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -202,6 +202,7 @@ public class AlbumDAOImpl implements AlbumDAO{
 				photo.setAlbum_id(rs.getInt("album_id"));
 				photo.setDesc(rs.getString("desc"));
 				photo.setKey(rs.getString("key"));
+				photo.setTs(rs.getTimestamp("ts"));
 				return photo;
 			}
 			

@@ -17,7 +17,7 @@ $(document).ready(function(){
 			replyTo = $(commentRef).find('.author:first').text();
 		var avatarRef = $(commentRef).find('a.avatar img:first').attr('src');
 		var commentContentRef = $(commentRef).find('.commentContent p:first()').text();
-		commentParent = $(commentRef).attr('author');
+		commentParent = $(commentRef).attr('id').substring(7);
 
 		var header = $('<div id="header"><img  class="ui avatar image" src="'+avatarRef+'"><span>'+commentContentRef+'</span></div>');
 		$('#replyarea').prepend($(header));
