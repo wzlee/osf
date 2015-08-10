@@ -15,4 +15,6 @@ public interface CommentDAO {
 
 	int save(Comment comment);
 	boolean delete(int id);
+	
+	int commentsCount(int object_type, int object_id);
 }

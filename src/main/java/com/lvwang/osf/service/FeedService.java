@@ -36,6 +36,10 @@ public class FeedService {
 	@Qualifier("likeService")
 	private LikeService likeService;
 	
+	@Autowired
+	@Qualifier("commentService")
+	private CommentService commentService;
+	
 	public void push(int user_id, int event_id) {
 		List<Integer> followers = followService.getFollowerIDs(user_id);
 		followers.add(user_id);	//add self
@@ -65,6 +69,7 @@ public class FeedService {
 			events = eventService.getEventsWithIDs(event_ids);
 			addUserInfo(events);
 			updLikeCount(user_id, events);
+			addCommentCount(user_id, events);
 		}
 		return events;
 	}
@@ -96,6 +101,15 @@ public class FeedService {
 			event.setIs_like(likeService.isLike(user_id, 
 												event.getObject_type(), 
 												event.getObject_id()));
+		}
+	}
+	
+	public void addCommentCount(int user_id, List<Event> events){
+		if(events == null || events.size() == 0)
+			return;
+		for(Event event : events) {
+			event.setComment_count(commentService.getCommentsCount(event.getObject_type(), 
+															 	   event.getObject_id()));
 		}
 	}
 	

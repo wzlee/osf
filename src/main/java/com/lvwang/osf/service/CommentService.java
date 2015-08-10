@@ -102,4 +102,8 @@ public class CommentService {
 	public User getCommentAuthor(int comment_id){
 		return commentDao.getCommentAuthor(comment_id);
 	}
+	
+	public int getCommentsCount(int object_type, int object_id) {
+		return commentDao.commentsCount(object_type, object_id);
+	}
 }

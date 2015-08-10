@@ -6,8 +6,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.redis.core.HashOperations;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -28,9 +33,17 @@ public class CommentDAOImpl implements CommentDAO{
 	
 	private static final String TABLE = "osf_comments";
 	
+	private static final String COUNTER = "counter";
+	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
+	@Autowired
+	@Qualifier("redisTemplate")
+	private RedisTemplate<String, String> redisTemplate; 
+	
+	@Resource(name="redisTemplate")
+	private HashOperations<String, String, Integer> hashOps;
 	
 	public User getCommentAuthor(int comment_id){
 		String sql = "select comment_author,comment_author_name from " + TABLE + " where id=?";
@@ -161,6 +174,15 @@ public class CommentDAOImpl implements CommentDAO{
 				return ps;
 			}
 		}, keyHolder);
+		
+		String key = "comment:"+Dic.checkType(comment.getComment_object_type())+":"+comment.getComment_object_id();
+		Integer count = hashOps.get(COUNTER, key);
+		
+		if(count == null) {
+			count = 0;
+		}
+		hashOps.put(COUNTER, key, count+1);
+		
 		return keyHolder.getKey().intValue();
 	}
 
@@ -169,5 +191,11 @@ public class CommentDAOImpl implements CommentDAO{
 		return false;
 	}
 
-
+	public int commentsCount(int object_type, int object_id){
+		String type = Dic.checkType(object_type);
+		if(type == null)
+			return 0;
+		Integer count = hashOps.get(COUNTER, "comment:"+type+":"+object_id);
+		return count==null ? 0 : count;
+	}
 }
