@@ -16,7 +16,31 @@
 	</context:component-scan>
 
 	<mvc:interceptors>
-		<bean class="com.lvwang.osf.web.NotifyInterceptor"></bean>
+		<!-- <bean class="com.lvwang.osf.web.NotifyInterceptor"></bean> -->
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<mvc:exclude-mapping path="/js/**"/>
+			<mvc:exclude-mapping path="/css/**"/>
+			<mvc:exclude-mapping path="/img/**"/>
+			<mvc:exclude-mapping path="/font/**"/>
+			<mvc:exclude-mapping path="/account/login"/>
+			<mvc:exclude-mapping path="/account/register"/>
+			<mvc:exclude-mapping path="/account/activation/**"/>
+			<mvc:exclude-mapping path="/album/*/photos"/>
+			<mvc:exclude-mapping path="/album/[0-9]*"/>
+			<mvc:exclude-mapping path="/comment/[0-9]*"/>
+			<mvc:exclude-mapping path="/comment/*/*"/>
+			<mvc:exclude-mapping path="/comment/attach/*/*"/>
+			<mvc:exclude-mapping path="/explore"/>
+			<mvc:exclude-mapping path="/explore/"/>
+			<mvc:exclude-mapping path="/sidebar"/>
+			<mvc:exclude-mapping path="/welcome"/>
+			<mvc:exclude-mapping path="/popup_usercard/*"/>
+			<mvc:exclude-mapping path="/post/[0-9]*"/>
+			<mvc:exclude-mapping path="/tag/*"/>
+			<mvc:exclude-mapping path="/user/*"/>
+			<bean class="com.lvwang.osf.web.LoginRequiredInterceptor"></bean>
+		</mvc:interceptor>
 	</mvc:interceptors>
 
 	<mvc:resources location="/js/" mapping="/js/**"/>
