@@ -62,13 +62,34 @@
 	line-height: 49px;
 	margin-bottom: 20px;
 }
+.ui.form input[type="text"],
+.ui.form input[type="password"] {
+    border: none;
+    border-radius: 2px;
+    background: #FFF;
+    height: 45px;
+    width: 280px;
+    color: #9B9B9B;
+    font-size: 20px;
+    padding-left: 10px;
+}
+
+#error{
+	margin-right: 20px;
+	opacity: 0.8;
+}
+#error ul{
+	margin: 0;
+}
+.hidden{
+	display: none;
+}
 .login input{
 	border: none;
 	border-radius: 2px;
-	/* Rectangle 4: */
-	background: #E7EBB2;
+	background: #FFF;
 	height: 45px;
-	width: 300px;
+	width: 280px;
 	margin-bottom: 10px;
 	color:#9B9B9B;
 	font-size: 20px;
@@ -78,12 +99,17 @@
 	margin-top: 10px;
 	border: none;
 	border-radius: 2px;
-	background: #F5A623;
+	background: #7ECBB1;
 	width: 150px;
 	height: 40px;	
 	font-size: 20px;
 	color:white;
 }
+.login .login_btn:hover {
+    background-color: #21ba45;
+    transition: 0.5s;
+}
+
 .login .forget_pwd{
 	float: right;
 	margin-top: 20px;
@@ -118,27 +144,42 @@
 	margin: 0;
 	background: none;
 }
-.navbar .register{
+.navbar a{
+	text-decoration: none;
+}
+.navbar .github{
 	position: absolute;
-	top: 10px;
-	right: 30px;
-	border: none;
-	border-radius: 2px;
-	background: #7ECBB1;
-	width: 90px;
- 		height: 40px;	
- 		font-size: 20px;
- 		color: white;
+	top: 20px;
+	right: 100px;
+	color: white;
+	font-size: 42px;
 }
 
 .navbar .logo{
 	position: absolute;
-	top: 10px;
-	left:50px;
+	top: 20px;
+	left:100px;
 }
+.navbar .logo span{
+	vertical-align: middle;
+    margin-left: 20px;
+    color: white;
+    font-size: 24px;	
+}
+
+.navbar .logo a{
+	color: white;
+    text-decoration: none;
+    opacity: 0.8;
+    transition: opacity 0.5s;
+}
+.navbar .logo a:hover{
+	opacity: 1;
+}	
+
 .navbar .logo > img{
-	width: 35px;
-	height: 45px;
+	width: 32px;
+	height: 42px;
 }
 
 .section .center{
@@ -168,14 +209,34 @@
 	margin: 0 auto;
 	margin-top: 40px;
 	width: 98%;
+	height: 500px;
+	overflow: hidden;
 }
 .section2 .gallery .box{
 	display: inline;
 }
-
-.section2 .gallery .box img{
-	height: 200px;
+.gallery .box{
+	position: relative;
+	display: inline;
+	float: left;
+	margin-bottom: 5px;
+	overflow: hidden;
 }
+.gallery .box .meta{
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	width: 100%;
+	height: 45px;
+	background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.6) 100%);
+}
+.gallery .meta a{
+	padding: 10px;
+}
+.gallery .meta span{
+	color: white;	
+}
+
 
 
 /* clearfix */

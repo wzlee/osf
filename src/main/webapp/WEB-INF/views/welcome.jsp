@@ -20,6 +20,10 @@
   	<script src="<%=request.getContextPath() %>/js/jquery.fullPage.js"></script>
   	<script src="http://cdn.staticfile.org/jquery-easing/1.3/jquery.easing.min.js"></script>
   	<script src="<%=request.getContextPath() %>/js/jquery.row-grid.js"></script>
+    <script src="<%=request.getContextPath() %>/js/semantic.js"></script>
+    <script src="<%=request.getContextPath() %>/js/basic.js"></script>
+    <script src="<%=request.getContextPath() %>/js/code.js"></script>
+    <script src="<%=request.getContextPath() %>/js/login.js"></script>
   	<script>
 	$(function(){
 		$('#welcome').fullpage({
@@ -42,8 +46,7 @@
 			}
 		});
 		
-		var options = {minMargin: 5, maxMargin: 10, itemSelector: ".box", firstItemClass: "first-item"};
-		$(".gallery").rowGrid(options);	
+		
 		
 	});
 	</script>
@@ -53,8 +56,9 @@
 		<div class="navbar">
 			<div class="logo">
 				<img src="<%=request.getContextPath() %>/img/logo.png" alt="" />
+				<span><a href="<c:url value="/explore" />">探索</a></span>
 			</div>
-			<button class="register">注册</button>
+			<a href="https://github.com/lvwangbeta/osf"><i class="github icon"></i></a>
 		</div>
 	</div>
 	<div id="welcome">
@@ -70,18 +74,21 @@
 								<p class="zh_initials">开放 分享 自由</p>
 							</div>
 							<div class="span6">
-								<div class="login">
+								<div class="login ui form">
 									<div class="login_header">
 										欢迎登录
 									</div>
+									<div id="error" class="ui red inverted segment hidden">
+								  		<ul class="list"></ul>
+								  	</div>
 									<div class="field">
-										<input type="text" placeholder="电子邮箱"/>
+										<input id="email" type="text" name="email" placeholder="电子邮箱">
 									</div>
 									<div class="field">
-										<input type="password" placeholder="密码"/>
+										<input id="password" type="password" name="password" placeholder="密码">
 									</div>
 									<div class="field">
-										<button class="login_btn">登录</button>
+										<button class="login_btn" id="loginbtn">登录</button>
 										<span class="forget_pwd"><a href="#">忘记密码?</a></span>
 									</div>
 								</div>
@@ -115,17 +122,26 @@
 				</div>
 			</div>
 			<div class="gallery">
-				<div class="box first-item"><img src="<%=request.getContextPath() %>/img/gallery/1.jpg" alt="" /></div>
-				<div class="box"><img src="<%=request.getContextPath() %>/img/gallery/2.jpg" alt="" /></div>
-				<div class="box"><img src="<%=request.getContextPath() %>/img/gallery/5.jpg" alt="" /></div>
-				<div class="box"><img src="<%=request.getContextPath() %>/img/gallery/4.jpg" alt="" /></div>
-				<div class="box"><img src="<%=request.getContextPath() %>/img/gallery/5.jpg" alt="" /></div>
-				<div class="box"><img src="<%=request.getContextPath() %>/img/gallery/6.jpg" alt="" /></div>
-				<div class="box"><img src="<%=request.getContextPath() %>/img/gallery/7.jpg" alt="" /></div>
-				<div class="box"><img src="<%=request.getContextPath() %>/img/gallery/8.jpg" alt="" /></div>
-				<div class="box"><img src="<%=request.getContextPath() %>/img/gallery/9.jpg" alt="" /></div>
-				<div class="box"><img src="<%=request.getContextPath() %>/img/gallery/10.jpg" alt="" /></div>
-				<div class="box"><img src="<%=request.getContextPath() %>/img/gallery/6.jpg" alt="" /></div>
+				<c:forEach items="${events }" var="event">
+					<div class="box">
+						<c:if test="${event.object_type eq dic.object_type_post }">
+							<a href="<c:url value="/post/${event.object_id }" />">
+								<img src="<c:url value="${img_base_url }${event.content }?imageView2/2/h/240" />" alt="" />
+							</a>
+						</c:if>
+						<c:if test="${event.object_type eq dic.object_type_album }">
+							<a href="<c:url value="/album/${event.object_id }/photos" />">
+								<img src="<c:url value="${img_base_url }${event.title }?imageView2/2/h/240" />" alt="" />
+							</a>
+						</c:if>
+						<div class="meta">
+							<a href="<c:url value="/user/${event.user_id }" />">
+								<img class="ui avatar image" src="${img_base_url }${event.user_avatar}?imageView2/1/w/48/h/48">
+								<span>${event.user_name}</span>
+							</a>
+						</div>
+					</div>
+				</c:forEach>
 			</div>			
 		</div>
 		<div class="section section3">
@@ -209,7 +225,13 @@
 			</div>
 		</div>
 	</div>
-
+	<script type="text/javascript">
+	$(document).ready(function(){
+		var options = {minMargin: 5, maxMargin: 10, itemSelector: ".box", firstItemClass: "first-item"};
+		$(".gallery").rowGrid(options);	
+		
+	});
+	</script>
 
 </body>
 </html>

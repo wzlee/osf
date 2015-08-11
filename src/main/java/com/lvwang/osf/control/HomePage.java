@@ -96,8 +96,12 @@ public class HomePage {
 	}
 	
 	@RequestMapping("/welcome")
-	public String welcome() {
-		return "welcome";
+	public ModelAndView welcome() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("welcome");
+		mav.addObject("events", feedService.getRecommendFeeds(0));
+		mav.addObject("dic", new Dic());
+		return mav;
 	}
 	
 	@RequestMapping("/sidebar")
