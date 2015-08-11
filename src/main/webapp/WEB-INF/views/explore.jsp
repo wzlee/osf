@@ -43,25 +43,27 @@
 
 		<div class="main">
 			<div class="gallery" >
-				<div class="box first-item"><img src="<%=request.getContextPath() %>/img/gallery/1.jpg" alt="" /></div>
-				<div class="box"><img src="<%=request.getContextPath() %>/img/gallery/2.jpg" alt="" /></div>
-				<div class="box"><img src="<%=request.getContextPath() %>/img/gallery/5.jpg" alt="" /></div>
-				<div class="box"><img src="<%=request.getContextPath() %>/img/gallery/4.jpg" alt="" /></div>
-				<div class="box"><img src="<%=request.getContextPath() %>/img/gallery/5.jpg" alt="" /></div>
-				<div class="box"><img src="<%=request.getContextPath() %>/img/gallery/6.jpg" alt="" /></div>
-				<div class="box"><img src="<%=request.getContextPath() %>/img/gallery/7.jpg" alt="" /></div>
-				<div class="box"><img src="<%=request.getContextPath() %>/img/gallery/8.jpg" alt="" /></div>
-				<div class="box"><img src="<%=request.getContextPath() %>/img/gallery/9.jpg" alt="" /></div>
-				<div class="box"><img src="<%=request.getContextPath() %>/img/gallery/10.jpg" alt="" /></div>
-				<div class="box"><img src="<%=request.getContextPath() %>/img/gallery/6.jpg" alt="" /></div>
-				<div class="box"><img src="<%=request.getContextPath() %>/img/gallery/5.jpg" alt="" /></div>
-				<div class="box"><img src="<%=request.getContextPath() %>/img/gallery/6.jpg" alt="" /></div>
-				<div class="box"><img src="<%=request.getContextPath() %>/img/gallery/1.jpg" alt="" /></div>
-				<div class="box"><img src="<%=request.getContextPath() %>/img/gallery/4.jpg" alt="" /></div>
-				<div class="box"><img src="<%=request.getContextPath() %>/img/gallery/5.jpg" alt="" /></div>
-				<div class="box"><img src="<%=request.getContextPath() %>/img/gallery/6.jpg" alt="" /></div>
-				<div class="box"><img src="<%=request.getContextPath() %>/img/gallery/7.jpg" alt="" /></div>
-				<div class="box"><img src="<%=request.getContextPath() %>/img/gallery/8.jpg" alt="" /></div>
+				<div class="box first-item"></div>
+				<c:forEach items="${events }" var="event">
+					<div class="box">
+						<c:if test="${event.object_type eq dic.object_type_post }">
+							<a href="<c:url value="/post/${event.object_id }" />">
+								<img src="<c:url value="${img_base_url }${event.content }?imageView2/2/h/200" />" alt="" />
+							</a>
+						</c:if>
+						<c:if test="${event.object_type eq dic.object_type_album }">
+							<a href="<c:url value="/album/${event.object_id }/photos" />">
+								<img src="<c:url value="${img_base_url }${event.title }?imageView2/2/h/200" />" alt="" />
+							</a>
+						</c:if>
+						<div class="meta">
+							<a href="<c:url value="/user/${event.user_id }" />">
+								<img class="ui avatar image" src="${img_base_url }${event.user_avatar}?imageView2/1/w/48/h/48">
+								<span>${event.user_name}</span>
+							</a>
+						</div>
+					</div>
+				</c:forEach>
 			</div>	
 			<div class="tags" style="display: none">
 				<div class="container">

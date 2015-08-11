@@ -109,6 +109,16 @@ public class EventService {
 		return events;
 	}
 	
+	/**
+	 * 获取含有图片的Event
+	 * @param start 
+	 * @param step
+	 * @return 
+	 */
+	public List<Event> getEventsHasPhoto(int start, int step) {
+		return eventDao.getEventsHasPhoto(start, step);
+	}
+	
 	public Event getEvent(int object_type, int object_id){
 		return eventDao.getEvent(object_type, object_id);
 	}

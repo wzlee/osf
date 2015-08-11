@@ -82,14 +82,15 @@ public class FeedService {
 		
 	}
 	
-	public void addUserInfo(List<Event> events) {
+	public List<Event> addUserInfo(List<Event> events) {
 		if(events == null || events.size() == 0)
-			return;
+			return events;
 		for(Event event : events) {
 			User user = userService.findById(event.getUser_id());
 			event.setUser_name(user.getUser_name());
 			event.setUser_avatar(user.getUser_avatar());
 		}
+		return events;
 	}
 	
 	public void updLikeCount(int user_id, List<Event> events){
@@ -121,4 +122,13 @@ public class FeedService {
 		feedDao.delete("feed:user:"+user_id, event_id);
 	}
 	
+	/**
+	 * feed推荐算法
+	 * 这里只是简单实现, 可自己扩充
+	 * @param user_id
+	 * @return 推荐feed列表 - List<Event>
+	 */
+	public List<Event> getRecommendFeeds(int user_id) {
+		return addUserInfo(eventService.getEventsHasPhoto(0, 20));
+	}
 }

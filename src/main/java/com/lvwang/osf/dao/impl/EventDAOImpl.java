@@ -185,6 +185,23 @@ public class EventDAOImpl implements EventDAO{
 		});
 	}
 
+	public List<Event> getEventsHasPhoto(int start, int step){
+		String sql = "select * from " + TABLE + " where (object_type=? and content is not null) "
+					 + "or (object_type=? and title is not null) limit ?,?";
+		return jdbcTemplate.query(sql, 
+								  new Object[]{
+												Dic.OBJECT_TYPE_POST, 
+												Dic.OBJECT_TYPE_ALBUM,
+												start, step},  
+								  new RowMapper<Event>(){
+
+			public Event mapRow(ResultSet rs, int arg1) throws SQLException {
+				return generateEvent(rs);
+			}
+			
+		});
+	}
+	
 	public void delete(int id) {
  		String sql = "delete from " + TABLE + " where id=?";
  		jdbcTemplate.update(sql, new Object[]{id});

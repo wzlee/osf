@@ -481,13 +481,29 @@ a {
 	padding-top: 50px;
 }
 .explore .main .gallery .box{
+	position: relative;
 	display: inline;
 	float: left;
 	margin-bottom: 5px;
 	overflow: hidden;
 }
+.explore .gallery .box .meta{
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	width: 100%;
+	height: 45px;
+	background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.6) 100%);
+}
+.explore .gallery .meta a{
+	padding: 10px;
+}
+.explore .gallery .meta span{
+	color: white;	
+}
+
 .explore .main .gallery img{
-	height: 200px;
+	/* height: 200px; */
 }
 .explore .active{
 	position: absolute;

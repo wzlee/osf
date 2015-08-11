@@ -16,6 +16,7 @@ import com.lvwang.osf.model.Event;
 import com.lvwang.osf.model.Tag;
 import com.lvwang.osf.model.User;
 import com.lvwang.osf.service.EventService;
+import com.lvwang.osf.service.FeedService;
 import com.lvwang.osf.service.FollowService;
 import com.lvwang.osf.service.InterestService;
 import com.lvwang.osf.service.TagService;
@@ -36,6 +37,10 @@ public class ExploreController {
 	private TagService tagService;
 	
 	@Autowired
+	@Qualifier("feedService")
+	private FeedService feedService;
+	
+	@Autowired
 	@Qualifier("eventService")
 	private EventService eventService;
 	
@@ -53,6 +58,8 @@ public class ExploreController {
 		mav.setViewName("explore");
 		
 		User user = (User) session.getAttribute("user");
+		
+		mav.addObject("events", feedService.getRecommendFeeds(user==null?0:user.getId()));
 		
 		List<Tag> tags_recommend = tagService.getRecommendTags(user==null?0:user.getId());
 		mav.addObject("tags", tags_recommend);
