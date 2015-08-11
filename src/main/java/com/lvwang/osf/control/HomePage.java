@@ -96,8 +96,13 @@ public class HomePage {
 	}
 	
 	@RequestMapping("/welcome")
-	public ModelAndView welcome() {
+	public ModelAndView welcome(HttpSession session) {		
 		ModelAndView mav = new ModelAndView();
+		if(session.getAttribute("user") != null){
+			mav.setViewName("redirect:/");
+			return mav;
+		}
+		
 		mav.setViewName("welcome");
 		mav.addObject("events", feedService.getRecommendFeeds(0));
 		mav.addObject("dic", new Dic());
