@@ -72,12 +72,14 @@
        ${feed.summary }
      </div>
      <div class="meta">
-       <div class="tags">
-	     	<i class="tag icon"></i>
-	     	<c:forEach items="${feed.tags }" var="tag">
-	     		<a href="<c:url value="/tag/${tag }"/>">${tag }</a>
-	     	</c:forEach>
-	   </div>							                     	
+       <c:if test="${not empty feed.tags }">	
+	       <div class="tags">
+		     	<i class="tag icon"></i>
+		     	<c:forEach items="${feed.tags }" var="tag">
+		     		<a href="<c:url value="/tag/${tag }"/>">${tag }</a>
+		     	</c:forEach>
+		   </div>
+	   </c:if>							                     	
        <div class="actions">
 	 		<a class="comment">
 	            <i class="comment outline icon"></i> ${feed.comment_count }

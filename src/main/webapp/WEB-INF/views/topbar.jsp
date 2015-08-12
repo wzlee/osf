@@ -13,7 +13,6 @@
 	    <div class="collapse navbar-collapse">
 	      <ul class="nav navbar-nav">
 	        <li class="active"><a href="<c:url value="/explore" />">探索</a></li>
-	        <li><a href="#">Link</a></li>
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
 	      	<c:if test="${not empty sessionScope.user}">

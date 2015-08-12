@@ -1,5 +1,6 @@
 package com.lvwang.osf.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -123,6 +124,8 @@ public class PostService {
 			}
 			
 			map.put("tags", tagsmap.get("tags"));
+		} else {
+			map.put("tags", new ArrayList<Tag>());
 		}
 				
 		map.put("post", post);

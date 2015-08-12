@@ -113,7 +113,7 @@
 									<c:forEach items="${feed.value }" var="f">
 										<c:if test="${f.object_type eq dic.object_type_post }">
 										   <a class="box" href="<c:url value="/post/${f.object_id }" />" href="<c:url value="/post/${f.object_id }" />">
-												<img src="${img_base_url }${f.content }" alt="" />
+												<img src="${img_base_url }${f.content }${album_thumbnail}" alt="" />
 												<div class="cover">
 													${f.title }
 												</div>
@@ -122,7 +122,7 @@
 										</c:if>							
 										<c:if test="${f.object_type eq dic.object_type_album }">
 											<a class="box" href="<c:url value="/album/${f.object_id }/photos" />" href="<c:url value="/album/${f.object_id }/photos" />">
-												<img src="${img_base_url }${f.title }" alt="" />
+												<img src="${img_base_url }${f.title }${album_thumbnail}" alt="" />
 												<div class="cover">
 													${f.summary }
 												</div>		

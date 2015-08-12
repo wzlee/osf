@@ -27,7 +27,7 @@
           <div class="span8">  
 	          	<div class="header_box">
 	          		<div class="ui avatar image">
-	                	<img src="img/avatar.png">
+	                	<img src="${img_base_url }${user.user_avatar}">
 	                </div>                
 					<div id="action_bar">
 						<div class="ui labeled icon menu actions" >
@@ -101,7 +101,7 @@
           		<c:if test="${not empty sessionScope.user}">
 	            <div class="ui card">
 	              <div class="ui small centered circular  image">
-	                <img src="<c:url value="${img_base_url }${user.user_avatar }"/> ">
+	                <a href="<c:url value="/user/${user.id }" />"><img src="<c:url value="${img_base_url }${user.user_avatar }"/> "></a>
 	              </div>
 	              <div class="content">
 	                <a class="header centered" href="<c:url value="/user/${user.id}" />">

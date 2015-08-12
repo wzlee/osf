@@ -394,8 +394,9 @@ a {
 }
 
 .header_box .ui.avatar.image img{
-	width: 65px;;
-	height: 65px;
+	width: 52px;
+    height: 52px;
+    margin-left: 20px;
 }
 
 #action_bar{
@@ -537,8 +538,7 @@ a {
 	left:0;
 	height: 180px;
 	width: 180px;
-	opacity: 0.7;
-	background-color: black;
+	background-color: rgba(0,0,0,0.7);
 }
 
 .explore .tags .hidden{
@@ -617,8 +617,7 @@ a {
 	height: 180px;
 	width: 180px;
 	overflow: hidden;
-	background-color: black;
-	opacity: 0.5;
+	background-color: rgba(0,0,0,0.3);
 	color: white;
 	font-size: 16px;
 	padding: 10px;
