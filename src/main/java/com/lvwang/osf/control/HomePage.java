@@ -17,6 +17,7 @@ import com.lvwang.osf.model.User;
 import com.lvwang.osf.service.EventService;
 import com.lvwang.osf.service.FeedService;
 import com.lvwang.osf.service.FollowService;
+import com.lvwang.osf.service.InterestService;
 import com.lvwang.osf.service.TagService;
 import com.lvwang.osf.service.UserService;
 import com.lvwang.osf.util.Dic;
@@ -44,6 +45,10 @@ public class HomePage {
 	@Autowired
 	@Qualifier("tagService")
 	private TagService tagService;
+	
+	@Autowired
+	@Qualifier("interestService")
+	private InterestService interestService;
 	
 	@RequestMapping("/")
 	public ModelAndView showHomePage(HttpSession session) {
@@ -128,7 +133,20 @@ public class HomePage {
 		return mav;
 	}
 	
-	
+	@RequestMapping("/guide")
+	public ModelAndView guide(HttpSession session){
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("guide");
+		
+		User user = (User) session.getAttribute("user");
+		
+		List<Tag> tags_recommend = tagService.getRecommendTags(user==null?0:user.getId());
+		mav.addObject("tags", tags_recommend);
+		mav.addObject("isInterests", interestService.hasInterestInTags(user==null?0:user.getId(), tags_recommend));
+		
+		mav.addObject("dic", new Dic());
+		return mav;
+	}
 	
 	
 }

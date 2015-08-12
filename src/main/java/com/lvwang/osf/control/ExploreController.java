@@ -76,4 +76,5 @@ public class ExploreController {
 		mav.addObject("dic", new Dic());
 		return mav;
 	}
+	
 }
