@@ -41,7 +41,7 @@
 			</div>
 			<div class="content">
 				<div class="header">
-					osfdemo1@163.com
+					$email$
 				</div>
 				<p>欢迎加入OSF，在此你可以发表说说、图片，关注喜欢的人和标签。最后一步，即可开启探索</p>
 				<div>

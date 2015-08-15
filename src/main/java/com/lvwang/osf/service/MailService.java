@@ -76,6 +76,7 @@ public class MailService {
     public void sendAccountActivationEmail(String to, String key){
     	//String body = "<a href='"+ACTIVATE_CONTEXT+key+"?email="+to+"'>激活链接</a>";
     	StringTemplate activation_temp = templateGroup.getInstanceOf("activation");
+    	activation_temp.setAttribute("email", to);
     	activation_temp.setAttribute("href", ACTIVATE_CONTEXT+key+"?email="+to);
     	activation_temp.setAttribute("link", ACTIVATE_CONTEXT+key+"?email="+to);
     	sendMail(to, "OSF账户激活", activation_temp.toString());
