@@ -337,19 +337,19 @@ a {
 .ui.divided.list > .item  {
 	border-top: 1px solid  rgba(0, 0, 0, 0.05);
 }
+.navbar-default {
+    background-color: #fff;
+    border-color: #e7e7e7;
+}
 .navbar-nav .dropdown {
   line-height: 20px;
   position: relative;
-  padding: 10px 0 10px 0;
+  padding: 10px 4px 12px 0;
 }
 
 .ui.simple.dropdown .menu {
 	right: 3px;
 	left: auto;
-}
-
-.navbar-nav .dropdown  {
-	padding: 10px 4px 12px 0;
 }
 
 .tagfield .ui.label {
