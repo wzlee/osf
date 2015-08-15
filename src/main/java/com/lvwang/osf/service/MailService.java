@@ -8,16 +8,12 @@ import java.util.Properties;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
+import org.antlr.stringtemplate.StringTemplate;
+import org.antlr.stringtemplate.StringTemplateGroup;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailSender;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
-import org.springframework.mail.javamail.MimeMailMessage;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-
-import com.lvwang.osf.util.CipherUtil;
-import com.lvwang.osf.util.Property;
 
 
 @Service("mailService")
@@ -42,6 +38,8 @@ public class MailService {
 			
 			MAIL_FROM = prop.getProperty("mail.from");
 			
+			templateGroup = new StringTemplateGroup("mailTemplates", classpath + "/mailTemplates");
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -50,6 +48,8 @@ public class MailService {
 	public static String MAIL_FROM;
 	public static String ACTIVATE_CONTEXT;
 	public static String RESETPWD_CONTEXT;
+	
+	public static StringTemplateGroup templateGroup;
 	
     @Autowired
     private JavaMailSenderImpl mailSender;
@@ -74,8 +74,11 @@ public class MailService {
      * @param to
      */
     public void sendAccountActivationEmail(String to, String key){
-    	String body = "<a href='"+ACTIVATE_CONTEXT+key+"?email="+to+"'>激活链接</a>";
-    	sendMail(to, "OSF账户激活", body);
+    	//String body = "<a href='"+ACTIVATE_CONTEXT+key+"?email="+to+"'>激活链接</a>";
+    	StringTemplate activation_temp = templateGroup.getInstanceOf("activation");
+    	activation_temp.setAttribute("href", ACTIVATE_CONTEXT+key+"?email="+to);
+    	activation_temp.setAttribute("link", ACTIVATE_CONTEXT+key+"?email="+to);
+    	sendMail(to, "OSF账户激活", activation_temp.toString());
     }
     
     /**
