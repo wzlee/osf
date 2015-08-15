@@ -221,7 +221,7 @@ public class AccountController {
 		}
 		if(Property.SUCCESS_ACCOUNT_ACTIVATION.equals(status) ||
 		   Property.ERROR_ACCOUNT_EXIST.equals(status)){
-			mav.setViewName("redirect:/explore");
+			mav.setViewName("redirect:/guide");
 			session.setAttribute("user", userService.findByEmail(email));
 		} else {
 			mav.setViewName("account/activation");
