@@ -46,7 +46,7 @@
 								  </div>
 	
 								  <div class="field">
-								  	<div class="ui orange button" id="registerBtn">注册</div>
+								  	<div class="ui blue button" id="registerBtn">注册</div>
 								  </div>								
 								</div>				
 	

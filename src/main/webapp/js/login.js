@@ -52,6 +52,7 @@ $(document).ready(function(){
 				}	
 				var msg=$('<li>'+err_msg+'</li>')
 				$(error_area).find('ul:first').prepend($(msg));
+				$(error_area).text(err_msg);
 				$(error_area).removeClass('hidden');
 			}
 
@@ -66,6 +67,10 @@ $(document).ready(function(){
 		
 	});
 
+	
+	$('#registerbtn').live('click', function(){
+		self.location = basePath + '/account/register';
+	});
 
 
 

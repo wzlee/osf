@@ -79,7 +79,7 @@
 										欢迎登录
 									</div>
 									<div id="error" class="ui red inverted segment hidden">
-								  		<ul class="list"></ul>
+								  		
 								  	</div>
 									<div class="field">
 										<input id="email" type="text" name="email" placeholder="电子邮箱">
@@ -89,7 +89,8 @@
 									</div>
 									<div class="field">
 										<button class="login_btn" id="loginbtn">登录</button>
-										<span class="forget_pwd"><a href="#">忘记密码?</a></span>
+										<button class="register_btn" id="registerbtn">注册</button>
+										<!-- <span class="forget_pwd"><a href="#">忘记密码?</a></span> -->
 									</div>
 								</div>
 							</div>
@@ -216,8 +217,8 @@
 				<div class="row">
 					<div class="span6 offset3">
 						<div class="row">
-							<div class="login_btn span3">登录</div>
-							<div class="register_btn span3">注册</div>						
+							<a class="login_btn span3" href="<c:url value="/account/login" />">登录</a>
+							<a class="register_btn span3" href="<c:url value="/account/register" />">注册</a>						
 						</div>
 
 					</div>
