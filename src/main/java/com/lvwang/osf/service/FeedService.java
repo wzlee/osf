@@ -9,12 +9,15 @@ import org.springframework.stereotype.Service;
 
 import com.lvwang.osf.dao.FeedDAO;
 import com.lvwang.osf.model.Event;
+import com.lvwang.osf.model.Relation;
+import com.lvwang.osf.model.Tag;
 import com.lvwang.osf.model.User;
 
 @Service("feedService")
 public class FeedService {
 
 	public static final int FEED_COUNT_PER_PAGE = 10;
+	public static final int FEED_COUNT = 200;	//feed缓存量
 	
 	@Autowired
 	@Qualifier("followService")
@@ -39,6 +42,14 @@ public class FeedService {
 	@Autowired
 	@Qualifier("commentService")
 	private CommentService commentService;
+	
+	@Autowired
+	@Qualifier("interestService")
+	private InterestService interestService;
+	
+	@Autowired
+	@Qualifier("relationService")
+	private RelationService relationService;
 	
 	public void push(int user_id, int event_id) {
 		List<Integer> followers = followService.getFollowerIDs(user_id);
@@ -121,7 +132,7 @@ public class FeedService {
 	public void delete(int user_id, int event_id) {
 		feedDao.delete("feed:user:"+user_id, event_id);
 	}
-	
+
 	/**
 	 * feed推荐算法
 	 * 这里只是简单实现, 可自己扩充
@@ -130,5 +141,27 @@ public class FeedService {
 	 */
 	public List<Event> getRecommendFeeds(int user_id) {
 		return addUserInfo(eventService.getEventsHasPhoto(0, 20));
+	}
+	
+	public void codeStart(int user_id){
+		if(feedDao.count("feed:user:"+user_id) != 0){
+			return ;
+		}
+		
+		List<Tag> tags_inted = interestService.getTagsUserInterestedIn(user_id);
+		List<Relation> relations = relationService.getRelationsInTags(tags_inted);
+		List<Event> events = eventService.getEventsWithRelations(relations);
+		
+		//no choose , fetch latest feeds default
+		if(events == null || events.size() == 0){
+			events = eventService.getEvents(0, FEED_COUNT_PER_PAGE);
+		}
+			
+		List<Integer> events_id = new ArrayList<Integer>();
+		for(Event event : events) {
+			events_id.add(event.getId());
+		}
+		feedDao.saveAll("feed:user:"+user_id, events_id);
+
 	}
 }

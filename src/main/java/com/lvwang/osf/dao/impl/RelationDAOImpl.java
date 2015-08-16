@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
@@ -25,6 +27,9 @@ public class RelationDAOImpl implements RelationDAO{
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
+	@Autowired
+	private NamedParameterJdbcTemplate namedParaJdbcTemplate;
 	
 	public int save(final int object_type, final int object_id, final int tag_id) {
 		final String sql = "insert into "+ TABLE + "(object_type, object_id, tag_id) values(?,?,?)";
@@ -88,6 +93,26 @@ public class RelationDAOImpl implements RelationDAO{
 				return relation;
 			}
 		});
+	}
+
+	public List<Relation> getRelationsInTags(List<Integer> tags_id) {
+		String sql = "select * from " + TABLE + " where tag_id in (:ids)";
+		HashMap<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("ids", tags_id);
+		return namedParaJdbcTemplate.query(sql, paramMap, new RowMapper<Relation>() {
+
+			public Relation mapRow(ResultSet rs, int row)
+					throws SQLException {
+				Relation relation = new Relation();
+				relation.setId(rs.getInt("id"));
+				relation.setAdd_ts(rs.getTimestamp("add_ts"));
+				relation.setObject_type(rs.getInt("object_type"));
+				relation.setObject_id(rs.getInt("object_id"));
+				relation.setTag_id(rs.getInt("tag_id"));
+				return relation;
+			}
+		});
+		
 	}
 	
 }

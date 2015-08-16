@@ -90,6 +90,16 @@ public class EventService {
 		return event_id;
 	}
 	
+	/**
+	 * 
+	 * @param limit
+	 * @param count
+	 * @return
+	 */
+	public List<Event> getEvents(int start, int step) {
+		return eventDao.getEvents(start, step);
+	}
+	
 	
 	/*
 	 * 根据relation关系(object_type, object_id)查询event

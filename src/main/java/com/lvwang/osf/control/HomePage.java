@@ -1,6 +1,8 @@
 package com.lvwang.osf.control;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.lvwang.osf.model.Event;
@@ -148,5 +151,19 @@ public class HomePage {
 		return mav;
 	}
 	
+	/**
+	 * 新用户兴趣选择之后 feed初始化
+	 * @param session
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/guide/ok")
+	public Map<String, Object> guideOk(HttpSession session){
+		Map<String, Object> map = new HashMap<String, Object>();
+		User user = (User) session.getAttribute("user");
+		feedService.codeStart(user.getId());
+		
+		return map;
+	}
 	
 }

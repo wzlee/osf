@@ -141,7 +141,7 @@ public class EventDAOImpl implements EventDAO{
 			paramMap.put(String.valueOf(type)+i, relationsCategory.get(type));
 			i++;
 		}
-
+		System.out.println(sql.toString());
 		return namedParaJdbcTemplate.query(sql.toString(), paramMap, new RowMapper<Event>() {
 
 			public Event mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -232,6 +232,19 @@ public class EventDAOImpl implements EventDAO{
 				}
 				return new Event();
 			}
+		});
+	}
+
+	public List<Event> getEvents(int start, int step) {
+		String sql = "select * from " + TABLE + " limit ?,?";		
+		return jdbcTemplate.query(sql, 
+								  new Object[]{start, step},  
+								  new RowMapper<Event>(){
+	
+			public Event mapRow(ResultSet rs, int arg1) throws SQLException {
+				return generateEvent(rs);
+			}
+			
 		});
 	}
 }

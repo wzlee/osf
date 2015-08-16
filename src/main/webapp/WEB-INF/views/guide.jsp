@@ -23,6 +23,7 @@
   <script src="<%=request.getContextPath() %>/js/explore.js"></script>
   <script src="<%=request.getContextPath() %>/js/follow.js"></script>
   <script src="<%=request.getContextPath() %>/js/login.js"></script>
+  <script src="<%=request.getContextPath() %>/js/guide.js"></script>
   
 </head>
 <body>
@@ -68,14 +69,9 @@
 			</div>
 			<!-- end tags -->
 			
-			<div class="ui green button" style="margin: 0 auto; margin-bottom: 50px">好了</div>
+			<div class="ui green button" id="ok" style="margin: 0 auto; margin-bottom: 50px">好了</div>
 			
 		</div>
 	</div>
-  <script type="text/javascript">
-	$(function(){				
-		
-	});
-  </script>
 </body>
 </html>

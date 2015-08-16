@@ -18,11 +18,13 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.lvwang.osf.dao.InterestDAO;
+import com.lvwang.osf.model.Tag;
 
 @Repository("interestDao")
 public class InterestDAOImpl implements InterestDAO{
 
 	public static String TABLE_INTEREST = "osf_interests";
+	public static String TABLE_TAG 		= "osf_tags";
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -115,6 +117,24 @@ public class InterestDAOImpl implements InterestDAO{
 			
 		});
 		return result;
+	}
+
+	public List<Tag> getTagsUserInterestedIn(int user_id) {
+		
+		String sql = "select t2.* from " + TABLE_INTEREST + " t1, " + TABLE_TAG + " t2 " +
+					 " where t1.user_id=? and t1.tag_id=t2.id";
+		return jdbcTemplate.query(sql, new Object[]{user_id}, new RowMapper<Tag>(){
+
+			public Tag mapRow(ResultSet rs, int row) throws SQLException {
+				Tag tag = new Tag();
+				tag.setId(rs.getInt("id"));
+				tag.setAdd_ts(rs.getTimestamp("add_ts"));
+				tag.setCover(rs.getString("cover"));
+				tag.setTag(rs.getString("tag"));
+				return tag;
+			}
+			
+		});
 	}
 	
 }

@@ -1,5 +1,6 @@
 package com.lvwang.osf.dao.impl;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -11,6 +12,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.lvwang.osf.dao.FeedDAO;
+import com.lvwang.osf.service.FeedService;
 
 @Repository("feedDao")
 public class FeedDAOImpl implements FeedDAO{
@@ -42,5 +44,14 @@ public class FeedDAOImpl implements FeedDAO{
 	
 	public List<Integer> fetch(String key, long start, long step) {
 		return listOps.range(key, start, start+step);
+	}
+
+	public void saveAll(String key, List<Integer> events_id) {
+		Iterator<Integer> events_it = events_id.iterator();
+		int count = 0;
+		while(events_it.hasNext() && count<FeedService.FEED_COUNT) {
+			save(key, events_it.next());
+			count++;
+		}
 	}
 }

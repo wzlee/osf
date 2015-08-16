@@ -9,4 +9,5 @@ public interface RelationDAO {
 	int save(int object_type, int object_id, int[] tags_id);
 	boolean delete();
 	List<Relation> get(int tag_id) ;
+	List<Relation> getRelationsInTags(List<Integer> tags_id);
 }

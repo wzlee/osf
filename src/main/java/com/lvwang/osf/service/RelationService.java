@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.lvwang.osf.dao.RelationDAO;
 import com.lvwang.osf.model.Relation;
+import com.lvwang.osf.model.Tag;
 import com.lvwang.osf.util.Property;
 
 @Service("relationService")
@@ -52,8 +53,10 @@ public class RelationService {
 	}
 	
 	
-	/*
-	 * return osf_object type and id with tag
+	/**
+	 * 
+	 * @param tag
+	 * @return
 	 */
 	public List<Relation> getRelationsWithTag(String tag){
 		List<Relation> relations = new ArrayList<Relation>();
@@ -65,4 +68,23 @@ public class RelationService {
 		}
 		return relations;
 	}
+	
+	/**
+	 * 获取有列表中tag的关联关系
+	 * 
+	 * @param tags
+	 * @return
+	 */
+	public List<Relation> getRelationsInTags(List<Tag> tags){
+		if(tags == null || tags.size() == 0)
+			return new ArrayList<Relation>();
+		
+		List<Integer> tags_id = new ArrayList<Integer>();
+		for(Tag tag : tags) {
+			tags_id.add(tag.getId());
+		}
+		
+		return relationDao.getRelationsInTags(tags_id);
+	}
+	
 }
