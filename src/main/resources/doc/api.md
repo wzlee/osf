@@ -205,8 +205,8 @@
 
 | 字段         | 说明      |
 | -------------- |:-------------:|
-| comment_object_type | 评论的对象类型 0：日志；1：图片；2：相册 |
-| comment_object_id | 评论的对象ID |
+| comment\_object_type | 评论的对象类型 0：日志；1：图片；2：相册 |
+| comment\_object_id | 评论的对象ID |
 | comment_content | 评论内容 |
 | comment_parent | 回复的评论ID | 
 
