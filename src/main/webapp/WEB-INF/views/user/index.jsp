@@ -60,7 +60,7 @@
 	                          <span style="float: left"> 
 	                        	<i class="tag icon"></i>
 	                        	<c:forEach items="${post.post_tags }" var="tag">
-	                        		<a href="<c:url value="/tag/${tag }" />">${tag }</a>
+	                        		<a href="<c:url value="/tag/${tag.id }" />">${tag.tag }</a>
 	                        	</c:forEach>
 	                          </span>
 	                          <span style="float: right">

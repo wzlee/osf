@@ -18,7 +18,7 @@ public class Event {
 	private String title;
 	private String summary;
 	private String content;
-	private List<String> tags;
+	private List<Tag> tags;
 	private int following_user_id;
 	private String following_user_name;
 	private int follower_user_id;
@@ -102,10 +102,10 @@ public class Event {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public List<String> getTags() {
+	public List<Tag> getTags() {
 		return tags;
 	}
-	public void setTags(List<String> tags) {
+	public void setTags(List<Tag> tags) {
 		this.tags = tags;
 	}
 	public int getFollowing_user_id() {

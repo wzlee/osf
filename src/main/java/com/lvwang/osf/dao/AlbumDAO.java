@@ -1,13 +1,11 @@
 package com.lvwang.osf.dao;
 
-import java.io.InputStream;
 import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
 import com.lvwang.osf.model.Album;
 import com.lvwang.osf.model.Photo;
-import com.lvwang.osf.model.User;
 
 public interface AlbumDAO {
 	

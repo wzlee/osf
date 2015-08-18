@@ -186,10 +186,17 @@ public class AccountController {
 		return map;
 	}
 	
+	private void initStatus(ModelAndView mav) {
+		mav.addObject("ERROR_ACCOUNT_ACTIVATION_NOTEXIST", Property.ERROR_ACCOUNT_ACTIVATION_NOTEXIST);
+		mav.addObject("ERROR_ACCOUNT_ACTIVATION_EXPIRED", Property.ERROR_ACCOUNT_ACTIVATION_EXPIRED);
+		mav.addObject("ERROR_ACCOUNT_ACTIVATION", Property.ERROR_ACCOUNT_ACTIVATION);
+	}
+	
 	@RequestMapping("/activation/mail/send")
 	public ModelAndView actication(@RequestParam("email") String email) {
 		ModelAndView mav = new ModelAndView();	
 		mav.setViewName("account/activation");
+		initStatus(mav);
 		mav.addObject("email", email);
 		return mav;
 	}

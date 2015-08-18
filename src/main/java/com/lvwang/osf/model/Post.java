@@ -19,7 +19,7 @@ public class Post {
 	private int share_count;
 	private int comment_count;
 	private String post_url;
-	private List<String> post_tags;
+	private List<Tag> post_tags;
 	private int post_album;
 	private String post_cover;
 	public int getId() {
@@ -106,10 +106,10 @@ public class Post {
 	public void setShare_count(int share_count) {
 		this.share_count = share_count;
 	}
-	public List<String> getPost_tags() {
+	public List<Tag> getPost_tags() {
 		return post_tags;
 	}
-	public void setPost_tags(List<String> post_tags) {
+	public void setPost_tags(List<Tag> post_tags) {
 		this.post_tags = post_tags;
 	}
 	public int getPost_album() {

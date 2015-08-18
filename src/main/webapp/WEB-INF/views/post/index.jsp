@@ -65,7 +65,7 @@
 								</div>
 								<div class="tags">
 									<c:forEach items="${post.post_tags }" var="tag">
-										<a class="ui label" href="<c:url value="/tag/${tag}" />">${tag }</a>
+										<a class="ui label" href="<c:url value="/tag/${tag.id}" />">${tag.tag }</a>
 									</c:forEach>
 								</div>
 							</div>

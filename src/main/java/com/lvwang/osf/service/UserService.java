@@ -239,7 +239,7 @@ public class UserService {
 			else if(STATUS_USER_CANCELLED == user.getUser_status()) 
 				status = Property.ERROR_ACCOUNT_CANCELLED;
 			
-			status = Property.ERROR_ACCOUNT_ACTIVATION;
+			//status = Property.ERROR_ACCOUNT_ACTIVATION;
 		}
 		map.put("status", status);
 		return map;

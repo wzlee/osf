@@ -106,14 +106,18 @@ public class PostService {
 		post.setLike_count(0);
 		post.setShare_count(0);
 		post.setComment_count(0);
-		post.setPost_tags(TagService.toList(param_tags));
+		
 		post.setPost_cover(post_cover);
-		int id = savePost(post);
-		post.setId(id);
+		
 		
 		//3 save tags
 		if(param_tags != null && param_tags.length() != 0) {				
 			Map<String, Object> tagsmap = tagService.newTags(tagService.toList(param_tags));
+			
+			post.setPost_tags((List<Tag>)tagsmap.get("tags"));
+			int id = savePost(post);
+			post.setId(id);
+			
 			//4 save post tag relation
 			for(Tag tag: (List<Tag>)tagsmap.get("tags")) {
 				Map<String, Object> relmap = relationService.newRelation(

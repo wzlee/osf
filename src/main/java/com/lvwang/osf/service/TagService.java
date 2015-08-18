@@ -42,19 +42,42 @@ public class TagService {
 		return Property.SUCCESS_TAG_FORMAT;
 	}
 	
-	public static List<String> toList(String tags) {
+	public static List<Tag> toList(String tags) {
 		if(tags == null || tags.length() == 0)
-			return new ArrayList<String>();
-		String[] tmp = tags.split(" ");
-		return new ArrayList<String>(Arrays.asList(tmp));
+			return new ArrayList<Tag>();
+		String[] tag_and_id_strs = tags.split(" ");
+		List<Tag> tag_list = new ArrayList<Tag>();
+		for(String tag : tag_and_id_strs) {
+			String[] tag_and_id = tag.split(":");
+			Tag t = new Tag();
+			if(tag_and_id.length > 1) {
+				t.setId(Integer.valueOf(tag.split(":")[1]) );
+			}
+			t.setTag(tag.split(":")[0]);
+			
+			tag_list.add(t);
+		}
+		
+		return tag_list;
 	}
 	
-	public static String toString(List<String> tags) {
+	
+//	public static String toString(List<String> tags) {
+//		if(tags == null || tags.size() == 0)
+//			return null;
+//		StringBuffer buffer = new StringBuffer();
+//		for(String tag: tags) {
+//			buffer.append(tag+" ");
+//		}
+//		return buffer.toString();
+//	}
+
+	public static String toString(List<Tag> tags) {
 		if(tags == null || tags.size() == 0)
 			return null;
 		StringBuffer buffer = new StringBuffer();
-		for(String tag: tags) {
-			buffer.append(tag+" ");
+		for(Tag tag: tags) {
+			buffer.append(tag.getTag()+":"+tag.getId()+" ");
 		}
 		return buffer.toString();
 	}
@@ -87,7 +110,7 @@ public class TagService {
 	}
 	
 	@Transactional
-	public Map<String, Object> newTags(List<String> tags) {
+	public Map<String, Object> newTags(List<Tag> tags) {
 				
 		Map<String, Object> ret = new HashMap<String, Object>();
 		List<Tag> taglist = new ArrayList<Tag>();
@@ -98,26 +121,26 @@ public class TagService {
 			return ret;
 		}
 		
-		for(String tag: tags) {
-			String status = check(tag);
+		for(Tag tag: tags) {
+			String status = check(tag.getTag());
 			if(!status.equals(Property.SUCCESS_TAG_FORMAT)) {
 				return ret;
 			}
 			
-			int id = tagDao.getTagID(tag);
+			int id = tagDao.getTagID(tag.getTag());
 			if(id != 0) {
 				Tag tg = new Tag();				
 				tg.setId(id);
-				tg.setTag(tag);
+				tg.setTag(tag.getTag());
 				taglist.add(tg);
 				continue;
 			}
 						
-			id = tagDao.save(tag);
+			id = tagDao.save(tag.getTag());
 			if(id != 0) {
 				Tag tg = new Tag();	
 				tg.setId(id);
-				tg.setTag(tag);
+				tg.setTag(tag.getTag());
 				taglist.add(tg);
 			}
 		}
@@ -150,5 +173,9 @@ public class TagService {
 	public List<Tag> getRecommendTags(int user_id){
 
 		return tagDao.getTagsHasCover();
+	}
+	
+	public Tag getTagByID(int id) {
+		return tagDao.getTagByID(id);
 	}
 }

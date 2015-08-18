@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -48,9 +47,24 @@ public class TagDAOImpl implements TagDAO{
 		return keyHolder.getKey().intValue();
 	}
 
-	public String getTagByID(int id) {
+	public Tag getTagByID(int id) {
 		
-		return null;
+		String sql = "select * from " + TABLE + " where id=?";
+		return jdbcTemplate.query(sql, new Object[]{id}, new ResultSetExtractor<Tag>(){
+
+			public Tag extractData(ResultSet rs) throws SQLException,
+					DataAccessException {
+				Tag tag = new Tag();
+				if(rs.next()) {
+					tag.setId(rs.getInt("id"));
+					tag.setTag(rs.getString("tag"));
+					tag.setAdd_ts(rs.getTimestamp("add_ts"));
+					tag.setCover(rs.getString("cover"));
+				}
+				return tag;
+			}
+			
+		});
 	}
 	
 	public int getTagID(final String tag) {

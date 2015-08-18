@@ -1,7 +1,6 @@
 package com.lvwang.osf.dao.impl;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,7 +8,6 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
-import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -22,15 +20,9 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.aliyun.oss.ClientException;
-import com.aliyun.oss.OSSClient;
-import com.aliyun.oss.OSSException;
-import com.aliyun.oss.model.ObjectMetadata;
-import com.aliyun.oss.model.PutObjectResult;
 import com.lvwang.osf.dao.AlbumDAO;
 import com.lvwang.osf.model.Album;
 import com.lvwang.osf.model.Photo;
-import com.lvwang.osf.model.User;
 import com.lvwang.osf.service.TagService;
 import com.qiniu.common.QiniuException;
 import com.qiniu.storage.BucketManager;

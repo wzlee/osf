@@ -184,10 +184,12 @@ public class AlbumController {
 			
 			JsonNode tags = root.path("tags");
 			if(tags.size() > 0) {
-				List<String> tag_list = new ArrayList<String>();
+				List<Tag> tag_list = new ArrayList<Tag>();
 				album.setAlbum_tags(tag_list);
 				for(int i=0; i<tags.size(); i++) {
-					tag_list.add(tags.get(i).getTextValue());
+					Tag t = new Tag();
+					t.setTag(tags.get(i).getTextValue());
+					tag_list.add(t);
 				}
 			}
 			

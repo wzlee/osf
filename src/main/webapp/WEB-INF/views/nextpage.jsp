@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <c:forEach items="${feeds }" var="feed"> 
 	<c:if test="${feed.object_type == dic.object_type_shortpost }">
@@ -76,7 +77,7 @@
 	       <div class="tags">
 		     	<i class="tag icon"></i>
 		     	<c:forEach items="${feed.tags }" var="tag">
-		     		<a href="<c:url value="/tag/${tag }"/>">${tag }</a>
+		     		<a href="<c:url value="/tag/${tag.id }"/>">${tag.tag }</a>
 		     	</c:forEach>
 		   </div>
 	   </c:if>							                     	
@@ -130,7 +131,7 @@
         <div class="tags">
 	      	<i class="tag icon"></i>
 	      	<c:forEach items="${feed.tags }" var="tag">
-	      		<a href="<c:url value="/tag/${tag }"/>">${tag }</a>
+	      		<a href="<c:url value="/tag/${tag.id }"/>">${tag.tag }</a>
 	      	</c:forEach>
 		</div> 
 		</c:if>                       

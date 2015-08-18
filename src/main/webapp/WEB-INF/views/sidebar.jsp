@@ -26,7 +26,7 @@
 </div>
 <div class="ui vertical menu poptags">
   <c:forEach items="${poptags }" var="poptag" begin="0" end="4">
-	  <a href="<c:url value='/tag/${poptag.tag }' />" target="_blank" />
+	  <a href="<c:url value='/tag/${poptag.id }' />" target="_blank" />
 		  <div class="tagitem" style="background: url(${img_base_url}${poptag.cover }?imageView2/1/w/255/h/80)">
 		  	<div class="mask"></div>
 		  	<div class="tag">

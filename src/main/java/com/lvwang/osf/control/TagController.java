@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.lvwang.osf.model.Event;
+import com.lvwang.osf.model.Tag;
 import com.lvwang.osf.model.User;
 import com.lvwang.osf.service.InterestService;
 import com.lvwang.osf.service.TagService;
@@ -34,30 +35,30 @@ public class TagController {
 	private InterestService interestService;
 	
 	
-	@RequestMapping("/{tag}")
-	public ModelAndView getFeedsWithTag(@PathVariable("tag") String tag, HttpSession session) {
-//		try {
-//			tag = new String(tag.getBytes("ISO-8859-1"), "UTF-8");
-//		} catch (UnsupportedEncodingException e) {
-//			e.printStackTrace();
-//		}
+	@RequestMapping("/{tag_id}")
+	public ModelAndView getFeedsWithTag(@PathVariable("tag_id") int tag_id, HttpSession session) {
+
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("tag/index");
 		
-		int id = tagService.getID(tag);
-		mav.addObject("tag", tag);
-		mav.addObject("id", id);
+		Tag tag = tagService.getTagByID(tag_id);
+		if(tag == null) {
+			mav.setViewName("404");
+		}
+		
+		mav.addObject("tag", tag.getTag());
+		mav.addObject("id", tag.getId());
 		
 		User user = (User)session.getAttribute("user");
 		if(user != null) {
 			mav.addObject("isInterest", 
-						  interestService.hasInterestInTag(user.getId(), id));
+						  interestService.hasInterestInTag(user.getId(), tag_id));
 			
 		} else {
 			mav.addObject("isInterest", false);
 		}
 		
-		List<Event> feeds = tagService.getWithTag(tag);
+		List<Event> feeds = tagService.getWithTag(tag.getTag());
 		mav.addObject("feeds", feeds);
 		mav.addObject("dic", new Dic());
 		return mav;

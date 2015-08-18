@@ -192,11 +192,14 @@ public class AlbumService {
 	}
 	
 	public List<Tag> updateAlbum(Album album) {
-		updateAlbumInfo(album);
-		updatePhotoDesc(album.getPhotos());
+		
 		
 		//save tag
 		Map<String, Object> tagsmap = tagService.newTags(album.getAlbum_tags());
+		album.setAlbum_tags((List<Tag>)tagsmap.get("tags"));
+		
+		updateAlbumInfo(album);
+		updatePhotoDesc(album.getPhotos());
 		
 		//save relation 
 		for(Tag tag: (List<Tag>)tagsmap.get("tags")) {

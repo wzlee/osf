@@ -18,7 +18,7 @@ public class Album {
 	private int share_count;
 	private int comment_count;
 	private List<Photo> photos;
-	private List<String> album_tags;
+	private List<Tag> album_tags;
 	public int getId() {
 		return id;
 	}
@@ -97,10 +97,10 @@ public class Album {
 	public void setComment_count(int comment_count) {
 		this.comment_count = comment_count;
 	}
-	public List<String> getAlbum_tags() {
+	public List<Tag> getAlbum_tags() {
 		return album_tags;
 	}
-	public void setAlbum_tags(List<String> album_tags) {
+	public void setAlbum_tags(List<Tag> album_tags) {
 		this.album_tags = album_tags;
 	}
 }
