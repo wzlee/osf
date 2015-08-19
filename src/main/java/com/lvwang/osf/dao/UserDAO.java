@@ -10,6 +10,7 @@ public interface UserDAO {
 	User getUserByUsername(String username);
 	String getPwdByEmail(String email);
 	List<User> getUsersByIDs(int[] ids);
+	List<User> getUsersByIDs(List<Integer> ids);
 	List<User> getUsers(int count);
 	User getUser(String condition, Object[] args);
 	

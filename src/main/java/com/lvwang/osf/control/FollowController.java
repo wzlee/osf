@@ -17,7 +17,6 @@ import com.lvwang.osf.service.FollowService;
 import com.lvwang.osf.service.NotificationService;
 import com.lvwang.osf.service.UserService;
 import com.lvwang.osf.util.Dic;
-import com.lvwang.osf.util.Property;
 
 @Controller
 @RequestMapping("/follow")
@@ -34,6 +33,7 @@ public class FollowController {
 	@Autowired
 	@Qualifier("notificationService")
 	private NotificationService notificationService;
+	
 	
 	@ResponseBody
 	@RequestMapping("/{following_user_id}")

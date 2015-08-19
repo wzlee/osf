@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -17,6 +19,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
@@ -32,6 +35,9 @@ public class UserDAOImpl implements UserDAO{
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
+	@Autowired
+	private NamedParameterJdbcTemplate namedParaJdbcTemplate;
+	
 	@Autowired
 	@Qualifier("redisTemplate")
 	private RedisTemplate<String, String> redisTemplate; 
@@ -107,6 +113,32 @@ public class UserDAOImpl implements UserDAO{
 		return queryUser(sql, args);
 	}
 	
+	public List<User> getUsersByIDs(List<Integer> ids) {
+		if(ids == null || ids.size() == 0){
+			return new ArrayList<User>();
+		}
+		
+		String sql = "select * from "+ TABLE + " where id in (:ids)";
+		HashMap<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("ids", ids);
+		return namedParaJdbcTemplate.query(sql, paramMap, new RowMapper<User>() {
+
+			public User mapRow(ResultSet rs, int row) throws SQLException {
+				User user = new User();
+				user.setId(rs.getInt("id"));
+				user.setUser_name(rs.getString("user_name"));
+				user.setUser_email(rs.getString("user_email"));
+				//user.setUser_pwd(rs.getString("user_pwd"));
+				user.setUser_registered_date(rs.getDate("user_registered_date"));
+				user.setUser_status(rs.getInt("user_status"));	
+				user.setUser_activationKey(rs.getString("user_activationKey"));
+				user.setUser_avatar(rs.getString("user_avatar"));
+				user.setUser_desc(rs.getString("user_desc"));
+				return user;
+			}
+		});
+		
+	}
 	
 	public List<User> getUsersByIDs(int[] ids) {
 		StringBuffer sb = new StringBuffer();

@@ -2,6 +2,8 @@ package com.lvwang.osf.model;
 
 import java.util.Date;
 
+
+
 public class Following {
 	private int id;
 	private int user_id;

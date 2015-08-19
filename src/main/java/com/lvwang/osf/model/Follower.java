@@ -45,4 +45,5 @@ public class Follower {
 	public void setTs(Date ts) {
 		this.ts = ts;
 	}
+
 }

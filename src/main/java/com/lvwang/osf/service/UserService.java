@@ -77,26 +77,30 @@ public class UserService {
 	
 	public User findByUsername(String username) {
 		User user = userDao.getUserByUsername(username);
-		if(user != null){
-			addAvatar(user);
-		}
+//		if(user != null){
+//			addAvatar(user);
+//		}
 		return user;
 	}
 	
 	public User findByEmail(String email) {
 		User user = userDao.getUserByEmail(email);
-		if(user != null) {
-			addAvatar(user);
-		}
+//		if(user != null) {
+//			addAvatar(user);
+//		}
 		return user;
 	}
 	
 	public User findById(int id) {
 		User user = userDao.getUserByID(id);
-		if(user != null) {
-			addAvatar(user);
-		}
+//		if(user != null) {
+//			addAvatar(user);
+//		}
 		return user;
+	}
+	
+	public List<User> findAllbyIDs(List<Integer> ids) {
+		return userDao.getUsersByIDs(ids);
 	}
 	
 	private void addAvatar(User user) {
@@ -301,7 +305,7 @@ public class UserService {
 				it.remove();
 				continue;
 			}
-			addAvatar(user);
+			//addAvatar(user);
 		}
 
 		return users;

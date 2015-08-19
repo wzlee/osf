@@ -166,4 +166,27 @@ public class HomePage {
 		return map;
 	}
 	
+	@RequestMapping("/followers")
+	public ModelAndView getFollowers(HttpSession session){
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("followers", userService.findAllbyIDs(
+								   followService.getFollowerIDs(
+										   ((User)session.getAttribute("user")).getId())
+								   ));
+		
+		mav.setViewName("follower");
+		return mav;
+	}
+	
+	@RequestMapping("/followings")
+	public ModelAndView getFollowings(HttpSession session){
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("followings", userService.findAllbyIDs(
+									followService.getFollowingIDs(
+											((User)session.getAttribute("user")).getId())
+									));
+		
+		mav.setViewName("following");
+		return mav;
+	}
 }
