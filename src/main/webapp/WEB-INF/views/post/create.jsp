@@ -43,7 +43,7 @@
 					  	</div>
 					</div>
 				  			  
-				  <div class="inline field">
+<!-- 				  <div class="inline field">
 				    <label>隐私:</label>
 					<input type="radio" name="post_status" value="0" checked="checked"> 公开
 					<input type="radio" name="post_status" value="1"> 仅自己可见
@@ -52,7 +52,7 @@
 				  	<label>评论:</label>
 					<input type="radio" name="comment_status" value="0" checked="checked"> 允许评论
 					<input type="radio" name="comment_status" value="1"> 不允许评论				  	
-				  </div>
+				  </div> -->
 				  <div class="ui button green" id="send">发表</div>
 				  <div class="ui button" id="cancel">取消</div>
 				</div>				
@@ -60,8 +60,25 @@
 			</div>
 		</div>
 	</div>
+	<div class="ui basic small modal cancel-tip">
+	    <div class="content">
+	      <p>确定取消编辑吗?</p>
+	    </div>
+	    <div class="actions">
+	      <div class="ui red basic cancel inverted button">
+	        <i class="remove icon"></i>
+	        否,留在本页
+	      </div>
+	      <div class="ui green ok inverted button">
+	        <i class="checkmark icon"></i>
+	        是
+	      </div>
+	    </div>
+	</div>
+	
   	<script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery-1.11.1.min.js"></script> 
   	<script type="text/javascript" src="<%=request.getContextPath() %>/js/froala_editor.min.js"></script>
+  	<script type="text/javascript" src="<%=request.getContextPath() %>/js/semantic.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath() %>/js/basic.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath() %>/js/code.js"></script>
   	<script type="text/javascript" src="<%=request.getContextPath() %>/js/tag.js"></script>
@@ -78,8 +95,8 @@
     		var title = $('#title').val();
     		var content = $('#content').val();
 
-    		var post_status = $('input[name="post_status"][checked]').val();
-    		var comment_status = $('input[name="comment_status"][checked]').val();
+    		var post_status = 0 // $('input[name="post_status"][checked]').val();
+    		var comment_status = 0 // $('input[name="comment_status"][checked]').val();
     		$.ajax({
     			url: basePath + '/post/create',
     			type: 'POST',
@@ -107,7 +124,22 @@
     		
     	});
           
-          
+        
+      	$('#cancel').click(function(){
+    		$('.cancel-tip')
+	  		  .modal({
+	  		    closable  : true,
+	  		    onDeny    : function(){
+	  		      return true;
+	  		    },
+	  		    onApprove : function() {
+	  				self.location = basePath;
+	  		    }
+	  		  })
+	  		  .modal('show');      		
+      	});
+      	
+      	
       });
     </script>	  	
 </body>

@@ -769,9 +769,11 @@ form style
 /**
 trash-tip style
 **/
-.ui.basic.small.modal.trash-tip {
+.ui.basic.small.modal.trash-tip,
+.ui.basic.small.modal.cancel-tip {
 	text-align: center;
 }
-.ui.basic.small.modal.trash-tip .actions{
+.ui.basic.small.modal.trash-tip .actions,
+.ui.basic.small.modal.cancel-tip .actions{
 	text-align: center;
 }

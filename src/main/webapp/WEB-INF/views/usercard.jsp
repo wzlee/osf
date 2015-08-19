@@ -16,21 +16,21 @@
 					<div class="ui mini statistics">
 					  <div class="statistic">
 					    <div class="value">
-					      ${counter.follower }
+					      <a href="<c:url value="/followers" />">${counter.follower }</a>
 					    </div>
 					    <div class="label">粉丝
 					    </div>
 					  </div>
 					  <div class="statistic">
 					    <div class="value">
-					      ${counter.following }
+					      <a href="<c:url value="/followings" />">${counter.following }</a>
 					    </div>
 					    <div class="label">关注
 					    </div>
 					  </div>
 					  <div class="statistic">
 					    <div class="value">
-					      ${counter.spost }
+					      <a href="#">${counter.spost }</a>
 					    </div>
 					    <div class="label">状态
 					    </div>
