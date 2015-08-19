@@ -73,7 +73,7 @@
 						<div class="field">
 						  	<label>标签:</label>
 						  	<div class="tags">
-						  		<input type="text" class="tag-input" id="tag-input">
+						  		<input type="text" class="tag-input" id="tag-input" placeholder="空格添加标签">
 						  		<div class="tagfield">   
 							    </div>
 						  	</div>
