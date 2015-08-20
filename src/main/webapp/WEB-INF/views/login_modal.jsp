@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-	<div class="ui small modal">
+	<div class="ui small modal login-tip">
 	  <div class="header">请先登录</div>
 	  <div class="content">
 	  	<div id="error" class="ui error message hidden">

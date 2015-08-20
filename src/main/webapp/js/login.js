@@ -21,8 +21,8 @@ $(document).ready(function(){
 		})
 		.success(function(data) {
 			if(data.status==SUCCESS_ACCOUNT_LOGIN){
-				self.location = basePath + '/';
-				
+				//self.location = basePath + '/';
+				location.reload();
 			} else{
 
 				if(data.status == ERROR_EMAIL_NOT_REG){

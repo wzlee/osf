@@ -3,7 +3,7 @@ $(document).ready(function(){
 	$('#like').click(function() {
 		var isLogin = $('meta[name=isLogin]').attr('content');
 		if(isLogin == 'false'){
-			$('.ui.small.modal').modal('show');
+			$('.ui.small.modal.login-tip').modal('show');
 			return false;
 		}
 		
