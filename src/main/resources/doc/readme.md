@@ -27,19 +27,51 @@ Sketch文件已经放在了[osf_sketch](sketch)
 
 ![feed](http://7xkkim.com1.z0.glb.clouddn.com/feed.png)
 
-Sketch文件在[osf_sketch](sketch)
+
 
 ## 技术选型 
 
-OSF选择Spring MVC作为后端基础框架，实现RESTFull url，为实现尽可能的前后端分离，除首屏数据渲染外均通过Ajax+json形式更新前端，url设计与数据交互规范见 [api](http)
+OSF选择Spring MVC作为后端基础框架，实现RESTFull url，为实现尽可能的前后端分离，除首屏数据渲染外均通过Ajax+json形式更新前端，url设计与数据交互规范见 [url设计与数据交互说明](http)
 
-MySQL作为OSF的关系型数据库，除Feed之外的所有数据均由其存储
+MySQL作为OSF的关系型数据库，除Feed之外的所有数据均由其存储，[OSF表设计]()
 
-Redis在OSF中的使用，主要缓存用户信息、统计计数，同时存储用户的Feed信息流，Feed信息读写设计可见[feed](feed)  
+Redis在OSF中的使用，主要缓存用户信息、统计计数，同时存储用户的Feed信息流和Tag与Feed的从属关系
 
 ## 配置
 
+	#domain
+	domain.name=localhost
+	domain.ip=127.0.0.1
+	domain.port=8080
+	context=com.lvwang.osf
 
+	#jdbc config
+	jdbc.driver=com.mysql.jdbc.Driver
+	jdbc.url=jdbc:mysql://localhost:3306/osf
+	jdbc.username=root
+	jdbc.password=xxxxxx
+
+
+	#Redis config
+	redis.host=localhost
+	redis.port=6379
+	redis.password=
+	redis.maxIdle=300
+	redis.maxActive=600
+	redis.maxWait=1000
+	redis.testOnBorrow=true
+
+	#mail
+	mail.from=examle@mailhost.com
+	mail.password=xxxxxx
+
+	#thumbnail style
+	post_cover_thumbnail=?imageView2/2/w/500
+	album_thumbnail=?imageView2/1/w/200/h/200
+ 
+	img_base_url=http://xxx.xxx.xxx/
+	
+主要设置 域，MySQL、Redis连接配置，发件人邮箱，[缩略图格式](http://developer.qiniu.com/docs/v6/api/reference/fop/image/imageview2.html)，云存储域名
 
 ## 后续版本计划 
 
