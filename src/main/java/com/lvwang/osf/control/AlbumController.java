@@ -232,6 +232,8 @@ public class AlbumController {
 			for(int u : i_users) {
 				feedService.push(u, event_id);
 			}
+			//cache feeds to tag list
+			feedService.cacheFeed2Tag(tag.getId(), event_id);
 		}
 		
 		map.put("album", album);

@@ -64,7 +64,7 @@
 	                        	</c:forEach>
 	                          </span>
 	                          <span style="float: right">
-		                          <a class="like">
+<%-- 		                          <a class="like">
 		                            <i class="like icon"></i> ${post.like_count }
 		                          </a>
 		                          <a class="share">
@@ -72,7 +72,7 @@
 		                          </a>   
 		                          <a class="comment">
 		                            <i class="comment outline icon"></i> ${post.comment_count }
-		                          </a>   
+		                          </a>    --%>
 							  </span>
 	                        </div>
 

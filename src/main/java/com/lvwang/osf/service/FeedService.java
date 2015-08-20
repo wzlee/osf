@@ -61,6 +61,20 @@ public class FeedService {
 		}
 	}
 	
+	/**
+	 * 缓存feed到对应标签列表序列中
+	 * 
+	 * @param tag_id
+	 * @param event_id
+	 */
+	public void cacheFeed2Tag(int tag_id, int event_id) {
+		feedDao.save("feed:tag:"+tag_id, event_id);
+	}
+	
+	public void cacheFeeds2Tag(int tag_id, List<Integer> events_id) {
+		feedDao.saveAll("feed:tag:"+tag_id, events_id);
+	}
+	
 	private List<Integer> getEventIDs(int user_id, int start, int count) {
 		return feedDao.fetch("feed:user:"+user_id, start, count);
 	}

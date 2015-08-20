@@ -63,13 +63,13 @@ public class TagController {
 			mav.addObject("isInterest", false);
 		}
 		
-		List<Event> feeds = tagService.getWithTag(tag.getTag());
+		List<Event> feeds = feedService.getFeedsByTagOfPage(user!=null?user.getId():0, tag_id, 1);
 		mav.addObject("feeds", feeds);
 		mav.addObject("dic", new Dic());
 		return mav;
 	}
 	
-	@RequestMapping("/{tag_id}/{page}")
+	@RequestMapping("/{tag_id}/page/{page}")
 	public ModelAndView getFeedsByTagOfPage(@PathVariable("tag_id") int tag_id, 
 											@PathVariable("page") int page,
 											HttpSession session) {

@@ -128,7 +128,10 @@ public class PostController {
 				for(int u : i_users) {
 					feedService.push(u, event_id);
 				}
+				//5 cache feeds to tag list
+				feedService.cacheFeed2Tag(tag.getId(), event_id);
 			}
+			
 		}
 		return map;
 		
