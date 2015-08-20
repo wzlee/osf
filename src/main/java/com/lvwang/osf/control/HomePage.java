@@ -189,4 +189,14 @@ public class HomePage {
 		mav.setViewName("following");
 		return mav;
 	}
+	
+	@RequestMapping("/404")
+	public ModelAndView pageNotFound() {
+		return new ModelAndView("404");
+	}
+	
+	@RequestMapping("/500")
+	public ModelAndView error500() {
+		return new ModelAndView("500");
+	}
 }

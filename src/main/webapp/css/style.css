@@ -777,3 +777,23 @@ trash-tip style
 .ui.basic.small.modal.cancel-tip .actions{
 	text-align: center;
 }
+
+
+/**
+	error page style
+**/
+
+.error.page.img{
+    display: inline;
+}
+.error.page.img img{
+	width: 160px;
+	margin-bottom: 172px;
+}
+.error.page.code {
+	display:inline-block;
+	font-size: 300px;
+    font-weight: 600;
+    color: #B5B5B5;
+}
+
