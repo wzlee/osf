@@ -252,6 +252,9 @@ public class UserDAOImpl implements UserDAO{
 		
 		//update cahce
 		User user = (User)mapOps.get("user", "user:"+user_id);
+		if(user == null) {
+			user = getUserByID(user_id);
+		}
 		user.setUser_avatar(avatar);
 		mapOps.put("user", "user:"+user_id, user);
 	}

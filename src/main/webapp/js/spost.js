@@ -24,6 +24,7 @@ $(document).ready(function(){
 
 				$(short_post).css('display', 'block');
 				$('.feed:first').prepend($(short_post));
+				$('#spost_content').val('');
 			}
 		})
 		.fail(function() {
