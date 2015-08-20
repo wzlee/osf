@@ -42,6 +42,7 @@ $(document).ready(function(){
 	});
 
 	$('#saveAlbumBtn').click(function(event) {
+		$(this).addClass('loading');
 		$('#uploadedphotos .card').each(function(index, el) {
 			var photo_id = $(this).attr('id').substring(4);
 			var photo_desc = $(this).find('textarea:first()').val();
@@ -60,7 +61,7 @@ $(document).ready(function(){
 			var status = data.status;
 			var author = data.album.user_id;
 			if(SUCCESS_ALBUM_CREATE == status || SUCCESS_ALBUM_UPDATE == status) {
-				self.location = basePath + "/user/" + author;
+				self.location = basePath;
 			}
 		})
 		.fail(function() {

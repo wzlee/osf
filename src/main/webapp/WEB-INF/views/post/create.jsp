@@ -92,6 +92,7 @@
           });
 
       	$('#send').click(function() {		
+      		$(this).addClass('loading');
     		var title = $('#title').val();
     		var content = $('#content').val();
 
@@ -112,7 +113,7 @@
     			var status = data.status;
     			var author = data.post.post_author;
     			if(SUCCESS_POST_CREATE == status) {
-    				self.location = basePath + "/user/"+author;
+    				self.location = basePath;
     			}
     		})
     		.fail(function() {
