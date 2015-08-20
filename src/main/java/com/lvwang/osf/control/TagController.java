@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.lvwang.osf.model.Event;
 import com.lvwang.osf.model.Tag;
 import com.lvwang.osf.model.User;
+import com.lvwang.osf.service.FeedService;
 import com.lvwang.osf.service.InterestService;
 import com.lvwang.osf.service.TagService;
 import com.lvwang.osf.util.Dic;
@@ -34,9 +35,12 @@ public class TagController {
 	@Qualifier("interestService")
 	private InterestService interestService;
 	
+	@Autowired
+	@Qualifier("feedService")
+	private FeedService feedService;
 	
 	@RequestMapping("/{tag_id}")
-	public ModelAndView getFeedsWithTag(@PathVariable("tag_id") int tag_id, HttpSession session) {
+	public ModelAndView getFeedsByTag(@PathVariable("tag_id") int tag_id, HttpSession session) {
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("tag/index");
@@ -44,6 +48,7 @@ public class TagController {
 		Tag tag = tagService.getTagByID(tag_id);
 		if(tag == null) {
 			mav.setViewName("404");
+			return mav;
 		}
 		
 		mav.addObject("tag", tag.getTag());
@@ -63,6 +68,29 @@ public class TagController {
 		mav.addObject("dic", new Dic());
 		return mav;
 	}
+	
+	@RequestMapping("/{tag_id}/{page}")
+	public ModelAndView getFeedsByTagOfPage(@PathVariable("tag_id") int tag_id, 
+											@PathVariable("page") int page,
+											HttpSession session) {
+
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("nextpage");
+		
+		Tag tag = tagService.getTagByID(tag_id);
+		if(tag == null) {
+			mav.setViewName("404");
+			return mav;
+		}
+		
+		User user = (User) session.getAttribute("user");
+		
+		List<Event> feeds = feedService.getFeedsByTagOfPage(user!=null?user.getId():0, tag_id, page);
+		mav.addObject("feeds", feeds);
+		mav.addObject("dic", new Dic());
+		return mav;
+	}
+	
 	/**
 	 * 对某个标签感兴趣
 	 */

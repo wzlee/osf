@@ -7,8 +7,13 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.redis.core.ListOperations;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -31,6 +36,15 @@ public class TagDAOImpl implements TagDAO{
 
 	@Autowired
 	private NamedParameterJdbcTemplate namedParaJdbcTemplate;
+	
+	@Autowired
+	@Qualifier("redisTemplate")
+	private RedisTemplate<String, String> redisTemplate; 
+	
+	@Resource(name="redisTemplate")
+	private ListOperations<String, Integer> listOps;
+	
+	
 	
 	public int save(final String tag) {
 		final String sql = "insert into "+TABLE + "(tag) values(?)";
@@ -121,5 +135,6 @@ public class TagDAOImpl implements TagDAO{
 			}
 		});
 	}
+
 	
 }

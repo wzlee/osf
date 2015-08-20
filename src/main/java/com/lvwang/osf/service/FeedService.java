@@ -80,7 +80,7 @@ public class FeedService {
 			events = eventService.getEventsWithIDs(event_ids);
 			addUserInfo(events);
 			updLikeCount(user_id, events);
-			addCommentCount(user_id, events);
+			addCommentCount(events);
 		}
 		return events;
 	}
@@ -116,7 +116,7 @@ public class FeedService {
 		}
 	}
 	
-	public void addCommentCount(int user_id, List<Event> events){
+	public void addCommentCount(List<Event> events){
 		if(events == null || events.size() == 0)
 			return;
 		for(Event event : events) {
@@ -133,6 +133,34 @@ public class FeedService {
 		feedDao.delete("feed:user:"+user_id, event_id);
 	}
 
+	/**
+	 * 获取tag标签的feed
+	 * 
+	 * @param user_id
+	 * @param tag_id
+	 * @return
+	 */
+	public List<Event> getFeedsByTag(int user_id, int tag_id) {
+		return getFeedsByTag(user_id, tag_id, FEED_COUNT_PER_PAGE);
+	}
+	
+	public List<Event> getFeedsByTag(int user_id, int tag_id, int count){
+		List<Integer> event_ids = getEventIDsByTag(tag_id, 0, count-1);
+		return decorateFeeds(user_id, event_ids);
+	}
+	
+	public List<Event> getFeedsByTagOfPage(int user_id, int tag_id, int num) {
+		List<Integer> event_ids = feedDao.fetch("feed:tag:"+tag_id, 
+												FEED_COUNT_PER_PAGE*(num-1), 
+												FEED_COUNT_PER_PAGE-1);
+		return decorateFeeds(user_id, event_ids);
+		
+	}
+	
+	private List<Integer> getEventIDsByTag(int tag_id, int start, int count) {
+		return feedDao.fetch("feed:tag:"+tag_id, start, count);
+	}
+	
 	/**
 	 * feed推荐算法
 	 * 这里只是简单实现, 可自己扩充

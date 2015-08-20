@@ -10,5 +10,5 @@ public interface FeedDAO {
 	Long count(String key);
 	List<Integer> fetch(String key);
 	List<Integer> fetch(String key, long start, long step);
-	
+
 }
