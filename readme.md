@@ -18,6 +18,21 @@
 * 个人信息设置、账户安全
 * 上传图片云存储
 
+## Demo
+
+此项目的Demo版演示已经部署在Coding.net [http://osf.coding.io/welcome](http://osf.coding.io/welcome)  
+
+演示用户:
+
+| 邮箱         | 密码      |
+| -------------- |:-------------:|
+| osfdemo1@163.com | demo123456 |
+| osfdemo2@163.com | demo123456 |
+
+**注意**:如果自行注册登录，请使用真实邮箱地址，osf会为新注册用户发送激活链接  
+
+
+
 ##  UI
 
 Sketch文件下载:[osf_sketch](http://pan.baidu.com/s/1hq5zI1e)  
@@ -78,3 +93,19 @@ Redis在OSF中的使用，主要缓存用户信息、统计计数，同时存储
 * 搜索功能  
 * 发送链接 
 
+## License GPL
+
+Copyright (C) 2015 osf
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
