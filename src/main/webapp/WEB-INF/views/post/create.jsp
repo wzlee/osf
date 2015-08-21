@@ -91,7 +91,8 @@
         	  imageUploadParam: "uploader_input"
           });
 
-      	$('#send').click(function() {		
+      	$('#send').click(function() {	
+      		var that = this;
       		$(this).addClass('loading');
     		var title = $('#title').val();
     		var content = $('#content').val();
@@ -110,6 +111,7 @@
     			       comment_status: comment_status}
     		})
     		.success(function(data) {
+    			$(that).removeClass('loading');
     			var status = data.status;
     			var author = data.post.post_author;
     			if(SUCCESS_POST_CREATE == status) {

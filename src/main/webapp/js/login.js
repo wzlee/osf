@@ -1,5 +1,7 @@
 $(document).ready(function(){
 	$('#loginbtn').live('click', function() {
+		var that = this;
+		$(this).addClass('loading');
 		var email = $('#email').val();
 		var password = $('#password').val();
 		var error_area=$('#error');
@@ -20,6 +22,7 @@ $(document).ready(function(){
 				   password: password},
 		})
 		.success(function(data) {
+			$(that).removeClass('loading');
 			if(data.status==SUCCESS_ACCOUNT_LOGIN){
 				//self.location = basePath + '/';
 				location.reload();

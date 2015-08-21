@@ -38,7 +38,7 @@
 								  </div>
 								  <div class="field">
 								    <label>密码<span id="passwordTip" class="tip"></span></label>
-								    <input type="password" name="password" id="password">
+								    <input type="password" name="password" id="password" placeholder="8-16位数字和字母的组合">
 								  </div>
 								  <div class="field">
 								    <label>确认密码<span id="cfmPwdTip" class="tip"></span></label>

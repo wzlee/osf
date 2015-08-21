@@ -1,5 +1,7 @@
 $(document).ready(function(){
 	$('#registerBtn').live('click', function() {
+		var that = this;
+		$(this).addClass('loading');
 		//clear tips
 		$('div.error').removeClass('error');
 		$('span.tip').text('');
@@ -19,6 +21,7 @@ $(document).ready(function(){
 				   cfmPwd: cfmPwd},
 		})
 		.success(function(data) {
+			$(that).removeClass('loading');
 			if(data.status == '104000') {
 				self.location = basePath + '/account/activation/mail/send?email='+email;
 			} else { //error
