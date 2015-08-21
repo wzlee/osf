@@ -18,14 +18,13 @@
 * 个人信息设置、账户安全
 * 上传图片云存储
 
-##  前端设计
+##  UI
 
 Sketch文件已经放在了[osf_sketch](sketch) 
 
 
-![explore](http://7xkkim.com1.z0.glb.clouddn.com/explore.png)
+![explore](http://7xkkim.com1.z0.glb.clouddn.com/osf_sketch_preview.png)
 
-![feed](http://7xkkim.com1.z0.glb.clouddn.com/feed.png)
 
 
 
