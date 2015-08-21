@@ -5,6 +5,9 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Cache-Control" content="no-cache">
+	<meta http-equiv="Expires" content="0">
 	<title>Welcome to OSF</title>
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/bootstrap2.css">
   	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/navbar.css">
@@ -24,32 +27,6 @@
     <script src="<%=request.getContextPath() %>/js/basic.js"></script>
     <script src="<%=request.getContextPath() %>/js/code.js"></script>
     <script src="<%=request.getContextPath() %>/js/login.js"></script>
-  	<script>
-	$(function(){
-		$('#welcome').fullpage({
-			sectionsColor: ['#FFFFFF', '#FFFFFF', '#F7F8FA', '#FFFFFF'],
-			'navigation': true,
-			afterLoad: function(anchorLink, index){
-				if(index == 2){
-					$('.section2').find('p').fadeIn(2000);
-				}
-				if(index == 3){
-					$('.section3').find('.features').delay(50).animate({
-						bottom: '0'
-					}, 1000, 'easeOutExpo');
-				
-				}
-				if(index == 4){
-					
-				}
-
-			}
-		});
-		
-		
-		
-	});
-	</script>
 </head>
 <body>
 	<div class="nav">
@@ -228,7 +205,28 @@
 	</div>
 	<script type="text/javascript">
 	$(document).ready(function(){
-		var options = {minMargin: 5, maxMargin: 10, itemSelector: ".box", firstItemClass: "first-item"};
+		
+		$('#welcome').fullpage({
+			sectionsColor: ['#FFFFFF', '#FFFFFF', '#F7F8FA', '#FFFFFF'],
+			'navigation': true,
+			afterLoad: function(anchorLink, index){
+				if(index == 2){
+					$('.section2').find('p').fadeIn(2000);
+				}
+				if(index == 3){
+					$('.section3').find('.features').delay(50).animate({
+						bottom: '0'
+					}, 1000, 'easeOutExpo');
+				
+				}
+				if(index == 4){
+					
+				}
+
+			}
+		});
+		
+		var options = {minMargin: 5, maxMargin: 10, itemSelector: ".box a", firstItemClass: "first-item"};
 		$(".gallery").rowGrid(options);	
 		
 	});
