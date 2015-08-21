@@ -2,7 +2,7 @@
 
 正如名字一样，OSF是一个开放、自由、分享的内容社区类网站原型。你会发现目前绝大多数的社交类网站、内容分享类、社区类、兴趣垂直类网站都有共同的特性，包括多用户，内容的发布、评论、喜欢，消息传递，Feed流，标签分类等等。打造OSF的初衷就是为了实现这些通用的模块，构建一个集合以上特点的内容社区类网站的原型。你可以用OSF构建一个单纯的社交网站，也可以加入标签成为一个兴趣社区，甚至两者皆可，这一切OSF都已为你提供。
 
-![welcome](http://7xkkim.com1.z0.glb.clouddn.com/welcome.png)
+![welcome](doc/welcome.png)
 
 ## 主要功能 
 
@@ -38,7 +38,7 @@
 Sketch文件下载:[osf_sketch](http://pan.baidu.com/s/1hq5zI1e)  
 
 
-![explore](http://7xkkim.com1.z0.glb.clouddn.com/osf_sketch_preview.png)
+![explore](doc/osf_sketch_preview.png)
 
 
 
