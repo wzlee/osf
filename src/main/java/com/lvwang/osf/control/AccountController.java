@@ -54,25 +54,30 @@ public class AccountController {
 		User me = (User)session.getAttribute("user");
 		Map<String, Object> map = new HashMap<String, Object>();
 		
+		String status = null;
+		
 		if(user_name == null || user_name.length() == 0){
-			map.put("status", Property.ERROR_USERNAME_EMPTY);
-			return map;
+			user_name = me.getUser_name();
+		} else {
+			User user = userService.findByUsername(user_name);
+			
+			if(user != null){
+				status = Property.ERROR_USERNAME_EXIST;
+				map.put("status", status);
+				return map;
+			} 
 		}
 		
-		String status = null;
-		User user = userService.findByUsername(user_name);
-		if(user != null){
-			status = Property.ERROR_USERNAME_EXIST;
-		}else {
-			//username is ok, but return a error status
-			status = Property.ERROR_USERNAME_NOTEXIST;
-			userService.updateUsernameAndDesc(me.getId(), 
-											  user_name,
-											  user_desc);
-			//update session
-			me.setUser_name(user_name);
-			me.setUser_desc(user_desc);
-		}
+		
+		//username is ok, but return a error status
+		status = Property.ERROR_USERNAME_NOTEXIST;
+		userService.updateUsernameAndDesc(me.getId(), 
+										  user_name,
+										  user_desc);
+		//update session
+		me.setUser_name(user_name);
+		me.setUser_desc(user_desc);
+	
 		map.put("status", status);
 		return map;
 	}
