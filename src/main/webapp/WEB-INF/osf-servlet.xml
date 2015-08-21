@@ -26,6 +26,7 @@
 			<mvc:exclude-mapping path="/account/login"/>
 			<mvc:exclude-mapping path="/account/register"/>
 			<mvc:exclude-mapping path="/account/activation/**"/>
+			<mvc:exclude-mapping path="/account/resetpwd"/>
 			<mvc:exclude-mapping path="/album/*/photos"/>
 			<mvc:exclude-mapping path="/comment/*"/>
 			<mvc:exclude-mapping path="/comment/*/*"/>
