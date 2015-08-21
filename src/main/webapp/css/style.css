@@ -593,6 +593,7 @@ a {
 	margin: 10px;
 }
 .explore .userbox .content{
+	float: right;
 	display: inline-block;
 	height: 180px;
 	overflow: hidden;
