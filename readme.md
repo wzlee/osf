@@ -20,7 +20,7 @@
 
 ##  UI
 
-Sketch文件已经放在了[osf_sketch](sketch) 
+Sketch文件下载:[osf_sketch](http://pan.baidu.com/s/1hq5zI1e)  
 
 
 ![explore](http://7xkkim.com1.z0.glb.clouddn.com/osf_sketch_preview.png)
@@ -30,9 +30,9 @@ Sketch文件已经放在了[osf_sketch](sketch)
 
 ## 技术选型 
 
-OSF选择Spring MVC作为后端基础框架，实现RESTFull url，为实现尽可能的前后端分离，除首屏数据渲染外均通过Ajax+json形式更新前端，url设计与数据交互规范见 [url设计与数据交互说明](http)
+OSF选择Spring MVC作为后端基础框架，实现RESTFull url，为实现尽可能的前后端分离，除首屏数据渲染外均通过Ajax+json形式更新前端，url设计与数据交互规范见 [url设计与数据交互说明](doc/url.md)
 
-MySQL作为OSF的关系型数据库，除Feed之外的所有数据均由其存储，[OSF表设计]()
+MySQL作为OSF的关系型数据库，除Feed之外的所有数据均由其存储，[OSF表设计](doc/osf_db.png)
 
 Redis在OSF中的使用，主要缓存用户信息、统计计数，同时存储用户的Feed信息流和Tag与Feed的从属关系
 
