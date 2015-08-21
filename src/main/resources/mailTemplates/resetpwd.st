@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>账户激活</title>
+	<title>OSF密码重置</title>
 	<style type="text/css">
 	body{
 		font-family: '微软雅黑','Helvetica Neue',sans-serif;
@@ -41,11 +41,10 @@
 			</div>
 			<div class="content">
 				<div class="header">
-					$email$
+					密码重置
 				</div>
-				<p>欢迎加入OSF，在此你可以发表说说、图片，关注喜欢的人和标签。最后一步，即可开启探索</p>
 				<div>
-					<p>点击链接，激活您的账户:</p>
+					<p>点击如下链接，重置您的OSF账户密码:</p>
 					<a href="$href$">$link$</a>
 				</div>
 				<p>
