@@ -73,7 +73,7 @@
 				<div class="container">
 					<div class="row">
 						<div>
-							<c:forEach items="${tags }" var="tag">
+							<c:forEach items="${tags }" var="tag" begin="0" end="9">
 								<div class="tagbox">
 									<div>
 										<img class="visible" src="<c:url value="${img_base_url }${tag.cover }?imageView2/1/w/200/h/200" />" alt="" />

@@ -122,7 +122,7 @@ public class TagDAOImpl implements TagDAO{
 	}
 	
 	public List<Tag> getTagsHasCover() {
-		String sql = "select * from "+ TABLE + " where cover is not null limit 10";
+		String sql = "select * from "+ TABLE + " where cover is not null limit 12";
 		return jdbcTemplate.query(sql, new RowMapper<Tag>() {
 
 			public Tag mapRow(ResultSet rs, int row) throws SQLException {

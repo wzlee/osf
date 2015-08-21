@@ -112,7 +112,8 @@ public class HomePage {
 		}
 		
 		mav.setViewName("welcome");
-		mav.addObject("events", feedService.getRecommendFeeds(0));
+		List<Tag> tags_recommend = tagService.getRecommendTags(0);
+		mav.addObject("tags", tags_recommend);
 		mav.addObject("dic", new Dic());
 		return mav;
 	}

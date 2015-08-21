@@ -262,6 +262,26 @@
 }
 
 
+.tags {
+	text-align: center;
+	margin-top: 50px;
+	margin-bottom: 30px;
+}
+.tags .tagbox{
+	position: relative;
+	display: inline-block;
+	height: 180px;
+	width: 180px;
+	overflow: hidden;
+}
+.tags .tagbox .desc{
+	position: absolute;
+	left: 10px;
+	bottom: 10px;
+	font-size: 18px;
+	color: white;
+}
+
 
 /* clearfix */
 .gallery:before,

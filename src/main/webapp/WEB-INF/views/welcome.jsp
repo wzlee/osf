@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="Pragma" content="no-cache">
@@ -15,14 +15,13 @@
   	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/jquery.fullPage.css">
   	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/welcome.css">
 	<style>
-	.section1 { background: url("<%=request.getContextPath() %>/img/background.png");}
+	.section1 { background: url("<%=request.getContextPath() %>/img/background.png") no-repeat; background-size: cover;}
 	.section4 { background: url("<%=request.getContextPath() %>/img/gallery/8.jpg") no-repeat;
 				background-size: cover;}
 	</style>
   	<script src="<%=request.getContextPath() %>/js/jquery.js"></script>
   	<script src="<%=request.getContextPath() %>/js/jquery.fullPage.js"></script>
   	<script src="http://cdn.staticfile.org/jquery-easing/1.3/jquery.easing.min.js"></script>
-  	<script src="<%=request.getContextPath() %>/js/jquery.row-grid.js"></script>
     <script src="<%=request.getContextPath() %>/js/semantic.js"></script>
     <script src="<%=request.getContextPath() %>/js/basic.js"></script>
     <script src="<%=request.getContextPath() %>/js/code.js"></script>
@@ -99,28 +98,18 @@
 					</div>
 				</div>
 			</div>
-			<div class="gallery">
-				<c:forEach items="${events }" var="event">
-					<div class="box">
-						<c:if test="${event.object_type eq dic.object_type_post }">
-							<a href="<c:url value="/post/${event.object_id }" />">
-								<img src="<c:url value="${img_base_url }${event.content }?imageView2/2/h/240" />" alt="" />
-							</a>
-						</c:if>
-						<c:if test="${event.object_type eq dic.object_type_album }">
-							<a href="<c:url value="/album/${event.object_id }/photos" />">
-								<img src="<c:url value="${img_base_url }${event.title }?imageView2/2/h/240" />" alt="" />
-							</a>
-						</c:if>
-						<div class="meta">
-							<a href="<c:url value="/user/${event.user_id }" />">
-								<img class="ui avatar image" src="${img_base_url }${event.user_avatar}?imageView2/1/w/48/h/48">
-								<span>${event.user_name}</span>
-							</a>
-						</div>
-					</div>
+			<div class="tags">
+				<c:forEach items="${tags }" var="tag" begin="0" end="11">
+					<div class="tagbox">
+						<a href="<c:url value="/tag/${tag.id }" />">
+							<img class="visible" src="<c:url value="${img_base_url }${tag.cover }?imageView2/1/w/200/h/200" />" alt="" />
+							<span class="desc">#${tag.tag }</span>
+						</a>
+					</div>								
 				</c:forEach>
-			</div>			
+
+			</div>
+			<!-- end tags -->	
 		</div>
 		<div class="section section3">
 			<div class="container">
@@ -225,10 +214,7 @@
 
 			}
 		});
-		
-		var options = {minMargin: 5, maxMargin: 10, itemSelector: ".box a", firstItemClass: "first-item"};
-		$(".gallery").rowGrid(options);	
-		
+			
 	});
 	</script>
 
